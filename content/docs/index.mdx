@@ -4,6 +4,7 @@ description: Kilpi — our security methodology, built on NIST Cybersecurity Fra
 ---
 
 import Image from 'next/image';
+import kilpiGovernDiagram from '@/public/diagrams/kilpi-govern.png';
 
 Kilpi is a standalone security methodology built on NIST CSF 2.0. It can be adopted by any organisation. It provides the structure, conventions, and operational guidance needed to run a traceable, outcome-driven security program.
 
@@ -17,7 +18,7 @@ Function (6)
       └─ Subcategory (106 total)
 ```
 
-<Image src="/diagrams/kilpi-govern.png" alt="Kilpi — Govern wraps Identify, Protect, Recover, and Respond" width={280} height={280} style={{maxWidth: '280px', height: 'auto'}} />
+<Image src={kilpiGovernDiagram} alt="Kilpi — Govern wraps Identify, Protect, Recover, and Respond" style={{maxWidth: '280px', height: 'auto'}} />
 
 Govern sits at the centre. The remaining five functions form a lifecycle: know what you have (Identify), protect it (Protect), watch for attacks (Detect), act on incidents (Respond), get back to normal (Recover).
 

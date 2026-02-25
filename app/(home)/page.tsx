@@ -1,16 +1,15 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { zain } from '../layout';
+import kilpiLogo from '@/public/kilpi-logo-2.png';
 
 export default function HomePage() {
   return (
     <div className="flex flex-1 flex-col items-center justify-center px-4 py-16">
       <div className="w-full max-w-xl text-center">
         <Image
-          src="/kilpi-logo-2.png"
+          src={kilpiLogo}
           alt="Kilpi"
-          width={96}
-          height={96}
           className="mx-auto mb-6 h-24 w-auto"
         />
         <h1 className={`mb-4 text-4xl text-fd-foreground ${zain.className}`}>

@@ -1,12 +1,39 @@
 ---
 title: Overview
-description: Kilpi — our security methodology, built on NIST Cybersecurity Framework 2.0
+description: Kilpi — an agent-first security methodology, built on NIST Cybersecurity Framework 2.0
 ---
 
 import Image from 'next/image';
+import { ShieldCheck } from 'lucide-react';
 import kilpiGovernDiagram from '@/public/diagrams/kilpi-govern.png';
 
 Kilpi is a standalone security methodology built on NIST CSF 2.0. It can be adopted by any organisation. It provides the structure, conventions, and operational guidance needed to run a traceable, outcome-driven security program.
+
+Kilpi defines a systematic, repeatable approach with defined procedures, artifacts, and principles for achieving security outcomes, and structured in an AI agent friendly format.
+
+<Accordions type="single">
+  <Accordion value="procedures" title={<span className="flex items-center gap-2"><ShieldCheck className="text-green-500" size={18} /> Defined Procedures & Processes</span>}>
+    Kilpi prescribes step-by-step work at every level: asset inventory, threat modeling (STRIDE), risk scoring (likelihood x impact), control selection, monitoring rule definition, response playbooks, recovery plans, and feedback loops. Each step has concrete instructions, not just suggestions.
+  </Accordion>
+  <Accordion value="artifacts" title={<span className="flex items-center gap-2"><ShieldCheck className="text-green-500" size={18} /> Concrete, Named Artifacts with an ID Scheme</span>}>
+    It produces traceable deliverables with strict naming conventions (SA-*, ST-*, SC-*). A framework tells you "identify assets." A methodology tells you to produce an Asset Register with columns for ID, name, type, owner, criticality, and classification — and gives you the template.
+  </Accordion>
+  <Accordion value="traceability" title={<span className="flex items-center gap-2"><ShieldCheck className="text-green-500" size={18} /> End-to-End Traceability Chain</span>}>
+    Nothing exists in isolation. Every artifact traces through a chain: Asset → Threat → Control → Monitoring Rule → Response Playbook → Recovery Plan. Every artifact references back to its predecessors, creating full accountability.
+  </Accordion>
+  <Accordion value="principles" title={<span className="flex items-center gap-2"><ShieldCheck className="text-green-500" size={18} /> Guiding Principles & Philosophy</span>}>
+    "The pipeline IS the policy" (automation-first). Risk-driven prioritisation via severity matrix. Continuous improvement feedback loops (ID.IM). Controls are not just documented — they are enforced through automated checks.
+  </Accordion>
+  <Accordion value="repeatable" title={<span className="flex items-center gap-2"><ShieldCheck className="text-green-500" size={18} /> Scoped, Repeatable Application</span>}>
+    Two distinct templates (Org and Component) define who does what at which level, preventing duplication. The methodology can be applied consistently across any organisation and any product.
+  </Accordion>
+  <Accordion value="example" title={<span className="flex items-center gap-2"><ShieldCheck className="text-green-500" size={18} /> Worked Example Demonstrating Application</span>}>
+    The Taskflow example shows the methodology applied end-to-end to a realistic system — 20 threats, 12 assets, full control inventory, monitoring rules, response playbooks. This demonstrates that the methodology produces concrete, verifiable results.
+  </Accordion>
+  <Accordion value="foundation" title={<span className="flex items-center gap-2"><ShieldCheck className="text-green-500" size={18} /> Built on Established Foundation (NIST CSF 2.0)</span>}>
+    Kilpi doesn't invent its own taxonomy. It provides the **how** on top of NIST's **what**, covering all 106 subcategories with actionable guidance. This ensures alignment with the most widely adopted cybersecurity framework.
+  </Accordion>
+</Accordions>
 
 ## Foundation
 

@@ -1,4 +1,5 @@
 import defaultMdxComponents from 'fumadocs-ui/mdx';
+import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
 import { Mermaid } from '@/components/mdx/mermaid';
 import { Heading } from '@/components/mdx/heading';
 import type { MDXComponents } from 'mdx/types';
@@ -11,6 +12,8 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     h4: (props) => <Heading as="h4" {...props} />,
     h5: (props) => <Heading as="h5" {...props} />,
     h6: (props) => <Heading as="h6" {...props} />,
+    Accordion,
+    Accordions,
     Mermaid,
     ...components,
   };

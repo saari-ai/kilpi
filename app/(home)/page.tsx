@@ -16,7 +16,7 @@ export default function HomePage() {
           <span className="text-6xl font-extrabold">KILPI</span> <br />Security Methodology
         </h1>
         <p className="mb-8 text-lg text-fd-muted-foreground">
-          A straightforward security methodology from <a href="https://saari.ai" className={`text-white text-2xl font-extrabold ${zain.className}`}>saari</a> built on NIST Cybersecurity Framework 2.0
+          A comprehensive agent first security methodology from <a href="https://saari.ai" className={`text-white text-2xl font-extrabold ${zain.className}`}>saari</a>, built on NIST Cybersecurity Framework 2.0
         </p>
         <Link
           href="/docs"

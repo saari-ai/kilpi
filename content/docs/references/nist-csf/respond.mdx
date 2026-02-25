@@ -1,0 +1,121 @@
+---
+title: Respond (RS)
+description: NIST CSF 2.0 subcategory definitions and implementation examples for the Respond function
+---
+
+## RS.MA: Incident Management
+
+*Responses to detected cybersecurity incidents are managed*
+
+### Subcategories
+
+| ID | Outcome |
+|----|---------|
+| <span style={{whiteSpace: 'nowrap'}}>RS.MA-01</span> | The incident response plan is executed in coordination with relevant third parties once an incident is declared |
+| <span style={{whiteSpace: 'nowrap'}}>RS.MA-02</span> | Incident reports are triaged and validated |
+| <span style={{whiteSpace: 'nowrap'}}>RS.MA-03</span> | Incidents are categorized and prioritized |
+| <span style={{whiteSpace: 'nowrap'}}>RS.MA-04</span> | Incidents are escalated or elevated as needed |
+| <span style={{whiteSpace: 'nowrap'}}>RS.MA-05</span> | The criteria for initiating incident recovery are applied |
+
+### Implementation examples
+
+| ID | Example |
+|----|---------|
+| <span style={{whiteSpace: 'nowrap'}}>RS.MA-01 Ex1</span> | Detection technologies automatically report confirmed incidents |
+| <span style={{whiteSpace: 'nowrap'}}>RS.MA-01 Ex2</span> | Request incident response assistance from the organization's incident response outsourcer |
+| <span style={{whiteSpace: 'nowrap'}}>RS.MA-01 Ex3</span> | Designate an incident lead for each incident |
+| <span style={{whiteSpace: 'nowrap'}}>RS.MA-01 Ex4</span> | Initiate execution of additional cybersecurity plans as needed to support incident response (for example, business continuity and disaster recovery) |
+| <span style={{whiteSpace: 'nowrap'}}>RS.MA-02 Ex1</span> | Preliminarily review incident reports to confirm that they are cybersecurity-related and necessitate incident response activities |
+| <span style={{whiteSpace: 'nowrap'}}>RS.MA-02 Ex2</span> | Apply criteria to estimate the severity of an incident |
+| <span style={{whiteSpace: 'nowrap'}}>RS.MA-03 Ex1</span> | Further review and categorize incidents based on the type of incident (e.g., data breach, ransomware, DDoS, account compromise) |
+| <span style={{whiteSpace: 'nowrap'}}>RS.MA-03 Ex2</span> | Prioritize incidents based on their scope, likely impact, and time-critical nature |
+| <span style={{whiteSpace: 'nowrap'}}>RS.MA-03 Ex3</span> | Select incident response strategies for active incidents by balancing the need to quickly recover from an incident with the need to observe the attacker or conduct a more thorough investigation |
+| <span style={{whiteSpace: 'nowrap'}}>RS.MA-04 Ex1</span> | Track and validate the status of all ongoing incidents |
+| <span style={{whiteSpace: 'nowrap'}}>RS.MA-04 Ex2</span> | Coordinate incident escalation or elevation with designated internal and external stakeholders |
+| <span style={{whiteSpace: 'nowrap'}}>RS.MA-05 Ex1</span> | Apply incident recovery criteria to known and assumed characteristics of the incident to determine whether incident recovery processes should be initiated |
+| <span style={{whiteSpace: 'nowrap'}}>RS.MA-05 Ex2</span> | Take the possible operational disruption of incident recovery activities into account |
+
+---
+
+## RS.AN: Incident Analysis
+
+*Investigations are conducted to ensure effective response and support forensics and recovery activities*
+
+### Subcategories
+
+| ID | Outcome |
+|----|---------|
+| <span style={{whiteSpace: 'nowrap'}}>RS.AN-03</span> | Analysis is performed to establish what has taken place during an incident and the root cause of the incident |
+| <span style={{whiteSpace: 'nowrap'}}>RS.AN-06</span> | Actions performed during an investigation are recorded, and the records' integrity and provenance are preserved |
+| <span style={{whiteSpace: 'nowrap'}}>RS.AN-07</span> | Incident data and metadata are collected, and their integrity and provenance are preserved |
+| <span style={{whiteSpace: 'nowrap'}}>RS.AN-08</span> | An incident's magnitude is estimated and validated |
+
+{/* Note: RS.AN numbering has gaps (01-02, 04-05) in CSF 2.0. */}
+
+### Implementation examples
+
+| ID | Example |
+|----|---------|
+| <span style={{whiteSpace: 'nowrap'}}>RS.AN-03 Ex1</span> | Determine the sequence of events that occurred during the incident and which assets and resources were involved in each event |
+| <span style={{whiteSpace: 'nowrap'}}>RS.AN-03 Ex2</span> | Attempt to determine what vulnerabilities, threats, and threat actors were directly or indirectly involved in the incident |
+| <span style={{whiteSpace: 'nowrap'}}>RS.AN-03 Ex3</span> | Analyze the incident to find the underlying, systemic root causes |
+| <span style={{whiteSpace: 'nowrap'}}>RS.AN-03 Ex4</span> | Check any cyber deception technology for additional information on attacker behavior |
+| <span style={{whiteSpace: 'nowrap'}}>RS.AN-06 Ex1</span> | Require each incident responder and others (e.g., system administrators, cybersecurity engineers) who perform incident response tasks to record their actions and make the record immutable |
+| <span style={{whiteSpace: 'nowrap'}}>RS.AN-06 Ex2</span> | Require the incident lead to document the incident in detail and be responsible for preserving the integrity of the documentation and the sources of all information being reported |
+| <span style={{whiteSpace: 'nowrap'}}>RS.AN-07 Ex1</span> | Collect, preserve, and safeguard the integrity of all pertinent incident data and metadata (e.g., data source, date/time of collection) based on evidence preservation and chain-of-custody procedures |
+| <span style={{whiteSpace: 'nowrap'}}>RS.AN-08 Ex1</span> | Review other potential targets of the incident to search for indicators of compromise and evidence of persistence |
+| <span style={{whiteSpace: 'nowrap'}}>RS.AN-08 Ex2</span> | Automatically run tools on targets to look for indicators of compromise and evidence of persistence |
+
+---
+
+## RS.CO: Incident Response Reporting and Communication
+
+*Response activities are coordinated with internal and external stakeholders as required by laws, regulations, or policies*
+
+### Subcategories
+
+| ID | Outcome |
+|----|---------|
+| <span style={{whiteSpace: 'nowrap'}}>RS.CO-02</span> | Internal and external stakeholders are notified of incidents |
+| <span style={{whiteSpace: 'nowrap'}}>RS.CO-03</span> | Information is shared with designated internal and external stakeholders |
+
+{/* Note: RS.CO numbering starts at 02 in CSF 2.0. */}
+
+### Implementation examples
+
+| ID | Example |
+|----|---------|
+| <span style={{whiteSpace: 'nowrap'}}>RS.CO-02 Ex1</span> | Follow the organization's breach notification procedures after discovering a data breach incident, including notifying affected customers |
+| <span style={{whiteSpace: 'nowrap'}}>RS.CO-02 Ex2</span> | Notify business partners and customers of incidents in accordance with contractual requirements |
+| <span style={{whiteSpace: 'nowrap'}}>RS.CO-02 Ex3</span> | Notify law enforcement agencies and regulatory bodies of incidents based on criteria in the incident response plan and management approval |
+| <span style={{whiteSpace: 'nowrap'}}>RS.CO-03 Ex1</span> | Securely share information consistent with response plans and information sharing agreements |
+| <span style={{whiteSpace: 'nowrap'}}>RS.CO-03 Ex2</span> | Voluntarily share information about an attacker's observed TTPs, with all sensitive data removed, with an Information Sharing and Analysis Center (ISAC) |
+| <span style={{whiteSpace: 'nowrap'}}>RS.CO-03 Ex3</span> | Notify HR when malicious insider activity occurs |
+| <span style={{whiteSpace: 'nowrap'}}>RS.CO-03 Ex4</span> | Regularly update senior leadership on the status of major incidents |
+| <span style={{whiteSpace: 'nowrap'}}>RS.CO-03 Ex5</span> | Follow the rules and protocols defined in contracts for incident information sharing between the organization and its suppliers |
+| <span style={{whiteSpace: 'nowrap'}}>RS.CO-03 Ex6</span> | Coordinate crisis communication methods between the organization and its critical suppliers |
+
+---
+
+## RS.MI: Incident Mitigation
+
+*Activities are performed to prevent expansion of an event and mitigate its effects*
+
+### Subcategories
+
+| ID | Outcome |
+|----|---------|
+| <span style={{whiteSpace: 'nowrap'}}>RS.MI-01</span> | Incidents are contained |
+| <span style={{whiteSpace: 'nowrap'}}>RS.MI-02</span> | Incidents are eradicated |
+
+### Implementation examples
+
+| ID | Example |
+|----|---------|
+| <span style={{whiteSpace: 'nowrap'}}>RS.MI-01 Ex1</span> | Cybersecurity technologies (e.g., antivirus software) and cybersecurity features of other technologies (e.g., operating systems, network infrastructure devices) automatically perform containment actions |
+| <span style={{whiteSpace: 'nowrap'}}>RS.MI-01 Ex2</span> | Allow incident responders to manually select and perform containment actions |
+| <span style={{whiteSpace: 'nowrap'}}>RS.MI-01 Ex3</span> | Allow a third party (e.g., internet service provider, managed security service provider) to perform containment actions on behalf of the organization |
+| <span style={{whiteSpace: 'nowrap'}}>RS.MI-01 Ex4</span> | Automatically transfer compromised endpoints to a remediation virtual local area network (VLAN) |
+| <span style={{whiteSpace: 'nowrap'}}>RS.MI-02 Ex1</span> | Cybersecurity technologies and cybersecurity features of other technologies (e.g., operating systems, network infrastructure devices) automatically perform eradication actions |
+| <span style={{whiteSpace: 'nowrap'}}>RS.MI-02 Ex2</span> | Allow incident responders to manually select and perform eradication actions |
+| <span style={{whiteSpace: 'nowrap'}}>RS.MI-02 Ex3</span> | Allow a third party (e.g., managed security service provider) to perform eradication actions on behalf of the organization |

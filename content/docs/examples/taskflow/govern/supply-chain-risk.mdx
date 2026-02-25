@@ -1,0 +1,114 @@
+---
+title: "GV.SC: Supply Chain Risk Management"
+description: Taskflow example for supply chain risk management
+---
+
+For methodology guidance, see [GV.SC: Supply Chain Risk Management](/docs/functions/govern/supply-chain-risk).
+
+---
+
+### GV.SC-01: Supply chain risk management program
+
+Taskflow's supply chain risk program covers all third-party services, open source dependencies, and infrastructure providers. The program objectives are: (1) maintain an inventory of all suppliers, (2) assess risk before onboarding, (3) monitor supplier security posture continuously, and (4) have contingency plans for supplier failure or compromise. The program integrates with the broader risk management strategy through the quarterly review cycle.
+
+---
+
+### GV.SC-02: Supply chain roles and responsibilities
+
+| Role | Supply chain responsibility |
+|---|---|
+| Security lead | Approves new supplier onboarding. Reviews supplier risk assessments. Owns supplier incident coordination. |
+| Dependency maintainer | Monitors npm dependency alerts. Triages and patches CVEs within SLA. Maintains lock files. |
+| Infrastructure owner | Manages AWS account security. Reviews IAM policies. Monitors CloudTrail for configuration drift. |
+| Backend lead | Evaluates new integration proposals. Ensures API key security for Stripe, SendGrid, Google OAuth. |
+
+---
+
+### GV.SC-03: Enterprise risk integration
+
+Supply chain risks appear in the same threat register as application-level threats. Threat IDs <span style={{whiteSpace: 'nowrap'}}>ST-TF-11</span> through <span style={{whiteSpace: 'nowrap'}}>ST-TF-14</span> and <span style={{whiteSpace: 'nowrap'}}>ST-TF-20</span> are all supply chain threats. They are scored using the same likelihood-impact matrix and reviewed at the same quarterly cadence.
+
+---
+
+### GV.SC-04: Supplier inventory and criticality
+
+| Supplier / dependency | Type | Criticality | Data access | Assessment frequency |
+|---|---|---|---|---|
+| Stripe | Payment processor | Critical | Payment method tokens, subscription data | Annually + after any payment incident |
+| SendGrid | Email delivery | Medium | Email addresses, notification content | Annually |
+| Google OAuth | Authentication provider | High | User email, profile info (during auth flow) | Annually |
+| AWS | Infrastructure provider | Critical | All data (hosts all infrastructure) | Continuously via CloudTrail + quarterly config review |
+| npm ecosystem | Open source packages | High | Application code execution context | Continuously via Dependabot + monthly audit |
+
+---
+
+### GV.SC-05: Contractual requirements
+
+| Requirement | Applies to |
+|---|---|
+| Data processing agreement (DPA) | Stripe, SendGrid, AWS (any supplier processing user data) |
+| Breach notification within 48 hours | All suppliers with access to user data |
+| SOC 2 or equivalent attestation | Stripe, AWS |
+| Right to audit | AWS (via shared responsibility model and compliance reports) |
+| Data deletion on termination | SendGrid, any supplier storing user data |
+
+---
+
+### GV.SC-06: Pre-adoption due diligence
+
+| Criterion | What to evaluate |
+|---|---|
+| Security posture | Does the supplier have SOC 2, ISO 27001, or equivalent? Published security practices? |
+| Data handling | What data does the supplier access? Where is it stored? What is their retention policy? |
+| Incident history | Any known breaches in the last 3 years? How were they handled? |
+| Dependency chain | Does adopting this supplier introduce transitive dependencies we need to assess? |
+| Exit strategy | Can we migrate away if needed? What is the data portability story? |
+
+---
+
+### GV.SC-07: Ongoing supplier risk monitoring
+
+| Monitoring activity | Cadence |
+|---|---|
+| Check Stripe, SendGrid, AWS status pages and security advisories | Weekly (automated) |
+| Review Dependabot alerts for npm dependencies | Daily (automated alerts, manual triage) |
+| Verify supplier SOC 2 / compliance reports are current | Annually |
+| Review AWS CloudTrail for unexpected IAM or configuration changes | Continuously (automated alerts) |
+| Check Have I Been Pwned for supplier domain breaches | Quarterly |
+
+---
+
+### GV.SC-08: Supplier incident coordination
+
+Escalation contacts and notification commitments for critical suppliers:
+
+- **Stripe**: Contact via Stripe dashboard support. Stripe notifies of breaches affecting shared data per DPA.
+- **AWS**: Contact via AWS Support (Business tier). AWS publishes security bulletins. CloudTrail alerts provide early detection.
+- **SendGrid**: Contact via SendGrid support. Monitor for domain reputation issues.
+- **Google OAuth**: Monitor Google Cloud status page. Fallback to local password auth if OAuth is compromised.
+
+---
+
+### GV.SC-09: Build integrity and provenance
+
+| SLSA level | Requirement | Target for |
+|---|---|---|
+| SLSA 1 | Build process is documented, build scripts are version-controlled | All Taskflow builds (current state) |
+| SLSA 2 | Build service generates provenance, source is version-controlled | Target for Q3 (CI/CD pipeline attestation) |
+
+Taskflow uses `package-lock.json` to pin dependency versions. All builds run in CI (GitHub Actions) with locked dependencies. No manual builds are deployed to production.
+
+---
+
+### GV.SC-10: Relationship termination
+
+When a supplier relationship ends:
+- Revoke all API keys and credentials within 1 hour
+- Verify data is returned or destroyed per the DPA
+- Rotate any shared secrets
+- Replace the dependency in application code
+- Update the supplier inventory and threat register to remove the supplier and add any new threats from the replacement
+
+Supply chain requirements are integrated into supplier agreements where possible. Suppliers are assessed for risk during onboarding and at each annual review.
+
+---

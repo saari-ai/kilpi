@@ -1,0 +1,11 @@
+{
+  "title": "NIST CSF 2.0",
+  "pages": [
+    "govern",
+    "identify",
+    "protect",
+    "detect",
+    "respond",
+    "recover"
+  ]
+}

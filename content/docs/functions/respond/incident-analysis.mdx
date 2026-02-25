@@ -1,0 +1,77 @@
+---
+title: "RS.AN: Incident Analysis"
+description: Investigation, root cause analysis, and forensic record-keeping to understand what happened and support recovery.
+---
+
+## Subcategories
+
+| ID | Outcome |
+|----|---------|
+| <span style={{whiteSpace: 'nowrap'}}>[RS.AN-03](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/rs/rs-an/rs-an-03/)</span> | Analysis is performed to establish what has taken place during an incident and the root cause of the incident |
+| <span style={{whiteSpace: 'nowrap'}}>[RS.AN-06](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/rs/rs-an/rs-an-06/)</span> | Actions performed during an investigation are recorded, and the records' integrity and provenance are preserved |
+| <span style={{whiteSpace: 'nowrap'}}>[RS.AN-07](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/rs/rs-an/rs-an-07/)</span> | Incident data and metadata are collected, and their integrity and provenance are preserved |
+| <span style={{whiteSpace: 'nowrap'}}>[RS.AN-08](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/rs/rs-an/rs-an-08/)</span> | An incident's magnitude is estimated and validated |
+
+## Our methodology
+
+Incident analysis runs in parallel with [Incident Management](./incident-management). While management coordinates the response, analysis answers the core questions: what happened, how far did it go, and why.
+
+---
+
+### RS.AN-03: Root cause analysis
+
+Reconstruct what happened, identify the entry point, map lateral movement, and find the systemic root cause. The root cause is not "the attacker exploited a vulnerability" — it is the reason the vulnerability existed and was exploitable.
+
+| Investigation step | Question to answer | Finding |
+|---|---|---|
+| *Timeline reconstruction* | *What happened and when?* | *Sequence of events from entry to detection* |
+| *Entry point* | *How did the attacker get in?* | *Phishing / credential stuffing / exploit / misconfig* |
+| *Lateral movement* | *Where did they go after entry?* | *Systems, accounts, and data accessed* |
+| *Data impact* | *What data was accessed, modified, or exfiltrated?* | *Specific records, users, datasets* |
+| *Root cause* | *Why was this possible?* | *Missing control / process gap / config error* |
+| | | |
+
+---
+
+### RS.AN-06: Investigation record-keeping
+
+Every person who performs investigative actions must document what they did. The incident lead consolidates these into a coherent incident report that feeds the post-mortem in [Recovery](../recover/recovery-plan-execution).
+
+| Responder | Action taken | Timestamp | Finding | Tools used |
+|---|---|---|---|---|
+| *e.g. Security engineer* | *Reviewed auth logs for compromised account* | *2024-01-15 14:30 UTC* | *Account accessed from 3 unusual IPs* | *SIEM query* |
+| | | | | |
+
+---
+
+### RS.AN-07: Evidence preservation
+
+Collect and preserve incident data before analyzing it. Analysis can alter evidence. Store evidence in immutable storage and maintain chain-of-custody records for every piece of evidence.
+
+| Evidence type | Collection method | Storage location | Collected by | Timestamp |
+|---|---|---|---|---|
+| *e.g. Disk image* | *Forensic imaging tool* | *Write-once archive* | *Forensics lead* | *Date/time* |
+| *e.g. Log snapshot* | *Log export from SIEM* | *Append-only store* | *Security engineer* | *Date/time* |
+| | | | | |
+
+---
+
+### RS.AN-08: Magnitude estimation
+
+Refine the initial severity estimate from triage as analysis progresses. Check adjacent systems for indicators of compromise, verify data exposure scope, and assess persistence. Update the severity classification and communicate changes to the incident lead.
+
+| Validation check | Method | Result |
+|---|---|---|
+| *Adjacent systems* | *IOC scan across non-flagged systems* | *Clean / additional compromise found* |
+| *Data exposure scope* | *Query affected records, users, datasets* | *X records, Y users affected* |
+| *Persistence assessment* | *Check for backdoors, scheduled tasks, new accounts* | *Persistence found / not found* |
+| | | |
+
+---
+
+## Informative references
+
+| Standard | Controls | Subcategories mapped |
+|----------|----------|---------------------|
+| ISO 27001 | A.5.26, A.5.28 | <span style={{whiteSpace: 'nowrap'}}>RS.AN-03</span>, <span style={{whiteSpace: 'nowrap'}}>RS.AN-06</span>, <span style={{whiteSpace: 'nowrap'}}>RS.AN-07</span> |
+| SOC 2 | CC7.3, CC7.4, CC7.5 | <span style={{whiteSpace: 'nowrap'}}>RS.AN-03</span>, <span style={{whiteSpace: 'nowrap'}}>RS.AN-08</span> |

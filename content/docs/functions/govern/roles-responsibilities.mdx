@@ -1,0 +1,73 @@
+---
+title: "GV.RR: Roles, Responsibilities, and Authorities"
+description: Define who owns security decisions, who responds to incidents, and how accountability is maintained.
+---
+
+## Subcategories
+
+| ID | Outcome |
+|----|---------|
+| <span style={{whiteSpace: 'nowrap'}}>[GV.RR-01](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/gv/gv-rr/gv-rr-01/)</span> | Organizational leadership is responsible and accountable for cybersecurity risk and fosters a culture that is risk-aware, ethical, and continually improving |
+| <span style={{whiteSpace: 'nowrap'}}>[GV.RR-02](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/gv/gv-rr/gv-rr-02/)</span> | Roles, responsibilities, and authorities related to cybersecurity risk management are established, communicated, understood, and enforced |
+| <span style={{whiteSpace: 'nowrap'}}>[GV.RR-03](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/gv/gv-rr/gv-rr-03/)</span> | Adequate resources are allocated commensurate with the cybersecurity risk strategy, roles, responsibilities, and policies |
+| <span style={{whiteSpace: 'nowrap'}}>[GV.RR-04](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/gv/gv-rr/gv-rr-04/)</span> | Cybersecurity is included in human resources practices |
+
+## Our methodology
+
+On a small team, security roles are not full-time positions — they are responsibilities that specific people own alongside their other work. The point is to make sure that when something needs a security decision, everyone knows who makes it.
+
+---
+
+### GV.RR-01: Leadership accountability
+
+Ensure organizational leadership is accountable for cybersecurity risk and fosters a risk-aware culture. Leadership does not need to do security work — they need to own the outcomes and set the expectation that security matters.
+
+---
+
+### GV.RR-02: Roles and responsibilities
+
+Define who owns each area of security work. For small teams, one person may hold multiple roles. What matters is that it is explicit.
+
+| Role | Responsibility | Authority |
+|------|---------------|-----------|
+| *e.g. Security lead* | *Owns strategy, maintains threat register, drives assessments* | *Can block releases for unresolved Critical findings* |
+| *e.g. Product owner* | *Defines risk appetite per product, approves risk acceptance* | *Signs off on accepted risks above Low severity* |
+| *e.g. Engineering lead* | *Implements controls, ensures secure development practices* | *Owns technical remediation decisions* |
+| *e.g. All engineers* | *Follow secure coding practices, report potential vulnerabilities* | *Raise issues without approval gates* |
+| | | |
+
+---
+
+### GV.RR-03: Resource allocation
+
+Allocate time and budget for security work proportional to the risk profile. Without explicit allocation, security consistently loses to feature work.
+
+| Resource type | Allocation | Rationale |
+|--------------|------------|-----------|
+| *e.g. Sprint capacity* | *10-15% reserved for security work* | *Control implementation, dependency updates, assessments* |
+| *e.g. Escalation budget* | *Critical/High findings override normal priority* | *Unresolved findings increase exposure every day they wait* |
+| *e.g. Training* | *Quarterly security training per engineer* | *Keep current on practices relevant to the stack* |
+| | | |
+
+---
+
+### GV.RR-04: Human resources practices
+
+Integrate security into hiring, onboarding, role changes, and offboarding. Access should follow the principle of least privilege from day one and be revoked promptly on departure.
+
+| HR event | Security action |
+|----------|----------------|
+| *Onboarding* | *Receive security policy, grant minimum required access* |
+| *Role change* | *Review and adjust access to match new responsibilities* |
+| *Offboarding* | *Revoke access, rotate shared credentials if applicable* |
+| *Screening* | *Background check for roles with elevated access* |
+| | |
+
+---
+
+## Informative references
+
+| Standard | Controls | Subcategories mapped |
+|----------|----------|---------------------|
+| ISO 27001 | Clause 5.3, A.6.1, A.6.2 | <span style={{whiteSpace: 'nowrap'}}>GV.RR-01</span>, <span style={{whiteSpace: 'nowrap'}}>GV.RR-02</span> |
+| ISO 27001 | A.6.1-6.6 (people controls) | <span style={{whiteSpace: 'nowrap'}}>GV.RR-04</span> |

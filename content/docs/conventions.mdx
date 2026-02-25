@@ -1,0 +1,78 @@
+---
+title: Conventions
+description: ID schemes, naming conventions, and traceability rules used across the security documentation
+---
+
+## ID schemes
+
+We use three prefixed ID schemes to uniquely identify security artifacts across the documentation.
+
+### Control IDs (SC-)
+
+Controls are safeguards implemented to achieve security outcomes. Every control gets a unique ID.
+
+| Format | Example | Meaning |
+|--------|---------|---------|
+| `SC-{category}-{number}` | SC-AA-1 | First control in the Access Authorization category |
+| `SC-{category}-{number}.{sub}` | SC-AA-1.1 | Sub-control under SC-AA-1 |
+
+The `{category}` segment uses the two-letter NIST category code (AA, DS, PS, CM, etc.), keeping controls traceable to the subcategories they satisfy.
+
+### Threat IDs (ST-)
+
+Threats are identified risks that controls mitigate.
+
+| Format | Example | Meaning |
+|--------|---------|---------|
+| `ST-{product}-{number}` | ST-TF-1 | First threat identified for [Taskflow](/docs/examples/taskflow) |
+| `ST-{product}-{number}.{sub}` | ST-TF-1.1 | Sub-threat under ST-TF-1 |
+
+The `{product}` segment is a short code for the product or system (e.g., TF for [Taskflow](/docs/examples/taskflow), SR for Streams).
+
+### Asset IDs (SA-)
+
+Assets are things of value that need protection — data, services, infrastructure.
+
+| Format | Example | Meaning |
+|--------|---------|---------|
+| `SA-{product}-{number}` | SA-TF-1 | First asset identified for [Taskflow](/docs/examples/taskflow) |
+
+## Subcategory traceability
+
+Every control, threat, and asset should trace back to at least one NIST CSF subcategory. This is how we ensure coverage and avoid gaps.
+
+### In threat model tables
+
+Threat model tables include a **Subcategory** column mapping each threat to the NIST subcategory it relates to:
+
+| ID | Threat | STRIDE | Subcategory |
+|----|--------|--------|-------------|
+| <span style={{whiteSpace: 'nowrap'}}>ST-TF-1</span> | Unauthorized API access | Spoofing | ID.RA-01 |
+
+### In control inventory tables
+
+Control inventory tables include a **Subcategory** column mapping each control to the subcategory it satisfies:
+
+| ID | Control | Threat | Subcategory |
+|----|---------|--------|-------------|
+| <span style={{whiteSpace: 'nowrap'}}>SC-AA-1</span> | JWT authentication | ST-TF-1 | PR.AA-01 |
+
+### Coverage check
+
+To verify completeness, list the subcategories relevant to your product (from the Identify phase) and confirm each has at least one control mapped to it. Gaps indicate either:
+
+1. A missing control (add one in Protect)
+2. A subcategory that genuinely doesn't apply (document the exclusion in your product template)
+
+## Severity levels
+
+We use a four-level severity scale consistently across all functions:
+
+| Level | Label | Meaning |
+|-------|-------|---------|
+| 4 | Critical | Existential risk to the product or organization |
+| 3 | High | Significant impact requiring prompt action |
+| 2 | Medium | Moderate impact, addressed in normal planning cycles |
+| 1 | Low | Minimal impact, monitored but not urgently acted on |
+
+Severity drives priority in both risk assessment (Identify) and incident response (Respond).

@@ -1,0 +1,52 @@
+---
+title: CIS Benchmarks
+description: CIS Controls mapped to NIST CSF subcategories
+---
+
+CIS Benchmarks turn abstract security controls into concrete, testable configuration requirements. Where ISO 27001 says "manage configurations", a CIS Benchmark says "set MaxAuthTries to 4". They provide exact values, not guidance.
+
+The Center for Internet Security (CIS) publishes benchmarks for operating systems, container runtimes, cloud providers, databases, web servers, and more. Each benchmark is a checklist of configuration settings that can be verified automatically through scanning tools.
+
+## How they fit
+
+CIS Benchmarks primarily map to the **Protect** function's Platform Security subcategories (<span style={{whiteSpace: 'nowrap'}}>PR.PS</span>). They are the implementation layer — once you have selected a control from ISO 27001 Annex A, the relevant CIS Benchmark tells you exactly how to configure it.
+
+The chain works like this:
+
+1. CSF subcategory defines the outcome (e.g., <span style={{whiteSpace: 'nowrap'}}>PR.PS-01</span> — configuration management practices are established)
+2. ISO 27001 Annex A provides the control (e.g., <span style={{whiteSpace: 'nowrap'}}>A.8.9</span> — Configuration management)
+3. CIS Benchmark provides the specific setting (e.g., "Ensure SSH MaxAuthTries is set to 4 or less")
+
+## Benchmark categories
+
+| Category | Covers | CSF subcategories |
+|---|---|---|
+| Operating systems | Linux (Ubuntu, RHEL, etc.), Windows Server — filesystem permissions, service hardening, kernel parameters | <span style={{whiteSpace: 'nowrap'}}>PR.PS-01</span>, <span style={{whiteSpace: 'nowrap'}}>PR.PS-02</span> |
+| Container runtimes | Docker daemon configuration, image security, container isolation, Kubernetes cluster hardening | <span style={{whiteSpace: 'nowrap'}}>PR.PS-01</span>, <span style={{whiteSpace: 'nowrap'}}>PR.PS-04</span> |
+| Cloud providers | AWS, GCP, Azure — IAM policies, storage encryption, network configuration, logging enablement | <span style={{whiteSpace: 'nowrap'}}>PR.PS-01</span>, <span style={{whiteSpace: 'nowrap'}}>PR.AA-05</span>, <span style={{whiteSpace: 'nowrap'}}>DE.CM-09</span> |
+| Databases | MongoDB, PostgreSQL, etc. — authentication settings, network binding, audit logging, encryption | <span style={{whiteSpace: 'nowrap'}}>PR.PS-01</span>, <span style={{whiteSpace: 'nowrap'}}>PR.DS-01</span> |
+| Web servers | Nginx, Apache — TLS configuration, header security, request limits, directory restrictions | <span style={{whiteSpace: 'nowrap'}}>PR.PS-01</span>, <span style={{whiteSpace: 'nowrap'}}>PR.DS-02</span> |
+
+## Key control areas and CSF mapping
+
+The table below maps specific CIS control areas (common across multiple benchmarks) to CSF subcategories.
+
+| CIS control area | Description | CSF subcategories | Annex A link |
+|---|---|---|---|
+| Access and authentication | Password policies, account lockout, SSH key management, MFA enforcement | <span style={{whiteSpace: 'nowrap'}}>PR.AA-01</span>, <span style={{whiteSpace: 'nowrap'}}>PR.AA-02</span>, <span style={{whiteSpace: 'nowrap'}}>PR.AA-03</span> | <span style={{whiteSpace: 'nowrap'}}>A.8.2</span>, <span style={{whiteSpace: 'nowrap'}}>A.8.5</span> |
+| Network configuration | Firewall rules, port restrictions, IP forwarding, network segmentation | <span style={{whiteSpace: 'nowrap'}}>PR.PS-04</span> | <span style={{whiteSpace: 'nowrap'}}>A.8.20</span>, <span style={{whiteSpace: 'nowrap'}}>A.8.21</span> |
+| TLS and cryptography | Cipher suite selection, protocol version enforcement, certificate management | <span style={{whiteSpace: 'nowrap'}}>PR.DS-01</span>, <span style={{whiteSpace: 'nowrap'}}>PR.DS-02</span> | <span style={{whiteSpace: 'nowrap'}}>A.8.24</span> |
+| Logging and auditing | Audit log enablement, log rotation, log protection, centralised collection | <span style={{whiteSpace: 'nowrap'}}>DE.CM-09</span> | <span style={{whiteSpace: 'nowrap'}}>A.8.15</span> |
+| Service hardening | Disabling unnecessary services, removing default accounts, restricting daemon permissions | <span style={{whiteSpace: 'nowrap'}}>PR.PS-01</span>, <span style={{whiteSpace: 'nowrap'}}>PR.PS-02</span> | <span style={{whiteSpace: 'nowrap'}}>A.8.9</span> |
+| Filesystem and permissions | File ownership, directory permissions, SUID/SGID restrictions, mount options | <span style={{whiteSpace: 'nowrap'}}>PR.PS-01</span>, <span style={{whiteSpace: 'nowrap'}}>PR.AA-03</span> | <span style={{whiteSpace: 'nowrap'}}>A.8.3</span> |
+| Container isolation | Namespace isolation, resource limits, read-only root filesystem, privilege restrictions | <span style={{whiteSpace: 'nowrap'}}>PR.PS-01</span>, <span style={{whiteSpace: 'nowrap'}}>PR.PS-04</span> | <span style={{whiteSpace: 'nowrap'}}>A.8.31</span> |
+
+## Compliance verification
+
+CIS Benchmarks are designed for automated verification. Each recommendation has a corresponding audit command or check that can be run against a live system. This makes them suitable for:
+
+- **CI/CD pipeline checks** — validate configurations before deployment
+- **Runtime scanning** — detect configuration drift in production
+- **Audit evidence** — produce machine-readable compliance reports
+
+Deviations from a benchmark recommendation are acceptable when documented with justification. Not every recommendation applies to every environment.

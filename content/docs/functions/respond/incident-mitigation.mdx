@@ -1,0 +1,53 @@
+---
+title: "RS.MI: Incident Mitigation"
+description: Containment and eradication actions to stop an incident from spreading and remove the attacker's presence.
+---
+
+## Subcategories
+
+| ID | Outcome |
+|----|---------|
+| <span style={{whiteSpace: 'nowrap'}}>[RS.MI-01](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/rs/rs-mi/rs-mi-01/)</span> | Incidents are contained |
+| <span style={{whiteSpace: 'nowrap'}}>[RS.MI-02](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/rs/rs-mi/rs-mi-02/)</span> | Incidents are eradicated |
+
+## Our methodology
+
+Mitigation has two phases: containment (stop the bleeding) and eradication (remove the cause). Containment limits the blast radius while responders assess the situation. Eradication removes the attacker's presence and fixes the vulnerability that allowed the compromise.
+
+---
+
+### RS.MI-01: Containment
+
+Select and execute containment actions based on the incident type. Balance speed against disruption — a critical data breach justifies taking a service offline, while a low-severity credential compromise may only require revoking the specific credential. Pre-configure automated containment for known incident types where possible.
+
+| Incident type | Containment action | Automated / Manual | Trade-off |
+|---|---|---|---|
+| *e.g. Credential compromise* | *Revoke tokens, force password reset* | *Automated* | *Affects legitimate sessions* |
+| *e.g. Malware detected* | *Quarantine container, isolate endpoint* | *Automated* | *System becomes unavailable* |
+| *e.g. DDoS / brute force* | *Rate limit, block source IPs* | *Automated* | *May slow legitimate traffic* |
+| *e.g. Data breach* | *Isolate affected systems, revoke access paths* | *Manual — incident lead decides* | *Service outage during isolation* |
+| *e.g. Lateral movement* | *Network segmentation* | *Manual — requires judgment* | *Requires controls already in place* |
+| | | | |
+
+---
+
+### RS.MI-02: Eradication
+
+After containment stops the spread, remove the attacker's presence and fix the root cause. Eradication is not recovery — the system is clean but may not be operational. Restoring service is the responsibility of [Recover](../recover).
+
+| Eradication step | Action | Verification |
+|---|---|---|
+| *Remove attacker access* | *Revoke credentials used or created, remove backdoors and persistence mechanisms* | *IOC scan shows no remaining access* |
+| *Patch vulnerability* | *Apply fix or compensating control for the entry point* | *Vulnerability scan confirms remediation* |
+| *Verify removal* | *Scan affected systems for remaining indicators of compromise* | *Clean scan across all affected systems* |
+| *Update controls* | *Feed findings back into [Protect](../protect) and [Detect](../detect)* | *New/updated controls documented* |
+| | | |
+
+---
+
+## Informative references
+
+| Standard | Controls | Subcategories mapped |
+|----------|----------|---------------------|
+| ISO 27001 | A.5.26, A.8.7 | <span style={{whiteSpace: 'nowrap'}}>RS.MI-01</span>, <span style={{whiteSpace: 'nowrap'}}>RS.MI-02</span> |
+| SOC 2 | CC7.4 | <span style={{whiteSpace: 'nowrap'}}>RS.MI-01</span>, <span style={{whiteSpace: 'nowrap'}}>RS.MI-02</span> |

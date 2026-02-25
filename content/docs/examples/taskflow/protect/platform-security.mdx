@@ -1,0 +1,79 @@
+---
+title: "PR.PS: Platform Security"
+description: Taskflow example for platform security
+---
+
+For methodology guidance, see [PR.PS: Platform Security](/docs/functions/protect/platform-security).
+
+---
+
+### PR.PS-01: Configuration management
+
+| Component | Baseline source | Key settings | Deviation notes |
+|---|---|---|---|
+| Express API | OWASP Node.js security checklist | Helmet middleware (CSP, X-Frame-Options, X-Content-Type-Options), CORS whitelist, request size limits | None |
+| PostgreSQL (RDS) | AWS RDS best practices | SSL enforced, public access disabled, minor version auto-upgrade enabled | None |
+| Redis (ElastiCache) | AWS ElastiCache best practices | VPC-only access, in-transit encryption, no public endpoint | None |
+| S3 bucket | AWS S3 security best practices | BlockPublicAccess enabled, versioning enabled, server-side encryption, no public ACL | None |
+| AWS IAM | Least privilege principle | Roles scoped to specific services, no wildcard permissions, MFA on root account | None |
+
+---
+
+### PR.PS-02: Software maintenance
+
+| Component type | Patching approach | SLA (critical / high / medium) | EOL tracking |
+|---|---|---|---|
+| npm dependencies (direct) | Dependabot PRs, manual triage | Critical: 48h / High: 48h / Medium: 2 weeks | Package EOL announcements monitored |
+| npm dependencies (transitive) | Dependabot PRs, `npm audit` | Critical: 48h / High: 1 week / Medium: 2 weeks | Transitive dependency health checked monthly |
+| Node.js runtime | LTS version, upgrade within 30 days of release | Critical: 7 days / High: 14 days / Medium: 30 days | Node.js LTS schedule tracked |
+| PostgreSQL | AWS RDS managed minor upgrades | Critical: AWS applies / High: next maintenance window / Medium: next quarter | RDS EOL notifications monitored |
+| OS / container base image | Pinned to digest, rebuilt on patch | Critical: 24h / High: 7 days / Medium: 30 days | Base image support lifecycle tracked |
+
+**Controls:** <span style={{whiteSpace: 'nowrap'}}>SC-TF-8.1</span> (automated dependency scanning blocks merge on critical/high CVEs)
+
+---
+
+### PR.PS-03: Hardware maintenance
+
+Taskflow runs entirely on AWS managed infrastructure. Hardware maintenance is delegated to AWS under the shared responsibility model. AWS handles hardware replacement, firmware updates, and physical security.
+
+---
+
+### PR.PS-04: Logging
+
+| Log source | Format | Destination | Retention | Sensitive data |
+|---|---|---|---|---|
+| API request logs | JSON (method, path, status, response time, user ID) | Centralized log aggregation (CloudWatch) | 90 days | Low -- no request bodies logged |
+| Authentication logs | JSON (event type, success/failure, IP, user agent) | Centralized log aggregation (CloudWatch) | 1 year | Medium -- IP addresses are PII in some jurisdictions |
+| Admin action audit log | JSON (actor, action, target, timestamp) | Centralized log aggregation (CloudWatch) + append-only audit table | 2 years (compliance) | Low -- actions only, no data payloads |
+| Error logs | JSON (error type, correlation ID, sanitised message) | Centralized log aggregation (CloudWatch) | 90 days | High risk mitigated -- stack traces logged internally only, never in responses (<span style={{whiteSpace: 'nowrap'}}>SC-TF-7.2</span>). Log masking strips secrets (<span style={{whiteSpace: 'nowrap'}}>SC-TF-5.2</span>). |
+| AWS CloudTrail | AWS native format | S3 bucket (separate from application data) | 1 year | Low -- API calls and metadata only |
+
+**Controls:** <span style={{whiteSpace: 'nowrap'}}>SC-TF-7.1</span> (immutable audit log for admin actions), <span style={{whiteSpace: 'nowrap'}}>SC-TF-7.2</span> (sanitised error responses), <span style={{whiteSpace: 'nowrap'}}>SC-TF-5.2</span> (log masking middleware)
+
+---
+
+### PR.PS-05: Software integrity
+
+| Control | Scope | Implementation |
+|---|---|---|
+| Lock files | All npm dependencies | `package-lock.json` committed, `npm ci` used in CI (no implicit upgrades) |
+| Pre-commit secret scanning | All code commits | Gitleaks runs pre-commit and in CI. Blocks commits containing secret patterns. |
+| CI build verification | All production deployments | Only CI-built artifacts are deployed. No manual builds reach production. |
+| Docker image pinning | Base images | Pinned to SHA digest, not mutable tags. Rebuilt when base image is updated. |
+
+---
+
+### PR.PS-06: Secure development practices
+
+| Practice | When it runs | Tool / method | Failure action |
+|---|---|---|---|
+| Schema validation | Every API request | Zod/Joi middleware validates request bodies against schema | Request rejected with 400 |
+| Parameterised query enforcement | Every database query | ORM (Sequelize/Knex) with linting rule against string concatenation | PR blocked by linting rule |
+| Output encoding | Every render | React auto-escaping + review for `dangerouslySetInnerHTML` (must be zero) | PR blocked if found |
+| CSRF token validation | Every state-changing request | Express CSRF middleware | Request rejected with 403 |
+| Secret scanning | Every commit + every CI build | Gitleaks (pre-commit hook + CI step) | Commit blocked / CI build fails |
+| Dependency scanning | Every PR + daily | Dependabot + `npm audit` | PR blocked on critical/high CVEs |
+| Code review | Every PR | Peer review with security checklist | PR cannot be merged without approval |
+
+---

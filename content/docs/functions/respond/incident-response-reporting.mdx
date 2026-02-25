@@ -1,0 +1,64 @@
+---
+title: "RS.CO: Incident Response Reporting"
+description: Notification and communication requirements during incident response, coordinated with internal and external stakeholders.
+---
+
+## Subcategories
+
+| ID | Outcome |
+|----|---------|
+| <span style={{whiteSpace: 'nowrap'}}>[RS.CO-02](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/rs/rs-co/rs-co-02/)</span> | Internal and external stakeholders are notified of incidents |
+| <span style={{whiteSpace: 'nowrap'}}>[RS.CO-03](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/rs/rs-co/rs-co-03/)</span> | Information is shared with designated internal and external stakeholders |
+
+## Our methodology
+
+Communication during an incident is not an afterthought — it is a core response activity. Who gets told, when, and what they are told should be decided before an incident happens. During an incident, communication follows the pre-defined plan.
+
+---
+
+### RS.CO-02: Stakeholder notification
+
+Define who gets notified, when, and what they are told for each incident type and severity level. Map out regulatory and contractual deadlines before an incident happens. Late notification creates legal and reputational risk.
+
+**Internal notifications:**
+
+| Stakeholder | When to notify | What to communicate |
+|---|---|---|
+| *Incident response team* | *Immediately on declaration* | *Full technical details, severity, scope* |
+| *Engineering leadership* | *Critical and high severity* | *Impact summary, affected systems, ETA for containment* |
+| *Executive leadership* | *Critical, or any data breach* | *Business impact, regulatory implications, customer exposure* |
+| *Legal* | *Data breaches, regulatory triggers* | *Scope, affected data types, timeline* |
+| | | |
+
+**External notifications:**
+
+| Stakeholder | When to notify | Deadline | What to communicate |
+|---|---|---|---|
+| *Affected customers* | *Data exposure confirmed* | *Per contractual SLA* | *What happened, what data, what actions to take* |
+| *Regulators* | *Reporting threshold met* | *e.g. GDPR 72 hours* | *Required details per regulatory framework* |
+| *Partners/suppliers* | *Shared systems affected* | *Per contract* | *Impact on shared services, actions needed* |
+| | | | |
+
+---
+
+### RS.CO-03: Information sharing
+
+Share incident information with designated stakeholders using secure, approved channels. The incident lead approves all external communications. Share observed attacker TTPs with industry groups after removing sensitive data. Coordinate with affected suppliers using pre-established protocols.
+
+| Audience | What to share | Channel | Approval required |
+|---|---|---|---|
+| *Senior leadership* | *Status updates on major incidents* | *Secure internal comms* | *Incident lead* |
+| *ISAC / industry group* | *Attacker TTPs, sanitized indicators* | *Secure sharing platform* | *Incident lead + legal review* |
+| *Suppliers* | *Impact on shared services, joint recovery actions* | *Pre-established protocols* | *Incident lead* |
+| *HR* | *Facts relevant to insider threat* | *Confidential channel* | *Incident lead + legal* |
+| | | | |
+
+---
+
+## Informative references
+
+| Standard | Controls | Subcategories mapped |
+|----------|----------|---------------------|
+| ISO 27001 | A.5.24, A.5.26, A.6.8 | <span style={{whiteSpace: 'nowrap'}}>RS.CO-02</span>, <span style={{whiteSpace: 'nowrap'}}>RS.CO-03</span> |
+| SOC 2 | CC7.3, CC7.4 | <span style={{whiteSpace: 'nowrap'}}>RS.CO-02</span>, <span style={{whiteSpace: 'nowrap'}}>RS.CO-03</span> |
+| GDPR | Articles 33, 34 | <span style={{whiteSpace: 'nowrap'}}>RS.CO-02</span> |

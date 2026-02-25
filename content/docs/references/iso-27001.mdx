@@ -1,0 +1,79 @@
+---
+title: ISO 27001
+description: ISO 27001 Annex A controls mapped to NIST CSF subcategories
+---
+
+ISO 27001 is the international standard for information security management systems (ISMS). Annex A provides a catalogue of 93 controls across four domains. These controls are the primary selection pool for our security programme.
+
+## Annex A domains
+
+| Domain | Scope | Control count |
+|---|---|---|
+| A.5 | Organisational controls — policies, roles, responsibilities, threat intelligence, supplier relationships | 37 |
+| A.6 | People controls — screening, awareness, training, disciplinary processes | 8 |
+| A.7 | Physical controls — perimeters, entry, equipment protection | 14 |
+| A.8 | Technological controls — access, cryptography, network security, secure development, configuration | 34 |
+
+Not all 93 controls are relevant to every organisation. The controls below are the ones most applicable to software product security.
+
+## Statement of Applicability
+
+The Statement of Applicability (SoA) is a mandatory ISO 27001 document. It lists every Annex A control, states whether it applies, and justifies inclusion or exclusion.
+
+For our purposes:
+
+- **A.7 (Physical controls)** are largely delegated to cloud infrastructure providers. The SoA documents this delegation and the evidence chain (provider SOC 2 reports, ISO 27001 certificates).
+- **A.6 (People controls)** apply but are organisational processes, not product-level technical controls.
+- **A.5 and A.8** contain the controls most directly relevant to product security and are the focus of the mapping below.
+
+## Annex A to CSF mapping
+
+### Organisational controls (A.5)
+
+| Annex A | Control name | CSF subcategories | Notes |
+|---|---|---|---|
+| <span style={{whiteSpace: 'nowrap'}}>A.5.1</span> | Policies for information security | <span style={{whiteSpace: 'nowrap'}}>GV.PO-01</span>, <span style={{whiteSpace: 'nowrap'}}>GV.PO-02</span> | Security policy creation and review |
+| <span style={{whiteSpace: 'nowrap'}}>A.5.2</span> | Information security roles and responsibilities | <span style={{whiteSpace: 'nowrap'}}>GV.RR-01</span>, <span style={{whiteSpace: 'nowrap'}}>GV.RR-02</span> | Defines accountability for security outcomes |
+| <span style={{whiteSpace: 'nowrap'}}>A.5.7</span> | Threat intelligence | <span style={{whiteSpace: 'nowrap'}}>ID.RA-02</span> | Collecting and analysing threat information |
+| <span style={{whiteSpace: 'nowrap'}}>A.5.8</span> | Information security in project management | <span style={{whiteSpace: 'nowrap'}}>GV.PO-02</span> | Security integrated into project lifecycle |
+| <span style={{whiteSpace: 'nowrap'}}>A.5.19</span> | Information security in supplier relationships | <span style={{whiteSpace: 'nowrap'}}>GV.SC-03</span>, <span style={{whiteSpace: 'nowrap'}}>GV.SC-05</span> | Supplier security requirements and monitoring |
+| <span style={{whiteSpace: 'nowrap'}}>A.5.20</span> | Addressing information security within supplier agreements | <span style={{whiteSpace: 'nowrap'}}>GV.SC-05</span>, <span style={{whiteSpace: 'nowrap'}}>GV.SC-06</span> | Contractual security obligations |
+| <span style={{whiteSpace: 'nowrap'}}>A.5.21</span> | Managing information security in the ICT supply chain | <span style={{whiteSpace: 'nowrap'}}>GV.SC-05</span>, <span style={{whiteSpace: 'nowrap'}}>GV.SC-07</span> | End-to-end supply chain risk management |
+| <span style={{whiteSpace: 'nowrap'}}>A.5.22</span> | Monitoring, review and change management of supplier services | <span style={{whiteSpace: 'nowrap'}}>GV.SC-09</span> | Ongoing supplier assurance |
+| <span style={{whiteSpace: 'nowrap'}}>A.5.23</span> | Information security for use of cloud services | <span style={{whiteSpace: 'nowrap'}}>GV.SC-05</span>, <span style={{whiteSpace: 'nowrap'}}>PR.DS-01</span> | Cloud-specific security requirements |
+
+### Technological controls (A.8)
+
+| Annex A | Control name | CSF subcategories | Notes |
+|---|---|---|---|
+| <span style={{whiteSpace: 'nowrap'}}>A.8.1</span> | User endpoint devices | <span style={{whiteSpace: 'nowrap'}}>PR.PS-01</span> | Endpoint security configuration |
+| <span style={{whiteSpace: 'nowrap'}}>A.8.2</span> | Privileged access rights | <span style={{whiteSpace: 'nowrap'}}>PR.AA-05</span> | Restricting and monitoring privileged accounts |
+| <span style={{whiteSpace: 'nowrap'}}>A.8.3</span> | Information access restriction | <span style={{whiteSpace: 'nowrap'}}>PR.AA-03</span>, <span style={{whiteSpace: 'nowrap'}}>PR.AA-05</span> | Access control enforcement |
+| <span style={{whiteSpace: 'nowrap'}}>A.8.5</span> | Secure authentication | <span style={{whiteSpace: 'nowrap'}}>PR.AA-02</span>, <span style={{whiteSpace: 'nowrap'}}>PR.AA-03</span> | Authentication mechanism requirements |
+| <span style={{whiteSpace: 'nowrap'}}>A.8.9</span> | Configuration management | <span style={{whiteSpace: 'nowrap'}}>PR.PS-01</span>, <span style={{whiteSpace: 'nowrap'}}>PR.PS-02</span> | Baseline configs, hardening, drift detection |
+| <span style={{whiteSpace: 'nowrap'}}>A.8.10</span> | Information deletion | <span style={{whiteSpace: 'nowrap'}}>PR.DS-10</span> | Secure data disposal |
+| <span style={{whiteSpace: 'nowrap'}}>A.8.12</span> | Data leakage prevention | <span style={{whiteSpace: 'nowrap'}}>PR.DS-01</span>, <span style={{whiteSpace: 'nowrap'}}>PR.DS-02</span> | Preventing unauthorised data exfiltration |
+| <span style={{whiteSpace: 'nowrap'}}>A.8.15</span> | Logging | <span style={{whiteSpace: 'nowrap'}}>DE.CM-09</span> | Activity logging and log protection |
+| <span style={{whiteSpace: 'nowrap'}}>A.8.16</span> | Monitoring activities | <span style={{whiteSpace: 'nowrap'}}>DE.CM-01</span>, <span style={{whiteSpace: 'nowrap'}}>DE.CM-09</span> | Network and system monitoring |
+| <span style={{whiteSpace: 'nowrap'}}>A.8.20</span> | Networks security | <span style={{whiteSpace: 'nowrap'}}>PR.PS-04</span> | Network segmentation and filtering |
+| <span style={{whiteSpace: 'nowrap'}}>A.8.21</span> | Security of network services | <span style={{whiteSpace: 'nowrap'}}>PR.PS-04</span> | Service-level network security |
+| <span style={{whiteSpace: 'nowrap'}}>A.8.24</span> | Use of cryptography | <span style={{whiteSpace: 'nowrap'}}>PR.DS-01</span>, <span style={{whiteSpace: 'nowrap'}}>PR.DS-02</span> | Encryption at rest and in transit |
+| <span style={{whiteSpace: 'nowrap'}}>A.8.25</span> | Secure development lifecycle | <span style={{whiteSpace: 'nowrap'}}>PR.PS-06</span> | SDLC security requirements |
+| <span style={{whiteSpace: 'nowrap'}}>A.8.26</span> | Application security requirements | <span style={{whiteSpace: 'nowrap'}}>PR.PS-06</span> | Security requirements in design and development |
+| <span style={{whiteSpace: 'nowrap'}}>A.8.27</span> | Secure system architecture and engineering principles | <span style={{whiteSpace: 'nowrap'}}>PR.PS-06</span> | Secure-by-design principles |
+| <span style={{whiteSpace: 'nowrap'}}>A.8.28</span> | Secure coding | <span style={{whiteSpace: 'nowrap'}}>PR.PS-06</span> | Coding standards and code review |
+| <span style={{whiteSpace: 'nowrap'}}>A.8.29</span> | Security testing in development and acceptance | <span style={{whiteSpace: 'nowrap'}}>PR.PS-06</span>, <span style={{whiteSpace: 'nowrap'}}>ID.RA-01</span> | SAST, DAST, penetration testing |
+| <span style={{whiteSpace: 'nowrap'}}>A.8.30</span> | Outsourced development | <span style={{whiteSpace: 'nowrap'}}>GV.SC-05</span>, <span style={{whiteSpace: 'nowrap'}}>PR.PS-06</span> | Security requirements for external developers |
+| <span style={{whiteSpace: 'nowrap'}}>A.8.31</span> | Separation of development, test and production environments | <span style={{whiteSpace: 'nowrap'}}>PR.PS-01</span> | Environment isolation |
+| <span style={{whiteSpace: 'nowrap'}}>A.8.8</span> | Management of technical vulnerabilities | <span style={{whiteSpace: 'nowrap'}}>ID.RA-01</span>, <span style={{whiteSpace: 'nowrap'}}>RS.MI-02</span> | Vulnerability scanning and patching |
+
+## ISO 27017 additions
+
+ISO 27017 extends ISO 27001 with controls specific to cloud service provision. These are relevant when the product operates as a cloud service or relies on cloud infrastructure.
+
+| Area | What it adds | CSF subcategories |
+|---|---|---|
+| Shared responsibility | Explicit documentation of who owns what between provider and customer | <span style={{whiteSpace: 'nowrap'}}>GV.SC-05</span>, <span style={{whiteSpace: 'nowrap'}}>GV.RR-01</span> |
+| Virtualisation security | Controls for hypervisor, container, and multi-tenant isolation | <span style={{whiteSpace: 'nowrap'}}>PR.PS-01</span> |
+| Cloud service monitoring | Monitoring and logging requirements specific to cloud environments | <span style={{whiteSpace: 'nowrap'}}>DE.CM-01</span>, <span style={{whiteSpace: 'nowrap'}}>DE.CM-09</span> |
+| Data location and portability | Controls for data residency, portability, and deletion assurance | <span style={{whiteSpace: 'nowrap'}}>PR.DS-01</span>, <span style={{whiteSpace: 'nowrap'}}>PR.DS-10</span> |

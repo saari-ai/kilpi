@@ -1,0 +1,29 @@
+---
+title: Taskflow Example
+description: A worked example applying the CSF methodology to a real product
+---
+
+Taskflow is a fictional SaaS project management tool used as a worked example across all six NIST CSF 2.0 functions. It has a React SPA, Express API, PostgreSQL, Redis, S3, and integrations with Stripe and SendGrid -- enough surface area to exercise the full methodology.
+
+The purpose of this example is to show how the CSF methodology produces concrete, traceable security artefacts for a real product. Every threat maps to an asset. Every control maps to a threat. Every monitoring rule maps to a control. Every response playbook maps to a detection trigger. And every subcategory ID ties the whole chain back to the NIST CSF 2.0 framework.
+
+Each function below is broken into its NIST CSF 2.0 categories, with every subcategory filled in with Taskflow-specific data.
+
+| Function | Categories |
+|---|---|
+| [Govern](/docs/examples/taskflow/govern) | Organizational context, risk strategy, roles, policy, oversight, and supply chain risk |
+| [Identify](/docs/examples/taskflow/identify) | Asset management, risk assessment, and improvement |
+| [Protect](/docs/examples/taskflow/protect) | Access control, training, data security, platform security, and resilience |
+| [Detect](/docs/examples/taskflow/detect) | Continuous monitoring and adverse event analysis |
+| [Respond](/docs/examples/taskflow/respond) | Incident management, analysis, reporting, and mitigation |
+| [Recover](/docs/examples/taskflow/recover) | Recovery plan execution and recovery communication |
+
+## The traceability chain
+
+The example demonstrates a full traceability chain across NIST CSF 2.0:
+
+```
+Asset (ID.AM) → Threat (ID.RA) → Control (PR.*) → Monitoring (DE.*) → Response (RS.*) → Recovery (RC.*)
+```
+
+Every table in the category pages includes references to the specific asset IDs (SA-TF-*), threat IDs (ST-TF-*), and control IDs (SC-TF-*) that connect the chain. This is the mechanism that connects product-level security work to the framework.

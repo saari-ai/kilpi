@@ -1,0 +1,9 @@
+{
+  "title": "RS: Respond",
+  "pages": [
+    "incident-management",
+    "incident-analysis",
+    "incident-response-reporting",
+    "incident-mitigation"
+  ]
+}

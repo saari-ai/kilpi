@@ -1,0 +1,85 @@
+---
+title: "ID.IM: Improvement"
+description: Identify improvements to cybersecurity risk management across all CSF functions.
+---
+
+Improvements to organizational cybersecurity risk management processes, procedures, and activities are identified across all CSF functions. This category is the feedback mechanism — it takes what the organization learns from evaluations, tests, incidents, and day-to-day operations and feeds it back into better security posture.
+
+## Subcategories
+
+| ID | Outcome |
+|----|---------|
+| <span style={{whiteSpace: 'nowrap'}}>[ID.IM-01](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/id/id-im/id-im-01/)</span> | Improvements are identified from evaluations |
+| <span style={{whiteSpace: 'nowrap'}}>[ID.IM-02](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/id/id-im/id-im-02/)</span> | Improvements are identified from security tests and exercises, including those done in coordination with suppliers and relevant third parties |
+| <span style={{whiteSpace: 'nowrap'}}>[ID.IM-03](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/id/id-im/id-im-03/)</span> | Improvements are identified from execution of operational processes, procedures, and activities |
+| <span style={{whiteSpace: 'nowrap'}}>[ID.IM-04](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/id/id-im/id-im-04/)</span> | Incident response plans and other cybersecurity plans that affect operations are established, communicated, maintained, and improved |
+
+## Our methodology
+
+Improvement connects the outputs of all other functions back into better security practice. Without it, the security program is static — it only reflects the threats and assumptions that existed when it was first written.
+
+---
+
+### ID.IM-01: Improvements from evaluations
+
+Perform self-assessments and invest in independent audits to identify areas that need improvement. Continuously evaluate compliance with selected cybersecurity requirements through automated means where possible.
+
+| Evaluation type | Scope | Frequency | Findings feed into |
+|---|---|---|---|
+| *e.g. Self-assessment* | *Critical services against current threats and TTPs* | *Quarterly* | *Risk assessment updates* |
+| *e.g. Third-party audit* | *Full platform security posture* | *Annually* | *Control improvements, compliance gaps* |
+| *e.g. Automated compliance checks* | *Selected cybersecurity requirements* | *Continuous* | *Policy violations, drift detection* |
+| | | | |
+
+---
+
+### ID.IM-02: Improvements from tests and exercises
+
+Identify improvements from tabletop exercises, penetration testing, simulations, and supplier coordination exercises. Collect performance metrics from security tools to inform what to test next.
+
+| Test type | Target | Last conducted | Findings | Status |
+|---|---|---|---|---|
+| *e.g. Tabletop exercise* | *Incident response plan* | *2025-01* | *Escalation path unclear for multi-tenant incidents* | *Response plan updated* |
+| *e.g. Penetration test* | *API gateway* | *2025-02* | *Rate limiting bypassed via header manipulation* | *Fix deployed* |
+| | | | | |
+
+---
+
+### ID.IM-03: Improvements from operations
+
+Capture lessons learned from day-to-day operations, incidents, and supplier collaboration. Review cybersecurity policies, processes, and procedures annually to incorporate these lessons.
+
+Each NIST function produces information that should feed back into improvement:
+
+| Source function | What it produces | How it feeds back |
+|---|---|---|
+| [Detect](../detect) | Alerts, anomalies, monitoring gaps | New threats to add to risk assessments, detection coverage gaps to close |
+| [Respond](../respond) | Incident analysis, containment actions | Validated attack paths, control failures that need remediation |
+| [Recover](../recover) | Post-incident reviews, recovery gaps | Lessons learned that update threat models and control requirements |
+| [Protect](../protect) | Control effectiveness data | Controls that underperform get flagged for reassessment |
+| [Govern](../govern) | Policy and strategy reviews | Changed risk appetite or organizational context that shifts priorities |
+
+---
+
+### ID.IM-04: Plan maintenance
+
+Establish and maintain contingency plans (incident response, business continuity, disaster recovery) as living documents. Review annually at minimum, update after any incident that reveals gaps, and communicate changes to those responsible for carrying them out.
+
+| Plan | Owner | Last reviewed | Next review | Status |
+|---|---|---|---|---|
+| *e.g. Incident response plan* | *Security lead* | *2025-01* | *2026-01* | *Current* |
+| *e.g. Business continuity plan* | *Operations lead* | *2024-06* | *2025-06* | *Overdue for review* |
+| *e.g. Disaster recovery plan* | *Platform team* | *2025-03* | *2026-03* | *Current* |
+| | | | | |
+
+---
+
+## Informative references
+
+| Standard | Controls | Subcategories mapped |
+|----------|----------|---------------------|
+| ISO 27001 | 10.1 (continual improvement) | ID.IM-01 through ID.IM-04 |
+| ISO 27001 | 9.2 (internal audit), 9.3 (management review) | ID.IM-01 |
+| SOC 2 | CC4.1 (monitoring activities), CC4.2 (evaluation and communication of deficiencies) | ID.IM-01, ID.IM-03 |
+| NIST SP 800-53 | CA-2 (control assessments), CA-7 (continuous monitoring) | ID.IM-01, ID.IM-02 |
+| NIST SP 800-53 | CP-2 (contingency plan), IR-8 (incident response plan) | ID.IM-04 |

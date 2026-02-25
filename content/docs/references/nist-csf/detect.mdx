@@ -1,0 +1,86 @@
+---
+title: Detect (DE)
+description: NIST CSF 2.0 subcategory definitions and implementation examples for the Detect function
+---
+
+## DE.CM: Continuous Monitoring
+
+*Assets are monitored to find anomalies, indicators of compromise, and other potentially adverse events.*
+
+### Subcategories
+
+| ID | Outcome |
+|----|---------|
+| <span style={{whiteSpace: 'nowrap'}}>DE.CM-01</span> | Networks and network services are monitored to find potentially adverse events |
+| <span style={{whiteSpace: 'nowrap'}}>DE.CM-02</span> | The physical environment is monitored to find potentially adverse events |
+| <span style={{whiteSpace: 'nowrap'}}>DE.CM-03</span> | Personnel activity and technology usage are monitored to find potentially adverse events |
+| <span style={{whiteSpace: 'nowrap'}}>DE.CM-06</span> | External service provider activities and services are monitored to find potentially adverse events |
+| <span style={{whiteSpace: 'nowrap'}}>DE.CM-09</span> | Computing hardware and software, runtime environments, and their data are monitored to find potentially adverse events |
+
+{/* Note: DE.CM numbering has gaps (04-05, 07-08) in CSF 2.0. */}
+
+### Implementation examples
+
+| ID | Example |
+|----|---------|
+| <span style={{whiteSpace: 'nowrap'}}>DE.CM-01 Ex1</span> | Monitor DNS, BGP, and other network services and protocols for adverse events |
+| <span style={{whiteSpace: 'nowrap'}}>DE.CM-01 Ex2</span> | Monitor wired and wireless networks for connections from unauthorized endpoints |
+| <span style={{whiteSpace: 'nowrap'}}>DE.CM-01 Ex3</span> | Monitor facilities for unauthorized or rogue wireless networks |
+| <span style={{whiteSpace: 'nowrap'}}>DE.CM-01 Ex4</span> | Compare actual network flows against baselines to detect deviations |
+| <span style={{whiteSpace: 'nowrap'}}>DE.CM-01 Ex5</span> | Monitor network communications to identify changes in security postures for zero trust purposes |
+| <span style={{whiteSpace: 'nowrap'}}>DE.CM-02 Ex1</span> | Monitor logs from physical access control systems (e.g., badge readers) to find unusual access patterns (e.g., deviations from the norm) and failed access attempts |
+| <span style={{whiteSpace: 'nowrap'}}>DE.CM-02 Ex2</span> | Review and monitor physical access records (e.g., from visitor registration, sign-in sheets) |
+| <span style={{whiteSpace: 'nowrap'}}>DE.CM-02 Ex3</span> | Monitor physical access controls (e.g., locks, latches, hinge pins, alarms) for signs of tampering |
+| <span style={{whiteSpace: 'nowrap'}}>DE.CM-02 Ex4</span> | Monitor the physical environment using alarm systems, cameras, and security guards |
+| <span style={{whiteSpace: 'nowrap'}}>DE.CM-03 Ex1</span> | Use behavior analytics software to detect anomalous user activity to mitigate insider threats |
+| <span style={{whiteSpace: 'nowrap'}}>DE.CM-03 Ex2</span> | Monitor logs from logical access control systems to find unusual access patterns and failed access attempts |
+| <span style={{whiteSpace: 'nowrap'}}>DE.CM-03 Ex3</span> | Continuously monitor deception technology, including user accounts, for any usage |
+| <span style={{whiteSpace: 'nowrap'}}>DE.CM-06 Ex1</span> | Monitor remote and onsite administration and maintenance activities that external providers perform on organizational systems |
+| <span style={{whiteSpace: 'nowrap'}}>DE.CM-06 Ex2</span> | Monitor activity from cloud-based services, internet service providers, and other service providers for deviations from expected behavior |
+| <span style={{whiteSpace: 'nowrap'}}>DE.CM-09 Ex1</span> | Monitor email, web, file sharing, collaboration services, and other common attack vectors to detect malware, phishing, data leaks and exfiltration, and other adverse events |
+| <span style={{whiteSpace: 'nowrap'}}>DE.CM-09 Ex2</span> | Monitor authentication attempts to identify attacks against credentials and unauthorized credential reuse |
+| <span style={{whiteSpace: 'nowrap'}}>DE.CM-09 Ex3</span> | Monitor software configurations for deviations from security baselines |
+| <span style={{whiteSpace: 'nowrap'}}>DE.CM-09 Ex4</span> | Monitor hardware and software for signs of tampering |
+| <span style={{whiteSpace: 'nowrap'}}>DE.CM-09 Ex5</span> | Use technologies with a presence on endpoints to detect cyber health issues (e.g., missing patches, malware infections, unauthorized software), and redirect the endpoints to a remediation environment before access is authorized |
+
+---
+
+## DE.AE: Adverse Event Analysis
+
+*Anomalies, indicators of compromise, and other potentially adverse events are analyzed to characterize the events and detect cybersecurity incidents.*
+
+### Subcategories
+
+| ID | Outcome |
+|----|---------|
+| <span style={{whiteSpace: 'nowrap'}}>DE.AE-02</span> | Potentially adverse events are analyzed to better understand associated activities |
+| <span style={{whiteSpace: 'nowrap'}}>DE.AE-03</span> | Information is correlated from multiple sources |
+| <span style={{whiteSpace: 'nowrap'}}>DE.AE-04</span> | The estimated impact and scope of adverse events are understood |
+| <span style={{whiteSpace: 'nowrap'}}>DE.AE-06</span> | Information on adverse events is provided to authorized staff and tools |
+| <span style={{whiteSpace: 'nowrap'}}>DE.AE-07</span> | Cyber threat intelligence and other contextual information are integrated into the analysis |
+| <span style={{whiteSpace: 'nowrap'}}>DE.AE-08</span> | Incidents are declared when adverse events meet the defined incident criteria |
+
+{/* Note: DE.AE numbering has gaps (01, 05) in CSF 2.0. */}
+
+### Implementation examples
+
+| ID | Example |
+|----|---------|
+| <span style={{whiteSpace: 'nowrap'}}>DE.AE-02 Ex1</span> | Use security information and event management (SIEM) or other tools to continuously monitor log events for known malicious and suspicious activity |
+| <span style={{whiteSpace: 'nowrap'}}>DE.AE-02 Ex2</span> | Utilize up-to-date cyber threat intelligence in log analysis tools to improve detection accuracy and characterize threat actors, their methods, and indicators of compromise |
+| <span style={{whiteSpace: 'nowrap'}}>DE.AE-02 Ex3</span> | Regularly conduct manual reviews of log events for technologies that cannot be sufficiently monitored through automation |
+| <span style={{whiteSpace: 'nowrap'}}>DE.AE-02 Ex4</span> | Use log analysis tools to generate reports on their findings |
+| <span style={{whiteSpace: 'nowrap'}}>DE.AE-03 Ex1</span> | Constantly transfer log data generated by other sources to a relatively small number of log servers |
+| <span style={{whiteSpace: 'nowrap'}}>DE.AE-03 Ex2</span> | Use event correlation technology (e.g., SIEM) to collect information captured by multiple sources |
+| <span style={{whiteSpace: 'nowrap'}}>DE.AE-03 Ex3</span> | Utilize cyber threat intelligence to help correlate events among log sources |
+| <span style={{whiteSpace: 'nowrap'}}>DE.AE-04 Ex1</span> | Use SIEMs or other tools to estimate impact and scope, and review and refine the estimates |
+| <span style={{whiteSpace: 'nowrap'}}>DE.AE-04 Ex2</span> | A person creates their own estimates of impact and scope |
+| <span style={{whiteSpace: 'nowrap'}}>DE.AE-06 Ex1</span> | Use cybersecurity software to generate alerts and provide them to the security operations center (SOC), incident responders, and incident response tools |
+| <span style={{whiteSpace: 'nowrap'}}>DE.AE-06 Ex2</span> | Incident responders and other authorized personnel can access log analysis findings at all times |
+| <span style={{whiteSpace: 'nowrap'}}>DE.AE-06 Ex3</span> | Automatically create and assign tickets in the organization's ticketing system when certain types of alerts occur |
+| <span style={{whiteSpace: 'nowrap'}}>DE.AE-06 Ex4</span> | Manually create and assign tickets in the organization's ticketing system when technical staff discover indicators of compromise |
+| <span style={{whiteSpace: 'nowrap'}}>DE.AE-07 Ex1</span> | Securely provide cyber threat intelligence feeds to detection technologies, processes, and personnel |
+| <span style={{whiteSpace: 'nowrap'}}>DE.AE-07 Ex2</span> | Securely provide information from asset inventories to detection technologies, processes, and personnel |
+| <span style={{whiteSpace: 'nowrap'}}>DE.AE-07 Ex3</span> | Rapidly acquire and analyze vulnerability disclosures for the organization's technologies from suppliers, vendors, and third-party security advisories |
+| <span style={{whiteSpace: 'nowrap'}}>DE.AE-08 Ex1</span> | Apply incident criteria to known and assumed characteristics of activity in order to determine whether an incident should be declared |
+| <span style={{whiteSpace: 'nowrap'}}>DE.AE-08 Ex2</span> | Take known false positives into account when applying incident criteria |

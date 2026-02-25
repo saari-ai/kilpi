@@ -1,0 +1,94 @@
+---
+title: "RS.MA: Incident Management"
+description: Systematic triage, prioritization, and coordination of responses to detected cybersecurity incidents.
+---
+
+## Subcategories
+
+| ID | Outcome |
+|----|---------|
+| <span style={{whiteSpace: 'nowrap'}}>[RS.MA-01](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/rs/rs-ma/rs-ma-01/)</span> | The incident response plan is executed in coordination with relevant third parties once an incident is declared |
+| <span style={{whiteSpace: 'nowrap'}}>[RS.MA-02](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/rs/rs-ma/rs-ma-02/)</span> | Incident reports are triaged and validated |
+| <span style={{whiteSpace: 'nowrap'}}>[RS.MA-03](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/rs/rs-ma/rs-ma-03/)</span> | Incidents are categorized and prioritized |
+| <span style={{whiteSpace: 'nowrap'}}>[RS.MA-04](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/rs/rs-ma/rs-ma-04/)</span> | Incidents are escalated or elevated as needed |
+| <span style={{whiteSpace: 'nowrap'}}>[RS.MA-05](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/rs/rs-ma/rs-ma-05/)</span> | The criteria for initiating incident recovery are applied |
+
+## Our methodology
+
+Incident management is the coordination layer — it makes sure the right people are involved, the incident is understood well enough to act on, and decisions are made in the right order. When [Detect](../detect) declares an incident, this is the first process that kicks in.
+
+---
+
+### RS.MA-01: Plan activation
+
+Assign an incident lead, activate the relevant playbook, engage third parties if needed, and notify stakeholders. The incident lead is the single point of accountability for status, decisions, and communications.
+
+| Step | Action | Owner |
+|---|---|---|
+| *1. Assign lead* | *Designate incident lead* | *On-call manager* |
+| *2. Activate plan* | *Pull up playbook for incident type* | *Incident lead* |
+| *3. Engage third parties* | *Contact external IR, legal, forensics if needed* | *Incident lead* |
+| *4. Notify stakeholders* | *Follow escalation matrix* | *Incident lead* |
+| | | |
+
+---
+
+### RS.MA-02: Incident triage
+
+Validate the incident is real and estimate severity. Triage should take minutes, not hours — the goal is "good enough to prioritize," not "fully understood."
+
+| Triage step | Question to answer | Output |
+|---|---|---|
+| *Validate* | *Is this a genuine incident or a false positive?* | *Confirmed / rejected* |
+| *Estimate severity* | *How urgent is this?* | *Critical / High / Medium / Low* |
+| *Scope check* | *What systems, data, and users are affected?* | *Preliminary scope statement* |
+| | | |
+
+---
+
+### RS.MA-03: Categorization and prioritization
+
+Categorize the incident by type and prioritize by scope, impact, and time sensitivity. Priority determines resource allocation — a critical incident gets all available responders.
+
+| Incident type | Scope | Impact | Priority |
+|---|---|---|---|
+| *e.g. Data breach* | *Customer database* | *PII exposure, regulatory reporting* | *Critical* |
+| *e.g. Account compromise* | *Single admin account* | *Potential lateral movement* | *High* |
+| *e.g. DDoS* | *Public API* | *Service degradation* | *High* |
+| | | | |
+
+---
+
+### RS.MA-04: Escalation
+
+Escalation decisions should be predefined, not improvised during an incident. The incident lead is responsible for re-escalating when the situation changes.
+
+| Severity | Escalate to | Timeline | Trigger for re-escalation |
+|---|---|---|---|
+| *Critical* | *Leadership + affected parties* | *Immediately* | *Any scope expansion* |
+| *High* | *Team lead* | *Within 1 hour* | *Data impact confirmed* |
+| *Medium* | *Incident log* | *Next business day* | *Scope expands beyond initial assessment* |
+| *Low* | *Incident log* | *Next review cycle* | *Severity increases* |
+| | | | |
+
+---
+
+### RS.MA-05: Recovery initiation criteria
+
+The decision to initiate recovery is deliberate, not automatic. Before starting recovery, confirm containment is complete and weigh investigation needs against business impact. When criteria are met, hand off to [Recover](../recover).
+
+| Criterion | Check | Status |
+|---|---|---|
+| *Attacker access removed* | *Containment and eradication confirmed* | *Yes / No* |
+| *Investigation preserved* | *Forensic evidence captured before restoration* | *Yes / No* |
+| *Business impact assessed* | *Cost of continued downtime vs. investigation thoroughness* | *Acceptable / Not yet* |
+| | | |
+
+---
+
+## Informative references
+
+| Standard | Controls | Subcategories mapped |
+|----------|----------|---------------------|
+| ISO 27001 | A.5.24, A.5.25, A.5.26 | <span style={{whiteSpace: 'nowrap'}}>RS.MA-01</span>, <span style={{whiteSpace: 'nowrap'}}>RS.MA-02</span>, <span style={{whiteSpace: 'nowrap'}}>RS.MA-03</span> |
+| SOC 2 | CC7.3, CC7.4 | <span style={{whiteSpace: 'nowrap'}}>RS.MA-01</span>, <span style={{whiteSpace: 'nowrap'}}>RS.MA-02</span>, <span style={{whiteSpace: 'nowrap'}}>RS.MA-04</span> |

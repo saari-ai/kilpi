@@ -1,0 +1,103 @@
+---
+title: "DE.AE: Adverse Event Analysis"
+description: Correlating, analyzing, and investigating anomalies to characterize events and detect cybersecurity incidents.
+---
+
+## Subcategories
+
+| ID | Outcome |
+|----|---------|
+| <span style={{whiteSpace: 'nowrap'}}>[DE.AE-02](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/de/de-ae/de-ae-02/)</span> | Potentially adverse events are analyzed to better understand associated activities |
+| <span style={{whiteSpace: 'nowrap'}}>[DE.AE-03](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/de/de-ae/de-ae-03/)</span> | Information is correlated from multiple sources |
+| <span style={{whiteSpace: 'nowrap'}}>[DE.AE-04](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/de/de-ae/de-ae-04/)</span> | The estimated impact and scope of adverse events are understood |
+| <span style={{whiteSpace: 'nowrap'}}>[DE.AE-06](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/de/de-ae/de-ae-06/)</span> | Information on adverse events is provided to authorized staff and tools |
+| <span style={{whiteSpace: 'nowrap'}}>[DE.AE-07](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/de/de-ae/de-ae-07/)</span> | Cyber threat intelligence and other contextual information are integrated into the analysis |
+| <span style={{whiteSpace: 'nowrap'}}>[DE.AE-08](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/de/de-ae/de-ae-08/)</span> | Incidents are declared when adverse events meet the defined incident criteria |
+
+## Our methodology
+
+Continuous monitoring from [DE.CM](./continuous-monitoring) generates signals. Adverse event analysis is the process of turning those signals into understanding — correlating events, assessing scope, and deciding whether something qualifies as an incident.
+
+---
+
+### DE.AE-02: Event analysis
+
+Analyze potentially adverse events using automated tools and manual review. Use SIEM or log analysis platforms for known patterns, and conduct manual reviews for technologies that cannot be sufficiently monitored through automation.
+
+| Alert source | Analysis method | Triage outcome |
+|---|---|---|
+| *e.g. Failed login spike* | *SIEM correlation rule* | *True positive / false positive / needs investigation* |
+| *e.g. Unusual API call pattern* | *Manual log review* | *True positive / false positive / needs investigation* |
+| | | |
+
+---
+
+### DE.AE-03: Cross-source correlation
+
+Correlate events from multiple sources to build a coherent picture. Use correlation IDs that span services, centralize logs into a single analysis platform, and enrich raw events with asset inventory and threat intelligence data.
+
+| Source A | Source B | Correlation method | Combined signal |
+|---|---|---|---|
+| *e.g. Auth service* | *e.g. Data access logs* | *User ID + timestamp* | *Compromised account accessing sensitive data* |
+| *e.g. Network flows* | *e.g. Threat intel feed* | *IP matching* | *Connection to known C2 server* |
+| | | | |
+
+---
+
+### DE.AE-04: Impact and scope estimation
+
+Estimate the impact and scope of adverse events. Start with what is directly affected, then check adjacent systems. Use the severity levels from [Conventions](../conventions) to assign urgency.
+
+| Event | Affected systems | Affected data | Estimated severity |
+|---|---|---|---|
+| *e.g. Credential compromise* | *Auth service, downstream APIs* | *User sessions* | *High* |
+| | | | |
+
+---
+
+### DE.AE-06: Alert routing and notification
+
+Route alert information to the right people and tools. Critical and high severity alerts go directly to incident responders. Medium and low go into the normal work queue.
+
+| Alert severity | Route to | Method | SLA |
+|---|---|---|---|
+| *e.g. Critical* | *Incident responders* | *PagerDuty, direct notification* | *Acknowledge within 15 min* |
+| *e.g. High* | *Security team* | *Ticketing system* | *Investigate within 4 hours* |
+| *e.g. Medium/Low* | *Work queue* | *Auto-created ticket* | *Review in next cycle* |
+| | | | |
+
+---
+
+### DE.AE-07: Threat intelligence integration
+
+Integrate threat intelligence feeds into your analysis workflow to improve detection accuracy. Subscribe to vendor advisories, CVE databases, and indicator feeds for known-malicious IPs, domains, and file hashes.
+
+| Intelligence type | Source | Integration point | Update cadence |
+|---|---|---|---|
+| *e.g. Vulnerability advisories* | *Vendor + NVD* | *Patch management, scanning* | *Continuous* |
+| *e.g. Indicator feeds* | *ISAC, commercial feed* | *SIEM correlation rules* | *Daily* |
+| *e.g. Threat actor TTPs* | *Industry reports* | *Detection rule tuning* | *Quarterly review* |
+| | | | |
+
+---
+
+### DE.AE-08: Incident declaration
+
+Define the criteria for declaring an incident before one happens. When an event meets the criteria, declare it and hand off to [Respond](../respond). Document known false positives explicitly so triage does not waste time on the same patterns.
+
+| Criterion | Threshold | Example |
+|---|---|---|
+| *Confirmed compromise* | *Unauthorized access verified* | *Attacker credentials used to access production database* |
+| *Data exposure* | *Sensitive data exposed to unauthorized party* | *Customer PII found in public S3 bucket* |
+| *Service impact* | *Availability or integrity of production threatened* | *Ransomware encryption in progress* |
+| *Regulatory trigger* | *Mandatory reporting threshold met* | *Breach affecting >500 data subjects under GDPR* |
+| | | |
+
+---
+
+## Informative references
+
+| Standard | Controls | Subcategories mapped |
+|----------|----------|---------------------|
+| ISO 27001 | A.5.7, A.8.15, A.8.16 | <span style={{whiteSpace: 'nowrap'}}>DE.AE-02</span>, <span style={{whiteSpace: 'nowrap'}}>DE.AE-03</span>, <span style={{whiteSpace: 'nowrap'}}>DE.AE-07</span> |
+| SOC 2 | CC7.2, CC7.3 | <span style={{whiteSpace: 'nowrap'}}>DE.AE-02</span>, <span style={{whiteSpace: 'nowrap'}}>DE.AE-04</span>, <span style={{whiteSpace: 'nowrap'}}>DE.AE-06</span> |

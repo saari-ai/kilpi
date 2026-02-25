@@ -1,0 +1,93 @@
+---
+title: "DE.CM: Continuous Monitoring"
+description: Ongoing monitoring of assets, networks, personnel activity, and external services to find anomalies and adverse events.
+---
+
+## Subcategories
+
+| ID | Outcome |
+|----|---------|
+| <span style={{whiteSpace: 'nowrap'}}>[DE.CM-01](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/de/de-cm/de-cm-01/)</span> | Networks and network services are monitored to find potentially adverse events |
+| <span style={{whiteSpace: 'nowrap'}}>[DE.CM-02](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/de/de-cm/de-cm-02/)</span> | The physical environment is monitored to find potentially adverse events |
+| <span style={{whiteSpace: 'nowrap'}}>[DE.CM-03](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/de/de-cm/de-cm-03/)</span> | Personnel activity and technology usage are monitored to find potentially adverse events |
+| <span style={{whiteSpace: 'nowrap'}}>[DE.CM-06](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/de/de-cm/de-cm-06/)</span> | External service provider activities and services are monitored to find potentially adverse events |
+| <span style={{whiteSpace: 'nowrap'}}>[DE.CM-09](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/de/de-cm/de-cm-09/)</span> | Computing hardware and software, runtime environments, and their data are monitored to find potentially adverse events |
+
+## Our methodology
+
+Continuous monitoring starts from the controls defined in [Protect](../protect). For each control, ask: what would I see if this control failed or was bypassed? That observable signal is what you monitor.
+
+---
+
+### DE.CM-01: Network monitoring
+
+Define monitoring rules for network-level signals. For cloud-native products without traditional network perimeters, focus on API gateway logs, load balancer metrics, and service mesh telemetry.
+
+| What to monitor | Method | Alert threshold |
+|---|---|---|
+| *e.g. DNS queries* | *DNS log analysis* | *Queries to known-malicious domains, tunneling patterns* |
+| *e.g. Connection patterns* | *Flow comparison against baseline* | *Unexpected outbound connections, unusual ports* |
+| *e.g. Service availability* | *Health checks, synthetic probes* | *Service unreachable or degraded* |
+| | | |
+
+---
+
+### DE.CM-02: Physical environment monitoring
+
+Define monitoring for physical access and environmental controls. For cloud-hosted products, document which physical monitoring your provider handles and what gaps remain in your own facilities.
+
+| What to monitor | Method | Alert threshold |
+|---|---|---|
+| *e.g. Office access* | *Badge reader logs* | *Access outside business hours, failed attempts* |
+| *e.g. Server room* | *Environmental sensors, cameras* | *Temperature spike, unauthorized entry* |
+| | | |
+
+---
+
+### DE.CM-03: Personnel activity monitoring
+
+Monitor authentication events and access patterns to detect insider threats and compromised accounts. Focus on deviations from normal behaviour, not surveillance.
+
+| What to monitor | Method | Alert threshold |
+|---|---|---|
+| *e.g. Authentication* | *Login event analysis* | *Brute force patterns, impossible travel, concurrent sessions* |
+| *e.g. Access patterns* | *Behavioural analytics* | *Bulk downloads, access to unfamiliar resources* |
+| *e.g. Privilege usage* | *Admin action audit logs* | *Elevated privilege use outside change windows* |
+| | | |
+
+---
+
+### DE.CM-06: External service provider monitoring
+
+When you depend on external services, you inherit their risk. Track provider activity on your systems and watch for behavioural deviations from expected norms.
+
+| What to monitor | Method | Alert threshold |
+|---|---|---|
+| *e.g. Cloud provider status* | *Status page integration, alerts* | *Degradation of services you depend on* |
+| *e.g. Third-party admin actions* | *Audit logs for external providers* | *Any administrative action on your systems* |
+| *e.g. Managed service traffic* | *Traffic pattern analysis* | *Deviation from expected norms* |
+| | | |
+
+---
+
+### DE.CM-09: Application and runtime monitoring
+
+This is the most product-specific category. Define monitoring rules for application logs, runtime environments, and software configuration drift. Each product should map its controls from [Protect](../protect) to observable signals.
+
+| What to monitor | Method | Alert threshold |
+|---|---|---|
+| *e.g. Auth events* | *Structured application logging* | *Failed login spikes, credential reuse* |
+| *e.g. Runtime environment* | *Container integrity checks* | *Unexpected process execution, file system changes* |
+| *e.g. Config drift* | *Baseline comparison* | *Unauthorized changes to security config* |
+| *e.g. Dependencies* | *CVE scanning* | *Any critical or high CVE* |
+| | | |
+
+---
+
+## Informative references
+
+| Standard | Controls | Subcategories mapped |
+|----------|----------|---------------------|
+| ISO 27001 | A.8.15, A.8.16 | <span style={{whiteSpace: 'nowrap'}}>DE.CM-01</span>, <span style={{whiteSpace: 'nowrap'}}>DE.CM-09</span> |
+| SOC 2 | CC7.1, CC7.2 | <span style={{whiteSpace: 'nowrap'}}>DE.CM-01</span>, <span style={{whiteSpace: 'nowrap'}}>DE.CM-03</span>, <span style={{whiteSpace: 'nowrap'}}>DE.CM-09</span> |
+| OWASP | Logging and Monitoring Failures (A09:2021) | <span style={{whiteSpace: 'nowrap'}}>DE.CM-09</span> |

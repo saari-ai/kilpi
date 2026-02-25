@@ -1,0 +1,66 @@
+---
+title: SLSA
+description: SLSA levels mapped to NIST CSF subcategories
+---
+
+SLSA (Supply-chain Levels for Software Artefacts) is a framework for ensuring the integrity of software artefacts throughout the supply chain. It defines a series of levels, each with increasingly strict requirements for how software is built and distributed.
+
+Traditional security frameworks underweight supply chain threats. ISO 27001 addresses supplier relationships (A.5.19-5.22) and secure development (A.8.25-8.31), but SLSA provides a more granular, build-focused model that fills the gap.
+
+## How it fits
+
+SLSA primarily maps to CSF subcategories under **Govern > Supply Chain Risk Management** (<span style={{whiteSpace: 'nowrap'}}>GV.SC</span>) and **Protect > Platform Security** (<span style={{whiteSpace: 'nowrap'}}>PR.PS</span>). It answers a specific question: can you prove that the artefact you deployed is the artefact your source code intended?
+
+## SLSA levels and CSF mapping
+
+| Level | Requirements | What it proves | CSF subcategories |
+|---|---|---|---|
+| SLSA 1 | Build process is documented | You know how artefacts are built. The build process is not opaque. | <span style={{whiteSpace: 'nowrap'}}>GV.SC-05</span>, <span style={{whiteSpace: 'nowrap'}}>PR.PS-06</span> |
+| SLSA 2 | Build service is hosted and generates provenance | Builds are not run on developer machines. Provenance is machine-generated, not self-attested. | <span style={{whiteSpace: 'nowrap'}}>GV.SC-05</span>, <span style={{whiteSpace: 'nowrap'}}>GV.SC-07</span>, <span style={{whiteSpace: 'nowrap'}}>PR.PS-06</span> |
+| SLSA 3 | Source and build platforms meet audit requirements | Builds are isolated. Source is version-controlled. Provenance is non-falsifiable. | <span style={{whiteSpace: 'nowrap'}}>GV.SC-05</span>, <span style={{whiteSpace: 'nowrap'}}>GV.SC-07</span>, <span style={{whiteSpace: 'nowrap'}}>PR.PS-01</span>, <span style={{whiteSpace: 'nowrap'}}>PR.PS-06</span> |
+| SLSA 4 | Two-person review, hermetic builds, reproducible | No single individual can push a compromised artefact. Builds are fully reproducible and hermetically sealed. | <span style={{whiteSpace: 'nowrap'}}>GV.SC-05</span>, <span style={{whiteSpace: 'nowrap'}}>GV.SC-07</span>, <span style={{whiteSpace: 'nowrap'}}>GV.SC-09</span>, <span style={{whiteSpace: 'nowrap'}}>PR.PS-01</span>, <span style={{whiteSpace: 'nowrap'}}>PR.PS-06</span> |
+
+## Build integrity requirements
+
+Each SLSA level builds on the previous one. The key requirements at each level are:
+
+### SLSA 1 — Documented build
+
+- Build process exists and is documented
+- Artefacts have some form of provenance (even if manually created)
+- Prevents: complete lack of visibility into how software is built
+
+### SLSA 2 — Hosted build with provenance
+
+- Builds run on a hosted service (not developer laptops)
+- Provenance is generated automatically by the build service
+- Provenance includes source repository, build command, and dependencies
+- Prevents: builds that cannot be traced back to their source
+
+### SLSA 3 — Auditable build platform
+
+- Source is version-controlled with authenticated contributors
+- Build platform is hardened and auditable
+- Provenance is signed and cannot be forged by the build user
+- Build environment is isolated (no network access, no shared state between builds)
+- Prevents: tampering with the build process itself
+
+### SLSA 4 — Reproducible and reviewed
+
+- All changes require two-person review before merge
+- Builds are hermetic — fully isolated with no external dependencies fetched at build time
+- Builds are reproducible — same inputs produce identical outputs
+- Prevents: a single compromised individual from injecting malicious code
+
+## Annex A cross-reference
+
+SLSA requirements reinforce several ISO 27001 Annex A controls:
+
+| SLSA requirement | Annex A controls |
+|---|---|
+| Documented build process | <span style={{whiteSpace: 'nowrap'}}>A.8.25</span> (Secure development lifecycle) |
+| Hosted build service | <span style={{whiteSpace: 'nowrap'}}>A.8.31</span> (Separation of environments) |
+| Machine-generated provenance | <span style={{whiteSpace: 'nowrap'}}>A.8.25</span>, <span style={{whiteSpace: 'nowrap'}}>A.8.26</span> (Application security requirements) |
+| Two-person review | <span style={{whiteSpace: 'nowrap'}}>A.8.28</span> (Secure coding) |
+| Hermetic builds | <span style={{whiteSpace: 'nowrap'}}>A.8.31</span> (Separation of environments) |
+| Supplier provenance verification | <span style={{whiteSpace: 'nowrap'}}>A.5.19</span>-<span style={{whiteSpace: 'nowrap'}}>A.5.22</span> (Supplier relationships) |

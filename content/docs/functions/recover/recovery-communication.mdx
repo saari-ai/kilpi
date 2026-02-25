@@ -1,0 +1,62 @@
+---
+title: "RC.CO: Recovery Communication"
+description: Coordinating status updates and public messaging during incident recovery with internal and external stakeholders.
+---
+
+## Subcategories
+
+| ID | Outcome |
+|----|---------|
+| <span style={{whiteSpace: 'nowrap'}}>[RC.CO-03](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/rc/rc-co/rc-co-03/)</span> | Recovery activities and progress in restoring operational capabilities are communicated to designated internal and external stakeholders |
+| <span style={{whiteSpace: 'nowrap'}}>[RC.CO-04](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/rc/rc-co/rc-co-04/)</span> | Public updates on incident recovery are shared using approved methods and messaging |
+
+## Our methodology
+
+Recovery communication is distinct from incident response reporting ([RS.CO](../respond/incident-response-reporting)). Response reporting is about notifying stakeholders that an incident occurred. Recovery communication is about keeping stakeholders informed as services are restored — what is working again, what is still down, and when to expect full restoration.
+
+---
+
+### RC.CO-03: Internal and stakeholder recovery updates
+
+Provide regular, structured updates to internal and external stakeholders during recovery. Ad-hoc messages create confusion. Keep updates factual — "Database restored, running integrity checks, expecting application available by 14:00 UTC" is useful. "Making good progress" is not.
+
+**Internal update cadence:**
+
+| Severity | Update frequency | Who receives |
+|---|---|---|
+| *Critical* | *Every 2-4 hours until major services restored, then daily* | *All leadership, engineering, affected teams* |
+| *High* | *Daily until resolved* | *Engineering leadership, affected teams* |
+| *Medium* | *At key milestones (containment, partial restore, full restore)* | *Incident log, team lead* |
+| *Low* | *At resolution* | *Incident log* |
+| | | |
+
+**External stakeholder notifications:**
+
+| Stakeholder | What to communicate | Channel |
+|---|---|---|
+| *Affected customers* | *Restoration progress, actions they need to take, timelines* | *Same channel as initial breach notification* |
+| *Regulators* | *Follow-up reports, updated scope if broader than initially reported* | *Per regulatory framework* |
+| *Partners/suppliers* | *When shared services restored, joint recovery coordination* | *Pre-established protocols* |
+| | | |
+
+---
+
+### RC.CO-04: Public updates
+
+For incidents affecting public-facing services or involving personal data, use approved channels only — status page, official blog, or designated spokesperson. Explain what happened in plain language, describe concrete steps being taken, and provide timelines where possible.
+
+| Update stage | Channel | Content | Approval |
+|---|---|---|---|
+| *During recovery* | *Status page* | *Current status, affected services, next update time* | *Incident lead* |
+| *At full recovery* | *Blog / status page* | *Summary: what happened, what was affected, what changed to prevent recurrence* | *Incident lead + leadership* |
+| | | | |
+
+---
+
+## Informative references
+
+| Standard | Controls | Subcategories mapped |
+|----------|----------|---------------------|
+| ISO 27001 | A.5.24, A.5.26 | <span style={{whiteSpace: 'nowrap'}}>RC.CO-03</span>, <span style={{whiteSpace: 'nowrap'}}>RC.CO-04</span> |
+| SOC 2 | CC7.4, CC7.5 | <span style={{whiteSpace: 'nowrap'}}>RC.CO-03</span>, <span style={{whiteSpace: 'nowrap'}}>RC.CO-04</span> |
+| GDPR | Articles 33, 34 | <span style={{whiteSpace: 'nowrap'}}>RC.CO-04</span> |

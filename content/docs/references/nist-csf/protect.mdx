@@ -1,0 +1,183 @@
+---
+title: Protect (PR)
+description: NIST CSF 2.0 subcategory definitions and implementation examples for the Protect function
+---
+
+## PR.AA: Identity Management, Authentication, and Access Control
+
+*Access to physical and logical assets is limited to authorized users, services, and hardware, and is managed commensurate with the assessed risk of unauthorized access.*
+
+### Subcategories
+
+| ID | Outcome |
+|----|---------|
+| <span style={{whiteSpace: 'nowrap'}}>PR.AA-01</span> | Identities and credentials for authorized users, services, and hardware are managed by the organization |
+| <span style={{whiteSpace: 'nowrap'}}>PR.AA-02</span> | Identities are proofed and bound to credentials based on the context of interactions |
+| <span style={{whiteSpace: 'nowrap'}}>PR.AA-03</span> | Users, services, and hardware are authenticated |
+| <span style={{whiteSpace: 'nowrap'}}>PR.AA-04</span> | Identity assertions are protected, conveyed, and verified |
+| <span style={{whiteSpace: 'nowrap'}}>PR.AA-05</span> | Access permissions, entitlements, and authorizations are defined in a policy, managed, enforced, and reviewed, and incorporate the principles of least privilege and separation of duties |
+| <span style={{whiteSpace: 'nowrap'}}>PR.AA-06</span> | Physical access to assets is managed, monitored, and enforced commensurate with risk |
+
+### Implementation examples
+
+| ID | Example |
+|----|---------|
+| <span style={{whiteSpace: 'nowrap'}}>PR.AA-01 Ex1</span> | Initiate requests for new access or additional access for employees, contractors, and others, and track, review, and fulfill the requests, with permission from system or data owners when needed |
+| <span style={{whiteSpace: 'nowrap'}}>PR.AA-01 Ex2</span> | Issue, manage, and revoke cryptographic certificates and identity tokens, cryptographic keys (i.e., key management), and other credentials |
+| <span style={{whiteSpace: 'nowrap'}}>PR.AA-01 Ex3</span> | Select a unique identifier for each device from immutable hardware characteristics or an identifier securely provisioned to the device |
+| <span style={{whiteSpace: 'nowrap'}}>PR.AA-01 Ex4</span> | Physically label authorized hardware with an identifier for inventory and servicing purposes |
+| <span style={{whiteSpace: 'nowrap'}}>PR.AA-02 Ex1</span> | Verify a person's claimed identity at enrollment time using government-issued identity credentials (e.g., passport, visa, driver's license) |
+| <span style={{whiteSpace: 'nowrap'}}>PR.AA-02 Ex2</span> | Issue a different credential for each person (i.e., no credential sharing) |
+| <span style={{whiteSpace: 'nowrap'}}>PR.AA-03 Ex1</span> | Require multifactor authentication |
+| <span style={{whiteSpace: 'nowrap'}}>PR.AA-03 Ex2</span> | Enforce policies for the minimum strength of passwords, PINs, and similar authenticators |
+| <span style={{whiteSpace: 'nowrap'}}>PR.AA-03 Ex3</span> | Periodically reauthenticate users, services, and hardware based on risk (e.g., in zero trust architectures) |
+| <span style={{whiteSpace: 'nowrap'}}>PR.AA-03 Ex4</span> | Ensure that authorized personnel can access accounts essential for protecting safety under emergency conditions |
+| <span style={{whiteSpace: 'nowrap'}}>PR.AA-04 Ex1</span> | Protect identity assertions that are used to convey authentication and user information through single sign-on systems |
+| <span style={{whiteSpace: 'nowrap'}}>PR.AA-04 Ex2</span> | Protect identity assertions that are used to convey authentication and user information between federated systems |
+| <span style={{whiteSpace: 'nowrap'}}>PR.AA-04 Ex3</span> | Implement standards-based approaches for identity assertions in all contexts, and follow all guidance for the generation (e.g., data models, metadata), protection (e.g., digital signing, encryption), and verification (e.g., signature validation) of identity assertions |
+| <span style={{whiteSpace: 'nowrap'}}>PR.AA-05 Ex1</span> | Review logical and physical access privileges periodically and whenever someone changes roles or leaves the organization, and promptly rescind privileges that are no longer needed |
+| <span style={{whiteSpace: 'nowrap'}}>PR.AA-05 Ex2</span> | Take attributes of the requester and the requested resource into account for authorization decisions (e.g., geolocation, day/time, requester endpoint's cyber health) |
+| <span style={{whiteSpace: 'nowrap'}}>PR.AA-05 Ex3</span> | Restrict access and privileges to the minimum necessary (e.g., zero trust architecture) |
+| <span style={{whiteSpace: 'nowrap'}}>PR.AA-05 Ex4</span> | Periodically review the privileges associated with critical business functions to confirm proper separation of duties |
+| <span style={{whiteSpace: 'nowrap'}}>PR.AA-06 Ex1</span> | Use security guards, security cameras, locked entrances, alarm systems, and other physical controls to monitor facilities and restrict access |
+| <span style={{whiteSpace: 'nowrap'}}>PR.AA-06 Ex2</span> | Employ additional physical security controls for areas that contain high-risk assets |
+| <span style={{whiteSpace: 'nowrap'}}>PR.AA-06 Ex3</span> | Escort guests, vendors, and other third parties within areas that contain business-critical assets |
+
+---
+
+## PR.AT: Awareness and Training
+
+*The organization's personnel are provided with cybersecurity awareness and training so that they can perform their cybersecurity-related tasks.*
+
+### Subcategories
+
+| ID | Outcome |
+|----|---------|
+| <span style={{whiteSpace: 'nowrap'}}>PR.AT-01</span> | Personnel are provided with awareness and training so that they possess the knowledge and skills to perform general tasks with cybersecurity risks in mind |
+| <span style={{whiteSpace: 'nowrap'}}>PR.AT-02</span> | Individuals in specialized roles are provided with awareness and training so that they possess the knowledge and skills to perform relevant tasks with cybersecurity risks in mind |
+
+### Implementation examples
+
+| ID | Example |
+|----|---------|
+| <span style={{whiteSpace: 'nowrap'}}>PR.AT-01 Ex1</span> | Provide basic cybersecurity awareness and training to employees, contractors, partners, suppliers, and all other users of the organization's non-public resources |
+| <span style={{whiteSpace: 'nowrap'}}>PR.AT-01 Ex2</span> | Train users to recognize social engineering attempts and other common attacks, report attacks and suspicious activity, comply with acceptable use policies, and perform basic cyber hygiene tasks (e.g., patching software, choosing passwords, protecting credentials) |
+| <span style={{whiteSpace: 'nowrap'}}>PR.AT-01 Ex3</span> | Explain the consequences of cybersecurity policy violations, both to individual users and the organization as a whole |
+| <span style={{whiteSpace: 'nowrap'}}>PR.AT-01 Ex4</span> | Periodically assess or test users on their understanding of basic cybersecurity practices |
+| <span style={{whiteSpace: 'nowrap'}}>PR.AT-01 Ex5</span> | Require annual refreshers to reinforce existing practices and introduce new practices |
+| <span style={{whiteSpace: 'nowrap'}}>PR.AT-02 Ex1</span> | Identify the specialized roles within the organization that require additional cybersecurity training, such as physical and cybersecurity personnel, finance personnel, senior leadership, and anyone with access to business-critical data |
+| <span style={{whiteSpace: 'nowrap'}}>PR.AT-02 Ex2</span> | Provide role-based cybersecurity awareness and training to all those in specialized roles, including contractors, partners, suppliers, and other third parties |
+| <span style={{whiteSpace: 'nowrap'}}>PR.AT-02 Ex3</span> | Periodically assess or test users on their understanding of cybersecurity practices for their specialized roles |
+| <span style={{whiteSpace: 'nowrap'}}>PR.AT-02 Ex4</span> | Require annual refreshers to reinforce existing practices and introduce new practices |
+
+---
+
+## PR.DS: Data Security
+
+*Data are managed consistent with the organization's risk strategy to protect the confidentiality, integrity, and availability of information.*
+
+### Subcategories
+
+| ID | Outcome |
+|----|---------|
+| <span style={{whiteSpace: 'nowrap'}}>PR.DS-01</span> | The confidentiality, integrity, and availability of data-at-rest are protected |
+| <span style={{whiteSpace: 'nowrap'}}>PR.DS-02</span> | The confidentiality, integrity, and availability of data-in-transit are protected |
+| <span style={{whiteSpace: 'nowrap'}}>PR.DS-10</span> | The confidentiality, integrity, and availability of data-in-use are protected |
+| <span style={{whiteSpace: 'nowrap'}}>PR.DS-11</span> | Backups of data are created, protected, maintained, and tested |
+
+{/* Note: PR.DS numbering jumps from 02 to 10 in CSF 2.0. */}
+
+### Implementation examples
+
+| ID | Example |
+|----|---------|
+| <span style={{whiteSpace: 'nowrap'}}>PR.DS-01 Ex1</span> | Use encryption, digital signatures, and cryptographic hashes to protect the confidentiality and integrity of stored data in files, databases, virtual machine disk images, container images, and other resources |
+| <span style={{whiteSpace: 'nowrap'}}>PR.DS-01 Ex2</span> | Use full disk encryption to protect data stored on user endpoints |
+| <span style={{whiteSpace: 'nowrap'}}>PR.DS-01 Ex3</span> | Confirm the integrity of software by validating signatures |
+| <span style={{whiteSpace: 'nowrap'}}>PR.DS-01 Ex4</span> | Restrict the use of removable media to prevent data exfiltration |
+| <span style={{whiteSpace: 'nowrap'}}>PR.DS-01 Ex5</span> | Physically secure removable media containing unencrypted sensitive information, such as within locked offices or file cabinets |
+| <span style={{whiteSpace: 'nowrap'}}>PR.DS-02 Ex1</span> | Use encryption, digital signatures, and cryptographic hashes to protect the confidentiality and integrity of network communications |
+| <span style={{whiteSpace: 'nowrap'}}>PR.DS-02 Ex2</span> | Automatically encrypt or block outbound emails and other communications that contain sensitive data, depending on the data classification |
+| <span style={{whiteSpace: 'nowrap'}}>PR.DS-02 Ex3</span> | Block access to personal email, file sharing, file storage services, and other personal communications applications and services from organizational systems and networks |
+| <span style={{whiteSpace: 'nowrap'}}>PR.DS-02 Ex4</span> | Prevent reuse of sensitive data from production environments (e.g., customer records) in development, testing, and other non-production environments |
+| <span style={{whiteSpace: 'nowrap'}}>PR.DS-10 Ex1</span> | Remove data that must remain confidential (e.g., from processors and memory) as soon as it is no longer needed |
+| <span style={{whiteSpace: 'nowrap'}}>PR.DS-10 Ex2</span> | Protect data in use from access by other users and processes of the same platform |
+| <span style={{whiteSpace: 'nowrap'}}>PR.DS-11 Ex1</span> | Continuously back up critical data in near-real-time, and back up other data frequently at agreed-upon schedules |
+| <span style={{whiteSpace: 'nowrap'}}>PR.DS-11 Ex2</span> | Test backups and restores for all types of data sources at least annually |
+| <span style={{whiteSpace: 'nowrap'}}>PR.DS-11 Ex3</span> | Securely store some backups offline and offsite so that an incident or disaster will not damage them |
+| <span style={{whiteSpace: 'nowrap'}}>PR.DS-11 Ex4</span> | Enforce geographic separation and geolocation restrictions for data backup storage |
+
+---
+
+## PR.PS: Platform Security
+
+*The hardware, software (e.g., firmware, operating systems, applications), and services of physical and virtual platforms are managed consistent with the organization's risk strategy to protect their confidentiality, integrity, and availability.*
+
+### Subcategories
+
+| ID | Outcome |
+|----|---------|
+| <span style={{whiteSpace: 'nowrap'}}>PR.PS-01</span> | Configuration management practices are established and applied |
+| <span style={{whiteSpace: 'nowrap'}}>PR.PS-02</span> | Software is maintained, replaced, and removed commensurate with risk |
+| <span style={{whiteSpace: 'nowrap'}}>PR.PS-03</span> | Hardware is maintained, replaced, and removed commensurate with risk |
+| <span style={{whiteSpace: 'nowrap'}}>PR.PS-04</span> | Log records are generated and made available for continuous monitoring |
+| <span style={{whiteSpace: 'nowrap'}}>PR.PS-05</span> | Installation and execution of unauthorized software are prevented |
+| <span style={{whiteSpace: 'nowrap'}}>PR.PS-06</span> | Secure software development practices are integrated, and their performance is monitored throughout the software development life cycle |
+
+### Implementation examples
+
+| ID | Example |
+|----|---------|
+| <span style={{whiteSpace: 'nowrap'}}>PR.PS-01 Ex1</span> | Establish, test, deploy, and maintain hardened baselines that enforce the organization's cybersecurity policies and provide only essential capabilities (i.e., principle of least functionality) |
+| <span style={{whiteSpace: 'nowrap'}}>PR.PS-01 Ex2</span> | Review all default configuration settings that may potentially impact cybersecurity when installing or upgrading software |
+| <span style={{whiteSpace: 'nowrap'}}>PR.PS-01 Ex3</span> | Monitor implemented software for deviations from approved baselines |
+| <span style={{whiteSpace: 'nowrap'}}>PR.PS-02 Ex1</span> | Perform routine and emergency patching within the timeframes specified in the vulnerability management plan |
+| <span style={{whiteSpace: 'nowrap'}}>PR.PS-02 Ex2</span> | Update container images, and deploy new container instances to replace rather than update existing instances |
+| <span style={{whiteSpace: 'nowrap'}}>PR.PS-02 Ex3</span> | Replace end-of-life software and service versions with supported, maintained versions |
+| <span style={{whiteSpace: 'nowrap'}}>PR.PS-02 Ex4</span> | Uninstall and remove unauthorized software and services that pose undue risks |
+| <span style={{whiteSpace: 'nowrap'}}>PR.PS-02 Ex5</span> | Uninstall and remove any unnecessary software components (e.g., operating system utilities) that attackers might misuse |
+| <span style={{whiteSpace: 'nowrap'}}>PR.PS-02 Ex6</span> | Define and implement plans for software and service end-of-life maintenance support and obsolescence |
+| <span style={{whiteSpace: 'nowrap'}}>PR.PS-03 Ex1</span> | Replace hardware when it lacks needed security capabilities or when it cannot support software with needed security capabilities |
+| <span style={{whiteSpace: 'nowrap'}}>PR.PS-03 Ex2</span> | Define and implement plans for hardware end-of-life maintenance support and obsolescence |
+| <span style={{whiteSpace: 'nowrap'}}>PR.PS-03 Ex3</span> | Perform hardware disposal in a secure, responsible, and auditable manner |
+| <span style={{whiteSpace: 'nowrap'}}>PR.PS-04 Ex1</span> | Configure all operating systems, applications, and services (including cloud-based services) to generate log records |
+| <span style={{whiteSpace: 'nowrap'}}>PR.PS-04 Ex2</span> | Configure log generators to securely share their logs with the organization's logging infrastructure systems and services |
+| <span style={{whiteSpace: 'nowrap'}}>PR.PS-04 Ex3</span> | Configure log generators to record the data needed by zero-trust architectures |
+| <span style={{whiteSpace: 'nowrap'}}>PR.PS-05 Ex1</span> | When risk warrants it, restrict software execution to permitted products only or deny the execution of prohibited and unauthorized software |
+| <span style={{whiteSpace: 'nowrap'}}>PR.PS-05 Ex2</span> | Verify the source of new software and the software's integrity before installing it |
+| <span style={{whiteSpace: 'nowrap'}}>PR.PS-05 Ex3</span> | Configure platforms to use only approved DNS services that block access to known malicious domains |
+| <span style={{whiteSpace: 'nowrap'}}>PR.PS-05 Ex4</span> | Configure platforms to allow the installation of organization-approved software only |
+| <span style={{whiteSpace: 'nowrap'}}>PR.PS-06 Ex1</span> | Protect all components of organization-developed software from tampering and unauthorized access |
+| <span style={{whiteSpace: 'nowrap'}}>PR.PS-06 Ex2</span> | Secure all software produced by the organization, with minimal vulnerabilities in their releases |
+| <span style={{whiteSpace: 'nowrap'}}>PR.PS-06 Ex3</span> | Maintain the software used in production environments, and securely dispose of software once it is no longer needed |
+
+---
+
+## PR.IR: Technology Infrastructure Resilience
+
+*Security architectures are managed with the organization's risk strategy to protect asset confidentiality, integrity, and availability, and organizational resilience.*
+
+### Subcategories
+
+| ID | Outcome |
+|----|---------|
+| <span style={{whiteSpace: 'nowrap'}}>PR.IR-01</span> | Networks and environments are protected from unauthorized logical access and usage |
+| <span style={{whiteSpace: 'nowrap'}}>PR.IR-02</span> | The organization's technology assets are protected from environmental threats |
+| <span style={{whiteSpace: 'nowrap'}}>PR.IR-03</span> | Mechanisms are implemented to achieve resilience requirements in normal and adverse situations |
+| <span style={{whiteSpace: 'nowrap'}}>PR.IR-04</span> | Adequate resource capacity to ensure availability is maintained |
+
+### Implementation examples
+
+| ID | Example |
+|----|---------|
+| <span style={{whiteSpace: 'nowrap'}}>PR.IR-01 Ex1</span> | Logically segment organization networks and cloud-based platforms according to trust boundaries and platform types (e.g., IT, IoT, OT, mobile, guests), and permit required communications only between segments |
+| <span style={{whiteSpace: 'nowrap'}}>PR.IR-01 Ex2</span> | Logically segment organization networks from external networks, and permit only necessary communications to enter the organization's networks from the external networks |
+| <span style={{whiteSpace: 'nowrap'}}>PR.IR-01 Ex3</span> | Implement zero trust architectures to restrict network access to each resource to the minimum necessary |
+| <span style={{whiteSpace: 'nowrap'}}>PR.IR-01 Ex4</span> | Check the cyber health of endpoints before allowing them to access and use production resources |
+| <span style={{whiteSpace: 'nowrap'}}>PR.IR-02 Ex1</span> | Protect organizational equipment from known environmental threats, such as flooding, fire, wind, and excessive heat and humidity |
+| <span style={{whiteSpace: 'nowrap'}}>PR.IR-02 Ex2</span> | Include protection from environmental threats and provisions for adequate operating infrastructure in requirements for service providers that operate systems on the organization's behalf |
+| <span style={{whiteSpace: 'nowrap'}}>PR.IR-03 Ex1</span> | Avoid single points of failure in systems and infrastructure |
+| <span style={{whiteSpace: 'nowrap'}}>PR.IR-03 Ex2</span> | Use load balancing to increase capacity and improve reliability |
+| <span style={{whiteSpace: 'nowrap'}}>PR.IR-03 Ex3</span> | Use high-availability components like redundant storage and power supplies to improve system reliability |
+| <span style={{whiteSpace: 'nowrap'}}>PR.IR-04 Ex1</span> | Monitor usage of storage, power, compute, network bandwidth, and other resources |
+| <span style={{whiteSpace: 'nowrap'}}>PR.IR-04 Ex2</span> | Forecast future needs, and scale resources accordingly |

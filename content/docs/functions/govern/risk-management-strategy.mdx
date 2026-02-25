@@ -1,0 +1,114 @@
+---
+title: "GV.RM: Risk Management Strategy"
+description: Define how the organization approaches risk — tolerance, appetite, scoring methodology, and response requirements.
+---
+
+## Subcategories
+
+| ID | Outcome |
+|----|---------|
+| <span style={{whiteSpace: 'nowrap'}}>[GV.RM-01](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/gv/gv-rm/gv-rm-01/)</span> | Risk management objectives are established and agreed to by organizational stakeholders |
+| <span style={{whiteSpace: 'nowrap'}}>[GV.RM-02](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/gv/gv-rm/gv-rm-02/)</span> | Risk appetite and risk tolerance statements are established, communicated, and maintained |
+| <span style={{whiteSpace: 'nowrap'}}>[GV.RM-03](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/gv/gv-rm/gv-rm-03/)</span> | Cybersecurity risk management activities and outcomes are included in enterprise risk management processes |
+| <span style={{whiteSpace: 'nowrap'}}>[GV.RM-04](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/gv/gv-rm/gv-rm-04/)</span> | Strategic direction that describes appropriate risk response options is established and communicated |
+| <span style={{whiteSpace: 'nowrap'}}>[GV.RM-05](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/gv/gv-rm/gv-rm-05/)</span> | Lines of communication across the organization are established for cybersecurity risks, including risks from suppliers and other third parties |
+| <span style={{whiteSpace: 'nowrap'}}>[GV.RM-06](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/gv/gv-rm/gv-rm-06/)</span> | A standardized method for calculating, documenting, categorizing, and prioritizing cybersecurity risks is established and communicated |
+| <span style={{whiteSpace: 'nowrap'}}>[GV.RM-07](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/gv/gv-rm/gv-rm-07/)</span> | Strategic opportunities (i.e., positive risks) are characterized and are included in organizational cybersecurity risk discussions |
+
+## Our methodology
+
+Risk management strategy answers: how much risk is acceptable, how do we measure it, and what do we do about it? This is the foundation that everything in [Identify](/docs/functions/identify) and [Protect](/docs/functions/protect) builds on.
+
+---
+
+### GV.RM-01: Risk management objectives
+
+State the organization's risk management objectives and review them annually or when significant changes occur.
+
+| Objective | Scope | Review trigger |
+|-----------|-------|----------------|
+| *e.g. No Critical risks in production* | *All customer-facing products* | *Annual planning, post-incident* |
+| *e.g. Compliance with SOC 2 trust criteria* | *Platform-wide* | *Regulation change, audit findings* |
+| | | |
+
+---
+
+### GV.RM-02: Risk appetite and tolerance
+
+Define risk appetite per product and threat area. Appetite is the general position; tolerance is the measurable threshold.
+
+| Area | Appetite | Tolerance | Rationale |
+|------|----------|-----------|-----------|
+| *e.g. Data exfiltration* | *Zero* | *No unmitigated Critical findings* | *Customer trust, regulatory obligation* |
+| *e.g. Availability* | *Medium* | *99.9% uptime, max 4h recovery* | *Internal tooling, limited blast radius* |
+| | | | |
+
+---
+
+### GV.RM-03: Enterprise risk integration
+
+Ensure cybersecurity risks are managed alongside other enterprise risks (financial, operational, compliance, reputational) rather than in isolation. Cybersecurity findings should appear in the same risk reporting that leadership uses for other business risks.
+
+---
+
+### GV.RM-04: Risk response options
+
+Establish which response options are available for each severity level. This removes ambiguity about what happens when a risk is identified.
+
+| Severity | Response | Conditions |
+|----------|----------|------------|
+| *Critical* | *Must remediate before ship* | *No exceptions without leadership sign-off* |
+| *High* | *Must remediate* | *May ship with documented mitigation + timeline* |
+| *Medium* | *Should remediate* | *Tracked with target date* |
+| *Low* | *Accept with documentation* | *Reviewed periodically* |
+| | | |
+
+---
+
+### GV.RM-05: Risk communication
+
+Define who receives risk information, in what format, and how often. Risk information is only useful if it reaches the people who make decisions.
+
+| Audience | Format | Cadence |
+|----------|--------|---------|
+| *e.g. Leadership* | *Severity summary, top unresolved risks* | *Quarterly, immediately for Critical* |
+| *e.g. Product owners* | *Product-specific risk register* | *After each assessment cycle* |
+| *e.g. Engineering leads* | *Open findings, remediation status* | *Per sprint* |
+| | | |
+
+---
+
+### GV.RM-06: Risk scoring methodology
+
+Define a standardized method for scoring risks. We use **ISO 27005** (likelihood x impact = severity), which aligns with NIST SP 800-30.
+
+**Likelihood:** High (actively exploited or trivial to execute), Medium (known technique, moderate skill), Low (theoretical, requires significant skill or unlikely conditions).
+
+**Impact:** Critical (multi-tenant breach, platform compromise), High (single-tenant exposure, significant disruption), Medium (limited exposure, degraded service), Low (minimal impact, quickly recoverable).
+
+| | Impact: Critical | Impact: High | Impact: Medium | Impact: Low |
+|---|---|---|---|---|
+| **Likelihood: High** | Critical | Critical | High | Medium |
+| **Likelihood: Medium** | Critical | High | Medium | Low |
+| **Likelihood: Low** | High | Medium | Low | Low |
+
+---
+
+### GV.RM-07: Strategic opportunities
+
+Document positive risks — cases where accepting more risk enables strategic advantage. This ensures security decisions are balanced against business objectives, not just threat avoidance.
+
+| Opportunity | Risk accepted | Benefit | Conditions |
+|-------------|---------------|---------|------------|
+| *e.g. Early adoption of new cloud service* | *Less mature security documentation from provider* | *Significant performance and cost advantage* | *Compensating controls in place, reassess in 6 months* |
+| | | | |
+
+---
+
+## Informative references
+
+| Standard | Controls | Subcategories mapped |
+|----------|----------|---------------------|
+| ISO 27001 | Clause 6.1.2 | <span style={{whiteSpace: 'nowrap'}}>GV.RM-01</span>, <span style={{whiteSpace: 'nowrap'}}>GV.RM-06</span> |
+| ISO 27005 | Full methodology | <span style={{whiteSpace: 'nowrap'}}>GV.RM-02</span>, <span style={{whiteSpace: 'nowrap'}}>GV.RM-06</span> |
+| NIST SP 800-30 | Risk assessment | <span style={{whiteSpace: 'nowrap'}}>GV.RM-06</span> |

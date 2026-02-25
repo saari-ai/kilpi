@@ -1,0 +1,30 @@
+@import 'tailwindcss';
+@import 'fumadocs-ui/css/neutral.css';
+@import 'fumadocs-ui/css/preset.css';
+
+.prose :not(h1, h2, h3, h4, h5, h6) > a {
+  text-decoration: none;
+  color: color-mix(in srgb, var(--color-fd-primary) 60%, var(--color-fd-foreground));
+}
+
+.prose :not(h1, h2, h3, h4, h5, h6) > a:hover {
+  text-decoration: underline;
+  color: var(--color-fd-primary);
+}
+
+/* External link icon in template headings — matches Fumadocs copy-link style */
+h2 > a[data-external],
+h3 > a[data-external],
+h4 > a[data-external] {
+  opacity: 0;
+  transition-property: opacity;
+  transition-duration: 150ms;
+  color: var(--color-fd-muted-foreground);
+  flex-shrink: 0;
+}
+
+h2:hover > a[data-external],
+h3:hover > a[data-external],
+h4:hover > a[data-external] {
+  opacity: 1;
+}

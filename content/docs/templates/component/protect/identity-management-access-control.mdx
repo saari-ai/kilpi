@@ -1,0 +1,69 @@
+---
+title: "PR.AA: Identity Management, Authentication, and Access Control"
+description: Template for identity management, authentication, and access control
+---
+import { SquareArrowOutUpRight } from 'lucide-react';
+
+For methodology guidance, see [PR.AA: Identity Management, Authentication, and Access Control](/docs/functions/protect/identity-management-access-control).
+
+---
+
+### PR.AA-01: Identity and credential management <a data-external href="/docs/functions/protect/identity-management-access-control#praa-01-identity-and-credential-management"><SquareArrowOutUpRight size={14} /></a>
+
+Document every identity type in the system and how their credentials are managed through the full lifecycle.
+
+| Identity type | Credential type | Provisioning | Rotation schedule | Revocation trigger |
+|---|---|---|---|---|
+| | | | | |
+
+---
+
+### PR.AA-02: Identity proofing <a data-external href="/docs/functions/protect/identity-management-access-control#praa-02-identity-proofing"><SquareArrowOutUpRight size={14} /></a>
+
+Define how each identity type is verified before credentials are issued.
+
+| Identity type | Proofing method | Binding |
+|---|---|---|
+| | | |
+
+---
+
+### PR.AA-03: Authentication methods <a data-external href="/docs/functions/protect/identity-management-access-control#praa-03-authentication-methods"><SquareArrowOutUpRight size={14} /></a>
+
+Define how each actor proves their identity on every interaction.
+
+| Actor | Auth method | MFA required | Password / credential policy | Reauthentication |
+|---|---|---|---|---|
+| | | | | |
+
+---
+
+### PR.AA-04: Identity assertions <a data-external href="/docs/functions/protect/identity-management-access-control#praa-04-identity-assertions"><SquareArrowOutUpRight size={14} /></a>
+
+Protect the tokens and assertions that carry authentication state between systems.
+
+| Assertion type | Standard | Protection | Verification |
+|---|---|---|---|
+| | | | |
+
+---
+
+### PR.AA-05: Access permissions and least privilege <a data-external href="/docs/functions/protect/identity-management-access-control#praa-05-access-permissions-and-least-privilege"><SquareArrowOutUpRight size={14} /></a>
+
+Define the authorization model and enforce least privilege.
+
+| Role / principal | Access scope | Model | Review cadence |
+|---|---|---|---|
+| | | | |
+
+---
+
+### PR.AA-06: Physical access <a data-external href="/docs/functions/protect/identity-management-access-control#praa-06-physical-access"><SquareArrowOutUpRight size={14} /></a>
+
+Document physical access controls for any infrastructure you manage directly.
+
+| Location / asset | Access control | Monitoring | Review cadence |
+|---|---|---|---|
+| | | | |
+
+---

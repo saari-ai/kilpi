@@ -1,0 +1,54 @@
+---
+title: "PR.AT: Awareness and Training"
+description: Personnel are provided with cybersecurity awareness and training so they can perform their tasks with security risks in mind.
+---
+
+## Subcategories
+
+| ID | Outcome |
+|----|---------|
+| <span style={{whiteSpace: 'nowrap'}}>[PR.AT-01](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/pr/pr-at/pr-at-01/)</span> | Personnel are provided with awareness and training so that they possess the knowledge and skills to perform general tasks with cybersecurity risks in mind |
+| <span style={{whiteSpace: 'nowrap'}}>[PR.AT-02](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/pr/pr-at/pr-at-02/)</span> | Individuals in specialized roles are provided with awareness and training so that they possess the knowledge and skills to perform relevant tasks with cybersecurity risks in mind |
+
+## Our methodology
+
+Awareness and training is a thin category for most software teams, but it matters. The best controls fail when people do not understand them. This is less about formal training programmes and more about building security knowledge into everyday work.
+
+---
+
+### PR.AT-01: General awareness
+
+Define the security topics every team member needs to understand, how the training is delivered, and how often it is refreshed.
+
+| Topic | Audience | Delivery | Cadence |
+|---|---|---|---|
+| *e.g. Security pipeline overview* | *All staff* | *Onboarding walkthrough* | *On hire + annual refresher* |
+| *e.g. Social engineering / phishing* | *All staff* | *Short session + simulated phish* | *Annual* |
+| *e.g. Acceptable use policy* | *All staff* | *Written policy, signed acknowledgement* | *On hire + on policy change* |
+| *e.g. Basic hygiene (MFA, patching, passwords)* | *All staff* | *Onboarding walkthrough* | *On hire + annual refresher* |
+| *e.g. Incident reporting* | *All staff* | *Written procedure* | *On hire + post-incident review* |
+| | | | |
+
+---
+
+### PR.AT-02: Specialized role training
+
+Identify roles that need deeper security knowledge and define the additional training they receive. Engineers, operations staff, and anyone with access to production or sensitive data typically qualify.
+
+| Role | Training topics | Delivery | Cadence |
+|---|---|---|---|
+| *e.g. Engineers* | *Secure coding (OWASP Top 10), input validation, secrets management, auth framework usage* | *Technical session + documentation* | *On hire + annual* |
+| *e.g. Engineers* | *Threat register, control derivation, evidence collection* | *Security pipeline walkthrough* | *On hire + on process change* |
+| *e.g. Operations* | *Incident response procedures, monitoring/alerting, access provisioning* | *Runbook review + tabletop exercise* | *Annual + post-incident* |
+| *e.g. Leadership* | *Risk appetite, escalation thresholds, compliance obligations* | *Briefing* | *Annual* |
+| | | | |
+
+---
+
+## Informative references
+
+| Standard | Controls | Subcategories mapped |
+|----------|----------|---------------------|
+| ISO 27001 | A.6.3 | <span style={{whiteSpace: 'nowrap'}}>PR.AT-01</span>, <span style={{whiteSpace: 'nowrap'}}>PR.AT-02</span> |
+| ISO 27001 | A.6.1, A.6.2 | <span style={{whiteSpace: 'nowrap'}}>PR.AT-02</span> |
+| NIST SP 800-50 | Security Awareness and Training | <span style={{whiteSpace: 'nowrap'}}>PR.AT-01</span>, <span style={{whiteSpace: 'nowrap'}}>PR.AT-02</span> |

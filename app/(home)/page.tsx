@@ -1,7 +1,14 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { zain } from '../layout';
-import kilpiLogo from '@/public/kilpi-logo-2.png';
+import kilpiLogo from '@/public/kilpi-logo-3.png';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: { absolute: 'Kilpi - AI Security Method' },
+  description:
+    'A comprehensive agent-first methodology for securing AI generated applications and systems.',
+};
 
 export default function HomePage() {
   return (
@@ -10,13 +17,13 @@ export default function HomePage() {
         <Image
           src={kilpiLogo}
           alt="Kilpi"
-          className="mx-auto mb-6 h-24 w-auto"
+          className="mx-auto mb-6 h-64 w-auto"
         />
         <h1 className={`mb-4 text-4xl text-fd-foreground ${zain.className}`}>
-          <span className="text-6xl font-extrabold">KILPI</span> <br />Security Methodology
+          <span className="text-6xl font-extrabold">KILPI</span> <br />Security Skills
         </h1>
         <p className="mb-8 text-lg text-fd-muted-foreground">
-          A comprehensive agent first security methodology from <a href="https://saari.ai" className={`text-white text-2xl font-extrabold ${zain.className}`}>saari</a>, built on NIST Cybersecurity Framework 2.0
+          A comprehensive agent-first methodology for securing AI generated applications and systems
         </p>
         <Link
           href="/docs"
@@ -25,6 +32,9 @@ export default function HomePage() {
           Get Started
         </Link>
       </div>
+      <p className="mt-12 text-sm text-fd-muted-foreground">
+        Made in Europe by <a href="https://saari.ai" className={`text-white text-2xl font-extrabold ${zain.className}`}>saari</a>
+      </p>
     </div>
   );
 }

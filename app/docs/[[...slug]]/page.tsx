@@ -43,5 +43,18 @@ export async function generateMetadata(props: {
   return {
     title: page.data.title,
     description: page.data.description,
+    openGraph: {
+      type: 'article',
+      title: page.data.title,
+      description: page.data.description,
+      url: page.url,
+      images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Kilpi - AI Security Methodology' }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: page.data.title,
+      description: page.data.description,
+      images: ['/og-image.png'],
+    },
   };
 }

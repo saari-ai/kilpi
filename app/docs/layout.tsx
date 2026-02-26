@@ -3,7 +3,7 @@ import { source } from '@/lib/source';
 import { DocsLayout } from 'fumadocs-ui/layouts/docs';
 import type { ReactNode } from 'react';
 import { zain } from '../layout';
-import kilpiLogo from '@/public/kilpi-logo-2.png';
+import kilpiLogo from '@/public/kilpi-logo-3.png';
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (

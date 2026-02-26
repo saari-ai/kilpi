@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     default: 'fiksu',
   },
   description:
-    'The skill library for clever agents.',
+    'Clever people need cleverer agents.',
   openGraph: {
     type: 'website',
     locale: 'en_US',

@@ -5,17 +5,54 @@ description: AI agent skills that apply the Kilpi methodology.
 
 ## Skills
 
-Kilpi comes with two skills for appyling the Kilpi methodology, each referencing sections of these docs as its source of truth.
+Kilpi comes with three skills for applying the Kilpi methodology, each referencing sections of these docs as its source of truth.
 
-You don't have to use our skills, you can build your own or simply just point your agent towards the docs as reference, however our skills have been tuned to get the best outcomes when applying the methodology.
+You don't have to use our skills — you can build your own or simply point your agent towards the docs as reference. However, our skills have been tuned to get the best outcomes when applying the methodology.
 
 | Skill | When activated | Reads from |
 |-------|---------------|------------|
-| <span style={{whiteSpace: 'nowrap'}}>kilpi_org</span> | Applying Kilpi at the organisational level | All 6 functions, Template (Org), [Taskflow](/docs/examples/taskflow) example |
-| <span style={{whiteSpace: 'nowrap'}}>kilpi_component</span> | Applying Kilpi to a specific product or component | Identify, Protect, Detect, Template (Component), [Taskflow](/docs/examples/taskflow) example |
+| <span style={{whiteSpace: 'nowrap'}}>kilpi_docs</span> | Editing, restructuring, or adding pages to the Kilpi security docs | Methodology pages, conventions, page hierarchy |
+| <span style={{whiteSpace: 'nowrap'}}>kilpi_org</span> | Applying Kilpi at the organisational level | GV, RS, RC functions, Template (Org), [Taskflow](/docs/examples/taskflow) example |
+| <span style={{whiteSpace: 'nowrap'}}>kilpi_component</span> | Applying Kilpi to a specific component | Identify, Protect, Detect, Template (Component), [Taskflow](/docs/examples/taskflow) example |
 
-The primary skills that leverage the methodology are available at [saari-ai/kilpi-skills](https://github.com/saari-ai/kilpi-skills).
+The primary skills are available at [saari-ai/kilpi-skills](https://github.com/saari-ai/kilpi-skills). Claude users can activate the skills via the [Saari Claude Marketplace](https://github.com/saari-ai/claude-marketplace).
 
-Claude users can activate the skills via the [Saari Claude Marketplace](https://github.com/saari-ai/claude-marketplace).
+## Inputs expected
 
-Other vendor support coming shortly.
+Before invoking a skill, the agent needs the following inputs. The more complete the inputs, the less the agent has to infer.
+
+| Input | Required | Used by | Notes |
+|-------|----------|---------|-------|
+| System description | Yes | kilpi_org, kilpi_component | What the component does, who uses it, what problem it solves |
+| Tech stack | Yes | kilpi_component | Languages, frameworks, databases, cloud provider, key dependencies |
+| Architecture | Recommended | kilpi_component | How components connect — services, data stores, external integrations. A text description or diagram. |
+| Team structure | Recommended | kilpi_org | Who is on the team and their roles, so GV.RR can be populated with real names |
+| Compliance obligations | Recommended | kilpi_org | Known regulatory requirements (GDPR, SOC 2, HIPAA, etc.) and customer contractual obligations |
+
+## Execution order
+
+The skills follow the methodology's execution sequence:
+
+1. **kilpi_org** runs Govern (GV.OC → GV.RM → GV.RR → GV.PO → GV.OV → GV.SC), then Respond, then Recover.
+2. **kilpi_component** runs Identify (ID.AM → ID.RA → ID.IM), then Protect (PR.AA → PR.DS → PR.PS → PR.AT → PR.IR), then Detect (DE.CM → DE.AE).
+
+For single-product startups, run kilpi_org and kilpi_component together — the agent will handle both scopes in one pass.
+
+## Autonomous vs. human-deferred
+
+Some subcategories require information the agent cannot determine on its own. The table below shows what the agent defers to the human for, and what it does instead when that input is unavailable.
+
+| Subcategory | Why human input is needed | What the agent does without it |
+|-------------|--------------------------|-------------------------------|
+| GV.RR-01 (Roles & Responsibilities) | Requires actual team member names and role assignments | Produces a role template with responsibilities defined but names left blank |
+| GV.OC-03 (Compliance landscape) | Requires knowledge of real regulatory and contractual obligations | Lists common obligations for the component type (e.g., GDPR for EU users) and marks them as "verify with legal" |
+| GV.SC-05 (Supplier contracts) | Requires access to actual contractual terms | Identifies suppliers from the tech stack and flags contractual review as a human action item |
+| PR.AT-01, PR.AT-02 (Awareness & Training) | Requires knowledge of real training programs and delivery | Produces a recommended training plan and marks existing program details as "human input required" |
+| DE.CM specifics (monitoring tooling) | Requires knowledge of actual monitoring stack | Defines what to monitor and alert thresholds, marks specific tool configuration as implementation detail |
+| ID.AM-03 (Data flow diagrams) | Requires architectural knowledge or existing diagrams | Produces a text-based data flow description from the tech stack and marks it for human verification |
+
+The agent will produce a complete assessment with these sections clearly marked for human review, rather than hallucinating information it cannot know.
+
+## Output
+
+Running a skill produces a filled-in template matching the [Template (Org)](/docs/templates/complete) or [Template (Component)](/docs/templates/component) structure. The output is equivalent to the [Taskflow](/docs/examples/taskflow) example — filled-in tables with IDs, traceability links, and concrete content.

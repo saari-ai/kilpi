@@ -1,33 +1,52 @@
 ---
 title: Scope
-description: How Kilpi applies at the organisational and product levels
+description: How Kilpi applies at the organisational and component levels
 ---
 
-Kilpi operates at two levels: **organisational** and **product**. Not every NIST function applies at both levels. This page explains which functions belong where and why.
+Kilpi operates at two levels: **organisational** and **component**. Each NIST function belongs to exactly one level. This page explains which functions belong where and why.
 
 ## Organisational scope
 
-The organisational scope covers the business as a whole. It establishes the security foundations that all products inherit. Use the [Template (Org)](/docs/templates/complete) to apply this scope.
+The organisational scope covers the business as a whole. It establishes governance, defines response processes, and plans recovery. Use the [Template (Org)](/docs/templates/complete) to apply this scope.
 
 | Function | What the org owns | Categories |
 |----------|-------------------|------------|
 | Govern | Risk strategy, roles, policy, oversight, supply chain | GV.OC, GV.RM, GV.RR, GV.PO, GV.OV, GV.SC |
-| Identify | Org-wide asset landscape, risk appetite | ID.AM, ID.RA, ID.IM |
-| Protect | Platform-level TLS, shared auth infrastructure, baseline hardening | PR.AA, PR.DS, PR.PS, PR.IR |
-| Detect | Platform-wide monitoring and alerting infrastructure | DE.CM, DE.AE |
 | Respond | Incident response process, playbooks, escalation matrix | RS.MA, RS.AN, RS.CO, RS.MI |
 | Recover | Recovery framework, communication plan | RC.RP, RC.CO |
 
-Products do not redo Govern, Respond, or Recover. Those are organisational concerns.
+Components do not redo Govern, Respond, or Recover. Those are organisational concerns.
 
-## Product scope
+The remaining three functions — Identify, Protect, and Detect — are covered by the [component scope](#component-scope). The organisation is split into one or more components, and each component owns its own ID, PR, and DE assessment. This split works because **policies** live at the org level while **controls** live at the component level. "All components must use TLS 1.3" is a policy (GV.PO). Configuring TLS 1.3 on a specific service is a control (PR.DS) in that component's assessment. The org sets the standard; each component implements it and proves compliance.
 
-The product scope applies to an individual product or system component. It covers a subset of functions where the specifics vary per component. Use the [Template (Component)](/docs/templates/component) to apply this scope.
+## Component scope
 
-| Function | What the product owns | Inherits from org | Template |
-|----------|-----------------------|-------------------|----------|
-| Identify | Asset register, threat model (STRIDE), risk assessment | Org-wide risk appetite, severity thresholds | [Template (Component)](/docs/templates/component) |
-| Protect | Auth model, encryption choices, input validation, product-specific controls | Platform baselines (TLS, shared auth, hardening) | [Template (Component)](/docs/templates/component) |
-| Detect | Monitoring rules, alert thresholds specific to the product | Platform-wide monitoring infrastructure | [Template (Component)](/docs/templates/component) |
+The component scope applies to an individual component — a product, service, feature, or any bounded unit with its own security risk surface. Components inherit governance, response processes, and recovery plans from the org. They own everything else within their own domain. Use the [Template (Component)](/docs/templates/component) to apply this scope.
 
+| Function | What the component owns | Inherits from org |
+|----------|------------------------|-------------------|
+| Identify | Asset register, threat model (STRIDE), risk assessment | Risk strategy (GV.RM), risk appetite, severity thresholds |
+| Protect | Auth model, encryption choices, input validation, component-specific controls | Policies (GV.PO) that mandate baseline standards |
+| Detect | Monitoring rules, alert thresholds specific to the component | Response processes (RS) and recovery plans (RC) for when alerts fire |
 
+## What constitutes a component?
+
+A component is the unit you assess with the [Template (Component)](/docs/templates/component). Use these rules of thumb:
+
+- **Single deployable = one component.** A monolithic application with its database is one component, even if it has multiple internal modules.
+- **Separate data boundaries = separate components.** If two services have independent databases and could be breached independently, assess them separately.
+- **Shared infrastructure = its own component.** A shared auth service, platform-wide monitoring stack, or CI/CD pipeline is assessed as a component using the [Template (Component)](/docs/templates/component), just like any other bounded unit. It is not assessed at the org level.
+
+When in doubt, start with one component per product. You can split into finer-grained components later as the system grows. The [Taskflow](/docs/examples/taskflow) example treats the entire application (SPA + API + database + cache + object storage + integrations) as a single component — this is the right default for most early-stage products.
+
+## Bootstrap
+
+If your organisation has never completed a Govern assessment, the component template tells you to "inherit" risk appetite, severity thresholds, and response options from the org — but there's nothing to inherit yet.
+
+In this case, do a minimal GV.RM baseline first:
+
+1. **GV.RM-02** — set a basic risk appetite (even a single sentence: "We have zero appetite for customer data exposure").
+2. **GV.RM-04** — define response options per severity level (what happens for Critical vs. High vs. Medium vs. Low findings).
+3. **GV.RM-06** — adopt the [severity matrix](/docs/functions/govern/risk-management-strategy#gv-rm-06-risk-scoring-methodology) so you can score risks consistently.
+
+With these three in place, proceed with the component assessment. Come back to complete the full Govern assessment when you have capacity.

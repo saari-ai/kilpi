@@ -11,9 +11,9 @@ export default function Layout({ children }: { children: ReactNode }) {
       tree={source.getPageTree()}
       nav={{
         title: (
-          <span className={`flex items-center gap-2 ${zain.className}`}>
-            <Image src={kilpiLogo} alt="" className="h-6 w-auto" />
-            KILPI
+          <span className={`flex items-center gap-3 text-2xl leading-none ${zain.className}`}>
+            <Image src={kilpiLogo} alt="" className="h-10 w-auto shrink-0" />
+            <span className="translate-y-[2px]">KILPI</span>
           </span>
         ),
       }}

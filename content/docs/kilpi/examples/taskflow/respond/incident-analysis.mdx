@@ -1,0 +1,71 @@
+---
+title: "RS.AN: Incident Analysis"
+description: Taskflow example for incident analysis
+---
+
+For methodology guidance, see [RS.AN: Incident Analysis](/docs/kilpi/functions/respond/incident-analysis).
+
+---
+
+### RS.AN-03: Root cause analysis
+
+| Investigation step | Question to answer | Finding |
+|---|---|---|
+| Entry point identification | How did the attacker get in? Which trust boundary was crossed? | Specific endpoint, configuration, or credential that was exploited |
+| Timeline reconstruction | When did the attack start? What was the sequence of actions? | Chronological event list from logs with timestamps |
+| Lateral movement | Did the attacker move beyond the initial entry point? Which systems were accessed? | List of additional systems accessed (asset IDs) |
+| Data access determination | Was any data read, modified, or exfiltrated? What classification? | Data classification and specific records affected |
+| Control failure analysis | Which control was supposed to prevent this? Why did it fail? | Specific control ID (SC-TF-*) and failure mode |
+| Systemic root cause | What underlying issue allowed this to happen? Configuration drift? Code bug? Process gap? | Root cause category and specific fix needed |
+
+**Playbook-specific investigation guidance:**
+
+- **Credential incidents** (<span style={{whiteSpace: 'nowrap'}}>ST-TF-3</span>, <span style={{whiteSpace: 'nowrap'}}>ST-TF-14</span>, <span style={{whiteSpace: 'nowrap'}}>ST-TF-15</span>, <span style={{whiteSpace: 'nowrap'}}>ST-TF-16</span>): Pull authentication logs for 24 hours. Identify targeted accounts and whether any were successfully compromised. For OAuth redirect, check if tokens were intercepted. For weak hashing, count accounts on the weak algorithm.
+- **Session incidents** (<span style={{whiteSpace: 'nowrap'}}>ST-TF-7</span>, <span style={{whiteSpace: 'nowrap'}}>ST-TF-8</span>, <span style={{whiteSpace: 'nowrap'}}>ST-TF-17</span>): Check Redis access logs and VPC flow logs. Look for sessions used from multiple geographies, sessions active beyond TTL, sessions that survived a password change.
+- **Injection/XSS** (<span style={{whiteSpace: 'nowrap'}}>ST-TF-1</span>, <span style={{whiteSpace: 'nowrap'}}>ST-TF-2</span>, <span style={{whiteSpace: 'nowrap'}}>ST-TF-5</span>): Query application logs for attack payloads. Check database audit logs for unusual queries. For XSS, identify where the payload was stored and which users loaded it.
+- **Data exposure** (<span style={{whiteSpace: 'nowrap'}}>ST-TF-6</span>, <span style={{whiteSpace: 'nowrap'}}>ST-TF-9</span>, <span style={{whiteSpace: 'nowrap'}}>ST-TF-10</span>): Check S3 access logs for unauthorized downloads. Review database query logs for abnormal patterns. Determine what admin actions occurred during any audit log gaps.
+- **Secret compromise** (<span style={{whiteSpace: 'nowrap'}}>ST-TF-11</span>, <span style={{whiteSpace: 'nowrap'}}>ST-TF-12</span>, <span style={{whiteSpace: 'nowrap'}}>ST-TF-13</span>): Review Stripe dashboard for unauthorized charges. Check SendGrid for unsolicited emails. Determine when and how the key was leaked (code, logs, client bundle).
+- **Dependency CVE** (<span style={{whiteSpace: 'nowrap'}}>ST-TF-20</span>): Read the advisory. Determine if the vulnerable code path is reachable. Check logs for exploitation attempts.
+
+---
+
+### RS.AN-06: Investigation record-keeping
+
+| Responder | Action taken | Timestamp | Finding | Tools used |
+|---|---|---|---|---|
+| On-call engineer | Acknowledged alert, began triage | T+0 | Initial alert details confirmed | PagerDuty, CloudWatch |
+| On-call engineer | Pulled relevant logs for 24-hour window | T+5min | Log data extracted for analysis | CloudWatch Logs Insights |
+| Security lead | Analyzed logs, identified affected scope | T+30min | Scope and affected systems documented | CloudWatch, PostgreSQL audit log |
+| Security lead | Determined root cause | T+1h | Root cause identified, fix planned | Code review, infrastructure config |
+
+(This is a template row structure. During an actual incident, each action taken by any responder is logged with timestamp and outcome.)
+
+---
+
+### RS.AN-07: Evidence preservation
+
+| Evidence type | Collection method | Storage location | Collected by | Timestamp |
+|---|---|---|---|---|
+| Application logs (24h window) | CloudWatch Logs Insights export | S3 evidence bucket (write-once, separate from app data) | On-call engineer | At start of investigation |
+| VPC flow logs | CloudWatch export | S3 evidence bucket | On-call engineer | At start of investigation |
+| Redis connection logs | Redis MONITOR output + VPC flow logs | S3 evidence bucket | On-call engineer | At start of investigation |
+| Database audit log | PostgreSQL log export | S3 evidence bucket | Security lead | At start of investigation |
+| S3 access logs | S3 server access log export | S3 evidence bucket | Security lead | At start of investigation |
+| CloudTrail events | CloudTrail export for relevant time window | S3 evidence bucket | Security lead | At start of investigation |
+| Application state snapshot | Database snapshot (RDS) | RDS snapshot (retained separately) | Infrastructure owner | Before any restoration |
+
+---
+
+### RS.AN-08: Magnitude estimation
+
+| Validation check | Method | Result |
+|---|---|---|
+| Number of affected users | Query user sessions/accounts active during exposure window | Count of potentially affected users |
+| Data classification of exposed data | Cross-reference affected tables/files with data inventory (ID.AM-07) | Highest classification level exposed |
+| Duration of exposure | Compare first evidence of exploitation to containment timestamp | Exposure window in hours/days |
+| Geographic scope | Check if affected users span multiple jurisdictions (GDPR implications) | List of jurisdictions |
+| Financial impact | For Stripe key: unauthorized charges. For data breach: notification costs, potential fines. | Estimated financial impact range |
+
+Severity is re-estimated as new information becomes available. A Medium can escalate to Critical when data access is confirmed.
+
+---

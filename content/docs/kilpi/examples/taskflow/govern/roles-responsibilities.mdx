@@ -1,0 +1,52 @@
+---
+title: "GV.RR: Roles, Responsibilities, and Authorities"
+description: Taskflow example for roles, responsibilities, and authorities
+---
+
+For methodology guidance, see [GV.RR: Roles, Responsibilities, and Authorities](/docs/kilpi/functions/govern/roles-responsibilities).
+
+Taskflow is a small team. Roles overlap -- one person may hold multiple roles. What matters is that each responsibility has a named owner.
+
+---
+
+### GV.RR-01: Leadership accountability
+
+The CTO is ultimately accountable for Taskflow's security posture. The CTO delegates operational security decisions to the security lead (backend lead) but retains authority over risk acceptance for Critical-severity items and budget allocation for security tooling.
+
+---
+
+### GV.RR-02: Roles and responsibilities
+
+| Role | Responsibility | Authority |
+|---|---|---|
+| Security lead (backend lead) | Reviews threat register quarterly. Approves changes to control inventory. Owns incident response coordination. Final decision on risk acceptance for High and below. | Can block releases for security reasons. Can mandate control implementation timelines. |
+| Infrastructure owner (backend lead or DevOps) | Manages cloud configuration (VPC, S3 policies, Redis network rules). Responsible for secret rotation. Verifies infrastructure controls match documented posture. | Can modify production infrastructure. Can rotate credentials without approval. |
+| Application security (all developers) | Follows secure coding practices (parameterised queries, output encoding, schema validation). Flags security-relevant changes in PRs for security lead review. | Can reject PRs for security violations. |
+| Incident responder (on-call engineer) | First responder for security alerts. Executes playbooks from the [Respond](/docs/kilpi/examples/taskflow/respond) function. Escalates to security lead if severity is High or Critical. | Can block IPs, disable endpoints, flush sessions during active incidents. |
+| Dependency maintainer (designated developer) | Monitors Dependabot / scanning alerts. Triages and patches critical CVEs within SLA. Reports blocked dependencies to security lead. | Can merge dependency update PRs without feature review. |
+
+---
+
+### GV.RR-03: Resource allocation
+
+| Resource type | Allocation | Rationale |
+|---|---|---|
+| Engineering time | 10% of each sprint reserved for security work | Covers dependency updates, control verification, threat register maintenance |
+| Security tooling | Budget for Gitleaks, Dependabot (free), AWS CloudTrail, log aggregation | Automation reduces manual review burden and catches issues CI can enforce |
+| Training | 1 day per quarter for security-focused learning | Keeps team current on OWASP Top 10, new attack patterns, framework updates |
+| Incident response | On-call rotation with 15-minute response SLA for Critical alerts | Ensures incidents are handled promptly regardless of business hours |
+
+---
+
+### GV.RR-04: Human resources practices
+
+| HR event | Security action |
+|---|---|
+| New hire onboarding | Grant least-privilege access. Security policy briefing. Add to relevant alert channels. |
+| Role change | Review and adjust access permissions. Update roles table above. |
+| Offboarding | Revoke all access within 1 hour. Rotate any shared credentials the person had access to. Remove from alert channels and on-call rotation. |
+| Contractor engagement | Scoped access only. No production database access. NDA required. Access reviewed monthly. |
+
+Accountability for security outcomes is documented and accepted by each role holder. Adequate resources (time, tooling, training) are allocated for each role.
+
+---

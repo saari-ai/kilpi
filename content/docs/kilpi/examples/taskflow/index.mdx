@@ -1,0 +1,38 @@
+---
+title: Taskflow Example
+description: A worked example applying the CSF methodology to a real product
+---
+
+Taskflow is a fictional SaaS project management tool used as a worked example across all six NIST CSF 2.0 functions. The fictional organisation behind Taskflow also operates a billing portal, marketing site, and build pipeline — four components that exercise the full per-component assessment structure.
+
+The purpose of this example is to show how the CSF methodology produces concrete, traceable security artefacts for a real organisation. Every threat maps to an asset. Every control maps to a threat. Every monitoring rule maps to a control. Every response playbook maps to a detection trigger. And every subcategory ID ties the whole chain back to the NIST CSF 2.0 framework.
+
+The [Component Register](/docs/kilpi/examples/taskflow/component-register) lists every component in the fictional organisation. The org-level sections (Govern, Respond, Recover) are completed once. Each component then gets its own Identify, Protect, and Detect assessment.
+
+## Org-level sections
+
+| Section | Scope |
+|---|---|
+| [Govern](/docs/kilpi/examples/taskflow/govern) | Organizational context, risk strategy, roles, policy, oversight, and supply chain risk |
+| [Component Register](/docs/kilpi/examples/taskflow/component-register) | All assessed components, owners, classification, and criticality |
+| [Respond](/docs/kilpi/examples/taskflow/respond) | Incident management, analysis, reporting, and mitigation |
+| [Recover](/docs/kilpi/examples/taskflow/recover) | Recovery plan execution and recovery communication |
+
+## Per-component assessments
+
+| Component | Description | Categories |
+|---|---|---|
+| [TF: Taskflow](/docs/kilpi/examples/taskflow/component-register/tf) | Core product — React SPA, Express API, PostgreSQL, Redis, S3, Stripe, SendGrid | [Identify](/docs/kilpi/examples/taskflow/component-register/tf/identify), [Protect](/docs/kilpi/examples/taskflow/component-register/tf/protect), [Detect](/docs/kilpi/examples/taskflow/component-register/tf/detect) |
+| [BL: Billing Portal](/docs/kilpi/examples/taskflow/component-register/bl) | Standalone billing dashboard with its own database and Stripe integration | [Identify](/docs/kilpi/examples/taskflow/component-register/bl/identify), [Protect](/docs/kilpi/examples/taskflow/component-register/bl/protect), [Detect](/docs/kilpi/examples/taskflow/component-register/bl/detect) |
+| [MK: Marketing Site](/docs/kilpi/examples/taskflow/component-register/mk) | Static site with headless CMS, no authentication, public content only | [Identify](/docs/kilpi/examples/taskflow/component-register/mk/identify), [Protect](/docs/kilpi/examples/taskflow/component-register/mk/protect), [Detect](/docs/kilpi/examples/taskflow/component-register/mk/detect) |
+| [CI: Build Pipeline](/docs/kilpi/examples/taskflow/component-register/ci) | Shared CI/CD infrastructure (GitHub Actions) with production secrets | [Identify](/docs/kilpi/examples/taskflow/component-register/ci/identify), [Protect](/docs/kilpi/examples/taskflow/component-register/ci/protect), [Detect](/docs/kilpi/examples/taskflow/component-register/ci/detect) |
+
+## The traceability chain
+
+The example demonstrates a full traceability chain across NIST CSF 2.0:
+
+```
+Asset (ID.AM) → Threat (ID.RA) → Control (PR.*) → Monitoring (DE.*) → Response (RS.*) → Recovery (RC.*)
+```
+
+Every table in the category pages includes references to the specific asset IDs (SA-TF-*, SA-BL-*, SA-MK-*, SA-CI-*), threat IDs (ST-TF-*, ST-BL-*, etc.), and control IDs (SC-TF-*, SC-BL-*, etc.) that connect the chain. This is the mechanism that connects product-level security work to the framework.

@@ -1,0 +1,72 @@
+---
+title: "DE.AE: Adverse Event Analysis"
+description: Marketing Site example for adverse-event-analysis
+---
+
+For methodology guidance, see [DE.AE: Adverse Event Analysis](/docs/kilpi/functions/detect/adverse-event-analysis).
+
+---
+
+### DE.AE-02: Event analysis
+
+| Alert source | Analysis method | Triage outcome |
+|---|---|---|
+| Site downtime alert | Check CloudFront and S3 health. Verify most recent deployment succeeded. Check AWS status page for regional outages. | Infrastructure issue (re-deploy or wait for AWS resolution) vs unauthorized change (escalate) |
+| Content integrity hash mismatch | Compare deployed files with latest CI build output. Check Contentful audit log for unexpected content changes. Check S3 access logs for direct uploads bypassing CI. | Legitimate content update not yet hashed vs unauthorized modification (escalate) |
+| S3 bucket policy change | Correlate with CI deploy logs and change management records. Check CloudTrail for the IAM principal that made the change. | Authorized change (acknowledge) vs unauthorized change (revert immediately, escalate) |
+| DNS record change outside CI | Check CloudTrail for the IAM principal. Verify against change management records. | Authorized manual change (document and update process) vs unauthorized change (revert, escalate) |
+
+---
+
+### DE.AE-03: Cross-source correlation
+
+| Source A | Source B | Correlation method | Combined signal |
+|---|---|---|---|
+| S3 access logs (direct upload) | CI deploy logs | Time and file comparison | Upload not matching a CI deploy = unauthorized modification |
+| Contentful audit log (content change) | CI build trigger | Time window | Content change without subsequent build = content may not be deployed, or build failed |
+| Route 53 change event | CI deploy logs | IAM principal match | DNS change by non-CI principal = investigate |
+
+---
+
+### DE.AE-04: Impact and scope estimation
+
+| Event | Affected systems | Affected data | Estimated severity |
+|---|---|---|---|
+| S3 bucket made public | S3 static site bucket | Static HTML/CSS/JS (public content) | Low -- content is already public, but bypasses CDN controls |
+| Content integrity mismatch | Static site | Published marketing content | Medium -- possible defacement visible to visitors |
+| DNS record hijacking | Route 53, browsers | All site traffic | High -- visitors redirected to attacker-controlled site |
+| CMS management API key compromised | Contentful | All CMS content | Medium -- attacker can modify content, mitigated by content approval workflow |
+
+Most events for this component are low-to-medium severity because the data is public. The primary concern is reputational impact from defacement or misdirection, not data breach.
+
+---
+
+### DE.AE-06: Alert routing and notification
+
+| Alert severity | Route to | Method | SLA |
+|---|---|---|---|
+| High | Frontend lead + engineering Slack channel | Slack alert | Alert within 1 hour. Investigation started within 8 hours. |
+| Medium | Weekly security review queue | Slack alert (low priority) | Included in next weekly review. Triaged within 7 days. |
+
+---
+
+### DE.AE-07: Threat intelligence integration
+
+| Intelligence type | Source | Integration point | Update cadence |
+|---|---|---|---|
+| Known CVE data | GitHub Advisory Database, NVD | Dependabot scans, `npm audit` | Continuous (automated) |
+| AWS IP ranges | AWS published IP ranges | CloudTrail source IP validation | Automatic (AWS updates) |
+
+---
+
+### DE.AE-08: Incident declaration
+
+| Criterion | Threshold | Example |
+|---|---|---|
+| Confirmed unauthorized content modification | Defaced or malicious content visible to visitors | CMS compromised and spam/malware published to live site |
+| DNS hijacking confirmed | Site traffic routed to attacker-controlled destination | Route 53 records modified to point to external IP |
+| CMS management API key used by unauthorized party | Key used to modify content outside of normal workflow | Contentful audit log shows API calls from unknown source |
+
+Given the public data classification, incident declaration thresholds are higher than for components handling sensitive data. A brief outage or minor content error does not constitute a security incident.
+
+---

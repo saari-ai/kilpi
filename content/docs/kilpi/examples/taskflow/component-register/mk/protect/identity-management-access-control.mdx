@@ -1,0 +1,70 @@
+---
+title: "PR.AA: Identity Management, Authentication, and Access Control"
+description: Marketing Site example for identity-management-access-control
+---
+
+For methodology guidance, see [PR.AA: Identity Management, Authentication, and Access Control](/docs/kilpi/functions/protect/identity-management-access-control).
+
+---
+
+### PR.AA-01: Identity and credential management
+
+The marketing site has no end-user authentication. Access management covers CMS users and infrastructure credentials only.
+
+| Identity type | Credential type | Provisioning | Rotation schedule | Revocation trigger |
+|---|---|---|---|---|
+| CMS editor | Contentful login (SSO or email/password) | Invited by frontend lead | Managed by Contentful | Team departure or role change |
+| CMS API (content delivery) | Read-only API key | Generated in Contentful dashboard, stored in CI env vars | Semi-annually | Key compromise detected |
+| CMS API (management) | Management API key | Generated in Contentful dashboard, stored in CI env vars | Semi-annually | Key compromise detected |
+| AWS IAM (deploy) | IAM role for CI deployment | Provisioned via infrastructure-as-code | Quarterly | Infrastructure rotation cycle |
+
+**Controls:** <span style={{whiteSpace: 'nowrap'}}>SC-MK-1.1</span> (CMS access restricted to management team), <span style={{whiteSpace: 'nowrap'}}>SC-MK-1.2</span> (CMS management API key rotation)
+
+---
+
+### PR.AA-02: Identity proofing
+
+| Identity type | Proofing method | Binding |
+|---|---|---|
+| CMS editor | Invited by frontend lead via Contentful. Identity verified through existing team membership. | Bound to Contentful account. |
+
+---
+
+### PR.AA-03: Authentication methods
+
+| Actor | Auth method | MFA required | Reauthentication |
+|---|---|---|---|
+| CMS editor | Contentful login (SSO or email/password) | Recommended (Contentful supports MFA) | Per Contentful session policy |
+| CI pipeline to Contentful | Content delivery API key (read-only) | N/A | Per-build authentication via key |
+| CI pipeline to AWS | IAM role (assumed by CI) | N/A | Per-deployment authentication |
+
+There are no end-user authentication flows. The site is entirely public.
+
+---
+
+### PR.AA-04: Identity assertions
+
+| Assertion type | Standard | Protection | Verification |
+|---|---|---|---|
+| Contentful session | Contentful-managed session | Managed by Contentful (SaaS) | Contentful handles session validation |
+| CI environment variables | Build-time secrets | Encrypted in CI provider, not exposed in build output | CI provider manages secret access |
+
+---
+
+### PR.AA-05: Access permissions and least privilege
+
+| Role / principal | Access scope | Model | Review cadence |
+|---|---|---|---|
+| CMS editor | Create and edit content drafts | Contentful role-based access | Semi-annually |
+| CMS admin (frontend lead) | Publish content, manage API keys, invite editors | Contentful admin role | Semi-annually |
+| CI deploy role | Write to S3 bucket, invalidate CloudFront cache | IAM role with scoped permissions | Annually |
+
+**Controls:** <span style={{whiteSpace: 'nowrap'}}>SC-MK-1.1</span> (CMS access restricted to management team)
+
+---
+
+### PR.AA-06: Physical access
+
+The marketing site runs entirely on AWS managed infrastructure and Contentful SaaS. There is no physical hardware managed by the organization. Physical access controls are delegated to AWS and Contentful under their respective security programs.
+
+---

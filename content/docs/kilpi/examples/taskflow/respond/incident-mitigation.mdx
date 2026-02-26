@@ -1,0 +1,44 @@
+---
+title: "RS.MI: Incident Mitigation"
+description: Taskflow example for incident mitigation
+---
+
+For methodology guidance, see [RS.MI: Incident Mitigation](/docs/kilpi/functions/respond/incident-mitigation).
+
+---
+
+### RS.MI-01: Containment
+
+| Incident type | Containment action | Automated / Manual | Trade-off |
+|---|---|---|---|
+| Credential stuffing / brute force (<span style={{whiteSpace: 'nowrap'}}>ST-TF-3</span>) | Block offending IP(s) at load balancer. Lock affected accounts. | Manual (IP block). Automated (account lockout via <span style={{whiteSpace: 'nowrap'}}>SC-TF-2.1</span>). | Blocking IPs may affect legitimate users behind shared IPs. Account lockout causes friction for the real user. |
+| OAuth redirect exploit (<span style={{whiteSpace: 'nowrap'}}>ST-TF-14</span>) | Disable Google OAuth login until redirect whitelist is verified. | Manual | Users relying on Google login cannot authenticate until re-enabled. |
+| Password reset abuse (<span style={{whiteSpace: 'nowrap'}}>ST-TF-16</span>) | Disable password reset endpoint. | Manual | Legitimate users cannot reset passwords until re-enabled. |
+| Redis network exposure (<span style={{whiteSpace: 'nowrap'}}>ST-TF-7</span>) | Flush all sessions (forces re-auth). Restrict Redis security group to VPC-only. | Manual | All users logged out immediately. |
+| Active injection (<span style={{whiteSpace: 'nowrap'}}>ST-TF-1</span>, <span style={{whiteSpace: 'nowrap'}}>ST-TF-5</span>) | Block attacking IP at WAF/load balancer. | Manual | May not catch distributed attacks from multiple IPs. |
+| Stored XSS live (<span style={{whiteSpace: 'nowrap'}}>ST-TF-2</span>) | Take affected page/feature offline. | Manual | Feature unavailable until fix deployed. |
+| CSRF attack in progress (<span style={{whiteSpace: 'nowrap'}}>ST-TF-4</span>) | Invalidate all CSRF tokens, force re-issuance. | Manual | Minor UX disruption (forms need resubmission). |
+| S3 bucket public (<span style={{whiteSpace: 'nowrap'}}>ST-TF-9</span>) | Enable BlockPublicAccess immediately. | Manual (urgent) | None -- restoring the correct state. |
+| DB over-permission (<span style={{whiteSpace: 'nowrap'}}>ST-TF-6</span>) | Revoke excess permissions, switch to least-privilege role. | Manual | None if done correctly. Application errors if permissions too restrictive. |
+| File access bypass (<span style={{whiteSpace: 'nowrap'}}>ST-TF-10</span>) | Disable direct S3 access, enforce signed URL generation only. | Manual | Existing download links stop working. |
+| Stripe API key leaked (<span style={{whiteSpace: 'nowrap'}}>ST-TF-11</span>) | Rotate key immediately in Stripe dashboard, update secrets manager, deploy. | Manual (urgent) | Brief payment processing downtime during key rotation. |
+| SendGrid API key leaked (<span style={{whiteSpace: 'nowrap'}}>ST-TF-13</span>) | Rotate key immediately, update secrets manager, deploy. | Manual (urgent) | Brief email delivery downtime during key rotation. |
+| Fake Stripe webhooks (<span style={{whiteSpace: 'nowrap'}}>ST-TF-12</span>) | Add IP allowlist or temporarily disable webhook endpoint. | Manual | Payment event processing paused until resolved. |
+| Critical CVE actively exploited (<span style={{whiteSpace: 'nowrap'}}>ST-TF-20</span>) | Take affected feature offline or deploy WAF rule to block attack vector. | Manual | Feature unavailable until patch deployed. |
+| Verbose error responses (<span style={{whiteSpace: 'nowrap'}}>ST-TF-19</span>) | Deploy config change to suppress stack traces in production. | Manual | None -- should already be the default. |
+
+---
+
+### RS.MI-02: Eradication
+
+| Eradication step | Action | Verification |
+|---|---|---|
+| Fix credential attack root cause | Verify rate limiting (<span style={{whiteSpace: 'nowrap'}}>SC-TF-2.1</span>). Force password reset on compromised accounts. Fix OAuth redirect whitelist (<span style={{whiteSpace: 'nowrap'}}>SC-TF-2.3</span>). Deploy updated hashing (<span style={{whiteSpace: 'nowrap'}}>SC-TF-2.2</span>). Fix reset endpoint rate limiting (<span style={{whiteSpace: 'nowrap'}}>SC-TF-2.4</span>). | Rate limiter blocks at configured threshold. OAuth only redirects to whitelisted URIs. All passwords use bcrypt/argon2id. Reset tokens expire after 15 minutes. |
+| Fix session management | Fix Redis network config (<span style={{whiteSpace: 'nowrap'}}>SC-TF-3.1</span>). Enforce session TTL (<span style={{whiteSpace: 'nowrap'}}>SC-TF-3.2</span>). Verify password-change invalidation (<span style={{whiteSpace: 'nowrap'}}>SC-TF-3.3</span>). Rotate session signing secret if applicable. | External port scan on Redis returns nothing. Expired sessions return 401. Password change invalidates all sessions. |
+| Fix injection / XSS | Patch vulnerable query with parameterised statements (<span style={{whiteSpace: 'nowrap'}}>SC-TF-1.1</span>). Sanitise stored XSS payload in database. Review output encoding (<span style={{whiteSpace: 'nowrap'}}>SC-TF-1.2</span>). Verify CSRF middleware (<span style={{whiteSpace: 'nowrap'}}>SC-TF-1.3</span>). Add missing schema validation (<span style={{whiteSpace: 'nowrap'}}>SC-TF-1.4</span>). | CI linting rule: zero string concatenation in query files. Zero `dangerouslySetInnerHTML` instances. Malformed request bodies rejected. |
+| Fix data exposure | Lock down S3 bucket policy (<span style={{whiteSpace: 'nowrap'}}>SC-TF-4.2</span>). Restrict DB user permissions (<span style={{whiteSpace: 'nowrap'}}>SC-TF-4.1</span>). Implement signed URL auth checks (<span style={{whiteSpace: 'nowrap'}}>SC-TF-4.3</span>). Deploy audit logging fix if missing (<span style={{whiteSpace: 'nowrap'}}>SC-TF-7.1</span>). | S3 returns 403 for unauthenticated requests. DDL rejected for app user. Cross-user file access returns 403. |
+| Fix secret leak | Remove secret from code/logs. Add to secrets manager (<span style={{whiteSpace: 'nowrap'}}>SC-TF-5.1</span>). Fix log masking (<span style={{whiteSpace: 'nowrap'}}>SC-TF-5.2</span>). For webhooks, verify signature validation (<span style={{whiteSpace: 'nowrap'}}>SC-TF-6.1</span>). Run secret scan on full repo history. | Secret scan on repo: zero matches. Log search for key prefixes: zero matches. Webhook with tampered signature returns 400. |
+| Fix dependency vulnerability | Update or remove vulnerable dependency. Run full dependency scan (<span style={{whiteSpace: 'nowrap'}}>SC-TF-8.1</span>). If RCE: rebuild server from known-good image, rotate all secrets. | `npm audit` returns zero critical/high. Application passes full test suite. |
+| Fix error leakage | Verify error handler returns only message + correlation ID (<span style={{whiteSpace: 'nowrap'}}>SC-TF-7.2</span>). Add test that triggers 500 and asserts no internal details. | Triggered 500 response contains only generic message and correlation ID. |
+
+---

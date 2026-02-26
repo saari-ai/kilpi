@@ -1,0 +1,75 @@
+---
+title: "PR.AA: Identity Management, Authentication, and Access Control"
+description: Build Pipeline example for identity-management-access-control
+---
+
+For methodology guidance, see [PR.AA: Identity Management, Authentication, and Access Control](/docs/kilpi/functions/protect/identity-management-access-control).
+
+---
+
+### PR.AA-01: Identity and credential management
+
+| Identity type | Credential type | Provisioning | Rotation schedule | Revocation trigger |
+|---|---|---|---|---|
+| Developer (GitHub user) | SSH key or personal access token | GitHub account provisioned by org admin | SSH keys: annually. PATs: 90-day expiry. | Team departure or key compromise. |
+| GitHub Actions (GITHUB_TOKEN) | Short-lived token (per-workflow) | Automatically provisioned by GitHub per workflow run | Per-run (ephemeral, expires when job completes) | N/A (automatic). |
+| AWS deployment (OIDC) | Temporary STS credentials | OIDC trust between GitHub and AWS IAM | Per-run (ephemeral, 1-hour max session) | Trust policy change or role deletion. |
+| Docker Hub (image push) | Access token | Generated in Docker Hub, stored in GitHub Secrets | Quarterly | Token compromise detected. |
+| ECR (image push) | IAM role via OIDC | AWS IAM role assumed via GitHub OIDC | Per-run (ephemeral) | Role policy change or trust removal. |
+
+**Controls:** <span style={{whiteSpace: 'nowrap'}}>SC-CI-3.1</span> (minimal secret scope), <span style={{whiteSpace: 'nowrap'}}>SC-CI-3.3</span> (OIDC for cloud auth)
+
+---
+
+### PR.AA-02: Identity proofing
+
+| Identity type | Proofing method | Binding |
+|---|---|---|
+| Developer (GitHub user) | GitHub account verified via SSO or org invitation with email verification | Bound to GitHub username and org membership. |
+| GitHub Actions bot | GitHub-managed identity. No external proofing needed. | Bound to repository and workflow file. |
+| AWS IAM role (OIDC) | OIDC trust policy restricts to specific GitHub org, repo, and branch | Bound to OIDC subject claim (repo + branch + environment). |
+
+---
+
+### PR.AA-03: Authentication methods
+
+| Actor | Auth method | MFA required | Credential policy | Reauthentication |
+|---|---|---|---|---|
+| Developer (push) | SSH key or PAT + GitHub SSO | Yes (org-enforced) | SSH keys: Ed25519 or RSA 4096. PATs: fine-grained, 90-day expiry. | Per-session (SSH agent) or per-request (PAT). |
+| GitHub Actions (GITHUB_TOKEN) | Automatic token per workflow run | N/A | Minimal permissions declared in workflow `permissions:` block | Per-job (new token each job). |
+| AWS deployment (OIDC) | OIDC federation (no static credentials) | N/A | IAM role trust policy scoped to repo + branch + environment | Per-run (new STS session each run). |
+| Docker Hub push | Access token stored in GitHub Secrets | N/A | Token scoped to push-only on specific repos | Per-request. |
+
+**Controls:** <span style={{whiteSpace: 'nowrap'}}>SC-CI-2.2</span> (minimal GITHUB_TOKEN permissions), <span style={{whiteSpace: 'nowrap'}}>SC-CI-3.3</span> (OIDC eliminates static cloud credentials)
+
+---
+
+### PR.AA-04: Identity assertions
+
+| Assertion type | Standard | Protection | Verification |
+|---|---|---|---|
+| GITHUB_TOKEN | GitHub proprietary (per-run) | Scoped to repository, minimal permissions declared per workflow | Verified by GitHub API on every API call within the workflow. |
+| OIDC token (GitHub to AWS) | OpenID Connect | Signed JWT with claims: repo, branch, environment, actor | AWS STS validates signature against GitHub OIDC provider. IAM role trust policy enforces claim constraints. |
+| Commit signature | GPG or SSH signing | Developer private key | GitHub verifies signature and displays "Verified" badge. Branch protection requires verified signatures. |
+
+---
+
+### PR.AA-05: Access permissions and least privilege
+
+| Role / principal | Access scope | Model | Review cadence |
+|---|---|---|---|
+| Developer | Push to feature branches. Cannot push directly to main. | Branch protection rules + CODEOWNERS | Continuous (enforced by GitHub) |
+| GITHUB_TOKEN | Read contents, write packages (per workflow). No admin access. | `permissions:` block in workflow YAML, defaulting to read-only | Every workflow file change (code review) |
+| AWS OIDC role (deploy) | Push to ECR, deploy to ECS. Cannot modify IAM or networking. | IAM policy with resource-scoped permissions. Condition keys restrict to specific repo and branch. | Quarterly |
+| GitHub org admin | Repository settings, branch protection, secret management | GitHub org role | Quarterly |
+| Dependabot | Create PRs for dependency updates. Cannot merge. | GitHub Dependabot permissions (read + PR creation) | Continuous (default permissions) |
+
+**Controls:** <span style={{whiteSpace: 'nowrap'}}>SC-CI-1.1</span> (required reviews before merge), <span style={{whiteSpace: 'nowrap'}}>SC-CI-1.3</span> (admin override disabled), <span style={{whiteSpace: 'nowrap'}}>SC-CI-2.2</span> (minimal GITHUB_TOKEN permissions)
+
+---
+
+### PR.AA-06: Physical access
+
+The build pipeline runs entirely on GitHub-hosted runners and AWS managed services. There is no physical infrastructure managed by the organization. Physical access controls are delegated to GitHub and AWS under their respective shared responsibility models. Both maintain SOC 2 and ISO 27001 certifications covering physical security.
+
+---

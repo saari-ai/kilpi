@@ -1,0 +1,10 @@
+{
+  "title": "PR: Protect",
+  "pages": [
+    "identity-management-access-control",
+    "awareness-training",
+    "data-security",
+    "platform-security",
+    "infrastructure-resilience"
+  ]
+}

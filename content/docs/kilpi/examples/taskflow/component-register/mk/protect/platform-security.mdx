@@ -1,0 +1,70 @@
+---
+title: "PR.PS: Platform Security"
+description: Marketing Site example for platform-security
+---
+
+For methodology guidance, see [PR.PS: Platform Security](/docs/kilpi/functions/protect/platform-security).
+
+---
+
+### PR.PS-01: Configuration management
+
+| Component | Baseline source | Key settings | Deviation notes |
+|---|---|---|---|
+| Next.js SSG | Next.js security defaults | Static export only (no server runtime), security headers via next.config.js | None |
+| S3 bucket | AWS S3 security best practices | BlockPublicAccess enabled, versioning enabled, server-side encryption, no public ACL | None |
+| CloudFront | AWS CloudFront best practices | HTTPS-only, TLS 1.2 minimum, Origin Access Identity, custom security headers | None |
+
+---
+
+### PR.PS-02: Software maintenance
+
+| Component type | Patching approach | SLA (critical / high / medium) | EOL tracking |
+|---|---|---|---|
+| npm dependencies (direct) | Dependabot PRs, manual triage | Critical: 1 week / High: 2 weeks / Medium: 1 month | Package EOL announcements monitored |
+| npm dependencies (transitive) | Dependabot PRs, `npm audit` | Critical: 1 week / High: 2 weeks / Medium: 1 month | Checked monthly |
+| Node.js runtime | LTS version, upgrade within 60 days of release | Critical: 14 days / High: 30 days / Medium: 60 days | Node.js LTS schedule tracked |
+
+Patching SLAs are longer than higher-criticality components because the site serves only public content and has no user-facing runtime.
+
+**Controls:** <span style={{whiteSpace: 'nowrap'}}>SC-MK-3.1</span> (automated dependency scanning)
+
+---
+
+### PR.PS-03: Hardware maintenance
+
+The marketing site runs entirely on AWS managed infrastructure. Hardware maintenance is delegated to AWS under the shared responsibility model.
+
+---
+
+### PR.PS-04: Logging
+
+| Log source | Format | Destination | Retention | Sensitive data |
+|---|---|---|---|---|
+| CloudFront access logs | AWS standard format | S3 bucket (log archive) | 90 days | Low -- public page requests only |
+| CI build logs | CI provider format | CI provider | 30 days | Medium -- may contain build errors referencing env var names (not values) |
+| Contentful audit log | Contentful native | Contentful dashboard | Per Contentful retention policy | Low -- content changes only |
+
+---
+
+### PR.PS-05: Software integrity
+
+| Control | Scope | Implementation |
+|---|---|---|
+| Lock files | All npm dependencies | `package-lock.json` committed, `npm ci` used in CI (no implicit upgrades) |
+| Pre-commit secret scanning | All code commits | Gitleaks runs pre-commit and in CI. Blocks commits containing secret patterns. |
+| CI-only deployments | All production deployments | Only CI-built artifacts are deployed to S3. No manual uploads. |
+
+**Controls:** <span style={{whiteSpace: 'nowrap'}}>SC-MK-3.2</span> (lock file enforcement)
+
+---
+
+### PR.PS-06: Secure development practices
+
+| Practice | When it runs | Tool / method | Failure action |
+|---|---|---|---|
+| Dependency scanning | Every PR + daily | Dependabot + `npm audit` | PR blocked on critical/high CVEs |
+| Secret scanning | Every commit + every CI build | Gitleaks (pre-commit hook + CI step) | Commit blocked / CI build fails |
+| Code review | Every PR | Peer review | PR cannot be merged without approval |
+
+---

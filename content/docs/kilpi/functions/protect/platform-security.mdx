@@ -1,0 +1,118 @@
+---
+title: "PR.PS: Platform Security"
+description: Hardware, software, and services of physical and virtual platforms are managed to protect their confidentiality, integrity, and availability.
+---
+
+## Subcategories
+
+| ID | Outcome |
+|----|---------|
+| <span style={{whiteSpace: 'nowrap'}}>[PR.PS-01](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/pr/pr-ps/pr-ps-01/)</span> | Configuration management practices are established and applied |
+| <span style={{whiteSpace: 'nowrap'}}>[PR.PS-02](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/pr/pr-ps/pr-ps-02/)</span> | Software is maintained, replaced, and removed commensurate with risk |
+| <span style={{whiteSpace: 'nowrap'}}>[PR.PS-03](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/pr/pr-ps/pr-ps-03/)</span> | Hardware is maintained, replaced, and removed commensurate with risk |
+| <span style={{whiteSpace: 'nowrap'}}>[PR.PS-04](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/pr/pr-ps/pr-ps-04/)</span> | Log records are generated and made available for continuous monitoring |
+| <span style={{whiteSpace: 'nowrap'}}>[PR.PS-05](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/pr/pr-ps/pr-ps-05/)</span> | Installation and execution of unauthorized software are prevented |
+| <span style={{whiteSpace: 'nowrap'}}>[PR.PS-06](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/pr/pr-ps/pr-ps-06/)</span> | Secure software development practices are integrated, and their performance is monitored throughout the software development life cycle |
+
+## Our methodology
+
+Platform security is where abstract controls become concrete configuration. This is the most technical PR category — it covers hardened baselines, patching, logging, and secure development practices.
+
+---
+
+### PR.PS-01: Configuration management
+
+Define a hardened baseline for every platform component. Start from a security benchmark, not from defaults. Document deviations with justification.
+
+| Component | Baseline source | Key settings | Deviation notes |
+|---|---|---|---|
+| *e.g. Web application* | *Security headers (CSP, HSTS, X-Content-Type-Options, X-Frame-Options, Referrer-Policy, Permissions-Policy)* | *CSP: script-src self; HSTS: max-age 31536000 includeSubDomains* | *None* |
+| *e.g. TLS* | *Mozilla TLS guidelines* | *TLS 1.2 min, ECDHE key exchange, no RC4/3DES* | *None* |
+| *e.g. Server* | *CIS Benchmark (OS-specific)* | *Debug off, no default creds, no server banners, CORS allowlist* | *Document any exceptions* |
+| *e.g. Container runtime* | *CIS Docker / Kubernetes Benchmark* | *Non-root containers, read-only root fs* | *Document any exceptions* |
+| *e.g. Cloud account* | *CIS AWS / GCP / Azure Foundations* | *Per benchmark* | *Document any exceptions* |
+| *e.g. Database* | *CIS MongoDB / PostgreSQL Benchmark* | *Auth enabled, no default ports, TLS required* | *Document any exceptions* |
+| | | | |
+
+---
+
+### PR.PS-02: Software maintenance
+
+Track patching timeframes and component lifecycle. Apply patches within the timeframe set in the vulnerability management plan. Replace end-of-life software before it becomes a liability.
+
+| Component type | Patching approach | SLA (critical / high / medium) | EOL tracking |
+|---|---|---|---|
+| *e.g. OS packages* | *Automated via package manager* | *24h / 7d / 30d* | *Distro release calendar* |
+| *e.g. Container base images* | *Rebuild image with updated base, deploy fresh* | *24h / 7d / 30d* | *Image tag lifecycle* |
+| *e.g. Application dependencies* | *Dependabot / Snyk, pin versions, review before merge* | *7d / 14d / 30d* | *npm/NuGet deprecation notices* |
+| *e.g. Managed services* | *Provider-managed* | *Provider SLA* | *Provider announcements* |
+| | | | |
+
+---
+
+### PR.PS-03: Hardware maintenance
+
+For cloud-hosted products, hardware lifecycle is provider-managed. Document any physical hardware you manage directly.
+
+| Hardware | Owner | Maintenance approach | Replacement trigger |
+|---|---|---|---|
+| *e.g. Cloud compute* | *Provider-managed* | *Automatic (instance replacement)* | *Provider-initiated* |
+| *e.g. Developer workstations* | *IT team* | *OS patching, disk encryption verified* | *EOL or failure* |
+| | | | |
+
+---
+
+### PR.PS-04: Logging
+
+Ensure every service and infrastructure component generates log records that are shipped to centralized infrastructure. Logs must be usable for incident investigation under [Detect](/docs/kilpi/functions/detect).
+
+| Log source | Format | Destination | Retention | Sensitive data |
+|---|---|---|---|---|
+| *e.g. Application services* | *Structured JSON (timestamp, source, severity, context)* | *Centralized log platform* | *90 days* | *Redacted before writing* |
+| *e.g. Infrastructure (cloud)* | *Provider format (CloudTrail, etc.)* | *Centralized log platform* | *1 year* | *N/A* |
+| *e.g. Database* | *Database audit log* | *Centralized log platform* | *90 days* | *No query parameters logged* |
+| | | | | |
+
+---
+
+### PR.PS-05: Software integrity
+
+Prevent unauthorized or tampered software from running in your environments. Verify the source and integrity of everything that executes.
+
+| Control | Scope | Implementation |
+|---|---|---|
+| *e.g. Approved base images* | *All containers* | *Internal registry, image signatures verified before deploy* |
+| *e.g. Dependency pinning* | *All application code* | *Lock files committed, checksums verified in CI* |
+| *e.g. Deployment gates* | *Production* | *Code review required, CI/CD pipeline only, no manual deploys* |
+| *e.g. DNS filtering* | *All environments* | *Block known malicious domains* |
+| | | |
+
+---
+
+### PR.PS-06: Secure development practices
+
+Integrate security into the development lifecycle. These practices feed into the supply chain controls tracked under [GV.SC](/docs/kilpi/functions/govern/supply-chain-risk).
+
+| Practice | When it runs | Tool / method | Failure action |
+|---|---|---|---|
+| *e.g. Code review* | *Every PR* | *Peer review, security-flagged changes get extra reviewer* | *Block merge* |
+| *e.g. Static analysis* | *CI on every push* | *SAST tool (e.g. Semgrep, CodeQL)* | *Block merge on high/critical* |
+| *e.g. Dependency scanning* | *CI on every push + scheduled* | *Dependabot / Snyk / Trivy* | *Block merge on critical, alert on high* |
+| *e.g. Build integrity* | *CI/CD pipeline* | *Reproducible builds, signed artifacts* | *Block deploy* |
+| *e.g. Environment separation* | *Always* | *Isolated dev/staging/prod, no prod creds in non-prod* | *Audit violation* |
+| | | | |
+
+---
+
+## Informative references
+
+| Standard | Controls | Subcategories mapped |
+|----------|----------|---------------------|
+| ISO 27001 | A.8.9 | <span style={{whiteSpace: 'nowrap'}}>PR.PS-01</span> |
+| ISO 27001 | A.8.8, A.8.19 | <span style={{whiteSpace: 'nowrap'}}>PR.PS-02</span> |
+| ISO 27001 | A.7.13 | <span style={{whiteSpace: 'nowrap'}}>PR.PS-03</span> |
+| ISO 27001 | A.8.15, A.8.17 | <span style={{whiteSpace: 'nowrap'}}>PR.PS-04</span> |
+| ISO 27001 | A.8.19, A.8.7 | <span style={{whiteSpace: 'nowrap'}}>PR.PS-05</span> |
+| ISO 27001 | A.8.25, A.8.26, A.8.27, A.8.28 | <span style={{whiteSpace: 'nowrap'}}>PR.PS-06</span> |
+| CIS Benchmarks | Platform-specific hardening guides | <span style={{whiteSpace: 'nowrap'}}>PR.PS-01</span>, <span style={{whiteSpace: 'nowrap'}}>PR.PS-02</span>, <span style={{whiteSpace: 'nowrap'}}>PR.PS-05</span> |
+| SLSA | Supply chain integrity levels | <span style={{whiteSpace: 'nowrap'}}>PR.PS-05</span>, <span style={{whiteSpace: 'nowrap'}}>PR.PS-06</span> |

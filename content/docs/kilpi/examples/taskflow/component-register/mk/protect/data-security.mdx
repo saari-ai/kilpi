@@ -1,0 +1,54 @@
+---
+title: "PR.DS: Data Security"
+description: Marketing Site example for data-security
+---
+
+For methodology guidance, see [PR.DS: Data Security](/docs/kilpi/functions/protect/data-security).
+
+---
+
+### PR.DS-01: Data at rest
+
+All published content is public by design. The only sensitive data at rest is the CMS management API key.
+
+| Data store | Encryption method | Key management | Key rotation |
+|---|---|---|---|
+| S3 (static site files) | AES-256 (SSE-S3) | AWS managed | Automatic (AWS managed) |
+| CI environment variables | Encrypted by CI provider | CI provider managed | Semi-annually (manual) |
+
+**Controls:** <span style={{whiteSpace: 'nowrap'}}>SC-MK-1.2</span> (CMS management API key rotation)
+
+---
+
+### PR.DS-02: Data in transit
+
+| Communication path | Protocol | Minimum version | Additional controls |
+|---|---|---|---|
+| Browser to CloudFront | HTTPS | TLS 1.2 | HSTS header, certificate managed via AWS ACM |
+| CloudFront to S3 | HTTPS (OAI) | TLS 1.2 | Origin Access Identity restricts S3 access |
+| CI to Contentful | HTTPS | TLS 1.2 | Contentful SDK enforces HTTPS |
+| CI to S3 | HTTPS | TLS 1.2 | AWS SDK enforces HTTPS |
+
+**Controls:** <span style={{whiteSpace: 'nowrap'}}>SC-MK-2.1</span> (CloudFront HTTPS-only), <span style={{whiteSpace: 'nowrap'}}>SC-MK-2.2</span> (S3 BlockPublicAccess + OAI)
+
+---
+
+### PR.DS-10: Data in use
+
+| Control | What it covers | Implementation |
+|---|---|---|
+| No secrets in build output | CMS management API key not included in static site output | Build-time environment variable separation. Only the read-only content delivery key is used at build time. Management key used only for CI content sync if needed. |
+| Secret scanning | API keys not committed to source control | Gitleaks runs pre-commit and in CI. Blocks commits containing secret patterns. |
+
+---
+
+### PR.DS-11: Backups
+
+| Data source | Backup frequency | Storage location | Encryption | Restore test cadence |
+|---|---|---|---|---|
+| Contentful content | Contentful-managed versioning | Contentful (SaaS) | Contentful-managed | N/A (SaaS managed) |
+| S3 (static site) | Versioning enabled | S3 same bucket (versioned objects) | AES-256 (SSE-S3) | Annually |
+
+Content can be rebuilt from Contentful at any time by re-running the CI build pipeline. Full site recovery is straightforward since all content lives in the CMS.
+
+---

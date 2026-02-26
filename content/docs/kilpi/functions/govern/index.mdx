@@ -1,0 +1,65 @@
+---
+title: "GV: Govern"
+description: Establish strategy, expectations, and policy that inform all other security functions.
+---
+
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+Govern wraps all five operational functions. It establishes the risk tolerance, roles, policies, and oversight cadence that every other function depends on. Without Govern, the rest of the framework has no anchor — controls exist without context, incidents get handled without process, and reviews don't happen.
+
+For a small team, this doesn't mean bureaucracy. It means decisions are written down, roles are clear, and the program gets reviewed as the system grows.
+
+## Recommended sequence
+
+All six Govern categories are required. Work through them in dependency order — each builds on what comes before it.
+
+<Steps>
+<Step>
+### GV.OC — Organisational Context
+Comes first because everything else references your mission, stakeholders, and obligations.
+</Step>
+<Step>
+### GV.RM — Risk Management Strategy
+Needs organisational context to set meaningful risk appetite and severity thresholds.
+</Step>
+<Step>
+### GV.RR — Roles & Responsibilities
+Can only be assigned once you know what risks you are managing and for whom.
+</Step>
+<Step>
+### GV.PO — Policy
+Codifies the decisions from the previous three categories into enforceable expectations.
+</Step>
+<Step>
+### GV.OV — Oversight
+Defines how you review and adjust — which requires policies and roles to already exist.
+</Step>
+<Step>
+### GV.SC — Supply Chain Risk Management
+Applies your risk strategy and policies to third parties and dependencies.
+</Step>
+</Steps>
+
+For small teams, later categories can start light. A three-row supplier table is enough to begin GV.SC — but it must exist.
+
+## Categories
+
+| Category | ID | Description |
+|----------|-----|-------------|
+| [Organizational Context](./organizational-context) | GV.OC | Mission, stakeholders, legal/regulatory requirements |
+| [Risk Management Strategy](./risk-management-strategy) | GV.RM | Risk tolerance, priorities, severity-action mapping |
+| [Roles & Responsibilities](./roles-responsibilities) | GV.RR | Who owns what in the security program |
+| [Policy](./policy) | GV.PO | Security policies as enforceable expectations |
+| [Oversight](./oversight) | GV.OV | Review cadence and adjustment triggers |
+| [Supply Chain Risk Management](./supply-chain-risk) | GV.SC | Third-party and dependency risk |
+
+## When is Govern complete?
+
+Govern is complete when:
+
+1. The organisation's mission and stakeholder expectations are documented (GV.OC)
+2. Risk appetite, tolerance thresholds, and severity matrix are defined (GV.RM)
+3. Security roles and responsibilities are assigned to named individuals (GV.RR)
+4. Security policies are documented and enforceable (GV.PO)
+5. A review cadence is established with defined triggers (GV.OV)
+6. Critical suppliers and dependencies are inventoried with risk assessments (GV.SC)

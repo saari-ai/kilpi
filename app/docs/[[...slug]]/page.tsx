@@ -48,7 +48,7 @@ export async function generateMetadata(props: {
       title: page.data.title,
       description: page.data.description,
       url: page.url,
-      images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Kilpi - AI Security Methodology' }],
+      images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'fiksu' }],
     },
     twitter: {
       card: 'summary_large_image',

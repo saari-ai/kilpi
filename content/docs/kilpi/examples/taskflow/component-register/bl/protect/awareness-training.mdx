@@ -1,0 +1,32 @@
+---
+title: "PR.AT: Awareness and Training"
+description: Billing Portal example for awareness and training
+---
+
+For methodology guidance, see [PR.AT: Awareness and Training](/docs/kilpi/functions/protect/awareness-training).
+
+---
+
+### PR.AT-01: General awareness
+
+| Topic | Audience | Delivery | Cadence |
+|---|---|---|---|
+| PCI awareness and payment data handling | All billing team developers | Team session + PCI DSS quick reference guide | Annually, refreshed when PCI DSS updates |
+| Payment fraud recognition (common attack patterns, chargeback abuse indicators) | All billing team developers | Team session + case study review | Annually + refreshed after payment fraud incidents |
+| OWASP Top 10 overview | All developers | Team session + self-study materials | Annually, refreshed when OWASP updates |
+| Secure coding practices (parameterised queries, output encoding, schema validation) | All developers | PR review checklist + onboarding walkthrough | Onboarding + continuous via PR reviews |
+| Secret handling (never in code, logs, or client bundles) | All developers | Onboarding briefing + CI enforcement | Onboarding + continuous via CI |
+| Incident response overview (who to contact, how to escalate) | All team members | Onboarding briefing + incident response runbook | Onboarding + refreshed after each incident |
+
+---
+
+### PR.AT-02: Specialized role training
+
+| Role | Training topics | Delivery | Cadence |
+|---|---|---|---|
+| Security lead | NIST CSF 2.0 framework updates, threat modelling methodologies, PCI DSS requirements | External training / conference, self-study | Annually |
+| Billing backend developer | Stripe API security best practices, webhook signature verification, payment amount validation | Stripe documentation review, hands-on labs | Annually + on Stripe API changes |
+| Incident responder (on-call) | Billing incident response playbook walkthrough, payment fraud containment procedures | Team exercise + tabletop simulation | Quarterly |
+| Dependency maintainer | Supply chain attack patterns, CVE triage, Dependabot configuration | Self-study + team knowledge sharing | Semi-annually |
+
+---

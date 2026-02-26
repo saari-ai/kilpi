@@ -1,0 +1,71 @@
+---
+title: "DE.CM: Continuous Monitoring"
+description: Taskflow example for continuous monitoring
+---
+
+For methodology guidance, see [DE.CM: Continuous Monitoring](/docs/kilpi/functions/detect/continuous-monitoring).
+
+---
+
+### DE.CM-01: Network monitoring
+
+| What to monitor | Method | Alert threshold |
+|---|---|---|
+| Request validation failures (schema validation, parameterised query errors) by endpoint and source IP | Application logs aggregated in CloudWatch, grouped by IP and endpoint | **Critical**: >50 validation failures from a single IP in 5 minutes. **Medium**: Failure rate exceeds 2x the 7-day rolling average. |
+| Failed login attempts per IP and per account | Authentication logs in CloudWatch, windowed counts | **Critical**: >10 failed logins for a single account in 10 minutes (brute force). **Critical**: >100 failed logins from a single IP in 10 minutes (credential stuffing). |
+| Password reset request volume per email | Application logs, windowed counts | **High**: >5 reset requests for the same email in 1 hour. |
+| OAuth callback redirect URI mismatches | Application logs, pattern match on non-whitelisted URIs | **High**: Any OAuth callback attempted with a redirect URI not on the whitelist. |
+| Stripe webhook signature validation failures and source IPs | Webhook handler logs, signature check results | **Critical**: Webhook request with invalid `Stripe-Signature` header. **High**: Volume exceeds 10x daily average. **Medium**: Requests from IPs outside Stripe's published ranges. |
+| Log output for secret patterns (`sk_live_`, `SG.`, bearer tokens, bcrypt hashes) | Post-processing regex scan of log output | **Critical**: Any log line matching a known secret pattern. |
+| Git commits containing credential patterns | CI secret scanner (Gitleaks) | **High**: Any match in a commit. |
+| Secrets manager access from unexpected IAM roles or IPs | CloudTrail events for `GetSecretValue`, grouped by caller identity | **Medium**: Access from an IAM role or IP not in the expected list. |
+| Audit log completeness for admin actions | Correlation check: application log admin action vs audit log entry | **High**: Admin action detected without corresponding audit log entry. |
+| API error response content | Periodic scan of response bodies (sampled from logs or synthetic tests) | **High**: Response body contains stack trace, file path, or library version. |
+
+---
+
+### DE.CM-02: Physical environment monitoring
+
+Taskflow runs entirely on AWS managed infrastructure. Physical environment monitoring is delegated to AWS under the shared responsibility model.
+
+---
+
+### DE.CM-03: Personnel activity monitoring
+
+| What to monitor | Method | Alert threshold |
+|---|---|---|
+| Database queries by application user (DDL detection) | PostgreSQL audit log, filtered to application user | **Critical**: Any DDL statement (CREATE, DROP, ALTER) executed by the application database user. |
+| S3 bucket policy changes | CloudTrail events for `PutBucketPolicy`, `PutBucketAcl`, `PutPublicAccessBlock` | **Critical**: S3 BlockPublicAccess setting changed or public ACL added. |
+| Pre-signed URL generation and access patterns (cross-user check) | Application log: requesting user ID, file owner ID, file key | **High**: Pre-signed URL generated for a file not owned by the requesting user. |
+
+---
+
+### DE.CM-06: External service provider monitoring
+
+| What to monitor | Method | Alert threshold |
+|---|---|---|
+| Dependency scanning results and CVE databases | Dependabot / equivalent scanner, CI pipeline logs | **Critical**: Critical or high CVE in a production dependency. **High**: PR merged despite failing dependency scan (CI bypass). **Medium**: Scanning job not run in 7+ days. |
+| Open PRs with critical/high CVE findings | Dependabot alert dashboard | **High**: CVE finding older than 48 hours without a fix PR. |
+
+---
+
+### DE.CM-09: Application and runtime monitoring
+
+| What to monitor | Method | Alert threshold |
+|---|---|---|
+| Redis connection sources | Redis connection logs, VPC flow logs for Redis security group | **Critical**: Any connection to Redis from an IP outside the VPC CIDR range. |
+| Session age and expiry enforcement | Redis TTL queries, session age checks | **High**: Sessions found with age exceeding the 7-day absolute expiry. |
+| Session invalidation after password changes | Correlation of password-change events with session-invalidation events | **Medium**: Password change event without corresponding session invalidation within 5 seconds. |
+| Audit log write latency and error rate | Audit log infrastructure metrics | **Medium**: Write failures or lag exceeding 30 seconds. |
+
+---
+
+## Alerting tiers
+
+Every alert trigger above maps to one of three tiers. The tier determines the response time.
+
+| Tier | Response time | Examples |
+|---|---|---|
+| **Critical** (immediate page) | On-call paged within 5 minutes. Response within 15 minutes. | Secret in logs. DDL by app user. Redis connection from outside VPC. Brute force / credential stuffing. S3 bucket made public. Invalid webhook signature. Critical CVE. |
+| **High** (same-day investigation) | Alert to security channel. Investigation within 4 hours. | Password reset abuse. OAuth redirect mismatch. Session expiry failure. Audit log gap. Stack trace in response. CI scan bypassed. |
+| **Medium** (weekly review) | Included in weekly security review. Triaged within 7 days. | Elevated validation failure rate. Session invalidation lag. Unusual secrets manager access. Webhook requests from unexpected IPs. Audit log latency. Scan not running. |

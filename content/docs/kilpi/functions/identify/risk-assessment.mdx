@@ -1,0 +1,217 @@
+---
+title: "ID.RA: Risk Assessment"
+description: Understand the cybersecurity risk to the organization, its assets, and individuals.
+---
+
+The cybersecurity risk to the organization, assets, and individuals is understood by the organization. This is the core analytical category — it takes the asset inventory from [ID.AM](./asset-management) and systematically identifies what could go wrong, how likely it is, and how bad it would be.
+
+## Subcategories
+
+| ID | Outcome |
+|----|---------|
+| <span style={{whiteSpace: 'nowrap'}}>[ID.RA-01](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/id/id-ra/id-ra-01/)</span> | Vulnerabilities in assets are identified, validated, and recorded |
+| <span style={{whiteSpace: 'nowrap'}}>[ID.RA-02](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/id/id-ra/id-ra-02/)</span> | Cyber threat intelligence is received from information sharing forums and sources |
+| <span style={{whiteSpace: 'nowrap'}}>[ID.RA-03](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/id/id-ra/id-ra-03/)</span> | Internal and external threats to the organization are identified and recorded |
+| <span style={{whiteSpace: 'nowrap'}}>[ID.RA-04](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/id/id-ra/id-ra-04/)</span> | Potential impacts and likelihoods of threats exploiting vulnerabilities are identified and recorded |
+| <span style={{whiteSpace: 'nowrap'}}>[ID.RA-05](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/id/id-ra/id-ra-05/)</span> | Threats, vulnerabilities, likelihoods, and impacts are used to understand inherent risk and inform risk response prioritization |
+| <span style={{whiteSpace: 'nowrap'}}>[ID.RA-06](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/id/id-ra/id-ra-06/)</span> | Risk responses are chosen, prioritized, planned, tracked, and communicated |
+| <span style={{whiteSpace: 'nowrap'}}>[ID.RA-07](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/id/id-ra/id-ra-07/)</span> | Changes and exceptions are managed, assessed for risk impact, recorded, and tracked |
+| <span style={{whiteSpace: 'nowrap'}}>[ID.RA-08](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/id/id-ra/id-ra-08/)</span> | Processes for receiving, analyzing, and responding to vulnerability disclosures are established |
+| <span style={{whiteSpace: 'nowrap'}}>[ID.RA-09](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/id/id-ra/id-ra-09/)</span> | The authenticity and integrity of hardware and software are assessed prior to acquisition and use |
+| <span style={{whiteSpace: 'nowrap'}}>[ID.RA-10](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/id/id-ra/id-ra-10/)</span> | Critical suppliers are assessed prior to acquisition |
+
+## Our methodology
+
+Risk Assessment is where the analytical work happens. It takes the assets from [ID.AM](./asset-management) and runs them through a structured process: identify vulnerabilities, gather threat intelligence, identify threats, score them, decide on responses, and validate against known attack patterns.
+
+---
+
+### ID.RA-01: Vulnerability identification
+
+Identify, validate, and record vulnerabilities in your assets. This includes unpatched software, misconfigured systems, architectural weaknesses, and coding flaws in organization-developed software.
+
+| Asset | Vulnerability | Source | Validated | Severity | Status |
+|---|---|---|---|---|---|
+| *e.g. API gateway* | *Outdated TLS configuration* | *Automated scan* | *Yes* | *Medium* | *Open* |
+| *e.g. Auth service* | *Default admin credentials in staging* | *Code review* | *Yes* | *High* | *Remediated* |
+| | | | | | |
+
+---
+
+### ID.RA-02: Threat intelligence
+
+Receive and review cyber threat intelligence from information sharing forums, vendor advisories, and reputable third-party sources. Use this intelligence to stay aware of threat actors likely to target your type of organization and the TTPs they use.
+
+| Intelligence source | Type | Frequency | What it covers |
+|---|---|---|---|
+| *e.g. Vendor security advisories* | *Vendor* | *As published* | *Vulnerabilities in dependencies* |
+| *e.g. Industry ISAC* | *Sharing forum* | *Weekly digest* | *Sector-specific threat activity* |
+| | | | |
+
+---
+
+### ID.RA-03: Threat identification
+
+Identify and record internal and external threats to the organization. Use STRIDE as a structured approach to ensure coverage across all threat types.
+
+STRIDE gives six questions to ask about every part of a system — processes, data stores, data flows, external entities, and the trust boundaries between them. Start with trust boundaries (where trust levels change), then extend to components that handle sensitive data or critical operations.
+
+| Category | Question | Example |
+|---|---|---|
+| **S**poofing | Can someone pretend to be another user or system? | Stolen certificate used to impersonate an agent |
+| **T**ampering | Can someone modify data they shouldn't? | Man-in-the-middle altering commands, or direct modification of data at rest |
+| **R**epudiation | Can someone deny performing an action? | Deleting audit logs, or missing logs on internal operations |
+| **I**nformation Disclosure | Can someone access data they shouldn't? | Secrets leaked through environment variables or verbose error messages |
+| **D**enial of Service | Can someone make the system unavailable? | Resource exhaustion through uncontrolled container creation |
+| **E**levation of Privilege | Can someone gain higher access than intended? | Container escape to host, lateral movement between tenants |
+
+#### Trust boundary identification
+
+Trust boundaries are where the level of trust changes — data crossing a boundary is inherently riskier because it moves between different security contexts. Start STRIDE analysis at these boundaries.
+
+Common trust boundaries in SaaS systems:
+
+- **Client to server** — browser/mobile app to API
+- **API to database** — application tier to data tier
+- **Service to service** — internal services communicating over a network
+- **Your system to third-party** — calls to external APIs, payment processors, email providers
+- **Public internet to private network** — anything exposed externally
+- **User roles** — boundaries between regular users, admins, and system accounts
+
+If you have a data flow diagram from [ID.AM-03](./asset-management), use it — trust boundaries should already be marked. If no data flow diagram exists, derive boundaries from the asset register: list every pair of assets that exchange data, and mark pairs where the trust level differs (e.g., a user-facing API talking to an internal database).
+
+Record every identified threat in the component's threat register:
+
+| Threat | STRIDE category | Affected asset | Trust boundary involved |
+|---|---|---|---|
+| *e.g. Stolen service certificate* | *Spoofing* | *Control plane* | *Agent to control plane* |
+| *e.g. Log deletion by compromised process* | *Repudiation* | *Audit service* | *None (internal)* |
+| | | | |
+
+---
+
+### ID.RA-04: Impact and likelihood scoring
+
+Estimate the likelihood and impact of each identified threat. Score each threat on two dimensions and combine them into a severity rating. This follows ISO 27005 and NIST SP 800-30.
+
+**Likelihood:**
+
+| Rating | Definition |
+|---|---|
+| High | Actively exploited in the wild, or trivial to execute with publicly available tooling |
+| Medium | Known technique, requires moderate skill or specific conditions |
+| Low | Theoretical, requires significant skill, insider access, or unlikely preconditions |
+
+**Impact:**
+
+| Rating | Definition |
+|---|---|
+| Critical | Multi-tenant data breach, complete platform compromise, or regulatory violation |
+| High | Single-tenant data exposure, significant service disruption, or credential theft |
+| Medium | Limited data exposure, degraded service, or operational disruption |
+| Low | Minimal impact, no data exposure, quickly recoverable |
+
+**Severity matrix:**
+
+| | Impact: Critical | Impact: High | Impact: Medium | Impact: Low |
+|---|---|---|---|---|
+| **Likelihood: High** | Critical | Critical | High | Medium |
+| **Likelihood: Medium** | Critical | High | Medium | Medium |
+| **Likelihood: Low** | Critical | High | Medium | Low |
+
+---
+
+### ID.RA-05: Risk prioritization
+
+Use the severity ratings to prioritize risks and inform resource allocation. Map scored threats to known real-world attack techniques using MITRE ATT&CK to validate that the threat model is grounded in observed attacker behaviour, not just theoretical risk.
+
+| Severity | Required response |
+|---|---|
+| Critical | Must be addressed before the affected component ships. No exceptions. |
+| High | Must be addressed. May ship with a documented mitigation and a tracked remediation timeline. |
+| Medium | Should be addressed. Tracked in the control inventory with a target date. |
+| Low | Accepted with documentation. Reviewed periodically. |
+
+[MITRE ATT&CK](https://attack.mitre.org/) is a publicly available knowledge base of real-world adversary tactics and techniques, maintained by MITRE Corporation. It catalogues how attackers actually behave — what they target, how they gain access, and how they move through systems. Use the **Enterprise matrix** for SaaS and cloud-hosted products (it covers cloud, SaaS, and traditional IT). The Mobile and ICS matrices exist for those domains but are not typically needed for web applications.
+
+For ATT&CK validation, search for matching techniques for each threat in the register and record the technique ID (e.g., T1078 for Valid Accounts) alongside the threat entry. Where ATT&CK has no matching technique, the threat may be theoretical — reassess its likelihood rating.
+
+---
+
+### ID.RA-06: Risk response
+
+Choose a response for each scored threat: mitigate, accept, transfer, or avoid. Track response implementation and communicate planned responses to affected stakeholders.
+
+| Response | When to use |
+|---|---|
+| Mitigate | Apply a control to reduce likelihood or impact. Most common response. |
+| Accept | Risk is within tolerance. Document the rationale and review periodically. |
+| Transfer | Shift the risk to a third party (insurance, contractual obligation). |
+| Avoid | Eliminate the risk by removing the feature or component. |
+
+| Threat | Severity | Response | Control / rationale | Owner | Status |
+|---|---|---|---|---|---|
+| *e.g. Stolen service certificate* | *High* | *Mitigate* | *Short-lived certificates, mutual TLS* | *Platform team* | *In progress* |
+| *e.g. Log deletion by compromised process* | *Medium* | *Mitigate* | *Immutable audit log, separate write permissions* | *Security team* | *Planned* |
+| | | | | | |
+
+---
+
+### ID.RA-07: Change and exception management
+
+Assess proposed changes and requested exceptions for risk impact. Document the risk of making or not making each change, get approval, and track. Include guidance on rolling back if the change introduces unexpected risk.
+
+| Change / exception | Requested by | Risk if approved | Risk if not approved | Decision | Approved by |
+|---|---|---|---|---|---|
+| *e.g. Disable rate limiting for load test* | *QA team* | *DoS exposure during test window* | *Cannot validate scale targets* | *Approved with time-box* | *Security lead* |
+| | | | | | |
+
+---
+
+### ID.RA-08: Vulnerability disclosure
+
+Establish processes for receiving, analyzing, and responding to vulnerability disclosures from internal teams, external researchers, and suppliers. Assign clear responsibilities for each stage.
+
+| Disclosure channel | Responsible party | SLA for acknowledgement | SLA for resolution |
+|---|---|---|---|
+| *e.g. security@company.com* | *Security lead* | *24 hours* | *Based on severity* |
+| *e.g. Supplier advisories* | *Engineering lead* | *48 hours* | *Based on severity* |
+| | | | |
+
+---
+
+### ID.RA-09: Hardware and software integrity
+
+Assess the authenticity and integrity of hardware and software prior to acquisition and use. Verify that critical technology products have not been tampered with and come from legitimate sources.
+
+| Product | Verification method | Verified by | Date | Result |
+|---|---|---|---|---|
+| *e.g. Container base images* | *Image signing, hash verification* | *Platform team* | *Ongoing* | *Pass* |
+| *e.g. Network appliance firmware* | *Vendor checksum, supply chain attestation* | *IT ops* | *2025-01* | *Pass* |
+| | | | | |
+
+---
+
+### ID.RA-10: Critical supplier assessment
+
+Assess critical suppliers against business and cybersecurity requirements prior to acquisition. Evaluate their security posture, incident response capability, and compliance status.
+
+| Supplier | Service | Assessment method | Security posture | Compliance | Decision |
+|---|---|---|---|---|---|
+| *e.g. Cloud provider* | *Compute, storage* | *SOC 2 report review, questionnaire* | *Strong* | *SOC 2 Type II, ISO 27001* | *Approved* |
+| *e.g. SaaS analytics tool* | *Product analytics* | *Security questionnaire* | *Adequate* | *SOC 2 Type I* | *Approved with conditions* |
+| | | | | | |
+
+---
+
+## Informative references
+
+| Standard | Controls | Subcategories mapped |
+|----------|----------|---------------------|
+| ISO 27001 | 6.1.2 (risk identification and assessment) | ID.RA-01 through ID.RA-06 |
+| ISO 27005 | Risk assessment methodology (likelihood x impact) | ID.RA-04, ID.RA-05 |
+| ISO 27001 | A.8.8 (management of technical vulnerabilities) | ID.RA-01, ID.RA-08 |
+| SOC 2 | CC3.2 (risk identification), CC3.3 (risk estimation) | ID.RA-03, ID.RA-04, ID.RA-05 |
+| NIST SP 800-30 | Risk assessment process | ID.RA-01 through ID.RA-06 |
+| MITRE ATT&CK | Technique and tactic mapping | ID.RA-03, ID.RA-05 |
+| NIST SP 800-53 | RA-3 (risk assessment), RA-5 (vulnerability monitoring) | ID.RA-01, ID.RA-04 |

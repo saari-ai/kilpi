@@ -1,0 +1,51 @@
+---
+title: "PR.IR: Technology Infrastructure Resilience"
+description: Marketing Site example for infrastructure-resilience
+---
+
+For methodology guidance, see [PR.IR: Technology Infrastructure Resilience](/docs/kilpi/functions/protect/infrastructure-resilience).
+
+---
+
+### PR.IR-01: Network protection
+
+The marketing site is a static deployment with no server-side runtime. Network protection is simpler than application-hosting components.
+
+| Control | Level | Rule | Purpose |
+|---|---|---|---|
+| CloudFront HTTPS-only | Application | HTTP requests redirected to HTTPS. TLS 1.2 minimum. | Ensures all visitor communication is encrypted |
+| S3 BlockPublicAccess + OAI | Infrastructure | S3 bucket blocks all public access. CloudFront uses Origin Access Identity for S3 reads. | Prevents direct S3 access, forces traffic through CDN |
+| Route 53 IAM restrictions | Infrastructure | Only CI deploy role and frontend lead can modify DNS records | Prevents unauthorized DNS changes (<span style={{whiteSpace: 'nowrap'}}>SC-MK-4.1</span>) |
+
+**Controls:** <span style={{whiteSpace: 'nowrap'}}>SC-MK-2.1</span> (CloudFront HTTPS-only), <span style={{whiteSpace: 'nowrap'}}>SC-MK-2.2</span> (S3 BlockPublicAccess + OAI), <span style={{whiteSpace: 'nowrap'}}>SC-MK-4.1</span> (Route 53 IAM restrictions)
+
+---
+
+### PR.IR-02: Environmental protection
+
+The marketing site runs entirely on AWS managed infrastructure. Environmental protections (power, cooling, fire suppression) are managed by AWS. Not applicable to this component.
+
+---
+
+### PR.IR-03: Resilience mechanisms
+
+| Mechanism | Where applied | Configuration | Failure behaviour |
+|---|---|---|---|
+| CloudFront edge caching | CDN | Content cached at edge locations worldwide. TTL configured per content type. | Cached content continues to be served even if S3 origin is temporarily unavailable. |
+| S3 durability | Static site files | S3 Standard (11 nines durability) + versioning | Files recoverable from versioning. |
+| Health checks | CloudFront origin | Origin health check monitors S3 availability | CloudFront serves stale cache if origin is unhealthy. |
+
+The site has no database, no sessions, and no real-time processing. Recovery from any failure is a matter of re-deploying static files from CI.
+
+---
+
+### PR.IR-04: Capacity management
+
+| Resource | Monitoring | Alert threshold | Scaling approach | Max limit |
+|---|---|---|---|---|
+| CloudFront bandwidth | CloudWatch metrics | Cost alert at $100/month | CloudFront scales automatically | N/A (AWS managed) |
+| S3 storage | CloudWatch metrics | No hard limit (cost monitoring) | S3 scales automatically | N/A |
+
+Capacity management is minimal. AWS managed services handle scaling automatically. The static nature of the site means traffic spikes are absorbed by CloudFront edge caching without any infrastructure changes.
+
+---

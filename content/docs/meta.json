@@ -1,14 +1,1 @@
-{
-  "title": "Kilpi",
-  "pages": [
-    "index",
-    "agents",
-    "conventions",
-    "scope",
-    "functions",
-    "references",
-    "templates",
-    "examples",
-    "changelog"
-  ]
-}
+{ "pages": ["kilpi", "runko", "varma"] }

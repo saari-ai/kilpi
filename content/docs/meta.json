@@ -2,13 +2,13 @@
   "title": "Kilpi",
   "pages": [
     "index",
+    "agents",
     "conventions",
     "scope",
     "functions",
     "references",
     "templates",
     "examples",
-    "agents",
     "changelog"
   ]
 }

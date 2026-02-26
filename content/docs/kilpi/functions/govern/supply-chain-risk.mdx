@@ -1,0 +1,146 @@
+---
+title: "GV.SC: Supply Chain Risk Management"
+description: Manage cybersecurity risks from suppliers, dependencies, and third-party services throughout the relationship lifecycle.
+---
+
+## Subcategories
+
+| ID | Outcome |
+|----|---------|
+| <span style={{whiteSpace: 'nowrap'}}>[GV.SC-01](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/gv/gv-sc/gv-sc-01/)</span> | A cybersecurity supply chain risk management program, strategy, objectives, policies, and processes are established and agreed to by organizational stakeholders |
+| <span style={{whiteSpace: 'nowrap'}}>[GV.SC-02](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/gv/gv-sc/gv-sc-02/)</span> | Cybersecurity roles and responsibilities for suppliers, customers, and partners are established, communicated, and coordinated internally and externally |
+| <span style={{whiteSpace: 'nowrap'}}>[GV.SC-03](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/gv/gv-sc/gv-sc-03/)</span> | Cybersecurity supply chain risk management is integrated into cybersecurity and enterprise risk management, risk assessment, and improvement processes |
+| <span style={{whiteSpace: 'nowrap'}}>[GV.SC-04](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/gv/gv-sc/gv-sc-04/)</span> | Suppliers are known and prioritized by criticality |
+| <span style={{whiteSpace: 'nowrap'}}>[GV.SC-05](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/gv/gv-sc/gv-sc-05/)</span> | Requirements to address cybersecurity risks in supply chains are established, prioritized, and integrated into contracts and other types of agreements with suppliers and other relevant third parties |
+| <span style={{whiteSpace: 'nowrap'}}>[GV.SC-06](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/gv/gv-sc/gv-sc-06/)</span> | Planning and due diligence are performed to reduce risks before entering into formal supplier or other third-party relationships |
+| <span style={{whiteSpace: 'nowrap'}}>[GV.SC-07](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/gv/gv-sc/gv-sc-07/)</span> | The risks posed by a supplier, their products and services, and other third parties are understood, recorded, prioritized, assessed, responded to, and monitored over the course of the relationship |
+| <span style={{whiteSpace: 'nowrap'}}>[GV.SC-08](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/gv/gv-sc/gv-sc-08/)</span> | Relevant suppliers and other third parties are included in incident planning, response, and recovery activities |
+| <span style={{whiteSpace: 'nowrap'}}>[GV.SC-09](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/gv/gv-sc/gv-sc-09/)</span> | Supply chain security practices are integrated into cybersecurity and enterprise risk management programs, and their performance is monitored throughout the technology product and service life cycle |
+| <span style={{whiteSpace: 'nowrap'}}>[GV.SC-10](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/gv/gv-sc/gv-sc-10/)</span> | Cybersecurity supply chain risk management plans include provisions for activities that occur after the conclusion of a partnership or service agreement |
+
+## Our methodology
+
+Supply chain risk covers every external dependency: open-source libraries, cloud services, SaaS tools, build tooling, container base images, and any third party with access to your systems or data. NIST CSF 2.0 places this under Govern because it requires strategy, policy, and ongoing oversight.
+
+---
+
+### GV.SC-01: Supply chain risk management program
+
+Establish a program with clear objectives for managing supply chain risk. This is the umbrella under which all other GV.SC subcategories operate.
+
+State the program's objectives, scope, and how it integrates with the broader security strategy. Review annually or when the supply chain landscape changes significantly.
+
+---
+
+### GV.SC-02: Supply chain roles and responsibilities
+
+Define who owns supply chain risk decisions internally, and what security expectations apply to suppliers, customers, and partners.
+
+| Role | Supply chain responsibility |
+|------|---------------------------|
+| *e.g. Engineering lead* | *Dependency selection, SBOM maintenance, vulnerability patching* |
+| *e.g. Security lead* | *Supplier risk assessment, contract review, ongoing monitoring* |
+| *e.g. Product owner* | *Approves new supplier relationships, accepts residual supplier risk* |
+| | |
+
+---
+
+### GV.SC-03: Enterprise risk integration
+
+Ensure supply chain risks appear in the same risk management process as other cybersecurity and enterprise risks. Supply chain findings should use the same scoring methodology and response options defined in [Risk Management Strategy](/docs/kilpi/functions/govern/risk-management-strategy).
+
+---
+
+### GV.SC-04: Supplier inventory and criticality
+
+Maintain an inventory of all suppliers and dependencies, classified by the risk they pose.
+
+| Supplier / dependency | Type | Criticality | Data access | Assessment frequency |
+|----------------------|------|-------------|-------------|---------------------|
+| *e.g. AWS* | *Cloud provider* | *Critical* | *All production data* | *Annually + event-driven* |
+| *e.g. Stripe* | *SaaS* | *Critical* | *Payment data* | *Annually + event-driven* |
+| *e.g. Lodash* | *Open-source library* | *Low* | *None* | *Automated scanning* |
+| | | | | |
+
+**Criticality criteria:** Critical = processes sensitive data, has production access, or no ready alternative. Standard = useful but no sensitive data access and has alternatives. Low = minimal integration, easily replaceable.
+
+---
+
+### GV.SC-05: Contractual requirements
+
+Include security requirements in contracts and agreements with suppliers. Requirements should be proportional to the supplier's criticality.
+
+| Requirement | Applies to |
+|-------------|-----------|
+| *Incident notification within 24h* | *Critical suppliers* |
+| *Annual security assessment evidence (SOC 2, ISO 27001)* | *Critical suppliers* |
+| *Data encryption in transit and at rest* | *Any supplier handling data* |
+| *Data deletion on termination* | *Any supplier storing data* |
+| | |
+
+---
+
+### GV.SC-06: Pre-adoption due diligence
+
+Assess supplier risk before entering a relationship. Depth of assessment should match the criticality of the relationship.
+
+| Criterion | What to evaluate |
+|-----------|-----------------|
+| *Data access* | *What data does the supplier access, process, or store?* |
+| *Security posture* | *Certifications, documented controls* |
+| *Incident response* | *Response process, notification commitments* |
+| *Business continuity* | *Availability commitments, failover strategy* |
+| *Exit strategy* | *Data extraction, deletion on termination* |
+| | |
+
+---
+
+### GV.SC-07: Ongoing supplier risk monitoring
+
+Monitor suppliers throughout the relationship. Review critical suppliers at least annually, and reassess when the scope of the relationship changes.
+
+| Monitoring activity | Cadence |
+|-------------------|---------|
+| *Review supplier security posture and certifications* | *Annually for critical, every 2 years for standard* |
+| *Track supplier security advisories* | *Ongoing* |
+| *Verify contractual requirements are met* | *Annually* |
+| *Dependency vulnerability scanning* | *Every build (automated)* |
+| | |
+
+---
+
+### GV.SC-08: Supplier incident coordination
+
+Include critical suppliers in incident planning. Document escalation contacts, communication protocols, and mutual notification commitments for each critical supplier.
+
+---
+
+### GV.SC-09: Build integrity and provenance
+
+Use SLSA (Supply-chain Levels for Software Artefacts) to establish build integrity requirements per product.
+
+| SLSA level | Requirement | Target for |
+|-----------|-------------|------------|
+| *SLSA 1* | *Build process documented* | *All products* |
+| *SLSA 2* | *Hosted build service, machine-generated provenance* | *All products* |
+| *SLSA 3* | *Isolated builds, non-falsifiable provenance* | *Products handling sensitive data* |
+| *SLSA 4* | *Two-person review, hermetic and reproducible builds* | *Critical infrastructure* |
+| | | |
+
+Pin dependency versions, generate SBOMs, and scan dependencies on every build. Block merges that introduce known Critical or High vulnerabilities.
+
+---
+
+### GV.SC-10: Relationship termination
+
+Plan for the end of supplier relationships before they begin. When a relationship ends, revoke access immediately, verify data is returned or destroyed, rotate shared credentials, and replace any dependencies on the supplier's products.
+
+---
+
+## Informative references
+
+| Standard | Controls | Subcategories mapped |
+|----------|----------|---------------------|
+| ISO 27001 | A.5.19-5.22 (supplier relationships) | <span style={{whiteSpace: 'nowrap'}}>GV.SC-04</span>, <span style={{whiteSpace: 'nowrap'}}>GV.SC-05</span>, <span style={{whiteSpace: 'nowrap'}}>GV.SC-06</span>, <span style={{whiteSpace: 'nowrap'}}>GV.SC-07</span> |
+| ISO 27001 | A.8.25-8.31 (secure development lifecycle) | <span style={{whiteSpace: 'nowrap'}}>GV.SC-09</span> |
+| SLSA | Levels 1-4 | <span style={{whiteSpace: 'nowrap'}}>GV.SC-09</span> |

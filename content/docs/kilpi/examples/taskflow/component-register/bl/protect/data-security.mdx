@@ -1,0 +1,55 @@
+---
+title: "PR.DS: Data Security"
+description: Billing Portal example for data security
+---
+
+For methodology guidance, see [PR.DS: Data Security](/docs/kilpi/functions/protect/data-security).
+
+---
+
+### PR.DS-01: Data at rest
+
+| Data store | Encryption method | Key management | Key rotation |
+|---|---|---|---|
+| Billing database (PostgreSQL on RDS) | AES-256 (AWS RDS encryption) | AWS KMS managed | Annually (AWS managed) |
+| Secrets manager (Stripe keys, DB credentials) | AES-256 (AWS Secrets Manager) | AWS KMS managed | Annually (AWS managed) |
+
+Payment card data is never stored in the Billing Portal database. All card data is tokenized by Stripe. The billing database stores only Stripe customer IDs, subscription IDs, and invoice references.
+
+**Controls:** <span style={{whiteSpace: 'nowrap'}}>SC-BL-1.1</span> (parameterised queries protect data integrity), <span style={{whiteSpace: 'nowrap'}}>SC-BL-5.1</span> (secrets in secrets manager), <span style={{whiteSpace: 'nowrap'}}>SC-BL-5.2</span> (log masking prevents data leakage)
+
+---
+
+### PR.DS-02: Data in transit
+
+| Communication path | Protocol | Minimum version | Additional controls |
+|---|---|---|---|
+| Browser to Billing API | HTTPS | TLS 1.2 | HSTS header, certificate managed via AWS ACM |
+| Billing API to PostgreSQL | TLS | TLS 1.2 | Within VPC, RDS enforces SSL connections |
+| Billing API to Stripe | HTTPS | TLS 1.2 | Stripe SDK enforces HTTPS |
+| Stripe webhooks to Billing API | HTTPS | TLS 1.2 | HMAC signature validation (<span style={{whiteSpace: 'nowrap'}}>SC-BL-3.1</span>) |
+
+**Controls:** <span style={{whiteSpace: 'nowrap'}}>SC-BL-3.1</span> (Stripe webhook signature verification), <span style={{whiteSpace: 'nowrap'}}>SC-BL-5.2</span> (log masking prevents secrets in transit via logs)
+
+---
+
+### PR.DS-10: Data in use
+
+| Control | What it covers | Implementation |
+|---|---|---|
+| No secrets in client bundles | Stripe API keys and credentials never included in Billing SPA build output | Build-time environment variable separation. Only public Stripe publishable key is bundled. Secret scanning of build artifacts. |
+| Payment tokenization | Raw card numbers never touch the Billing Portal | Stripe.js / Stripe Elements handles card input client-side. Only Stripe tokens are transmitted to the Billing API. |
+| Log masking middleware | Sensitive data stripped before logging | Middleware scans for patterns (`sk_live_`, `rk_live_`, bearer tokens, card number fragments) and replaces with `[REDACTED]` before log output. |
+| Generic error responses | Internal state not exposed in API responses | Error handler returns message + correlation ID only. Stack traces, paths, and versions logged internally only. |
+
+---
+
+### PR.DS-11: Backups
+
+| Data source | Backup frequency | Storage location | Encryption | Restore test cadence |
+|---|---|---|---|---|
+| Billing database (PostgreSQL on RDS) | Daily automated snapshots + continuous WAL archiving (point-in-time recovery) | AWS RDS automated backups (same region) + cross-region copy | AES-256 (KMS) | Quarterly |
+| Secrets manager | AWS-managed redundancy | AWS Secrets Manager (multi-AZ) | AES-256 (KMS) | Annually (verify recovery) |
+| Stripe data | Stripe-managed redundancy | Stripe infrastructure | Stripe-managed | N/A (Stripe manages) |
+
+---

@@ -1,0 +1,53 @@
+---
+title: "ID.IM: Improvement"
+description: Taskflow example for improvement
+---
+
+For methodology guidance, see [ID.IM: Improvement](/docs/kilpi/functions/identify/improvement).
+
+---
+
+### ID.IM-01: Improvements from evaluations
+
+| Evaluation type | Scope | Frequency | Findings feed into |
+|---|---|---|---|
+| Quarterly threat register review | All 20 threats, all 18 controls | Quarterly | Threat severity re-scoring, control inventory updates |
+| Annual security posture review | End-to-end: Govern through Recover | Annually | Policy updates, risk tolerance adjustments, staffing changes |
+| SOC 2 readiness self-assessment | Access controls, audit logging, incident response, change management | Annually (prior to audit) | Control gaps, evidence collection improvements |
+| Dependency audit | All direct and transitive npm dependencies | Monthly | Dependency management policy updates, scanning frequency changes |
+
+---
+
+### ID.IM-02: Improvements from tests and exercises
+
+| Test type | Target | Last conducted | Findings | Status |
+|---|---|---|---|---|
+| Tabletop exercise: credential stuffing | Authentication controls, incident response playbook 1 | Q3 2025 | Rate limiter threshold too generous (was 20/min, lowered to 5/min) | Remediated |
+| Tabletop exercise: S3 bucket exposure | Data access controls, incident response playbook 4 | Q4 2025 | Need automated CloudTrail alert for S3 policy changes | Implemented |
+| Penetration test (external) | Full application surface | Q2 2025 | 2 medium findings (CSRF on one endpoint, verbose error on 404) | Remediated |
+| Dependency compromise simulation | Dependency management, recovery playbook 5 | Q4 2025 | Server rebuild runbook needed more detail on secret rotation order | Updated |
+
+---
+
+### ID.IM-03: Improvements from operations
+
+| Source function | What it produces | How it feeds back |
+|---|---|---|
+| Detect (monitoring alerts) | False positive / true positive data | Tuning alert thresholds, refining correlation rules |
+| Respond (incident post-mortems) | Root cause analysis, timeline gaps | New threats added to register, controls strengthened, playbooks updated |
+| Recover (after-action reports) | Lessons learned, feedback loop updates | Re-scored threat likelihoods, new CI checks, tighter SLAs |
+| Day-to-day operations (PR reviews) | Patterns in security-relevant code changes | Updated coding standards, new linting rules |
+
+---
+
+### ID.IM-04: Plan maintenance
+
+| Plan | Owner | Last reviewed | Next review | Status |
+|---|---|---|---|---|
+| Incident response plan (6 playbooks) | Security lead | Q4 2025 | Q1 2026 | Current |
+| Recovery procedures (5 scenarios) | Security lead | Q4 2025 | Q1 2026 | Current |
+| Business continuity plan | CTO | Q3 2025 | Q1 2026 | Due for review |
+| Dependency management policy | Dependency maintainer | Q4 2025 | Q2 2026 | Current |
+| Data classification policy | Security lead | Q3 2025 | Q1 2026 | Due for review |
+
+---

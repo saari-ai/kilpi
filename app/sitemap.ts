@@ -3,7 +3,7 @@ import { source } from '@/lib/source';
 
 export const dynamic = 'force-static';
 
-const baseUrl = 'https://saari-ai.github.io/kilpi';
+const baseUrl = 'https://saari-ai.github.io/skills';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const pages = source.getPages().map((page) => ({

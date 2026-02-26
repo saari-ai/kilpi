@@ -1,0 +1,63 @@
+---
+title: "PR: Protect"
+description: Turn threats into controls. Every scored threat from Identify traces to a testable safeguard.
+---
+
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+Protect turns threats into controls. The primary input is the scored threat register from [Identify](../identify) — every threat gets a control, every control gets evidence, and the trace is documented end-to-end.
+
+## From threats to controls
+
+The process follows these steps:
+
+<Steps>
+<Step>
+### Gather threats
+Read the scored threats from Identify. Severity determines priority.
+</Step>
+<Step>
+### Select controls per threat
+For each threat, write a testable control statement. The threat describes the attack mechanism; the control is what prevents it. Use [OWASP Top 10](https://owasp.org/www-project-top-ten/) and [CIS Benchmarks](https://www.cisecurity.org/cis-benchmarks) as control pattern sources — they provide concrete, well-tested controls for common web application and infrastructure threats.
+</Step>
+<Step>
+### Map to subcategories
+Assign each control to the appropriate PR category below. This confirms coverage and catches gaps.
+</Step>
+<Step>
+### Prioritize by severity
+Critical and High threats drive the controls that block shipping. Medium and Low are tracked with target dates.
+</Step>
+<Step>
+### Verify coverage
+For each PR subcategory, verify at least one control is mapped. Then check by data classification level:
+
+- **Restricted** data: encryption at rest and in transit, access logging, key management controls must all be present.
+- **Confidential** data: encryption at rest and in transit, access controls must be present.
+- **Internal** data: access controls must be present.
+- **Public** data: integrity controls (tamper protection) should be present.
+
+If the component handles sensitive data but no control addresses encryption, something was missed.
+</Step>
+</Steps>
+
+## Categories
+
+| Category | ID | Description |
+|----------|-----|-------------|
+| [Identity Management & Access Control](./identity-management-access-control) | PR.AA | Authentication, authorization, credential lifecycle |
+| [Awareness & Training](./awareness-training) | PR.AT | Security awareness and secure coding patterns |
+| [Data Security](./data-security) | PR.DS | Encryption, secrets, data retention |
+| [Platform Security](./platform-security) | PR.PS | Security headers, TLS, hardened configuration |
+| [Infrastructure Resilience](./infrastructure-resilience) | PR.IR | Rate limiting, input validation, backups |
+
+Use the [Component Register](/docs/kilpi/templates/component-register) section of the template to apply Protect controls to a specific system.
+
+## When is Protect complete?
+
+Protect is complete when:
+
+1. Every threat rated Medium or above in the threat register has at least one control mapped to it
+2. Every control has a unique ID (`SC-{component}-*`), a testable statement, and a mapped NIST subcategory
+3. Coverage checks pass for every data classification level present in the asset register
+4. Critical and High severity threats have controls with evidence of implementation (not just planned)

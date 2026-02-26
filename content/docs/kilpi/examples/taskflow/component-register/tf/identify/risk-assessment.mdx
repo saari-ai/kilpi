@@ -1,0 +1,150 @@
+---
+title: "ID.RA: Risk Assessment"
+description: Taskflow example for risk assessment
+---
+
+For methodology guidance, see [ID.RA: Risk Assessment](/docs/kilpi/functions/identify/risk-assessment).
+
+---
+
+### ID.RA-01: Vulnerability identification
+
+| Asset | Vulnerability | Source | Validated | Severity | Status |
+|---|---|---|---|---|---|
+| <span style={{whiteSpace: 'nowrap'}}>SA-TF-1</span>, <span style={{whiteSpace: 'nowrap'}}>SA-TF-2</span>, <span style={{whiteSpace: 'nowrap'}}>SA-TF-3</span> | <span id="ST-TF-1" style={{whiteSpace: 'nowrap'}}>ST-TF-1</span> Injection (SQL, NoSQL, command) via user input | Threat modelling (STRIDE) | Yes | Critical | Controls implemented (<span style={{whiteSpace: 'nowrap'}}>SC-TF-1.1</span>, <span style={{whiteSpace: 'nowrap'}}>SC-TF-1.4</span>) |
+| <span style={{whiteSpace: 'nowrap'}}>SA-TF-1</span>, <span style={{whiteSpace: 'nowrap'}}>SA-TF-2</span> | <span id="ST-TF-2" style={{whiteSpace: 'nowrap'}}>ST-TF-2</span> Cross-site scripting (XSS) via stored user content | Threat modelling (STRIDE) | Yes | Critical | Controls implemented (<span style={{whiteSpace: 'nowrap'}}>SC-TF-1.2</span>) |
+| <span style={{whiteSpace: 'nowrap'}}>SA-TF-1</span>, <span style={{whiteSpace: 'nowrap'}}>SA-TF-2</span>, <span style={{whiteSpace: 'nowrap'}}>SA-TF-9</span> | <span id="ST-TF-3" style={{whiteSpace: 'nowrap'}}>ST-TF-3</span> Credential stuffing / brute force on login | Threat modelling (STRIDE) | Yes | Critical | Controls implemented (<span style={{whiteSpace: 'nowrap'}}>SC-TF-2.1</span>) |
+| <span style={{whiteSpace: 'nowrap'}}>SA-TF-1</span>, <span style={{whiteSpace: 'nowrap'}}>SA-TF-2</span> | <span id="ST-TF-4" style={{whiteSpace: 'nowrap'}}>ST-TF-4</span> CSRF on state-changing endpoints | Threat modelling (STRIDE) | Yes | Medium | Controls implemented (<span style={{whiteSpace: 'nowrap'}}>SC-TF-1.3</span>) |
+| <span style={{whiteSpace: 'nowrap'}}>SA-TF-2</span>, <span style={{whiteSpace: 'nowrap'}}>SA-TF-3</span> | <span id="ST-TF-5" style={{whiteSpace: 'nowrap'}}>ST-TF-5</span> SQL injection via parameterisation failure | Threat modelling (STRIDE) | Yes | Critical | Controls implemented (<span style={{whiteSpace: 'nowrap'}}>SC-TF-1.1</span>) |
+| <span style={{whiteSpace: 'nowrap'}}>SA-TF-2</span>, <span style={{whiteSpace: 'nowrap'}}>SA-TF-3</span> | <span id="ST-TF-6" style={{whiteSpace: 'nowrap'}}>ST-TF-6</span> Unauthorised data access via overly permissive DB role | Threat modelling (STRIDE) | Yes | High | Controls implemented (<span style={{whiteSpace: 'nowrap'}}>SC-TF-4.1</span>) |
+| <span style={{whiteSpace: 'nowrap'}}>SA-TF-2</span>, <span style={{whiteSpace: 'nowrap'}}>SA-TF-4</span>, <span style={{whiteSpace: 'nowrap'}}>SA-TF-10</span> | <span id="ST-TF-7" style={{whiteSpace: 'nowrap'}}>ST-TF-7</span> Session token theft via network access to Redis | Threat modelling (STRIDE) | Yes | Critical | Controls implemented (<span style={{whiteSpace: 'nowrap'}}>SC-TF-3.1</span>) |
+| <span style={{whiteSpace: 'nowrap'}}>SA-TF-4</span>, <span style={{whiteSpace: 'nowrap'}}>SA-TF-10</span> | <span id="ST-TF-8" style={{whiteSpace: 'nowrap'}}>ST-TF-8</span> Session reuse via missing expiry and rotation | Threat modelling (STRIDE) | Yes | High | Controls implemented (<span style={{whiteSpace: 'nowrap'}}>SC-TF-3.2</span>) |
+| <span style={{whiteSpace: 'nowrap'}}>SA-TF-5</span>, <span style={{whiteSpace: 'nowrap'}}>SA-TF-12</span> | <span id="ST-TF-9" style={{whiteSpace: 'nowrap'}}>ST-TF-9</span> File attachments exposed via public bucket ACL | Threat modelling (STRIDE) | Yes | High | Controls implemented (<span style={{whiteSpace: 'nowrap'}}>SC-TF-4.2</span>) |
+| <span style={{whiteSpace: 'nowrap'}}>SA-TF-2</span>, <span style={{whiteSpace: 'nowrap'}}>SA-TF-5</span>, <span style={{whiteSpace: 'nowrap'}}>SA-TF-12</span> | <span id="ST-TF-10" style={{whiteSpace: 'nowrap'}}>ST-TF-10</span> Cross-user file access via unauthenticated download URLs | Threat modelling (STRIDE) | Yes | High | Controls implemented (<span style={{whiteSpace: 'nowrap'}}>SC-TF-4.3</span>) |
+| <span style={{whiteSpace: 'nowrap'}}>SA-TF-2</span>, <span style={{whiteSpace: 'nowrap'}}>SA-TF-6</span>, <span style={{whiteSpace: 'nowrap'}}>SA-TF-11</span> | <span id="ST-TF-11" style={{whiteSpace: 'nowrap'}}>ST-TF-11</span> Stripe API key exposure via logs or source code | Threat modelling (STRIDE) | Yes | Critical | Controls implemented (<span style={{whiteSpace: 'nowrap'}}>SC-TF-5.1</span>, <span style={{whiteSpace: 'nowrap'}}>SC-TF-5.2</span>) |
+| <span style={{whiteSpace: 'nowrap'}}>SA-TF-2</span>, <span style={{whiteSpace: 'nowrap'}}>SA-TF-6</span> | <span id="ST-TF-12" style={{whiteSpace: 'nowrap'}}>ST-TF-12</span> Fake payment confirmations via unsigned webhook requests | Threat modelling (STRIDE) | Yes | High | Controls implemented (<span style={{whiteSpace: 'nowrap'}}>SC-TF-6.1</span>) |
+| <span style={{whiteSpace: 'nowrap'}}>SA-TF-2</span>, <span style={{whiteSpace: 'nowrap'}}>SA-TF-7</span>, <span style={{whiteSpace: 'nowrap'}}>SA-TF-11</span> | <span id="ST-TF-13" style={{whiteSpace: 'nowrap'}}>ST-TF-13</span> SendGrid API key exposure via logs or source code | Threat modelling (STRIDE) | Yes | High | Controls implemented (<span style={{whiteSpace: 'nowrap'}}>SC-TF-5.1</span>, <span style={{whiteSpace: 'nowrap'}}>SC-TF-5.2</span>) |
+| <span style={{whiteSpace: 'nowrap'}}>SA-TF-2</span>, <span style={{whiteSpace: 'nowrap'}}>SA-TF-8</span> | <span id="ST-TF-14" style={{whiteSpace: 'nowrap'}}>ST-TF-14</span> Token theft via open redirect in OAuth callback | Threat modelling (STRIDE) | Yes | High | Controls implemented (<span style={{whiteSpace: 'nowrap'}}>SC-TF-2.3</span>) |
+| <span style={{whiteSpace: 'nowrap'}}>SA-TF-9</span> | <span id="ST-TF-15" style={{whiteSpace: 'nowrap'}}>ST-TF-15</span> Credential database cracked due to weak hashing | Threat modelling (STRIDE) | Yes | Critical | Controls implemented (<span style={{whiteSpace: 'nowrap'}}>SC-TF-2.2</span>) |
+| <span style={{whiteSpace: 'nowrap'}}>SA-TF-2</span>, <span style={{whiteSpace: 'nowrap'}}>SA-TF-9</span> | <span id="ST-TF-16" style={{whiteSpace: 'nowrap'}}>ST-TF-16</span> Account takeover via unthrottled password reset | Threat modelling (STRIDE) | Yes | High | Controls implemented (<span style={{whiteSpace: 'nowrap'}}>SC-TF-2.4</span>) |
+| <span style={{whiteSpace: 'nowrap'}}>SA-TF-10</span> | <span id="ST-TF-17" style={{whiteSpace: 'nowrap'}}>ST-TF-17</span> Session reuse via stale tokens after password change | Threat modelling (STRIDE) | Yes | High | Controls implemented (<span style={{whiteSpace: 'nowrap'}}>SC-TF-3.3</span>) |
+| <span style={{whiteSpace: 'nowrap'}}>SA-TF-2</span> | <span id="ST-TF-18" style={{whiteSpace: 'nowrap'}}>ST-TF-18</span> Unattributable admin changes due to missing audit logging | Threat modelling (STRIDE) | Yes | Medium | Controls implemented (<span style={{whiteSpace: 'nowrap'}}>SC-TF-7.1</span>) |
+| <span style={{whiteSpace: 'nowrap'}}>SA-TF-2</span> | <span id="ST-TF-19" style={{whiteSpace: 'nowrap'}}>ST-TF-19</span> Architecture reconnaissance via verbose error responses | Threat modelling (STRIDE) | Yes | Medium | Controls implemented (<span style={{whiteSpace: 'nowrap'}}>SC-TF-7.2</span>) |
+| <span style={{whiteSpace: 'nowrap'}}>SA-TF-1</span>, <span style={{whiteSpace: 'nowrap'}}>SA-TF-2</span> | <span id="ST-TF-20" style={{whiteSpace: 'nowrap'}}>ST-TF-20</span> Exploitation via known CVE in npm dependency | Threat modelling + Dependabot | Yes | High | Controls implemented (<span style={{whiteSpace: 'nowrap'}}>SC-TF-8.1</span>) |
+
+---
+
+### ID.RA-02: Threat intelligence
+
+| Intelligence source | Type | Frequency | What it covers |
+|---|---|---|---|
+| MITRE ATT&CK | Threat taxonomy | Referenced during threat modelling | Attack technique classification for all 20 threats (T1190, T1189, T1110, etc.) |
+| Dependabot / GitHub Advisory Database | Vulnerability advisories | Continuous (automated) | Known CVEs in npm dependencies |
+| OWASP Top 10 | Vulnerability taxonomy | Referenced during threat modelling | Web application vulnerability patterns (injection, XSS, CSRF, etc.) |
+| Stripe security advisories | Vendor advisory | As published | Stripe integration security updates |
+| AWS security bulletins | Vendor advisory | As published | Infrastructure vulnerability patches and configuration guidance |
+
+---
+
+### ID.RA-03: Threat identification
+
+| Threat | STRIDE category | Affected asset | Trust boundary involved |
+|---|---|---|---|
+| <span style={{whiteSpace: 'nowrap'}}>ST-TF-1</span> SQL/NoSQL/command injection | Tampering | API, PostgreSQL | Browser to API |
+| <span style={{whiteSpace: 'nowrap'}}>ST-TF-2</span> Stored XSS | Tampering | SPA, API | Browser to API |
+| <span style={{whiteSpace: 'nowrap'}}>ST-TF-3</span> Credential stuffing / brute force | Spoofing | API, auth credentials | Browser to API |
+| <span style={{whiteSpace: 'nowrap'}}>ST-TF-4</span> CSRF | Tampering | SPA, API | Browser to API |
+| <span style={{whiteSpace: 'nowrap'}}>ST-TF-5</span> SQL injection (parameterisation failure) | Tampering | API, PostgreSQL | API to PostgreSQL |
+| <span style={{whiteSpace: 'nowrap'}}>ST-TF-6</span> Overly permissive DB role | Elevation of Privilege | API, PostgreSQL | API to PostgreSQL |
+| <span style={{whiteSpace: 'nowrap'}}>ST-TF-7</span> Redis network session theft | Information Disclosure | API, Redis, session tokens | API to Redis (network) |
+| <span style={{whiteSpace: 'nowrap'}}>ST-TF-8</span> Missing session expiry | Spoofing | Redis, session tokens | API to Redis |
+| <span style={{whiteSpace: 'nowrap'}}>ST-TF-9</span> Public S3 bucket | Information Disclosure | S3, file attachments | Public internet to S3 |
+| <span style={{whiteSpace: 'nowrap'}}>ST-TF-10</span> Unauthenticated file download | Information Disclosure | API, S3, file attachments | API to S3 |
+| <span style={{whiteSpace: 'nowrap'}}>ST-TF-11</span> Stripe API key leak | Information Disclosure | API, Stripe, API keys | API to Stripe |
+| <span style={{whiteSpace: 'nowrap'}}>ST-TF-12</span> Unsigned Stripe webhooks | Spoofing | API, Stripe | Stripe to API |
+| <span style={{whiteSpace: 'nowrap'}}>ST-TF-13</span> SendGrid API key leak | Information Disclosure | API, SendGrid, API keys | API to SendGrid |
+| <span style={{whiteSpace: 'nowrap'}}>ST-TF-14</span> OAuth open redirect | Spoofing | API, Google OAuth | API to Google |
+| <span style={{whiteSpace: 'nowrap'}}>ST-TF-15</span> Weak password hashing | Information Disclosure | Auth credentials | Internal (data at rest) |
+| <span style={{whiteSpace: 'nowrap'}}>ST-TF-16</span> Password reset abuse | Spoofing | API, auth credentials | Browser to API |
+| <span style={{whiteSpace: 'nowrap'}}>ST-TF-17</span> Stale sessions after password change | Spoofing | Session tokens | Internal (session lifecycle) |
+| <span style={{whiteSpace: 'nowrap'}}>ST-TF-18</span> Missing audit logging | Repudiation | API | Internal (admin actions) |
+| <span style={{whiteSpace: 'nowrap'}}>ST-TF-19</span> Verbose error responses | Information Disclosure | API | API to Browser |
+| <span style={{whiteSpace: 'nowrap'}}>ST-TF-20</span> CVE in npm dependency | Varies | SPA, API | Supply chain |
+
+---
+
+### ID.RA-04: Impact and likelihood scoring
+
+| | Impact: Critical | Impact: High | Impact: Medium | Impact: Low |
+|---|---|---|---|---|
+| **Likelihood: High** | <span style={{whiteSpace: 'nowrap'}}>ST-TF-1</span>, <span style={{whiteSpace: 'nowrap'}}>ST-TF-2</span>, <span style={{whiteSpace: 'nowrap'}}>ST-TF-3</span> | <span style={{whiteSpace: 'nowrap'}}>ST-TF-19</span> | | |
+| **Likelihood: Medium** | <span style={{whiteSpace: 'nowrap'}}>ST-TF-5</span>, <span style={{whiteSpace: 'nowrap'}}>ST-TF-7</span> | <span style={{whiteSpace: 'nowrap'}}>ST-TF-6</span>, <span style={{whiteSpace: 'nowrap'}}>ST-TF-8</span>, <span style={{whiteSpace: 'nowrap'}}>ST-TF-10</span>, <span style={{whiteSpace: 'nowrap'}}>ST-TF-12</span>, <span style={{whiteSpace: 'nowrap'}}>ST-TF-13</span>, <span style={{whiteSpace: 'nowrap'}}>ST-TF-14</span>, <span style={{whiteSpace: 'nowrap'}}>ST-TF-16</span>, <span style={{whiteSpace: 'nowrap'}}>ST-TF-17</span>, <span style={{whiteSpace: 'nowrap'}}>ST-TF-20</span> | <span style={{whiteSpace: 'nowrap'}}>ST-TF-4</span>, <span style={{whiteSpace: 'nowrap'}}>ST-TF-18</span> | |
+| **Likelihood: Low** | <span style={{whiteSpace: 'nowrap'}}>ST-TF-11</span>, <span style={{whiteSpace: 'nowrap'}}>ST-TF-15</span> | <span style={{whiteSpace: 'nowrap'}}>ST-TF-9</span> | | |
+
+---
+
+### ID.RA-05: Risk prioritization
+
+| Severity | Required response |
+|---|---|
+| Critical (6 threats) | Must be addressed before shipping. No exceptions. |
+| High (10 threats) | Must be addressed, may ship with documented mitigation plan |
+| Medium (4 threats) | Tracked with target date. Included in sprint planning. |
+
+---
+
+### ID.RA-06: Risk response
+
+All 20 threats have been addressed with the "mitigate" response. Controls are documented in the [Protect](/docs/kilpi/examples/taskflow/component-register/tf/protect) function pages. No threats have been accepted without mitigation. No threats have been transferred (Stripe handles PCI scope, but Taskflow still mitigates its integration risks).
+
+| Threat | Severity | Response | Control / rationale | Owner | Status |
+|---|---|---|---|---|---|
+| <span style={{whiteSpace: 'nowrap'}}>ST-TF-1</span> to <span style={{whiteSpace: 'nowrap'}}>ST-TF-5</span> | Critical/Medium | Mitigate | Input validation controls (<span style={{whiteSpace: 'nowrap'}}>SC-TF-1.1</span> to <span style={{whiteSpace: 'nowrap'}}>SC-TF-1.4</span>) | All developers | Implemented |
+| <span style={{whiteSpace: 'nowrap'}}>ST-TF-3</span>, <span style={{whiteSpace: 'nowrap'}}>ST-TF-14</span> to <span style={{whiteSpace: 'nowrap'}}>ST-TF-16</span> | Critical/High | Mitigate | Authentication controls (<span style={{whiteSpace: 'nowrap'}}>SC-TF-2.1</span> to <span style={{whiteSpace: 'nowrap'}}>SC-TF-2.4</span>) | Backend team | Implemented |
+| <span style={{whiteSpace: 'nowrap'}}>ST-TF-7</span>, <span style={{whiteSpace: 'nowrap'}}>ST-TF-8</span>, <span style={{whiteSpace: 'nowrap'}}>ST-TF-17</span> | Critical/High | Mitigate | Session management controls (<span style={{whiteSpace: 'nowrap'}}>SC-TF-3.1</span> to <span style={{whiteSpace: 'nowrap'}}>SC-TF-3.3</span>) | Backend team | Implemented |
+| <span style={{whiteSpace: 'nowrap'}}>ST-TF-6</span>, <span style={{whiteSpace: 'nowrap'}}>ST-TF-9</span>, <span style={{whiteSpace: 'nowrap'}}>ST-TF-10</span> | High | Mitigate | Data access controls (<span style={{whiteSpace: 'nowrap'}}>SC-TF-4.1</span> to <span style={{whiteSpace: 'nowrap'}}>SC-TF-4.3</span>) | Backend team | Implemented |
+| <span style={{whiteSpace: 'nowrap'}}>ST-TF-11</span>, <span style={{whiteSpace: 'nowrap'}}>ST-TF-13</span> | Critical/High | Mitigate | Secret management controls (<span style={{whiteSpace: 'nowrap'}}>SC-TF-5.1</span>, <span style={{whiteSpace: 'nowrap'}}>SC-TF-5.2</span>) | Backend team | Implemented |
+| <span style={{whiteSpace: 'nowrap'}}>ST-TF-12</span> | High | Mitigate | Integration security control (<span style={{whiteSpace: 'nowrap'}}>SC-TF-6.1</span>) | Backend team | Implemented |
+| <span style={{whiteSpace: 'nowrap'}}>ST-TF-18</span>, <span style={{whiteSpace: 'nowrap'}}>ST-TF-19</span> | Medium | Mitigate | Audit and observability controls (<span style={{whiteSpace: 'nowrap'}}>SC-TF-7.1</span>, <span style={{whiteSpace: 'nowrap'}}>SC-TF-7.2</span>) | Backend team | Implemented |
+| <span style={{whiteSpace: 'nowrap'}}>ST-TF-20</span> | High | Mitigate | Dependency management control (<span style={{whiteSpace: 'nowrap'}}>SC-TF-8.1</span>) | Dependency maintainer | Implemented |
+
+---
+
+### ID.RA-07: Change and exception management
+
+| Change / exception | Requested by | Risk if approved | Risk if not approved | Decision | Approved by |
+|---|---|---|---|---|---|
+| Ship Google OAuth before MFA | Product lead | Single-factor OAuth sessions (medium risk) | Delayed user acquisition | Approved with shorter session TTL (4 hours) | Security lead |
+| Accept medium-severity schema validation gaps | Backend team | Edge cases in input validation could be exploited | Sprint delayed by 1 week | Approved with 2-week fix deadline | Security lead |
+
+---
+
+### ID.RA-08: Vulnerability disclosure
+
+| Disclosure channel | Responsible party | SLA for acknowledgement | SLA for resolution |
+|---|---|---|---|
+| security@taskflow.app email | Security lead | 48 hours | Critical: 7 days. High: 30 days. |
+| GitHub Security Advisories (for open source components) | Dependency maintainer | 48 hours | Per dependency management policy |
+
+---
+
+### ID.RA-09: Hardware and software integrity
+
+| Product | Verification method | Verified by | Date | Result |
+|---|---|---|---|---|
+| npm dependencies | package-lock.json integrity check, `npm audit` on every build | CI pipeline | Every build | Automated pass/fail |
+| Docker base images | Pinned to digest, scanned with Trivy | CI pipeline | Every build | Automated pass/fail |
+| AWS AMIs | Amazon-published, verified via AWS Marketplace | Infrastructure owner | On adoption | Passed |
+
+---
+
+### ID.RA-10: Critical supplier assessment
+
+| Supplier | Service | Assessment method | Security posture | Compliance | Decision |
+|---|---|---|---|---|---|
+| Stripe | Payment processing | SOC 2 report review, PCI DSS Level 1 attestation | Strong | PCI DSS Level 1, SOC 2 Type II | Approved |
+| AWS | Infrastructure | SOC 2 report review, ISO 27001 certification | Strong | SOC 2, ISO 27001, FedRAMP | Approved |
+| SendGrid | Email delivery | Security practices review, SOC 2 report | Adequate | SOC 2 Type II | Approved |
+| Google | OAuth provider | Public security practices, OAuth 2.0 standard compliance | Strong | SOC 2, ISO 27001 | Approved |
+
+---

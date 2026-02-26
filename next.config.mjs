@@ -11,8 +11,8 @@ const config = {
     output: 'export',
     trailingSlash: true,
     images: { unoptimized: true },
-    basePath: '/kilpi',
-    assetPrefix: 'https://saari-ai.github.io/kilpi/',
+    basePath: '/skills',
+    assetPrefix: 'https://saari-ai.github.io/skills/',
   }),
 };
 

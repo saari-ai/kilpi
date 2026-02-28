@@ -1,0 +1,6 @@
+{
+  "title": "Product Discovery",
+  "description": "Discovery Skills",
+  "root": true,
+  "pages": ["index", "getting-started", "conventions", "problem-framing", "customer-research", "evidence", "opportunity-assessment", "synthesis", "templates", "techniques", "agents", "changelog"]
+}

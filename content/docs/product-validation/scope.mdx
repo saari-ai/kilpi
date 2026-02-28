@@ -1,0 +1,85 @@
+---
+title: Scope
+description: What Product Validation covers, its boundaries, and handoff points with adjacent disciplines
+---
+
+Product Validation operates at the **solution level**. It tests whether a proposed solution solves a validated problem. This page defines what falls inside and outside its scope, and the handoff contracts with adjacent disciplines.
+
+## What validation covers
+
+Product Validation owns the process of testing solution assumptions before committing to full-scale build. Specifically:
+
+| Activity | Phase | Example |
+|----------|-------|---------|
+| Decomposing a proposed solution into testable assumptions | Hypothesize | "Students will trust AI-generated summaries" |
+| Prioritizing assumptions by risk | Hypothesize | Critical: willingness to pay; Low: color preference |
+| Forming testable hypotheses | Hypothesize | "If we show AI summaries alongside lecture notes, 70% of students will prefer the AI version" |
+| Designing experiments at appropriate fidelity | Design | Wizard of Oz test with 10 users |
+| Executing experiments and collecting evidence | Execute | Running the test, logging observations |
+| Evaluating evidence against pre-defined criteria | Evaluate | 8/10 preferred AI → passes threshold |
+| Making pivot/persevere/kill decisions | Decide | Persevere on desirability, pivot on pricing |
+
+## What validation does NOT cover
+
+| Activity | Belongs to | Why |
+|----------|-----------|-----|
+| Discovering user problems | [Product Discovery](/docs/product-discovery) | Validation assumes the problem is proven. If evidence suggests the problem is wrong, loop back to Discovery. |
+| Defining product requirements | Product Development | Validation produces a Decision Record, not a spec. Build teams take the Decision Record and produce specifications. |
+| Building production software | Engineering | Validation builds only what is needed to test — prototypes, landing pages, Wizard of Oz setups. Not production code. |
+| Market research and sizing | [Product Discovery](/docs/product-discovery) | Market understanding feeds the Discovery Brief. Validation tests a specific solution, not the market. |
+| Ongoing product optimization | Product Analytics | Post-launch A/B testing and optimization is not validation — it is product management. |
+
+## Handoff FROM Product Discovery
+
+Product Validation receives a **Discovery Brief** from [Product Discovery](/docs/product-discovery). The brief is the entry ticket — without it, validation cannot begin.
+
+The Discovery Brief must contain:
+
+| Required element | Purpose in validation |
+|-----------------|----------------------|
+| Problem statement | Anchors all assumptions — every VA- traces back to this |
+| User segments | Defines who experiments target |
+| Opportunity score (OP-) | Confirms the problem meets the threshold for investment |
+| Validated user evidence | Provides the foundation for desirability assumptions |
+| Proposed solution direction | The subject being validated — what we decompose into assumptions |
+| Constraints and context | Shapes feasibility and viability assumptions |
+
+If the Discovery Brief is incomplete, request the missing elements before starting validation. Do not infer what Discovery should have provided.
+
+## Handoff TO Build
+
+Product Validation produces a **Decision Record** (VD-) that serves as the handoff to engineering. The Decision Record must contain:
+
+| Required element | Purpose in build |
+|-----------------|-----------------|
+| Decision (Persevere/Pivot/Kill) | Determines whether build proceeds |
+| Solution description | What is being built |
+| Evidence summary with VE- and VV- references | Justification for the decision |
+| Confidence level (must be ≥ Medium) | Risk assessment for the build investment |
+| Validated assumptions | What the team can rely on |
+| Invalidated assumptions and adaptations | What changed during validation |
+| Next actions | Specific build steps or new validation cycle scope |
+
+The Decision Record is not a product specification. It is the evidence-backed justification for building (or not building) a specific solution. The build team uses it as input to create specifications.
+
+## When to loop back to Discovery
+
+Validation loops back to [Product Discovery](/docs/product-discovery) when evidence suggests the underlying problem is flawed:
+
+- **All desirability assumptions fail.** Users do not want any version of the solution. This suggests the problem may not be as significant as Discovery indicated.
+- **User interviews during experiments reveal a different problem.** The users' actual pain point diverges from the Discovery Brief's problem statement.
+- **Kill decision with no viable pivot.** If all pivot directions have been exhausted and none produce positive signals, the problem space needs re-examination.
+
+When looping back, the validation evidence becomes input to the next Discovery cycle — it narrows the problem space and prevents repeating the same dead ends.
+
+## Scope per solution
+
+Unlike the Cybersecurity methodology which operates at both org and component levels, Product Validation operates at a single level: the **solution**. Each solution gets one Validation Plan, one set of experiments, and one (or more) Decision Records.
+
+If an organisation is validating multiple solutions simultaneously, each gets its own independent validation cycle with its own solution code, assumption register, and experiment set. There is no org-level validation scaffolding — each solution is self-contained.
+
+```
+Solution A (VA-A-*, VH-A-*, VE-A-*, VV-A-*, VD-A-*)
+Solution B (VA-B-*, VH-B-*, VE-B-*, VV-B-*, VD-B-*)
+Solution C (VA-C-*, VH-C-*, VE-C-*, VV-C-*, VD-C-*)
+```

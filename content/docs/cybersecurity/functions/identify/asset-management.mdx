@@ -1,0 +1,124 @@
+---
+title: "ID.AM: Asset Management"
+description: Inventory and manage the assets that enable business purposes, consistent with their relative importance and risk.
+---
+
+Assets (data, hardware, software, systems, facilities, services, people) that enable the organization to achieve business purposes are identified and managed consistent with their relative importance to organizational objectives and the organization's risk strategy.
+
+## Subcategories
+
+| ID | Outcome |
+|----|---------|
+| <span style={{whiteSpace: 'nowrap'}}>[ID.AM-01](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/id/id-am/id-am-01/)</span> | Inventories of hardware managed by the organization are maintained |
+| <span style={{whiteSpace: 'nowrap'}}>[ID.AM-02](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/id/id-am/id-am-02/)</span> | Inventories of software, services, and systems managed by the organization are maintained |
+| <span style={{whiteSpace: 'nowrap'}}>[ID.AM-03](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/id/id-am/id-am-03/)</span> | Representations of the organization's authorized network communication and internal and external network data flows are maintained |
+| <span style={{whiteSpace: 'nowrap'}}>[ID.AM-04](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/id/id-am/id-am-04/)</span> | Inventories of services provided by suppliers are maintained |
+| <span style={{whiteSpace: 'nowrap'}}>[ID.AM-05](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/id/id-am/id-am-05/)</span> | Assets are prioritized based on classification, criticality, resources, and impact on the mission |
+| <span style={{whiteSpace: 'nowrap'}}>[ID.AM-07](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/id/id-am/id-am-07/)</span> | Inventories of data and corresponding metadata for designated data types are maintained |
+| <span style={{whiteSpace: 'nowrap'}}>[ID.AM-08](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/id/id-am/id-am-08/)</span> | Systems, hardware, software, services, and data are managed throughout their life cycles |
+
+{/* Note: ID.AM-06 does not exist in CSF 2.0. Numbering jumps from 05 to 07. */}
+
+## Our methodology
+
+You cannot threat-model something until you know what you own. Asset Management is the foundation — everything in [Risk Assessment](./risk-assessment) and [Protect](../protect) depends on having a clear inventory of what exists, who owns it, and how important it is.
+
+---
+
+### ID.AM-01: Hardware inventory
+
+List all hardware managed by the organization. Include servers, networking equipment, endpoints, IoT devices, and anything else with a network presence.
+
+| Asset | Type | Location | Owner | Criticality |
+|---|---|---|---|---|
+| *e.g. Production k8s nodes* | *Server* | *AWS us-east-1* | *Platform team* | *Critical* |
+| *e.g. Office access points* | *Networking* | *HQ* | *IT ops* | *Medium* |
+| | | | | |
+
+---
+
+### ID.AM-02: Software and services inventory
+
+List all software, services, and systems managed by the organization. Include applications, container images, APIs, and cloud services you build or operate.
+
+| Asset | Type | Owner | Data classification | Criticality |
+|---|---|---|---|---|
+| *e.g. API gateway* | *Service* | *Platform team* | *Confidential* | *Critical* |
+| *e.g. Admin dashboard* | *Application* | *Product team* | *Internal* | *High* |
+| | | | | |
+
+---
+
+### ID.AM-03: Network data flows
+
+Document authorized network communication paths and data flows, both internal and external. Architectural diagrams (produced by architecture, annotated by security during Identify) serve as the primary representation. These should show external actors, services, data stores, trust boundaries, data flow direction, and classification labels on flows carrying confidential or restricted data.
+
+See the [Component Register](/docs/cybersecurity/templates/component-register) section of the template for the full list of what security needs on the diagrams.
+
+---
+
+### ID.AM-04: Supplier services
+
+Inventory all external services your products depend on: IaaS, PaaS, SaaS, APIs, and externally hosted applications. Update the inventory when a new external service is introduced.
+
+| Supplier | Service | Data processed | Authorized by | Trust level |
+|---|---|---|---|---|
+| *e.g. AWS* | *Compute, storage* | *All production data* | *CTO* | *High* |
+| *e.g. SendGrid* | *Transactional email* | *Email addresses, notification content* | *Engineering lead* | *Medium* |
+| | | | | |
+
+---
+
+### ID.AM-05: Asset prioritization
+
+Prioritize assets based on classification, criticality, and impact on the mission. Define criteria for each asset class and apply them consistently. Update priorities when significant changes occur.
+
+| Classification | Definition |
+|---|---|
+| Public | No impact if exposed. Marketing pages, open-source code. |
+| Internal | Low impact if exposed. Internal tooling, non-sensitive config. |
+| Confidential | Material impact if exposed. User data, business data, API keys. |
+| Restricted | Severe impact if exposed. Credentials, payment data, encryption keys. |
+
+| Criticality | Definition |
+|---|---|
+| Low | Loss or compromise has minimal operational impact. |
+| Medium | Loss or compromise causes degraded service or limited data exposure. |
+| High | Loss or compromise causes significant disruption or data exposure. |
+| Critical | Loss or compromise causes platform-wide impact, multi-tenant breach, or regulatory violation. |
+
+---
+
+### ID.AM-07: Data inventory
+
+Maintain an inventory of designated data types and their metadata. Assign data classifications through tags or labels and track provenance, data owner, and geolocation.
+
+| Data type | Classification | Owner | Storage location | Retention |
+|---|---|---|---|---|
+| *e.g. User PII* | *Confidential* | *Product team* | *Primary database, backups* | *Account lifetime + 30 days* |
+| *e.g. API keys* | *Restricted* | *Platform team* | *Secrets manager* | *Rotated quarterly* |
+| | | | | |
+
+---
+
+### ID.AM-08: Lifecycle management
+
+Track assets from deployment through retirement. Integrate security considerations before production deployment, identify shadow IT and redundant systems that increase attack surface, and securely destroy or sanitize data when hardware or services are retired.
+
+| Asset | Lifecycle stage | Last reviewed | Next action | Owner |
+|---|---|---|---|---|
+| *e.g. Legacy auth service* | *Scheduled for retirement* | *2025-01* | *Migrate users by Q2, decommission* | *Platform team* |
+| *e.g. New billing service* | *Pre-deployment* | *2025-02* | *Security review before production* | *Product team* |
+| | | | | |
+
+---
+
+## Informative references
+
+| Standard | Controls | Subcategories mapped |
+|----------|----------|---------------------|
+| ISO 27001 | A.5.9 (inventory of assets), A.5.12 (classification of information) | ID.AM-01 through ID.AM-08 |
+| ISO 27001 | 4.3 (scope definition) | ID.AM-01 through ID.AM-05 |
+| SOC 2 | CC1.1 (control environment) | ID.AM-05 |
+| SOC 2 | CC6.1 (logical and physical access) | ID.AM-01, ID.AM-02 |
+| NIST SP 800-53 | CM-8 (system component inventory), PM-5 (system inventory) | ID.AM-01, ID.AM-02 |

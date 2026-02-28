@@ -1,0 +1,85 @@
+---
+title: Agents
+description: AI agent skills that apply the Product Discovery methodology.
+---
+
+## Skills
+
+The Product Discovery skill set comes with a skill for applying the methodology, referencing sections of these docs as its source of truth.
+
+You don't have to use our skill — you can build your own or simply point your agent towards the docs as reference. However, our skill has been tuned to get the best outcomes when applying the methodology.
+
+| Skill | When activated | Reads from |
+|-------|---------------|------------|
+| <span style={{whiteSpace: 'nowrap'}}>product-discovery</span> | Running a discovery process — framing problems, planning research, evaluating evidence, assessing opportunities, and producing a Discovery Brief | All 5 phases ([Problem Framing](/docs/product-discovery/problem-framing), [Customer Research](/docs/product-discovery/customer-research), [Evidence](/docs/product-discovery/evidence), [Opportunity Assessment](/docs/product-discovery/opportunity-assessment), [Synthesis](/docs/product-discovery/synthesis)), [Templates](/docs/product-discovery/templates), [Techniques](/docs/product-discovery/techniques) |
+
+The skill is available at [saari-ai/fiksu-skills](https://github.com/saari-ai/fiksu-skills). Claude users can activate it via the [Saari Claude Marketplace](https://github.com/saari-ai/claude-marketplace).
+
+## State management
+
+The skill persists discovery state via [orch](https://github.com/saari-ai/orch) MCP tools. Every discovery artifact is stored as a work scope, enabling persistence across sessions and visibility into discovery progress.
+
+### Work scope types
+
+The skill uses eight custom work scope definitions, all under the `pd.*` namespace:
+
+| Namespace | Artifact | Status values |
+|-----------|----------|---------------|
+| `pd.discovery` | Discovery (top-level container) | `pending`, `active`, `completed`, `archived` |
+| `pd.hypotheses` | Hypotheses container | — |
+| `pd.hypothesis` | Hypothesis (PH-\*) | `pending` (Draft), `active`, `supported`, `refuted`, `retired` |
+| `pd.evidence` | Evidence item (EV-\*) | `pending` |
+| `pd.research-plan` | Research plan | `pending`, `active`, `completed` |
+| `pd.insight` | Insight (IN-\*) | `pending` |
+| `pd.opportunity` | Opportunity score (OP-\*) | `pending` |
+| `pd.brief` | Discovery Brief | `pending`, `draft`, `finalized` |
+
+### Hierarchy
+
+All artifacts are flat children of the discovery. Cross-references between artifacts (e.g. which evidence supports which hypothesis) are tracked through naming conventions and the methodology&rsquo;s traceability chain, not through containment.
+
+```
+pd.discovery (e.g. "Solo Agent Orchestration", key: SAO)
+  ├ pd.hypotheses      (container)
+  │   ├ pd.hypothesis  (SAO-003, SAO-004, ...)
+  │   └ ...
+  ├ pd.research-plan   (SAO-011)
+  ├ pd.evidence        (SAO-013, SAO-014, ...)
+  ├ pd.insight         (SAO-020, ...)
+  ├ pd.opportunity     (SAO-021, ...)
+  └ pd.brief           (SAO-022)
+```
+
+### Session resumption
+
+On activation, the skill checks for existing discoveries before starting a new one. It loads the discovery&rsquo;s children to reconstruct current state &mdash; which hypotheses exist, their lifecycle status, evidence gathered so far &mdash; and resumes from where the discovery left off.
+
+### MCP operations
+
+| Action | MCP tool | Key parameters |
+|--------|----------|----------------|
+| Create a discovery | `create_work_scope` | `namespace: "pd.discovery"`, `name`, `keyPrefix`, `parentId` (optional) |
+| Create hypotheses container | `create_work_scope` | `namespace: "pd.hypotheses"`, `name: "Hypotheses"`, `parentId` (discovery ID) |
+| Create a hypothesis | `create_work_scope` | `namespace: "pd.hypothesis"`, `name`, `parentId` (hypotheses container ID) |
+| Create evidence | `create_work_scope` | `namespace: "pd.evidence"`, `name`, `parentId` (discovery ID) |
+| Create a research plan | `create_work_scope` | `namespace: "pd.research-plan"`, `name`, `parentId` (discovery ID) |
+| Create an insight | `create_work_scope` | `namespace: "pd.insight"`, `name`, `parentId` (discovery ID) |
+| Create an opportunity | `create_work_scope` | `namespace: "pd.opportunity"`, `name`, `parentId` (discovery ID) |
+| Create the brief | `create_work_scope` | `namespace: "pd.brief"`, `name`, `parentId` (discovery ID) |
+| Transition a hypothesis | `update_work_scope` | `id`, `status` (new state) |
+| Complete the discovery | `update_work_scope` | `id`, `status: "completed"` |
+| List discovery contents | `list_work_scope_children` | `parentId` (discovery ID) |
+| Find all discoveries | `list_work_scopes_by_namespace` | `namespace: "pd.discovery"` |
+| Delete an artifact | `delete_work_scope` | `id` |
+
+## Workflow
+
+The skill works interactively across the five methodology phases:
+
+1. **Kickoff** &mdash; Asks the human for problem context, constraints, and triggers. Generates a discovery code and creates the `pd.discovery` work scope.
+2. **Problem Framing** &mdash; Helps articulate problem statements, generates falsifiable hypotheses, and creates `pd.hypothesis` work scopes for each. Challenges weak hypotheses and prioritises which to test first.
+3. **Customer Research Planning** &mdash; Recommends research techniques matched to each hypothesis, generates interview guides, and suggests sample sizes. Creates a `pd.research-plan` work scope with the full plan. The human conducts the research; the agent plans it and processes the results.
+4. **Evidence Evaluation** &mdash; Extracts evidence items from research results, weights them on the 1&ndash;5 scale, links them to hypotheses, and creates `pd.evidence` work scopes. Transitions hypothesis statuses as evidence accumulates.
+5. **Iteration** &mdash; When evidence contradicts a hypothesis, proposes reframing. New hypotheses get new work scopes; refuted ones are updated.
+6. **Opportunity Assessment** &mdash; Generates scored opportunities grounded in evidence and creates `pd.opportunity` work scopes.
+7. **Synthesis** &mdash; Extracts insights, drafts the Discovery Brief, and recommends proceed/pivot/kill. Creates `pd.insight` and `pd.brief` work scopes.

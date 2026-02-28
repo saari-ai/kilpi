@@ -1,0 +1,203 @@
+---
+title: Experiments — FocusNote
+description: Three experiment cards for FocusNote — landing page test, Wizard of Oz, and pocket test — with full evidence logs
+---
+
+## VE-FN-1: Landing Page Test
+
+### Header
+
+```
+VE-ID:              VE-FN-1
+Linked hypothesis:  VH-FN-1
+Linked assumptions: VA-FN-1, VA-FN-2
+Method:             Landing page test
+Fidelity level:     Level 1 (Smoke test)
+Date designed:      2026-01-18
+Date started:       2026-01-20
+Date completed:     2026-02-03
+Status:             Complete
+```
+
+### Success criteria
+
+| Metric | Pass threshold | Fail threshold | Inconclusive range |
+|--------|---------------|----------------|-------------------|
+| Visitor-to-signup conversion | ≥ 8% | < 4% | 4% - 8% |
+| Bounce rate | < 60% | > 80% | 60% - 80% |
+
+### Experiment parameters
+
+| Parameter | Value |
+|-----------|-------|
+| Sample size (minimum) | 500 unique visitors |
+| Duration (maximum) | 14 days |
+| Cost budget | $250 (ad spend) |
+| Target audience | University students 18-25, ADHD-related interest targeting on social media |
+| Tools / platforms | Carrd landing page, Google Analytics, Instagram/TikTok ads |
+
+### Description
+
+A single-page landing page describing FocusNote's value proposition: "AI-powered note-taking that adapts to your attention. Never miss a lecture moment again." The page included a hero section with a product mockup, three benefit bullet points, a testimonial-style quote from Discovery interviews (anonymized), and an email signup form for the waitlist. Traffic was driven via Instagram and TikTok ads targeting university students with interests in ADHD, study tools, and productivity.
+
+### Evidence log
+
+| VV-ID | Date | Source | Type | Observation | Notes |
+|-------|------|--------|------|------------|-------|
+| VV-FN-1 | 2026-01-23 | Google Analytics | Quant | 142 visitors in first 3 days, 15 signups (10.6%) | Higher than expected — early traffic may be more motivated |
+| VV-FN-2 | 2026-01-27 | Google Analytics | Quant | Cumulative: 312 visitors, 31 signups (9.9%). Bounce rate 52%. | Conversion stabilizing around 10% |
+| VV-FN-3 | 2026-01-28 | TikTok Analytics | Quant | TikTok ad CTR: 2.3%. Instagram ad CTR: 1.1%. TikTok driving 68% of traffic. | TikTok audience more responsive — potential channel signal |
+| VV-FN-4 | 2026-02-01 | Google Analytics | Quant | Cumulative: 487 visitors, 47 signups (9.7%). Bounce rate 54%. | Approaching sample size target |
+| VV-FN-5 | 2026-02-03 | Google Analytics | Quant | Final: 523 visitors, 49 signups (9.4%). Bounce rate 53%. Avg time on page: 1m42s. | Experiment complete — sample size met |
+| VV-FN-6 | 2026-02-03 | Signup survey | Qual | 38 of 49 signups completed a 2-question survey. Top reason for signing up: "I lose so much during lectures" (24 responses). Second: "AI sounds interesting" (9 responses). | Desirability signal aligns with Discovery Brief |
+
+### Result
+
+```
+Primary metric result:    9.4% conversion (49/523)
+Secondary metric result:  53% bounce rate
+Outcome:                  Pass
+Confidence level:         High
+Confounding factors:      None identified — traffic sources were targeted and representative
+Evaluator notes:          Conversion exceeded 8% threshold with good sample size. Bounce rate
+                          well below 60%. TikTok outperformed Instagram as an acquisition
+                          channel — relevant for VA-FN-6 though not directly tested. Strong
+                          desirability signal.
+```
+
+---
+
+## VE-FN-2: Wizard of Oz Test
+
+### Header
+
+```
+VE-ID:              VE-FN-2
+Linked hypothesis:  VH-FN-2
+Linked assumptions: VA-FN-3, VA-FN-4
+Method:             Wizard of Oz
+Fidelity level:     Level 2
+Date designed:      2026-01-22
+Date started:       2026-02-05
+Date completed:     2026-02-16
+Status:             Complete
+```
+
+### Success criteria
+
+| Metric | Pass threshold | Fail threshold | Inconclusive range |
+|--------|---------------|----------------|-------------------|
+| Summary usefulness rating | ≥ 7 of 10 rate "useful" or "very useful" | < 4 of 10 rate "useful" or "very useful" | 4-7 of 10 |
+| Study usage | ≥ 6 of 10 use summaries for exam prep | < 3 of 10 use summaries | 3-6 of 10 |
+
+### Experiment parameters
+
+| Parameter | Value |
+|-----------|-------|
+| Sample size (minimum) | 10 students |
+| Duration (maximum) | 10 days (covering 2 lectures per student) |
+| Cost budget | $500 (participant incentives at $50 each) |
+| Target audience | University students with ADHD, recruited from landing page signups |
+| Tools / platforms | Google Docs (shared note), human summarizer (team member), post-session survey |
+
+### Description
+
+10 students from the landing page waitlist were recruited to participate in a "beta test" of FocusNote. During their lectures, they took notes in a shared Google Doc. A team member observed the typing patterns (simulating AI attention detection) and manually generated summaries of content during apparent attention drops — inserting them as highlighted blocks in the student's document. Students were told the summaries were AI-generated. After each lecture, students rated the summaries. After two lectures, students reported whether they used the summaries for study.
+
+### Evidence log
+
+| VV-ID | Date | Source | Type | Observation | Notes |
+|-------|------|--------|------|------------|-------|
+| VV-FN-7 | 2026-02-07 | Post-lecture survey 1 | Quant | After first lecture: 8 of 10 rated summaries "useful" or "very useful". 2 rated "neutral". | Strong initial signal |
+| VV-FN-8 | 2026-02-07 | Post-lecture interview | Qual | P3: "This is exactly what I need — I looked down at my phone for 2 minutes and the summary caught what I missed." P7: "The summary was good but I wasn't sure it got the nuance right." | Trust concern from P7 worth tracking |
+| VV-FN-9 | 2026-02-12 | Post-lecture survey 2 | Quant | After second lecture: 9 of 10 rated "useful" or "very useful". 1 rated "neutral" (P7 again). | Improvement from lecture 1 — familiarity effect |
+| VV-FN-10 | 2026-02-14 | Study usage survey | Quant | 8 of 10 reported using the summaries for exam prep. 2 said they "looked at them but used their own notes primarily." | Passes study usage threshold |
+| VV-FN-11 | 2026-02-14 | Post-experiment interview | Qual | P2: "I started relying on FocusNote to catch what I miss. I actually stopped stressing about every attention lapse." P10: "I would want to edit the summaries — sometimes the AI misses context I care about." | P10's feedback reveals a usability need: editability |
+| VV-FN-12 | 2026-02-16 | Observation notes | Qual | Human summarizer found attention detection was feasible via typing patterns — long pauses (>15s) followed by rapid typing correlated with attention recovery in 7 of 10 students. 3 students had irregular patterns that were harder to interpret. | Feasibility signal: pattern detection works for 70% of users. 30% may need alternative detection methods. |
+
+### Result
+
+```
+Primary metric result:    9 of 10 rated "useful" or "very useful" (lecture 2)
+Secondary metric result:  8 of 10 used summaries for study
+Outcome:                  Pass
+Confidence level:         Medium
+Confounding factors:      Hawthorne effect likely — students knew they were in a study and
+                          may have been more positive. Human summaries may be higher quality
+                          than AI would produce. Small sample (10 students).
+Evaluator notes:          Both metrics pass thresholds. Key insight: students want editability
+                          (VV-FN-12). Feasibility proxy positive but with 30% edge case
+                          concern. Confidence is Medium (not High) due to small sample and
+                          Hawthorne effect. VA-FN-3 validated via proxy — real AI performance
+                          remains a build-phase risk.
+```
+
+---
+
+## VE-FN-3: Pocket Test (Willingness to Pay)
+
+### Header
+
+```
+VE-ID:              VE-FN-3
+Linked hypothesis:  VH-FN-3
+Linked assumptions: VA-FN-5
+Method:             Pocket test (willingness to pay)
+Fidelity level:     Level 2-3
+Date designed:      2026-02-04
+Date started:       2026-02-10
+Date completed:     2026-02-20
+Status:             Complete
+```
+
+### Success criteria
+
+| Metric | Pass threshold | Fail threshold | Inconclusive range |
+|--------|---------------|----------------|-------------------|
+| Pre-purchase commitment rate | ≥ 15% of contacted signups | < 5% of contacted signups | 5% - 15% |
+
+### Experiment parameters
+
+| Parameter | Value |
+|-----------|-------|
+| Sample size (minimum) | 40 qualified leads (from 49 landing page signups) |
+| Duration (maximum) | 10 days |
+| Cost budget | $0 (email-only, no ad spend) |
+| Target audience | Landing page signups (VE-FN-1 waitlist) |
+| Tools / platforms | Email, Stripe payment link ($10 refundable pre-order) |
+
+### Description
+
+Emailed all 49 landing page signups offering early access to FocusNote at $10/month. The email described the product (consistent with the landing page), explained the pre-order model (charged $10 now, refundable if the product does not launch within 6 months, first month free at launch). Included a Stripe payment link. Follow-up email sent on Day 5 to non-responders.
+
+### Evidence log
+
+| VV-ID | Date | Source | Type | Observation | Notes |
+|-------|------|--------|------|------------|-------|
+| VV-FN-13 | 2026-02-12 | Email analytics | Quant | 49 emails sent. 38 opened (78% open rate). 14 clicked the payment link (29% of opens, 37% of signups). | High open rate — engaged audience |
+| VV-FN-14 | 2026-02-14 | Stripe | Quant | After initial email: 3 of 49 completed payment ($10 pre-order). 6.1% conversion. | Below pass threshold |
+| VV-FN-15 | 2026-02-15 | Email analytics | Quant | Follow-up email sent to 46 non-purchasers. 29 opened. 8 clicked payment link. | Decent re-engagement |
+| VV-FN-16 | 2026-02-18 | Stripe | Quant | After follow-up: 1 additional payment. Total: 4 of 49 (8.2%). | Still below 15% threshold |
+| VV-FN-17 | 2026-02-18 | Email replies | Qual | 7 replies explaining why they didn't purchase. Common themes: "I can't afford $10/month as a student" (4 replies), "I want to try it first" (2 replies), "I'd pay but less" (1 reply). | Price sensitivity signal — not lack of interest |
+| VV-FN-18 | 2026-02-20 | Stripe | Quant | Final: 4 of 49 pre-ordered (8.2%). No additional purchases after Day 8. | Experiment complete |
+| VV-FN-19 | 2026-02-20 | Reply analysis | Qual | Of the 7 who replied: 4 cited price as barrier, not value. 1 said "I'd pay $3-5/month." 2 wanted a free trial. 0 said the product wasn't interesting. | Desirability intact — viability at this price point fails |
+
+### Result
+
+```
+Primary metric result:    8.2% pre-purchase (4/49)
+Outcome:                  Inconclusive (between 5% fail and 15% pass)
+                          Leaning Fail when combined with qualitative evidence
+Confidence level:         High
+Confounding factors:      Small absolute numbers (4 purchases from 49 leads). However,
+                          qualitative evidence is strong and consistent — price is the
+                          barrier, not interest.
+Evaluator notes:          Quantitatively inconclusive (8.2% is between thresholds). However,
+                          qualitative evidence clearly points to price sensitivity, not lack
+                          of demand. Students want the product but $10/month exceeds their
+                          budget. Combined with VE-FN-1 (strong desirability) and VE-FN-2
+                          (strong usability), the pattern is clear: the product is wanted but
+                          the price is wrong. This is a viability failure, not a desirability
+                          failure. Confidence is High because quantitative and qualitative
+                          evidence converge on the same conclusion.
+```

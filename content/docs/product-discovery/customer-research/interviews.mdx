@@ -1,0 +1,92 @@
+---
+title: Interviews
+description: Conducting discovery interviews that produce reliable evidence
+---
+
+Interviews are the primary evidence-gathering method in discovery. A well-run interview produces direct quotes, behavioural stories, and contextual understanding that cannot be obtained from quantitative data alone. A poorly run interview produces confirmation of whatever the interviewer already believed.
+
+## Interview types
+
+Choose the interview type based on your research stage:
+
+| Type | When to use | Focus | Typical length |
+|------|-------------|-------|----------------|
+| Exploratory | Early in discovery, hypotheses are still forming | Understand the problem space broadly. Let the participant lead. | 30-45 min |
+| Problem | Hypotheses are defined, testing specific beliefs | Dig into specific problems, contexts, and behaviours. | 30-45 min |
+| Switching | Understanding why users adopted or abandoned solutions | Map the forces that drove a change in behaviour. | 45-60 min |
+
+## Interview arc
+
+Every interview follows a five-part arc. The arc builds psychological safety before asking harder questions.
+
+### 1. Rapport (2-3 minutes)
+
+Thank them for their time. Explain the purpose briefly ("We're researching how [segment] handles [topic area]"). Set expectations: this is a conversation, not a survey. There are no right answers.
+
+Do not reveal your hypotheses. Saying "We think users struggle with X" primes them to agree.
+
+### 2. Context (5-7 minutes)
+
+Understand their world before asking about problems. What is their role? What does a typical day/week look like? What tools do they use for [relevant area]?
+
+This section grounds everything that follows. It also reveals whether this person matches your target segment.
+
+### 3. Stories (10-15 minutes)
+
+This is the core of the interview. Ask for specific stories about past experiences, not opinions about hypothetical futures.
+
+**Key question patterns:**
+
+- "Tell me about the last time you [did relevant activity]."
+- "Walk me through what happened."
+- "What happened next?"
+- "What were you trying to accomplish?"
+
+Follow the stories. When they mention something relevant to a hypothesis, go deeper: "You mentioned [X]. Can you tell me more about that?"
+
+### 4. Specifics (5-10 minutes)
+
+Now drill into the details that matter for your hypotheses. This is where you can ask more targeted questions — but always grounded in the stories they already told.
+
+- "You mentioned you tried [approach]. What made you choose that?"
+- "How often does [problem] come up?"
+- "What did you do about it?"
+- "What would have to be true for that to not be a problem?"
+
+### 5. Wrap (2-3 minutes)
+
+Ask if there is anything they expected you to ask about but you did not. This catches blind spots. Thank them. Explain next steps if applicable.
+
+## Question design
+
+### Open-ended questions (use these)
+
+| Pattern | Example | Why it works |
+|---------|---------|-------------|
+| Temporal | "Tell me about the last time..." | Forces recall of a specific event, not a generalisation |
+| Process | "Walk me through how you..." | Reveals the actual workflow, including steps they might forget to mention |
+| Contrast | "How is that different from..." | Surfaces what matters by highlighting differences |
+| Consequence | "What happened as a result?" | Reveals impact, which maps to the impact component of problem statements |
+| Attribution | "What made you decide to..." | Reveals motivations without putting words in their mouth |
+
+### Anti-patterns (avoid these)
+
+| Anti-pattern | Example | Why it fails | Fix |
+|-------------|---------|-------------|-----|
+| Leading question | "Don't you find it frustrating when..." | Suggests the answer you want | "How do you feel about [topic]?" |
+| Yes/no trap | "Do you have this problem?" | Produces a binary answer with no depth | "Tell me about how you handle [topic]" |
+| Future hypothetical | "Would you use a tool that..." | People are terrible at predicting their own future behaviour | "Tell me about the last time you dealt with this" |
+| Solution selling | "What if there was a product that..." | You are testing problems, not solutions | Save this for [Product Validation](/docs/product-validation) |
+| Double-barreled | "Do you find it slow and confusing?" | Two questions in one — which are they answering? | Ask one question at a time |
+| Expert framing | "As an expert, what do you think..." | Flattery produces expert opinions, not honest experiences | "What has your experience been with..." |
+
+## Recording evidence from interviews
+
+During or immediately after each interview, extract evidence items:
+
+1. **Direct quotes** — verbatim statements that relate to hypotheses. These are your strongest qualitative evidence. Record them with exact wording.
+2. **Described behaviours** — what the participant said they did (note: this is self-reported, not observed).
+3. **Emotional signals** — frustration, excitement, resignation when discussing specific topics.
+4. **Absence of expected signal** — if you expected them to describe a problem and they did not, that is evidence too (potentially refuting a hypothesis).
+
+Each becomes an EV- item in the [Evidence Register](/docs/product-discovery/templates/evidence-register). Assign the source type as "interview", link to the relevant hypotheses, and assign an initial weight. Individual interview quotes typically start at weight 1-2. The weight increases as the same pattern appears across multiple interviews.

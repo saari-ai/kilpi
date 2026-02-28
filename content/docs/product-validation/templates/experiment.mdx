@@ -1,0 +1,83 @@
+---
+title: Experiment Card
+description: Per-experiment template — method, success criteria, evidence log, and result
+---
+
+The Experiment Card documents a single experiment. One card per experiment, created during the [Design](/docs/product-validation/phases/design) phase and updated through [Execute](/docs/product-validation/phases/execute) and [Evaluate](/docs/product-validation/phases/evaluate).
+
+## Experiment header
+
+```
+VE-ID:              [VE-{solution}-{n}]
+Linked hypothesis:  [VH-{solution}-{n}]
+Linked assumptions: [VA-{solution}-{n}, VA-{solution}-{m}]
+Method:             [Technique name from the catalog]
+Fidelity level:     [Level 1-5]
+Date designed:      [YYYY-MM-DD]
+Date started:       [YYYY-MM-DD]
+Date completed:     [YYYY-MM-DD]
+Status:             [Designed | Running | Evaluating | Complete]
+```
+
+## Success criteria
+
+Define BEFORE execution. Do not modify after the experiment starts.
+
+| Metric | Pass threshold | Fail threshold | Inconclusive range |
+|--------|---------------|----------------|-------------------|
+| [Primary metric, e.g., conversion rate] | [≥ X%] | [< Y%] | [Y% - X%] |
+| [Secondary metric, if applicable] | [≥ X] | [< Y] | [Y - X] |
+
+## Experiment parameters
+
+| Parameter | Value |
+|-----------|-------|
+| Sample size (minimum) | [n participants/visitors/users] |
+| Duration (maximum) | [n days/weeks] |
+| Cost budget | [$n] |
+| Target audience | [Segment description, recruitment channel] |
+| Tools / platforms | [Analytics tool, survey tool, prototype tool, etc.] |
+
+## Experiment description
+
+[2-3 sentences describing what the experiment does, how users are recruited, and what they experience. This is the protocol that the Execute phase follows.]
+
+## Evidence log
+
+One row per observation. Populated during the [Execute](/docs/product-validation/phases/execute) phase.
+
+| VV-ID | Date | Source | Type | Observation | Notes |
+|-------|------|--------|------|------------|-------|
+| `VV-{sol}-1` | YYYY-MM-DD | [Source] | Quant/Qual | [What was observed — fact, not interpretation] | [Anomalies, context] |
+| `VV-{sol}-2` | | | | | |
+| `VV-{sol}-3` | | | | | |
+
+### Column definitions
+
+- **VV-ID:** Unique evidence identifier. See [Conventions](/docs/product-validation/conventions).
+- **Date:** When the observation was recorded.
+- **Source:** Where the data came from (analytics platform, interview participant ID, survey response, etc.).
+- **Type:** Quantitative (Quant) or Qualitative (Qual).
+- **Observation:** What happened. Raw fact. No interpretation.
+- **Notes:** Context, anomalies, or flags for the Evaluate phase.
+
+## Result
+
+Populated during the [Evaluate](/docs/product-validation/phases/evaluate) phase.
+
+```
+Primary metric result:    [Actual value]
+Secondary metric result:  [Actual value, if applicable]
+Outcome:                  [Pass | Fail | Inconclusive]
+Confidence level:         [None | Low | Medium | High | Validated]
+Confounding factors:      [None | List of factors]
+Evaluator notes:          [Interpretation, synthesis, surprises]
+```
+
+## Usage notes
+
+- Create one card per experiment during the Design phase. All fields above the evidence log must be complete before execution starts.
+- The evidence log is populated during Execute. Add entries daily, not in bulk at the end.
+- The result section is populated during Evaluate. Do not fill it in until the experiment is complete and evidence has been compiled.
+- If the experiment result is Inconclusive, note whether a follow-up experiment is recommended and what would make it conclusive.
+- Link the completed card back to the [Validation Plan](/docs/product-validation/templates/validation-plan) by updating the hypothesis register.

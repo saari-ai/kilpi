@@ -1,0 +1,81 @@
+---
+title: Validation Plan
+description: Solution-level container template — assumption register, hypothesis register, and overall validation status
+---
+
+The Validation Plan is the top-level container for a validation cycle. One plan per solution. It is created at the start of the [Hypothesize](/docs/product-validation/phases/hypothesize) phase and updated throughout the cycle.
+
+## Header
+
+```
+Solution:        [Solution name]
+Code:            [2-3 letter code, e.g., FN]
+Discovery Brief: [Reference to the Discovery Brief, e.g., DB-FN-1]
+Date started:    [YYYY-MM-DD]
+Status:          [Not started | In progress | Complete]
+Decision:        [Pending | VD-{solution}-{n}]
+```
+
+## Assumption register
+
+List every assumption decomposed from the Discovery Brief. One row per assumption.
+
+| VA-ID | Assumption | Type | Risk level | Discovery ref | Linked hypotheses | Status |
+|-------|-----------|------|------------|--------------|-------------------|--------|
+| `VA-{sol}-1` | [What must be true] | D/V/F/U | Critical/High/Medium/Low | [DB section or evidence] | `VH-{sol}-{n}` | Untested/Testing/Validated/Invalidated |
+| `VA-{sol}-2` | | | | | | |
+| `VA-{sol}-3` | | | | | | |
+
+### Column definitions
+
+- **VA-ID:** Unique assumption identifier. See [Conventions](/docs/product-validation/conventions).
+- **Assumption:** A clear statement of what must be true for the solution to succeed.
+- **Type:** Desirability (D), Viability (V), Feasibility (F), or Usability (U).
+- **Risk level:** From the impact x uncertainty matrix. Critical, High, Medium, or Low.
+- **Discovery ref:** The section or evidence item from the Discovery Brief that this assumption relates to.
+- **Linked hypotheses:** VH- IDs of hypotheses that test this assumption. An assumption may have multiple hypotheses.
+- **Status:** Current state. Untested → Testing (experiment in progress) → Validated (evidence supports) or Invalidated (evidence refutes).
+
+## Hypothesis register
+
+List every hypothesis formed from the assumptions. One row per hypothesis.
+
+| VH-ID | Hypothesis | Linked assumptions | Experiment | Confidence | Status |
+|-------|-----------|-------------------|-----------|-----------|--------|
+| `VH-{sol}-1` | If [action], then [outcome], because [rationale] | `VA-{sol}-{n}` | `VE-{sol}-{n}` | None/Low/Medium/High/Validated | Untested/Testing/Supported/Refuted |
+| `VH-{sol}-2` | | | | | |
+| `VH-{sol}-3` | | | | | |
+
+### Column definitions
+
+- **VH-ID:** Unique hypothesis identifier.
+- **Hypothesis:** Standard if/then/because format. See [Hypothesize](/docs/product-validation/phases/hypothesize).
+- **Linked assumptions:** VA- IDs this hypothesis tests. A hypothesis may test multiple related assumptions.
+- **Experiment:** VE- ID of the experiment designed to test this hypothesis.
+- **Confidence:** Current confidence level from the [confidence scale](/docs/product-validation/conventions#confidence-levels).
+- **Status:** Current state. Untested → Testing → Supported (evidence for) or Refuted (evidence against).
+
+## Overall validation status
+
+A summary section updated as the cycle progresses.
+
+```
+Overall status:      [Not started | Hypothesizing | Designing | Executing | Evaluating | Deciding | Complete]
+Assumptions total:   [n]
+  - Validated:       [n]
+  - Invalidated:     [n]
+  - Untested:        [n]
+  - Testing:         [n]
+Critical assumptions resolved: [n of n]
+Overall confidence:  [None | Low | Medium | High | Validated]
+Decision:            [Pending | Persevere | Pivot ({type}) | Kill]
+Decision record:     [VD-{sol}-{n} or Pending]
+```
+
+## Usage notes
+
+- Create the plan at the start of the Hypothesize phase. Populate the assumption register first, then the hypothesis register.
+- Update assumption and hypothesis statuses as experiments progress.
+- The plan is the single source of truth for the validation cycle's state.
+- If the decision is Pivot, create a new Validation Plan for the next cycle, referencing this plan and VD- record.
+- Store experiment cards ([Experiment template](/docs/product-validation/templates/experiment)) and the decision record ([Decision Record template](/docs/product-validation/templates/decision-record)) alongside this plan.

@@ -1,6 +1,6 @@
 {
   "title": "fiksu",
-  "description": "Skill Library",
+  "description": "Agent Capabilities",
   "root": true,
-  "pages": ["index"]
+  "pages": ["index", "the-solopreneur", "anatomy-of-a-discipline", "anatomy-of-a-skill", "dependency-graph"]
 }

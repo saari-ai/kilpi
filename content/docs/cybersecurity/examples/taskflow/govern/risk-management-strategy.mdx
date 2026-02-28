@@ -1,0 +1,83 @@
+---
+title: "GV.RM: Risk Management Strategy"
+description: Taskflow example for risk management strategy
+---
+
+For methodology guidance, see [GV.RM: Risk Management Strategy](/docs/cybersecurity/functions/govern/risk-management-strategy).
+
+---
+
+### GV.RM-01: Risk management objectives
+
+| Objective | Scope | Review trigger |
+|---|---|---|
+| Protect user data confidentiality | All data stores (PostgreSQL, Redis, S3) | Quarterly, or when new data types are introduced |
+| Maintain service availability at 99.9% | All production infrastructure | Quarterly, or after any outage exceeding 5 minutes |
+| Prevent financial fraud via Stripe integration | Billing features, webhook processing | Quarterly, or after any payment-related incident |
+| Meet GDPR and SOC 2 obligations | All user-facing features and internal processes | Annually, or when regulatory guidance changes |
+
+---
+
+### GV.RM-02: Risk appetite and tolerance
+
+| Area | Appetite | Tolerance | Rationale |
+|---|---|---|---|
+| Payment data | Zero | No residual risk accepted | PCI compliance requirements. Financial liability for any breach. Stripe API key exposure or webhook forgery leads directly to monetary loss. Threat IDs: <span style={{whiteSpace: 'nowrap'}}>ST-TF-11</span>, <span style={{whiteSpace: 'nowrap'}}>ST-TF-12</span> |
+| User credentials | Zero | No residual risk accepted | Account takeover is the highest-impact user-facing threat. Weak hashing, brute force, or reset abuse all lead to full account compromise. Threat IDs: <span style={{whiteSpace: 'nowrap'}}>ST-TF-3</span>, <span style={{whiteSpace: 'nowrap'}}>ST-TF-15</span>, <span style={{whiteSpace: 'nowrap'}}>ST-TF-16</span> |
+| User PII | Low | Residual risk accepted with compensating controls | GDPR and privacy obligations. Exposure of names, emails, or files triggers mandatory breach notification. Compensating controls (encryption, access checks) reduce residual risk. Threat IDs: <span style={{whiteSpace: 'nowrap'}}>ST-TF-6</span>, <span style={{whiteSpace: 'nowrap'}}>ST-TF-9</span>, <span style={{whiteSpace: 'nowrap'}}>ST-TF-10</span> |
+| Session integrity | Low | Residual risk accepted with compensating controls | Session hijacking bypasses authentication entirely. Network isolation and expiry policies reduce likelihood. Threat IDs: <span style={{whiteSpace: 'nowrap'}}>ST-TF-7</span>, <span style={{whiteSpace: 'nowrap'}}>ST-TF-8</span>, <span style={{whiteSpace: 'nowrap'}}>ST-TF-17</span> |
+| Input handling | Low | Residual risk accepted with compensating controls | Injection and XSS can lead to full database compromise or session theft. Parameterised queries and output encoding are non-negotiable, but edge cases in schema validation are tolerable short-term. Threat IDs: <span style={{whiteSpace: 'nowrap'}}>ST-TF-1</span>, <span style={{whiteSpace: 'nowrap'}}>ST-TF-2</span>, <span style={{whiteSpace: 'nowrap'}}>ST-TF-4</span>, <span style={{whiteSpace: 'nowrap'}}>ST-TF-5</span> |
+| Third-party integrations | Medium | Contained blast radius accepted | SendGrid key leak enables phishing but not data access. OAuth redirect issues mitigated by whitelist. Blast radius contained to individual integration. Threat IDs: <span style={{whiteSpace: 'nowrap'}}>ST-TF-13</span>, <span style={{whiteSpace: 'nowrap'}}>ST-TF-14</span> |
+| Observability | Medium | Gaps accepted short-term | Missing audit logs and verbose errors are detection and information gaps, not direct compromise vectors. Important to fix, but not immediately exposing user data. Threat IDs: <span style={{whiteSpace: 'nowrap'}}>ST-TF-18</span>, <span style={{whiteSpace: 'nowrap'}}>ST-TF-19</span> |
+| Dependencies | Low | Residual risk from upstream maintainers accepted | Supply chain attacks can result in RCE. Automated scanning catches known CVEs, but zero-days remain a residual risk. Threat ID: <span style={{whiteSpace: 'nowrap'}}>ST-TF-20</span> |
+
+---
+
+### GV.RM-03: Enterprise risk integration
+
+Cybersecurity risks are tracked alongside product and business risks in the same quarterly review. Security items appear on the engineering roadmap with the same priority system as feature work. The security lead presents risk status to leadership alongside product metrics.
+
+---
+
+### GV.RM-04: Risk response options
+
+| Severity | Response | Conditions |
+|---|---|---|
+| Critical | Mitigate immediately | Must be addressed before shipping. No exceptions. |
+| High | Mitigate before next release | Must be addressed, may ship with documented mitigation plan and timeline |
+| Medium | Schedule mitigation | Tracked with target date. Included in sprint planning. |
+| Low | Accept or defer | Documented acceptance with rationale. Reviewed at next quarterly cycle. |
+
+---
+
+### GV.RM-05: Risk communication
+
+| Audience | Format | Cadence |
+|---|---|---|
+| Engineering team | Threat register + control inventory in docs | Continuously updated, reviewed at sprint planning |
+| Security lead | Risk dashboard (severity counts, open items, SLA compliance) | Weekly |
+| CTO / leadership | Executive summary (critical/high count, trend, top 3 items) | Quarterly |
+| External auditors | Full documentation package (policies, controls, evidence) | Annually or on request |
+
+---
+
+### GV.RM-06: Risk scoring methodology
+
+Taskflow uses a 3x4 likelihood-impact matrix. Likelihood is High, Medium, or Low. Impact is Critical, High, Medium, or Low. The intersection determines severity.
+
+| | Impact: Critical | Impact: High | Impact: Medium | Impact: Low |
+|---|---|---|---|---|
+| **Likelihood: High** | Critical | Critical | High | Medium |
+| **Likelihood: Medium** | Critical | High | Medium | Medium |
+| **Likelihood: Low** | Critical | High | Medium | Low |
+
+---
+
+### GV.RM-07: Strategic opportunities
+
+| Opportunity | Risk accepted | Benefit | Conditions |
+|---|---|---|---|
+| Ship Google OAuth before MFA | Accepting single-factor OAuth sessions temporarily | Faster user onboarding, reduced signup friction | MFA scheduled for next quarter. OAuth sessions get shorter TTL (4 hours vs 7 days). |
+| Use managed AWS services instead of self-hosted | Trusting AWS shared responsibility model | Reduced operational burden, better uptime | AWS maintains SOC 2 and ISO 27001. Taskflow responsible for configuration. |
+
+---

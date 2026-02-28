@@ -1,0 +1,84 @@
+---
+title: Patterns
+description: Identifying and assessing patterns across evidence items
+---
+
+Pattern identification is the first step in synthesis. Patterns are groups of related evidence items that, taken together, say something meaningful about the problem space. Individual evidence items are data points. Patterns are the signal that emerges from multiple data points.
+
+## Affinity mapping
+
+Affinity mapping is the primary technique for finding patterns. It works whether you have 20 evidence items or 200.
+
+### Process
+
+1. **Extract key statements.** For each evidence item (EV-), write a short summary statement on a card (physical or digital). One statement per card.
+
+2. **Group by similarity.** Move cards into groups based on what they have in common. Do not pre-define categories — let the groups emerge from the data. If a statement fits in two groups, duplicate it.
+
+3. **Name the groups.** Once clusters stabilise, give each group a descriptive name. The name should capture the theme, not just list the contents.
+
+4. **Identify hierarchies.** Some groups may be sub-groups of a larger theme. Arrange them in a hierarchy if it helps clarify the structure.
+
+5. **Note outliers.** Evidence items that do not fit any group are often the most interesting. They may represent edge cases, or they may be the early signal of a pattern you have not yet recognised.
+
+### Example
+
+From a discovery about security workflows for solo founders:
+
+| Group | Evidence items | Theme |
+|-------|---------------|-------|
+| "I don't know where to start" | EV-FN-7, EV-FN-9, EV-FN-14 | Founders face a knowledge barrier — they lack the security background to prioritise |
+| "I just copy a checklist" | EV-FN-8, EV-FN-12, EV-FN-16 | Founders default to generic checklists because they cannot assess their own risk |
+| "It's fine until a customer asks" | EV-FN-11, EV-FN-13, EV-FN-18 | Security becomes urgent only when driven by an external trigger (enterprise customer, audit) |
+| Outlier: EV-FN-22 | EV-FN-22 | One founder described building a custom threat model — exception to the pattern |
+
+## Pattern strength assessment
+
+Not all patterns are equally strong. Assess each pattern on two dimensions:
+
+### Frequency
+
+How many evidence items contribute to this pattern?
+
+| Evidence count | Frequency label |
+|---------------|----------------|
+| 2-3 items | Emerging — worth watching but not yet reliable |
+| 4-6 items | Moderate — a real pattern, especially if from diverse sources |
+| 7+ items | Strong — consistent and broadly observed |
+
+### Importance
+
+How significant is this pattern for the problem space? Frequency and importance are not the same thing. A pattern that appears in every interview but describes a minor annoyance is frequent but unimportant. A pattern that appears in only 3 interviews but describes a critical failure is infrequent but important.
+
+Assess importance based on:
+
+| Factor | Question |
+|--------|----------|
+| Impact severity | How much does this pattern affect the user when it occurs? |
+| Impact breadth | Does this affect all users in the segment, or a sub-group? |
+| Relationship to hypotheses | Does this pattern directly address a core hypothesis? |
+| Actionability | Could a solution address this pattern? |
+
+### Combining frequency and importance
+
+| | High importance | Low importance |
+|---|---|---|
+| **High frequency** | Core pattern — likely becomes a key insight | Common but minor — note it, but it may not drive the recommendation |
+| **Low frequency** | Interesting signal — investigate further before concluding | Background noise — acknowledge but do not prioritise |
+
+## Cross-segment patterns
+
+If your research spans multiple user segments, look for patterns that appear across segments versus those that are segment-specific.
+
+| Pattern type | Implication |
+|-------------|------------|
+| Cross-segment | Broad problem — larger opportunity, but may require a broader solution |
+| Segment-specific | Focused problem — smaller opportunity, but easier to solve well for that segment |
+
+Cross-segment patterns are stronger evidence that a problem is real and widespread. Segment-specific patterns help you choose which segment to target first.
+
+## From patterns to insights
+
+Patterns are descriptive — they tell you what you observed. Insights are interpretive — they tell you what the pattern means and what it implies. The next step is to convert your strongest patterns into formal insights (IN-) using the frameworks in [Insight Frameworks](/docs/product-discovery/synthesis/insight-frameworks).
+
+A pattern like "founders copy generic checklists" becomes an insight when you add the why and the implication: "Solo founders default to generic security checklists because they cannot assess their own risk profile, which means a solution that provides contextual risk assessment would replace the most common workaround."

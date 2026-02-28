@@ -1,0 +1,90 @@
+---
+title: Evidence Register
+description: Template for collecting and tracking all evidence items throughout discovery
+---
+
+The Evidence Register is the single source of truth for all evidence gathered during discovery. Every interview quote, observation, data point, and market signal is recorded here with a unique ID, weight, and link to the hypotheses it relates to.
+
+See [Evidence](/docs/product-discovery/evidence) for standards on what counts as evidence, how to weight it, and when you have enough. See [Conventions](/docs/product-discovery/conventions) for the evidence weight scale.
+
+## Template
+
+---
+
+### Evidence Register: [Discovery Name] ([Discovery Code])
+
+**Discovery code:** [XX]
+**Created:** [Date]
+**Last updated:** [Date]
+
+---
+
+#### Evidence items
+
+| ID | Date | Source type | Source detail | Summary | Weight | Direction | Linked hypotheses | Notes |
+|----|------|-----------|---------------|---------|--------|-----------|-------------------|-------|
+| EV-XX-1 | *YYYY-MM-DD* | *interview / observation / analytics / survey / market-data / expert* | *e.g., Interview #3, founding engineer at 5-person SaaS* | *Neutral, factual summary of what was observed or said* | *1-5* | *Supports / Refutes / Neutral* | *PH-XX-1, PH-XX-3* | |
+| EV-XX-2 | | | | | | | | |
+| EV-XX-3 | | | | | | | | |
+| | | | | | | | | |
+
+---
+
+#### Column definitions
+
+| Column | Description |
+|--------|-------------|
+| ID | Unique identifier. Format: `EV-{discovery}-{n}`. Sequential numbering. |
+| Date | Date the evidence was collected. |
+| Source type | Category of evidence. One of: interview, observation, analytics, survey, market-data, expert. See [What Counts](/docs/product-discovery/evidence/what-counts). |
+| Source detail | Specific source without PII. Use roles and segment descriptors, not names. E.g., "Interview #3, solo founder, B2B SaaS, 2 years experience." |
+| Summary | Factual description of what was observed or said. For direct quotes, use exact wording in quotation marks. For observations, describe what happened without interpretation. |
+| Weight | Evidence strength on the 1-5 scale. See [Conventions](/docs/product-discovery/conventions#evidence-weight-scale). |
+| Direction | Supports, Refutes, or Neutral relative to linked hypotheses. If an item supports one hypothesis and refutes another, list it separately for each with the appropriate direction. |
+| Linked hypotheses | PH- IDs this evidence relates to. Every item must link to at least one hypothesis. |
+| Notes | Interpretation, context, or follow-up questions. Keep this separate from the factual summary. |
+
+---
+
+#### Evidence by hypothesis
+
+*Pivot table view — helps assess sufficiency per hypothesis.*
+
+| Hypothesis | Supporting items | Refuting items | Neutral items | Total | Avg weight (supporting) |
+|-----------|-----------------|----------------|---------------|-------|------------------------|
+| PH-XX-1 | EV-XX-1, EV-XX-4 | EV-XX-7 | EV-XX-10 | 4 | 3.0 |
+| PH-XX-2 | | | | | |
+| | | | | | |
+
+---
+
+#### Evidence by source type
+
+*Distribution check — are you relying too heavily on one method?*
+
+| Source type | Count | Percentage |
+|------------|-------|------------|
+| Interview | | |
+| Observation | | |
+| Analytics | | |
+| Survey | | |
+| Market data | | |
+| Expert | | |
+| **Total** | | |
+
+---
+
+#### Weight distribution
+
+*Quality check — are your evidence items sufficiently strong?*
+
+| Weight | Count | Percentage |
+|--------|-------|------------|
+| 1 (Anecdotal) | | |
+| 2 (Directional) | | |
+| 3 (Moderate) | | |
+| 4 (Strong) | | |
+| 5 (Statistically significant) | | |
+| **Total** | | |
+
+---

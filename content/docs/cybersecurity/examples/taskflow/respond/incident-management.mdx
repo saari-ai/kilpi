@@ -1,0 +1,75 @@
+---
+title: "RS.MA: Incident Management"
+description: Taskflow example for incident management
+---
+
+For methodology guidance, see [RS.MA: Incident Management](/docs/cybersecurity/functions/respond/incident-management).
+
+---
+
+### RS.MA-01: Plan activation
+
+| Step | Action | Owner |
+|---|---|---|
+| 1. Acknowledge alert | On-call engineer acknowledges the page/alert within 15 minutes for Critical, 4 hours for High | On-call engineer |
+| 2. Assign incident lead | On-call engineer is incident lead for High and below. Security lead takes over for Critical. | On-call engineer / security lead |
+| 3. Activate playbook | Select the relevant playbook based on incident type (see [Incident Mitigation](/docs/cybersecurity/examples/taskflow/respond/incident-mitigation)) | Incident lead |
+| 4. Open incident channel | Create a dedicated Slack channel for Critical incidents. Use existing security channel for High and below. | Incident lead |
+| 5. Engage third parties | If Stripe/SendGrid/AWS is involved, contact their support. If legal is needed (data breach), notify legal counsel. | Incident lead |
+| 6. Notify stakeholders | Follow the notification matrix in [Incident Response Reporting](/docs/cybersecurity/examples/taskflow/respond/incident-response-reporting) | Incident lead |
+
+---
+
+### RS.MA-02: Incident triage
+
+| Triage step | Question to answer | Output |
+|---|---|---|
+| Validate the alert | Is this a true positive or a false positive? Check correlated signals. | Confirmed incident or dismissed false positive |
+| Identify affected systems | Which assets from the register are involved? Which trust boundaries were crossed? | List of affected asset IDs (SA-TF-*) |
+| Identify affected data | Was any data accessed, modified, or exfiltrated? What classification level? | Data classification and scope |
+| Estimate timeline | When did this start? How long has the exposure been active? | Exposure window (start time to detection time) |
+| Initial severity | Based on data classification, scope, and active exploitation status | Initial severity rating (Low/Medium/High/Critical) |
+
+---
+
+### RS.MA-03: Categorization and prioritization
+
+| Incident type | Scope | Impact | Priority |
+|---|---|---|---|
+| Credential attack (brute force, stuffing) | Single account or multiple accounts | Account takeover, unauthorized access to user data | Critical if successful, High if blocked by controls |
+| Session hijacking | All active sessions (Redis exposed) or single session | Full account access for hijacked sessions | Critical if Redis exposed, High if single session |
+| Injection / XSS | Application-wide (injection) or specific feature (XSS) | Data exfiltration, session theft, unauthorized modifications | Critical if data accessed, High if attack blocked |
+| Data exposure (S3, DB) | All user files (S3) or specific tables (DB) | Data breach, regulatory notification required | Critical |
+| Secret / API key compromise | Depends on which key (Stripe = payment data, SendGrid = email) | Financial fraud, phishing, unauthorized API usage | Critical for Stripe, High for SendGrid |
+| Dependency vulnerability | Application-wide | Depends on CVE -- ranges from DoS to RCE | Critical if actively exploited, Medium if theoretical |
+
+---
+
+### RS.MA-04: Escalation
+
+| Severity | Escalate to | Timeline | Trigger for re-escalation |
+|---|---|---|---|
+| Low | Engineering team lead | Next business day | Severity increases during investigation |
+| Medium | Engineering team lead, security lead | Within 24 hours | Evidence of exploitation found |
+| High | Engineering team lead, security lead, CTO | Within 4 hours | Scope expands, data breach confirmed |
+| Critical | Engineering team lead, security lead, CTO, legal counsel | Within 1 hour | Regulatory notification needed (GDPR 72-hour window) |
+
+**Escalation rules:**
+- When in doubt, escalate. Over-notification is always better than under-notification.
+- Severity can increase during assessment. A Medium can become Critical once data access is confirmed. Re-notify when severity changes.
+- Every Critical incident gets a written post-mortem within 5 business days.
+- Customer notification is required for any incident where customer data was accessed by an unauthorized party. Legal determines content and timeline.
+
+---
+
+### RS.MA-05: Recovery initiation criteria
+
+| Criterion | Check | Status |
+|---|---|---|
+| Containment confirmed | Attack vector is blocked. No ongoing exploitation. | Must be verified before recovery starts |
+| Scope determined | All affected systems and data identified. No unknown exposure. | Must be confirmed |
+| Evidence preserved | Logs, network captures, and database state saved before any restoration | Must be completed |
+| Root cause identified (or bounded) | Either root cause is known, or the investigation has narrowed the cause to a manageable set | Recommended but not blocking for Critical (parallel recovery) |
+| Stakeholders notified | Relevant parties informed per escalation matrix | Must be completed |
+
+---

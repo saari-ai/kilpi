@@ -1,0 +1,105 @@
+---
+title: Hypothesize
+description: Phase HY — decompose Discovery Brief into assumptions, prioritize by risk, form testable hypotheses
+---
+
+## Purpose
+
+The Hypothesize phase takes the Discovery Brief from [Product Discovery](/docs/product-discovery) and decomposes the proposed solution into explicit, testable assumptions. It then prioritizes those assumptions by risk and converts the highest-risk assumptions into formal hypotheses.
+
+**Input:** Discovery Brief with validated problem, user segments, and proposed solution direction.
+
+**Output:** Prioritized assumption register (VA-) and hypothesis set (VH-).
+
+## Assumption mapping
+
+Start by listing every belief that must be true for the proposed solution to succeed. Be exhaustive — implicit assumptions are the ones that kill products.
+
+### Decomposition process
+
+1. Read the Discovery Brief's problem statement and proposed solution direction.
+2. For each element of the solution, ask: "What must be true for this to work?"
+3. Categorize each assumption by type (see below).
+4. Assign an ID: `VA-{solution}-{n}` in discovery order.
+
+### Assumption types
+
+Every assumption falls into one of four categories. This categorization drives technique selection in the [Design](/docs/product-validation/phases/design) phase.
+
+| Type | Code | Question it answers | Examples |
+|------|------|-------------------|----------|
+| Desirability | D | Do users want this? | "Students want AI-generated note summaries" |
+| Viability | V | Can this sustain a business? | "Students will pay $10/month for this service" |
+| Feasibility | F | Can we build this? | "AI can detect attention patterns from typing cadence" |
+| Usability | U | Can users use this? | "Students will trust and act on AI-generated summaries" |
+
+### Common assumption sources
+
+| Solution element | Typical assumptions |
+|-----------------|-------------------|
+| Target user | Users in this segment actually have the problem (D), they are reachable through the planned channel (V) |
+| Core mechanism | The proposed mechanism works as expected (F), users understand how to use it (U) |
+| Value proposition | Users perceive the value as described (D), the value is differentiated from alternatives (D) |
+| Revenue model | Users will pay the proposed price (V), unit economics are sustainable (V) |
+| Technology | Required technology exists or can be built within constraints (F), performance meets user expectations (F) |
+| Distribution | Target users can be reached cost-effectively (V), the acquisition channel scales (V) |
+
+## Risk prioritization
+
+Not all assumptions are equal. Prioritize by risk using the impact x uncertainty matrix defined in [Conventions](/docs/product-validation/conventions).
+
+### Scoring assumptions
+
+For each assumption, assess two dimensions:
+
+**Impact** — How badly does the solution fail if this assumption is wrong?
+- High: Solution is dead. No workaround exists.
+- Medium: Solution is degraded. Workarounds exist but they reduce value.
+- Low: Solution still works. Minor adjustments needed.
+
+**Uncertainty** — How confident are we that this assumption is true, based on existing evidence?
+- High: No evidence. Pure speculation.
+- Medium: Some indirect evidence (market analogies, Discovery Brief signals).
+- Low: Strong evidence from Discovery or prior work.
+
+The intersection determines risk level (Critical, High, Medium, Low). See the [risk matrix](/docs/product-validation/conventions#assumption-risk-levels).
+
+### Prioritization rules
+
+1. Test **Critical** assumptions first. If a Critical assumption fails, nothing else matters.
+2. Test **High** assumptions next. These can be run in parallel if resources allow.
+3. **Medium** assumptions are tested if time and budget permit, or deferred to early build.
+4. **Low** assumptions are monitored during build, not explicitly tested in validation.
+
+## Hypothesis formation
+
+Convert each assumption being tested into a formal hypothesis using the standard format:
+
+```
+If [specific action or change],
+then [measurable outcome],
+because [rationale from Discovery Brief].
+```
+
+### Hypothesis rules
+
+- Every hypothesis must be **falsifiable**. If no experiment result could disprove it, it is not a hypothesis.
+- Every hypothesis must reference at least one VA- assumption.
+- The "measurable outcome" must be quantifiable or clearly observable. "Users like it" is not measurable. "7 out of 10 users complete the onboarding flow without assistance" is measurable.
+- The "rationale" ties back to the Discovery Brief, grounding the hypothesis in validated user evidence.
+
+### Example
+
+| ID | Hypothesis | Linked assumptions |
+|----|-----------|-------------------|
+| VH-FN-1 | If we present a landing page describing AI-powered note summaries, then at least 8% of visitors will sign up for the waitlist, because Discovery interviews showed 85% of students with ADHD want better lecture note tools. | VA-FN-1, VA-FN-2 |
+| VH-FN-2 | If we provide human-generated summaries disguised as AI summaries during lectures, then 7 out of 10 students will rate them as "useful" or "very useful," because students reported spending 40min+ reorganizing notes after class. | VA-FN-3, VA-FN-5 |
+
+## Output
+
+The Hypothesize phase produces two artifacts:
+
+1. **Assumption Register** — A table of all VA- items with type, risk level, and links to Discovery Brief evidence. Lives in the [Validation Plan](/docs/product-validation/templates/validation-plan).
+2. **Hypothesis Set** — Formal VH- hypotheses for each assumption being tested, with the standard if/then/because format. Also lives in the Validation Plan.
+
+These feed directly into the [Design](/docs/product-validation/phases/design) phase, where each hypothesis gets an experiment card.

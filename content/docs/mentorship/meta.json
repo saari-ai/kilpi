@@ -1,0 +1,6 @@
+{
+  "title": "Mentorship",
+  "description": "Mentorship Framework",
+  "root": true,
+  "pages": ["index", "assessment", "modes", "composability"]
+}

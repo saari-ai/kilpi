@@ -1,0 +1,96 @@
+---
+title: "PR.IR: Technology Infrastructure Resilience"
+description: Security architectures are managed to protect asset confidentiality, integrity, and availability, and organizational resilience.
+---
+
+## Subcategories
+
+| ID | Outcome |
+|----|---------|
+| <span style={{whiteSpace: 'nowrap'}}>[PR.IR-01](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/pr/pr-ir/pr-ir-01/)</span> | Networks and environments are protected from unauthorized logical access and usage |
+| <span style={{whiteSpace: 'nowrap'}}>[PR.IR-02](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/pr/pr-ir/pr-ir-02/)</span> | The organization's technology assets are protected from environmental threats |
+| <span style={{whiteSpace: 'nowrap'}}>[PR.IR-03](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/pr/pr-ir/pr-ir-03/)</span> | Mechanisms are implemented to achieve resilience requirements in normal and adverse situations |
+| <span style={{whiteSpace: 'nowrap'}}>[PR.IR-04](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/pr/pr-ir/pr-ir-04/)</span> | Adequate resource capacity to ensure availability is maintained |
+
+## Our methodology
+
+Infrastructure resilience covers the controls that keep systems running under both normal load and attack conditions. The focus here is on protective architecture — design decisions that make the system resistant to disruption in the first place.
+
+---
+
+### PR.IR-01: Network protection
+
+Segment networks by trust boundary and enforce default-deny between segments. How the network is segmented determines the blast radius of any compromise.
+
+| Network segment | Contains | Inbound allowed from | Outbound allowed to | Enforcement |
+|---|---|---|---|---|
+| *e.g. Public subnet* | *Load balancers, API gateways* | *Internet (HTTPS only)* | *Private subnet (app ports)* | *Security groups* |
+| *e.g. Private subnet (app)* | *Application services* | *Public subnet, other app services* | *Private subnet (data), external APIs* | *Security groups + network policy* |
+| *e.g. Private subnet (data)* | *Databases, caches, queues* | *Private subnet (app) only* | *None* | *Security groups, no public IP* |
+| *e.g. Management* | *CI/CD, monitoring, bastion* | *VPN only* | *All internal subnets* | *Security groups + VPN* |
+| | | | | |
+
+Also define rate limiting and input validation rules as part of network protection:
+
+| Control | Level | Rule | Purpose |
+|---|---|---|---|
+| *e.g. Rate limit* | *API gateway* | *100 req/IP/min* | *Block volumetric attacks before they reach the app* |
+| *e.g. Rate limit* | *Application* | *30 req/user/min per endpoint* | *Prevent abuse by authenticated users* |
+| *e.g. Rate limit* | *Authentication* | *5 attempts/account/15min* | *Prevent credential brute-forcing* |
+| *e.g. Input validation* | *API boundary* | *Reject unexpected formats, enforce size limits, parameterized queries* | *Prevent injection, resource exhaustion* |
+| *e.g. Request size* | *API gateway* | *Max 10MB body, max 50MB upload* | *Prevent resource exhaustion* |
+| | | | |
+
+---
+
+### PR.IR-02: Environmental protection
+
+For cloud-hosted products, environmental protection (power, cooling, fire suppression) is handled by the cloud provider under the shared responsibility model documented in [Organizational Context](/docs/cybersecurity/functions/govern/organizational-context). For physical infrastructure you manage directly, document the protections in place.
+
+| Location / asset | Environmental threats | Protection | Owner |
+|---|---|---|---|
+| *e.g. Cloud infrastructure* | *Power, cooling, fire, flood* | *Provider-managed (see SOC reports)* | *Cloud provider* |
+| *e.g. Office / on-prem equipment* | *Power, fire* | *UPS, fire suppression, climate control* | *Facilities team* |
+| | | | |
+
+---
+
+### PR.IR-03: Resilience mechanisms
+
+Design systems to continue functioning when components fail. Avoid single points of failure on the critical path.
+
+| Mechanism | Where applied | Configuration | Failure behaviour |
+|---|---|---|---|
+| *e.g. Circuit breaker* | *All downstream service calls* | *Trip after 5 consecutive failures, half-open after 30s* | *Return cached/degraded response* |
+| *e.g. Timeouts* | *All external calls (HTTP, DB, cache)* | *5s default, 30s for long-running ops* | *Fail fast, log timeout* |
+| *e.g. Redundancy* | *Application tier* | *Min 2 instances, multi-AZ* | *Traffic shifts to healthy instances* |
+| *e.g. Load balancing* | *Public entry points* | *Health-check based routing* | *Unhealthy instances removed from pool* |
+| *e.g. Fallbacks* | *Read-heavy paths* | *Serve cached data when DB is slow* | *Degraded but functional* |
+| | | | |
+
+---
+
+### PR.IR-04: Capacity management
+
+Monitor resource usage, set alerts before exhaustion, and plan for growth. Running out of resources is a denial of service whether caused by an attacker or by growth.
+
+| Resource | Monitoring | Alert threshold | Scaling approach | Max limit |
+|---|---|---|---|---|
+| *e.g. CPU* | *CloudWatch / Prometheus* | *80% sustained 5min* | *Auto-scale horizontally* | *20 instances* |
+| *e.g. Memory* | *CloudWatch / Prometheus* | *85%* | *Auto-scale horizontally* | *20 instances* |
+| *e.g. Storage* | *CloudWatch* | *75%* | *Alert + manual expansion* | *Per budget* |
+| *e.g. DB connections* | *Connection pool metrics* | *80% of pool* | *Alert + pool resize* | *Per DB plan limit* |
+| *e.g. Network bandwidth* | *CloudWatch* | *70% of provisioned* | *Alert + upgrade* | *Per plan* |
+| | | | | |
+
+---
+
+## Informative references
+
+| Standard | Controls | Subcategories mapped |
+|----------|----------|---------------------|
+| ISO 27001 | A.8.20, A.8.21, A.8.22, A.8.23 | <span style={{whiteSpace: 'nowrap'}}>PR.IR-01</span> |
+| ISO 27001 | A.7.5, A.7.8, A.7.11, A.7.12 | <span style={{whiteSpace: 'nowrap'}}>PR.IR-02</span> |
+| ISO 27001 | A.8.6, A.8.14 | <span style={{whiteSpace: 'nowrap'}}>PR.IR-03</span> |
+| ISO 27001 | A.8.6 | <span style={{whiteSpace: 'nowrap'}}>PR.IR-04</span> |
+| CIS Benchmarks | Network and firewall hardening guides | <span style={{whiteSpace: 'nowrap'}}>PR.IR-01</span> |

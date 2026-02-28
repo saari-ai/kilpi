@@ -1,6 +1,6 @@
-# Kilpi Methodology: Agent Execution Review
+# Cybersecurity Methodology: Agent Execution Review
 
-This document is a critical review of the Kilpi security methodology from the perspective of an AI agent tasked with applying it end-to-end to a real SaaS product with a REST API, a database, a web frontend, and third-party integrations.
+This document is a critical review of the Cybersecurity security methodology from the perspective of an AI agent tasked with applying it end-to-end to a real SaaS product with a REST API, a database, a web frontend, and third-party integrations.
 
 Every MDX file under `content/docs/` was read before writing this review. The assessment is structured section-by-section, walking through the methodology as if actually executing it.
 
@@ -8,7 +8,7 @@ Every MDX file under `content/docs/` was read before writing this review. The as
 
 ## Overview and Foundation (index.mdx)
 
-The overview page establishes that Kilpi is a methodology built on NIST CSF 2.0, with six functions, 22 categories, and 106 subcategories. It claims to produce "traceable, outcome-driven" results and to be "directly consumable by AI agents."
+The overview page establishes that Cybersecurity is a methodology built on NIST CSF 2.0, with six functions, 22 categories, and 106 subcategories. It claims to produce "traceable, outcome-driven" results and to be "directly consumable by AI agents."
 
 ### Blockers
 
@@ -18,7 +18,7 @@ The overview page establishes that Kilpi is a methodology built on NIST CSF 2.0,
 
 - **"Agent-first" claim is underdeveloped.** The overview says the methodology is "designed to be directly consumable by AI agents," but the only agent-specific page (`agents.mdx`) is two paragraphs pointing to external skill repos with no specification of what those skills do, what inputs they expect, or what outputs they produce. The skills themselves are hosted externally and the linked repositories are not part of the methodology documentation. An agent reading only the docs has no executable skill definition.
 
-- **No definition of "done."** The overview does not define what a completed Kilpi assessment looks like. Is it a filled-in Org template? A filled-in Component template? Both? All 106 subcategories addressed? There is no acceptance criteria for the overall assessment output.
+- **No definition of "done."** The overview does not define what a completed Cybersecurity assessment looks like. Is it a filled-in Org template? A filled-in Component template? Both? All 106 subcategories addressed? There is no acceptance criteria for the overall assessment output.
 
 ### Polish
 
@@ -74,7 +74,7 @@ The conventions page defines three ID schemes (SC-, ST-, SA-), subcategory trace
 
 - **No executable specification.** The page lists two skills (`kilpi_org`, `kilpi_component`) and says they reference "sections of these docs as its source of truth." But it does not specify: what input the skills expect (system description? architecture diagram? codebase access?), what output they produce (filled template? risk report? control inventory?), what order they execute sections in, what decisions they make autonomously vs. defer to a human, or what constitutes a successful run. An agent cannot self-execute from this page. It is a pointer to external repos, not an operational specification.
 
-- **External dependency with no fallback.** The skills are hosted at `saari-ai/kilpi-skills` and activated via `saari-ai/claude-marketplace`. If these repos are unavailable, moved, or the skills are updated independently of the docs, there is no way for an agent to verify alignment. The methodology documentation should be self-sufficient for agent execution.
+- **External dependency with no fallback.** The skills are hosted at `saari-ai/fiksu-skills` and activated via `saari-ai/claude-marketplace`. If these repos are unavailable, moved, or the skills are updated independently of the docs, there is no way for an agent to verify alignment. The methodology documentation should be self-sufficient for agent execution.
 
 ### Gaps
 
@@ -276,7 +276,7 @@ None.
 
 ### Gaps
 
-- **ISO 27001 mapping is selective.** The page says "Not all 93 controls are relevant to every organisation" and maps approximately 25 of the 93 Annex A controls. This is reasonable, but an agent performing an ISO 27001 gap analysis alongside a Kilpi assessment would produce incomplete ISO coverage. The methodology should state that the ISO mapping covers "controls most relevant to software product security" and is not a complete ISO 27001 SoA.
+- **ISO 27001 mapping is selective.** The page says "Not all 93 controls are relevant to every organisation" and maps approximately 25 of the 93 Annex A controls. This is reasonable, but an agent performing an ISO 27001 gap analysis alongside a Cybersecurity assessment would produce incomplete ISO coverage. The methodology should state that the ISO mapping covers "controls most relevant to software product security" and is not a complete ISO 27001 SoA.
 
 - **CIS Benchmarks mapping is generic.** The page maps CIS control areas to CSF subcategories but does not map specific benchmark recommendations. An agent cannot go from "PR.PS-01 requires configuration management" to "run this specific CIS benchmark check." The Taskflow example fills this gap for its stack, but the methodology-level mapping stays abstract.
 

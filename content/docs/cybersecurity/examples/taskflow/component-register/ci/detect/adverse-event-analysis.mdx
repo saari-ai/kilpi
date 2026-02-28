@@ -1,0 +1,79 @@
+---
+title: "DE.AE: Adverse Event Analysis"
+description: Build Pipeline example for adverse-event-analysis
+---
+
+For methodology guidance, see [DE.AE: Adverse Event Analysis](/docs/cybersecurity/functions/detect/adverse-event-analysis).
+
+---
+
+### DE.AE-02: Event analysis
+
+| Alert source | Analysis method | Triage outcome |
+|---|---|---|
+| Branch protection change alert | Correlate with change management records and GitHub audit log actor. Determine whether the change was authorized (scheduled maintenance) or unauthorized (compromise or policy violation). | Authorized change (acknowledge) vs unauthorized change (immediate containment: re-enable protection, revoke actor access, investigate). |
+| Unauthorized ECR image push | Correlate CloudTrail caller identity with known OIDC subject claims. Cross-reference with workflow run logs to determine if the push originated from a legitimate CI run or an external source. | Legitimate CI run with misconfigured trust policy (fix policy) vs external attacker with stolen credentials (rotate credentials, incident). |
+| Fork workflow accessing secrets | Verify whether GitHub secret scoping is correctly configured (environment-scoped, fork access disabled). Check if `pull_request_target` trigger was used instead of `pull_request`. | Misconfigured workflow (fix trigger, restrict secrets) vs intentional exfiltration attempt (block fork, investigate actor). |
+| Workflow duration anomaly | Compare step-by-step timing against baseline. A single slow step suggests resource issues or network problems. Multiple slow steps or new steps suggest workflow tampering. | Infrastructure degradation (monitor) vs workflow tampering (investigate, compare workflow file against last known good). |
+| Lockfile hash mismatch | Compare `package-lock.json` at checkout vs at build time. Determine whether the mismatch is due to a race condition (concurrent PR merge) or intentional tampering. | Race condition (re-run build) vs tampering (block deployment, investigate commit history). |
+
+---
+
+### DE.AE-03: Cross-source correlation
+
+| Source A | Source B | Correlation method | Combined signal |
+|---|---|---|---|
+| Branch protection change (GitHub audit log) | Direct push to main (Git event) | Same actor + time window (protection disabled, then direct push within minutes) | Confirmed branch protection bypass -- always an incident regardless of actor. |
+| Unauthorized OIDC token request (CloudTrail) | ECR image push from unknown principal (CloudTrail) | Same IAM session + time window | Confirmed unauthorized deployment chain -- attacker assumed OIDC role and pushed malicious image. |
+| Secret access event (GitHub audit log) | Workflow run from fork (GitHub Actions) | Same workflow run ID + secret name | Confirmed secret exfiltration from fork -- immediate credential rotation required. |
+| Dependency scanning failure (CI logs) | PR merged (GitHub event) | Same PR + CI status check override | Confirmed CI bypass -- vulnerable dependency shipped to production. Investigate who overrode the check. |
+| Action SHA drift alert | Workflow run with anomalous behaviour | Same Action + time window | Upstream Action may have been compromised between old and new SHA. Review all changes between pinned SHAs. |
+
+---
+
+### DE.AE-04: Impact and scope estimation
+
+| Event | Affected systems | Affected data | Estimated severity |
+|---|---|---|---|
+| Branch protection bypass + direct push to main | Source code, all downstream builds and deployments | All production services deployed from tampered code | Critical -- potential production supply chain compromise for all components |
+| Secret exfiltration from workflow logs | All services using the exfiltrated credential | Depends on credential scope (deployment: production infrastructure; API key: external service) | Critical -- immediate credential rotation required, blast radius depends on credential |
+| Compromised third-party Action | All workflows using the Action, all builds since last known-good SHA | Build artifacts, potentially secrets if Action had access | Critical -- all artifacts built with compromised Action must be treated as tainted |
+| Unauthorized ECR image push | Container registry, deployment pipeline | Production deployment (if tainted image is deployed) | Critical -- tainted image could execute arbitrary code in production |
+| Dependency confusion (malicious package) | Build environment, build artifacts | Build output, potentially secrets via build-time exfiltration | High -- contained to build environment if secrets were not accessible during install |
+| Cache poisoning | Build artifacts for subsequent runs | Potentially all builds that restore the poisoned cache | High -- blast radius depends on what the cache contains (dependencies, build intermediates) |
+
+---
+
+### DE.AE-06: Alert routing and notification
+
+| Alert severity | Route to | Method | SLA |
+|---|---|---|---|
+| Critical | On-call engineer (pager) + infrastructure owner + security lead + engineering Slack channel | PagerDuty page + Slack alert | Paged within 5 minutes. Response within 15 minutes. |
+| High | Infrastructure owner + security lead + engineering Slack channel | Slack alert + email | Alert within 30 minutes. Investigation started within 4 hours. |
+| Medium | Weekly security review queue | Slack alert (low priority) + dashboard ticket | Included in next weekly review. Triaged within 7 days. |
+
+---
+
+### DE.AE-07: Threat intelligence integration
+
+| Intelligence type | Source | Integration point | Update cadence |
+|---|---|---|---|
+| Known CVE data (npm, Docker) | GitHub Advisory Database, NVD | Dependabot scans, `npm audit`, Trivy | Continuous (automated) |
+| Compromised Action reports | GitHub Security Advisories, OpenSSF | Action allow-list review, SHA pinning verification | As published (monitored weekly) |
+| SLSA threat model updates | SLSA specification, OpenSSF | Control design, provenance requirements | Referenced during quarterly review |
+| Supply chain attack case studies | CISA advisories, security community reports | Awareness training updates, threat model refinement | As published (reviewed quarterly) |
+| GitHub Actions IP ranges | GitHub meta API | Network-level monitoring baselines | Automatic (GitHub updates) |
+
+---
+
+### DE.AE-08: Incident declaration
+
+| Criterion | Threshold | Example |
+|---|---|---|
+| Confirmed unauthorized code in main branch | Any commit merged without required review or with tampered content | Direct push to main bypassing branch protection, PR merged with overridden CI checks |
+| Confirmed secret exfiltration | Any secret value exposed in logs, artifacts, or to unauthorized principal | Secret visible in workflow logs, fork workflow accessed environment secrets |
+| Confirmed artifact tampering | Any production image or package modified outside of trusted CI pipeline | Unauthorized ECR push, image signature verification failure, lockfile hash mismatch |
+| Confirmed supply chain compromise | Third-party Action or dependency confirmed malicious | Pinned Action SHA found in compromise advisory, dependency flagged by GitHub Advisory |
+| Pipeline control failure confirmed | A control expected to prevent an attack type is not functioning | Branch protection found disabled, image signing skipped, OIDC trust policy overly permissive |
+
+---

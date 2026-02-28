@@ -1,0 +1,84 @@
+---
+title: Getting Started
+description: Execution order, entry conditions, and exit conditions for applying the Product Validation methodology
+---
+
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+## Entry condition
+
+Product Validation begins when you have a **Discovery Brief** from [Product Discovery](/docs/product-discovery) with a validated problem or opportunity. The brief must contain:
+
+- A problem statement with validated user evidence
+- An opportunity score (OP-) at or above the team's threshold
+- Identified user segments affected
+- A proposed solution direction (even if rough)
+
+Do not start validation without a Discovery Brief. Testing solutions to unvalidated problems wastes cycles and produces misleading evidence.
+
+## Execution order
+
+Execute the methodology in this order:
+
+<Steps>
+<Step>
+### Hypothesize (HY)
+
+Decompose the Discovery Brief into explicit assumptions. Categorize each assumption by type (desirability, viability, feasibility, usability). Prioritize by risk using the impact x uncertainty matrix. Form testable hypotheses for the highest-risk assumptions first.
+
+See [Hypothesize](/docs/product-validation/phases/hypothesize).
+</Step>
+
+<Step>
+### Design (DE)
+
+For each hypothesis, design an experiment. Choose the minimum fidelity level that can test the hypothesis. Define quantitative success criteria before execution — never after. Set sample sizes, durations, and cost budgets. Produce experiment cards ready for execution.
+
+See [Design](/docs/product-validation/phases/design).
+</Step>
+
+<Step>
+### Execute (EX)
+
+Run experiments following the protocol defined in Design. Do not change success criteria mid-experiment. Collect data and log evidence entries with timestamps, sources, and observations. Maintain execution integrity — the goal is truth, not confirmation.
+
+See [Execute](/docs/product-validation/phases/execute).
+</Step>
+
+<Step>
+### Evaluate (EV)
+
+Assess collected evidence against the pre-defined success criteria. Determine signal vs noise. Assign a confidence level (None → Low → Medium → High → Validated) to each experiment result. Determine whether you have sufficient evidence to make a decision or need additional experiments.
+
+See [Evaluate](/docs/product-validation/phases/evaluate).
+</Step>
+
+<Step>
+### Decide (DC)
+
+Using the evaluated evidence, make a decision for the solution: Persevere, Pivot, or Kill. Document the decision in a formal Decision Record (VD-) with evidence references, confidence level, rationale, and next actions. If pivoting, specify the pivot type and initiate a new validation cycle.
+
+See [Decide](/docs/product-validation/phases/decide).
+</Step>
+</Steps>
+
+## Exit condition
+
+Product Validation is complete when you have a **VD- Decision Record** with:
+
+- Confidence level of **Medium** or higher
+- A clear decision: Persevere, Pivot (with type), or Kill
+- Referenced evidence chain (VV- → VE- → VH- → VA-)
+- Defined next actions
+
+If the decision is **Persevere**, the Decision Record becomes the handoff to engineering with build specifications. If the decision is **Pivot**, a new validation cycle begins with revised assumptions. If the decision is **Kill**, the learnings are archived and the team returns to [Product Discovery](/docs/product-discovery) for a new solution direction.
+
+## Iteration
+
+Validation is not always a single pass. Common iteration patterns:
+
+- **Insufficient evidence:** Evaluate phase determines confidence is too low. Return to Design to create additional experiments.
+- **Partial validation:** Some assumptions validate, others fail. Return to Hypothesize to re-prioritize and form new hypotheses around the failing assumptions.
+- **Pivot loop:** Decide phase produces a Pivot. The pivot generates new assumptions, starting a fresh Hypothesize → Design → Execute → Evaluate → Decide cycle.
+
+Each iteration maintains traceability — new artifacts reference the originals they supersede.

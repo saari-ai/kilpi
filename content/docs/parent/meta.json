@@ -1,0 +1,6 @@
+{
+  "title": "Parent",
+  "description": "Parent Framework",
+  "root": true,
+  "pages": ["index"]
+}

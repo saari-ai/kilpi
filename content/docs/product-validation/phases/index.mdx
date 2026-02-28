@@ -1,0 +1,62 @@
+---
+title: Phases
+description: The five phases of Product Validation and their relationships
+---
+
+Product Validation operates as a five-phase pipeline. Each phase has defined inputs, outputs, and key artifacts. Phases execute sequentially, though iteration loops are common — see [Getting Started](/docs/product-validation/getting-started) for iteration patterns.
+
+## Phase overview
+
+| Phase | Code | Input | Output | Key artifacts |
+|-------|------|-------|--------|---------------|
+| [Hypothesize](/docs/product-validation/phases/hypothesize) | HY | Discovery Brief | Prioritized assumption register + hypothesis set | VA- assumption register, VH- hypothesis cards |
+| [Design](/docs/product-validation/phases/design) | DE | Prioritized hypotheses | Experiment cards ready for execution | VE- experiment cards with success criteria |
+| [Execute](/docs/product-validation/phases/execute) | EX | Experiment cards | Evidence log entries | VV- evidence items |
+| [Evaluate](/docs/product-validation/phases/evaluate) | EV | Evidence log + success criteria | Evaluated results with confidence levels | Experiment results (pass/fail/inconclusive) |
+| [Decide](/docs/product-validation/phases/decide) | DC | Evaluated results | Decision record | VD- decision record |
+
+## Phase dependency diagram
+
+```
+Discovery Brief (from Product Discovery)
+       │
+       ▼
+  ┌──────────┐
+  │Hypothesize│──→ Assumption Register (VA-*)
+  │   (HY)   │──→ Hypothesis Set (VH-*)
+  └────┬─────┘
+       │
+       ▼
+  ┌──────────┐
+  │  Design  │──→ Experiment Cards (VE-*)
+  │   (DE)   │    with success criteria
+  └────┬─────┘
+       │
+       ▼
+  ┌──────────┐
+  │  Execute │──→ Evidence Log (VV-*)
+  │   (EX)   │
+  └────┬─────┘
+       │
+       ▼
+  ┌──────────┐
+  │ Evaluate │──→ Results + confidence levels
+  │   (EV)   │
+  └────┬─────┘
+       │        ┌─── Insufficient evidence ──→ back to Design (DE)
+       ▼        │
+  ┌──────────┐  │
+  │  Decide  │──┤── Pivot ──→ back to Hypothesize (HY)
+  │   (DC)   │  │
+  └──────────┘  ├── Persevere ──→ handoff to Build
+                │
+                └── Kill ──→ archive learnings
+```
+
+## Phase rules
+
+1. **Phases execute in order.** Do not skip ahead — designing experiments before mapping assumptions leads to testing the wrong things.
+2. **Success criteria are set in Design, not Evaluate.** Moving the goalposts after seeing results is the most common validation failure.
+3. **Every artifact references its predecessor.** VH- references VA-. VE- references VH-. VV- references VE-. VD- references VV- and VE-. Broken chains indicate gaps.
+4. **Minimum viable fidelity.** Always choose the lowest-fidelity experiment that can test the hypothesis. Do not build a prototype when a landing page test suffices.
+5. **Pivot is not failure.** A pivot is a validated learning. The methodology treats Kill, Pivot, and Persevere as equally valid outcomes — the goal is truth, not confirmation.

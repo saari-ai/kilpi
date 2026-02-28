@@ -1,0 +1,117 @@
+---
+title: Design
+description: Phase DE — design experiments with appropriate fidelity, define success criteria before execution
+---
+
+## Purpose
+
+The Design phase takes prioritized hypotheses from [Hypothesize](/docs/product-validation/phases/hypothesize) and creates experiment cards with everything needed for execution: method, fidelity level, success criteria, sample size, duration, and cost budget.
+
+**Input:** Prioritized hypothesis set (VH-).
+
+**Output:** Experiment cards (VE-) with pre-defined success criteria, ready for execution.
+
+## Experiment card structure
+
+Every experiment is documented as a card with the following fields:
+
+| Field | Description | Example |
+|-------|-------------|---------|
+| VE-ID | Unique experiment identifier | VE-FN-1 |
+| Linked hypothesis | VH-ID being tested | VH-FN-1 |
+| Method | Technique from the [catalog](/docs/product-validation/techniques/catalog) | Landing page test |
+| Fidelity level | Position on the fidelity ladder | Smoke test |
+| Success criteria | Quantitative threshold(s) that must be met | ≥ 8% visitor-to-signup conversion |
+| Sample size | Minimum number of participants or data points | 500 unique visitors |
+| Duration | Maximum time allocated for the experiment | 14 days |
+| Cost budget | Maximum spend (ads, tools, incentives) | $300 |
+| Linked assumptions | VA-IDs being tested through the hypothesis | VA-FN-1, VA-FN-2 |
+
+## Fidelity ladder
+
+Choose the minimum fidelity that can test the hypothesis. Higher fidelity costs more time and money but produces stronger evidence. Lower fidelity is faster and cheaper but may miss nuances.
+
+| Level | Fidelity | Cost | Time | Evidence strength | Examples |
+|-------|----------|------|------|------------------|----------|
+| 1 | Smoke test | Very low | Days | Low-Medium | Fake door, landing page, painted door |
+| 2 | Wizard of Oz | Low-Medium | 1-2 weeks | Medium | Human-behind-the-curtain simulating the product |
+| 3 | Prototype | Medium | 2-4 weeks | Medium-High | Clickable prototype, paper prototype usability test |
+| 4 | Concierge | Medium-High | 2-4 weeks | High | Manual delivery of the value proposition to real users |
+| 5 | MVP | High | 4-8 weeks | High | Minimum viable product with core feature only |
+
+### Choosing the right fidelity
+
+Use these rules:
+
+1. **Start at Level 1 for desirability assumptions.** If users don't even want the concept, there is no point building a prototype. A landing page or fake door test is sufficient.
+2. **Use Level 2-3 for usability and feasibility assumptions.** These require user interaction with something resembling the product.
+3. **Use Level 3-4 for viability assumptions.** Willingness to pay requires users to experience (or believe they are experiencing) real value.
+4. **Never use Level 5 (MVP) in validation unless all lower-fidelity experiments pass.** An MVP is the last resort, not the first experiment.
+
+### Fidelity by assumption type
+
+| Assumption type | Recommended starting fidelity | Rationale |
+|----------------|------------------------------|-----------|
+| Desirability (D) | Level 1: Smoke test | Test demand before building anything |
+| Viability (V) | Level 3-4: Prototype / Concierge | Users need to perceive value before committing money |
+| Feasibility (F) | Level 2-3: Wizard of Oz / Prototype | Simulate the technical capability to see if the concept works |
+| Usability (U) | Level 2-3: Wizard of Oz / Prototype | Users need something to interact with |
+
+## Success criteria
+
+Success criteria must be defined BEFORE execution. This is the single most important rule in the Design phase. Criteria defined after seeing results are worthless — they are rationalizations, not tests.
+
+### Writing good criteria
+
+- **Be specific.** "Users like it" is not a criterion. "≥ 7/10 users rate the experience 4+ on a 5-point scale" is a criterion.
+- **Set a threshold.** Every criterion needs a number: a percentage, a count, a ratio, a rating.
+- **Define pass, fail, and inconclusive.** Not just the pass threshold — define what constitutes a clear failure and what falls in the inconclusive zone.
+
+| Outcome | Definition |
+|---------|-----------|
+| Pass | Meets or exceeds the success threshold |
+| Fail | Falls below the failure threshold |
+| Inconclusive | Falls between pass and fail thresholds, or sample size is insufficient |
+
+### Example criteria
+
+| Experiment | Pass | Fail | Inconclusive |
+|-----------|------|------|-------------|
+| Landing page test | ≥ 8% signup conversion | < 4% signup conversion | 4-8% conversion |
+| Wizard of Oz usability | ≥ 7/10 users complete task without help | < 4/10 complete without help | 4-7/10 complete |
+| Pre-order test | ≥ 15% commit to purchase | < 5% commit | 5-15% commit |
+
+## Sample size guidance
+
+Larger samples produce stronger evidence but cost more. Use these minimums by experiment type:
+
+| Experiment type | Minimum sample | Rationale |
+|----------------|---------------|-----------|
+| Landing page / fake door | 300-500 visitors | Need statistical significance for conversion rates |
+| User interview (solution-focused) | 8-12 participants | Qualitative saturation typically at 8-10 |
+| Usability test (prototype) | 5-10 participants | Nielsen's research: 5 users find ~85% of usability issues |
+| Wizard of Oz | 8-15 participants | Enough for pattern detection, not statistical significance |
+| Pre-order / willingness to pay | 30-50 qualified leads | Need enough to distinguish signal from noise on payment intent |
+| A/B test | 200+ per variant | Minimum for detectable effect size at p < 0.05 |
+| Concierge | 5-10 customers | Deep engagement; quality over quantity |
+
+When sample size is too small to be conclusive, the experiment result is **Inconclusive**, not a failure. This is an honest assessment, not a loophole.
+
+## Cost and duration budgets
+
+Every experiment has a cost and time ceiling. These prevent validation from becoming an endless research project.
+
+- **Cost budget** includes ad spend, tool subscriptions, participant incentives, and any materials.
+- **Duration** is calendar time, not effort. If an experiment hasn't reached its sample size within the duration, evaluate what you have — do not extend indefinitely.
+
+### Budget rules
+
+1. Total validation budget for a solution should not exceed 5-10% of the estimated build cost. If building costs $100K, validation should cost $5-10K.
+2. Individual experiment budgets are allocated based on fidelity level and assumption risk.
+3. Critical assumptions get larger budgets. Low-risk assumptions get smaller budgets or no dedicated experiments.
+
+## Output
+
+The Design phase produces **Experiment Cards** (VE-) — one per hypothesis being tested. Each card contains all the fields listed above, fully specified and ready for execution. No decisions are deferred to the Execute phase.
+
+Experiment cards are documented in the [Experiment template](/docs/product-validation/templates/experiment) and feed directly into the [Execute](/docs/product-validation/phases/execute) phase.

@@ -1,10 +1,10 @@
-# Kilpi
+# Cybersecurity
 
-Documentation site for the Kilpi security methodology — a practical framework for applying NIST CSF 2.0 to software products and organisations.
+Documentation site for the Cybersecurity security methodology — a practical framework for applying NIST CSF 2.0 to software products and organisations.
 
 ## What this is
 
-Kilpi provides structured templates and conventions for security assessments at two levels:
+Cybersecurity provides structured templates and conventions for security assessments at two levels:
 
 - **Organisation level** — covers all 6 NIST CSF 2.0 functions: Govern, Identify, Protect, Detect, Respond, Recover
 - **Component level** — covers Identify, Protect, and Detect for individual products and system components (inherits Govern, Respond, Recover from the org)
@@ -27,4 +27,4 @@ pnpm dev
 
 ## Related
 
-- [kilpi-skills](https://github.com/saari-ai/kilpi-skills) — Claude Code plugin that guides users through Kilpi assessments interactively
+- [fiksu-skills](https://github.com/saari-ai/fiksu-skills) — Claude Code plugin that guides users through Cybersecurity assessments interactively

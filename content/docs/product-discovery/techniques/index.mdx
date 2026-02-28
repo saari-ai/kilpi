@@ -1,0 +1,189 @@
+---
+title: Techniques
+description: Catalog of discovery techniques with phase mapping, evidence types, and sample size guidance
+---
+
+This page catalogs the discovery techniques available across all phases of the Product Discovery methodology. Each technique is a specific method for gathering evidence or forming insights. Choose techniques based on what you need to learn, what phase you are in, and what resources you have available.
+
+## Technique catalog
+
+| Technique | Phase(s) | Best for | Evidence type produced | Sample size guidance |
+|-----------|---------|----------|----------------------|---------------------|
+| [Jobs to Be Done interviews](#jobs-to-be-done-interviews) | Customer Research, Synthesis | Understanding motivations, switching behaviour, and the "job" users are hiring solutions for | Direct quotes, switching stories, job statements | 8-12 per segment |
+| [Contextual inquiry](#contextual-inquiry) | Customer Research | Observing actual behaviour in the user's real environment | Behavioural observations, workflow documentation | 5-8 per workflow |
+| [Diary studies](#diary-studies) | Customer Research | Capturing behaviour over time, understanding frequency and context | Longitudinal entries, self-reported behaviour | 10-15 participants over 1-4 weeks |
+| [Surveys](#surveys) | Customer Research, Evidence | Quantifying known signals across a larger sample | Quantitative ratings, preference data | 100-500 responses |
+| [Analytics mining](#analytics-mining) | Customer Research, Evidence | Finding behavioural patterns at scale in existing product data | Quantitative metrics, drop-off rates, usage patterns | All available data |
+| [Competitor analysis](#competitor-analysis) | Opportunity Assessment | Understanding the competitive landscape and differentiation opportunities | Competitive positioning data, feature comparisons | Cover all direct competitors + top 3-5 indirect |
+| [Expert interviews](#expert-interviews) | Problem Framing, Customer Research | Leveraging domain expertise to shape hypotheses or validate patterns | Expert opinions, domain insights | 3-5 experts |
+| [Concept testing (light)](#concept-testing-light) | Synthesis | Gauging reaction to opportunity framing (not solution testing) | Reaction data, interest signals | 5-10 participants |
+| [5 Whys](#5-whys) | Problem Framing, Synthesis | Getting to root causes behind surface-level problems | Causal chains, root cause identification | Applied per problem, not per participant |
+| [Assumption mapping](#assumption-mapping) | Problem Framing | Identifying and prioritising the riskiest assumptions in your hypotheses | Risk-ranked assumption list | Workshop exercise (team activity) |
+
+---
+
+## Jobs to Be Done interviews
+
+A structured interview format focused on understanding the "job" a user is trying to get done and the forces that drive them to adopt or abandon solutions.
+
+**When to use:** When you need to understand why users make the choices they make — particularly when switching from one solution to another.
+
+**Key questions:**
+- "What were you trying to accomplish when you first started looking for a solution?"
+- "What was the trigger that made you start looking?"
+- "What did you try before this? What made you stop using it?"
+- "What would have to be true for you to go back to the old way?"
+
+**Output:** Job statements in the When-I/I-want-to/So-I-can format. Switching stories that reveal push factors (frustration with current solution), pull factors (attraction to new solution), inertia (habit/switching cost), and anxiety (risk of change).
+
+See [Insight Frameworks](/docs/product-discovery/synthesis/insight-frameworks) for how to structure JTBD insights.
+
+---
+
+## Contextual inquiry
+
+Observing users performing real tasks in their real environment while asking questions to understand what you are seeing.
+
+**When to use:** When you need to see actual behaviour rather than self-reported behaviour. Particularly valuable when you suspect a say-do gap.
+
+**Protocol:** Observe the full workflow without interrupting. Ask questions at natural pauses: "I noticed you [did X]. What was happening there?" Record the sequence, tools used, workarounds, and hesitation points.
+
+**Output:** Behavioural observations, workflow maps, identified workarounds.
+
+See [Observation](/docs/product-discovery/customer-research/observation) for the full protocol.
+
+---
+
+## Diary studies
+
+Participants record their experiences with a topic over a period of time (typically 1-4 weeks) through regular entries.
+
+**When to use:** When you need to understand frequency, context, and variation over time. Interviews capture one point in time; diary studies capture the full pattern.
+
+**Setup:** Provide participants with a simple recording template (digital or physical). Define the trigger: "Each time you [do the relevant activity], record what happened, how long it took, and what tools you used." Set a minimum cadence (e.g., at least one entry per day or per occurrence).
+
+**Output:** Longitudinal data about when the problem occurs, how often, in what context, and what the user does about it.
+
+**Limitations:** Requires participant commitment. Completion rates drop after week 2. Use incentives and check-ins.
+
+---
+
+## Surveys
+
+Structured questionnaires distributed to a larger sample to quantify known signals.
+
+**When to use:** After qualitative research has identified patterns. Use surveys to quantify: "How many people experience this? How severely?" Do not use surveys to discover problems — they are too constrained for exploratory work.
+
+**Design principles:**
+- Keep it under 5 minutes (10 questions maximum)
+- Use closed-ended questions for quantification, open-ended for unexpected signal
+- Randomise option order to reduce bias
+- Include screening questions to verify segment match
+- Pilot with 5-10 people before full launch
+
+**Output:** Quantitative data about problem frequency, severity, and segment distribution.
+
+---
+
+## Analytics mining
+
+Analysing existing product usage data, support data, or market data to find behavioural patterns.
+
+**When to use:** When you have access to product analytics, support ticket databases, or other existing data sources. Analytics mining is most effective when combined with qualitative research — it tells you what is happening, and qualitative methods tell you why.
+
+**Approach:**
+1. Start with the hypotheses — what would you expect to see in the data if the hypothesis is true?
+2. Look for the signal (e.g., drop-off rates, feature non-usage, error patterns)
+3. Check for confounders
+4. Quantify the finding
+
+**Output:** Quantitative metrics, funnel analyses, usage patterns.
+
+See [Data Analysis](/docs/product-discovery/customer-research/data-analysis) for detail on signal vs noise and evidence weight.
+
+---
+
+## Competitor analysis
+
+Systematic evaluation of the competitive landscape.
+
+**When to use:** During Opportunity Assessment to understand who else is solving the problem and where differentiation opportunities exist.
+
+**Approach:**
+1. Identify direct, indirect, and JTBD competitors
+2. Map each on key dimensions (segment, approach, pricing, traction)
+3. Identify strengths, weaknesses, and gaps
+4. Assess switching costs
+
+**Output:** Competitive landscape map, differentiation opportunities, competitive intensity score.
+
+See [Competitive Landscape](/docs/product-discovery/opportunity-assessment/competitive-landscape) for the full framework.
+
+---
+
+## Expert interviews
+
+Conversations with domain experts to leverage their pattern recognition and deep knowledge.
+
+**When to use:** Early in Problem Framing to shape hypotheses, or during Evidence to validate patterns. Expert interviews supplement but do not replace customer research.
+
+**Key questions:**
+- "In your experience, what are the biggest challenges [segment] faces with [topic]?"
+- "What solutions have you seen work? What has not worked?"
+- "What do you think most people get wrong about this problem?"
+
+**Output:** Domain insights, hypothesis refinement, expert opinion evidence (typically weight 1-3).
+
+**Limitation:** Experts have their own biases. Treat expert opinion as directional, not definitive.
+
+---
+
+## Concept testing (light)
+
+Presenting a high-level description of the opportunity (not a solution) to gauge interest and reaction.
+
+**When to use:** During late Synthesis to validate that the opportunity framing resonates with the target segment. This is NOT solution testing — that belongs in [Product Validation](/docs/product-validation).
+
+**Format:** "We've found that [problem statement]. We're considering ways to [opportunity framing]. Does that resonate with your experience?" Then listen.
+
+**Output:** Reaction data — does the framing match their experience? Do they get excited, shrug, or correct you?
+
+**Limitation:** This is the lightest possible validation. It does not prove willingness to pay or use a specific solution.
+
+---
+
+## 5 Whys
+
+A root-cause analysis technique: ask "Why?" five times to move from surface symptoms to underlying causes.
+
+**When to use:** During Problem Framing when a problem seems superficial, or during Synthesis when you need to connect observed patterns to deeper causes.
+
+**Example:**
+1. Why do founders skip security? "They don't have time."
+2. Why don't they have time? "Security seems like a huge project."
+3. Why does it seem huge? "They don't know what applies to them."
+4. Why don't they know? "Security resources are written for enterprises, not startups."
+5. Why are resources enterprise-focused? "Security professionals write for their own context."
+
+The root cause (generic resources not tailored to the segment) is more actionable than the surface symptom (founders skip security).
+
+---
+
+## Assumption mapping
+
+A workshop exercise for identifying and prioritising the assumptions embedded in your hypotheses.
+
+**When to use:** At the start of Problem Framing to decide which hypotheses to test first.
+
+**Process:**
+1. List every assumption embedded in each hypothesis
+2. Rate each assumption on two axes: **importance** (if wrong, does it change everything?) and **uncertainty** (how confident are we that this is true?)
+3. Plot on a 2x2 matrix
+4. Prioritise testing assumptions that are high importance AND high uncertainty
+
+**Output:** A ranked list of assumptions to test, which directly informs your research plan.
+
+| | High uncertainty | Low uncertainty |
+|--|-----------------|----------------|
+| **High importance** | Test these first | Monitor — important but likely true |
+| **Low importance** | Deprioritise — low impact if wrong | Ignore — low risk all around |

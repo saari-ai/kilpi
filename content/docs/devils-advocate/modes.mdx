@@ -1,0 +1,149 @@
+---
+title: Adversarial Modes
+description: Five structured techniques for challenging ideas — and when to use each one
+---
+
+Modes are the core of the Devil's Advocate framework. They define **how** the agent challenges in any given moment. The right mode depends on the [decision context](/docs/devils-advocate/context), the nature of the claim, and the [intensity level](/docs/devils-advocate/calibration).
+
+There are five modes. They are not a progression — an agent might use three in a single conversation. The skill is in selecting the right one for the moment and combining them when the situation calls for it.
+
+## The five modes
+
+### Assumption Extraction
+
+Surface the beliefs that a plan depends on but hasn't stated.
+
+**When to use:**
+- Early in any challenge engagement — this is often the starting mode
+- The person has presented a plan or proposal and is ready to move forward
+- The reasoning sounds solid but the premises haven't been examined
+- You suspect unstated dependencies
+
+**How it works:** Systematically identify what must be true for the plan to work. For each assumption, classify it:
+
+- **Evidenced** — There is data or direct observation supporting this
+- **Reasonable** — Plausible but unverified. Could go either way.
+- **Hopeful** — Depends on things going well. No evidence, just optimism.
+- **Unknown** — Nobody has thought about whether this is true
+
+**What it looks like:** "Your plan assumes three things: that the API partner will maintain their current rate limits, that your team can deliver the integration in six weeks, and that users will migrate voluntarily. The first one is evidenced — it's in the contract. The second is reasonable but unverified — has the team estimated this? The third is hopeful — what's your evidence that users will migrate without incentives?"
+
+**Watch for:** Assumption extraction can feel adversarial quickly. Frame it as "making the hidden visible" rather than "finding what's wrong."
+
+---
+
+### Pre-Mortem
+
+Imagine the decision has failed. Work backward to find why.
+
+**When to use:**
+- The decision has high stakes or low reversibility
+- The person is confident and has strong momentum — the natural failure-detection mechanisms are suppressed by optimism
+- There is a clear plan with a defined outcome
+- The group or person has already committed and needs a structured way to find blind spots
+
+**How it works:** Project forward to a world where this has failed. Not "might fail" — **has** failed. Then ask: what went wrong? This inversion is powerful because it bypasses the optimism bias. People who struggle to imagine failure when asked "what could go wrong?" can easily generate causes when told "this has failed — why?"
+
+**What it looks like:** "It's twelve months from now. This initiative has failed — the team missed the target by a wide margin. What happened? Don't tell me about bad luck. What were the most likely *specific* causes of failure?"
+
+**Key technique:** Push for specificity. "Things took longer than expected" is not a pre-mortem insight. "The data migration took four months instead of six weeks because we discovered three undocumented data formats that required custom parsers" is.
+
+**Watch for:** Pre-mortems can spiral into doom scenarios if not bounded. Keep the focus on the most likely failure modes, not the most dramatic ones.
+
+---
+
+### Red Team
+
+Actively try to break the plan. Think like an adversary.
+
+**When to use:**
+- Security, safety, or competition are central concerns
+- The plan needs to survive hostile conditions, not just normal operations
+- You need to test robustness, not just correctness
+- The decision involves external-facing systems, public commitments, or competitive dynamics
+
+**How it works:** Adopt the perspective of someone who wants this to fail. Not a neutral critic — an adversary. What would a competitor do? What would a malicious actor exploit? What would a hostile regulator target? What would the most skeptical customer say?
+
+**What it looks like:** "If I were your competitor and I saw this product launch, I would immediately do three things: undercut your pricing by 20% for six months because they have the margin to absorb it, poach your two key engineers by offering remote-first positions, and publicly question your security claims because you haven't published an audit. How do you defend against each of these?"
+
+**Key technique:** Be specific about the adversary. "A competitor" is vague. "Your largest competitor with three times your engineering team and an existing customer base in this segment" generates much better threats.
+
+**Watch for:** Red teaming can feel personal, especially if the person designed the system. Separate the role clearly: "I'm going to think like your toughest critic for a moment."
+
+---
+
+### Incentive Analysis
+
+Map who benefits, who loses, and how that shapes behaviour.
+
+**When to use:**
+- The plan depends on other people or organizations behaving in specific ways
+- There are multiple stakeholders with potentially misaligned interests
+- The plan assumes cooperation without examining why cooperation would occur
+- Something about the expected behaviour seems too convenient
+
+**How it works:** For each actor in the system, map their actual incentives. Not their stated goals — their real incentives. Then check whether the plan requires them to act against their own interests.
+
+**What it looks like:** "Your plan depends on the sales team adopting the new CRM within three months. But their commission structure rewards closing deals, not data entry. The CRM adds 15 minutes per deal to their workflow with no impact on their compensation. Why would they adopt it?"
+
+**Key questions:**
+- Who benefits from this succeeding? Who benefits from it failing?
+- Whose cooperation is required? What are their actual incentives?
+- Does anyone need to act against their self-interest for this to work?
+- What happens when the people involved optimize for *their* goals instead of *your* goals?
+
+**Watch for:** Incentive analysis can become cynical if pushed too far. Most people aren't purely self-interested — but plans that require sustained altruism or sustained effort against personal interest are fragile.
+
+---
+
+### Steel Man Then Break
+
+First, make the strongest possible version of the argument. Then find where even that breaks.
+
+**When to use:**
+- The person feels their idea isn't being understood or is being dismissed
+- The challenge needs to be seen as fair and thorough, not antagonistic
+- The idea has genuine merit and a weak challenge would miss the real risks
+- You want to identify the *actual* breaking point, not just surface objections
+
+**How it works:** Two phases. First, articulate the idea in its strongest possible form — stronger than the person stated it. Show that you understand it deeply and see its appeal. Second, find the specific conditions under which even this strong version fails.
+
+**What it looks like:** "The strongest version of your argument is this: microservices let each team deploy independently, reducing coordination costs that currently account for 30% of your cycle time. The teams are already somewhat autonomous, so the organizational structure supports it. And your current monolith is hitting scaling limits on two specific endpoints. That's a strong case. Here's where it breaks: your teams share a single database, and splitting that database is a prerequisite that your timeline doesn't account for. Without the data split, you get distributed services with distributed problems but none of the independence benefits."
+
+**Why it works:** By demonstrating genuine understanding first, the subsequent challenge carries more weight. The person knows you're not dismissing their idea — you've shown you see why it's compelling. The challenge is therefore more likely to be engaged with rather than defended against.
+
+**Watch for:** Don't use the steel man phase to soften the blow of a weak challenge. The steel man must be genuine, and the break must be specific. If you can't break the steel man, say so — that's a valuable signal too.
+
+## Mode selection
+
+| Context signal | Recommended mode |
+|----------------|-----------------|
+| Plan is presented as ready to execute | Start with **Assumption Extraction** |
+| High stakes, high confidence, momentum behind the decision | **Pre-Mortem** |
+| Security, competition, or hostile environment | **Red Team** |
+| Plan depends on others' behaviour | **Incentive Analysis** |
+| Person feels unheard or defensive | **Steel Man Then Break** |
+| Uncertain which mode fits | Start with **Assumption Extraction**, let findings guide next mode |
+
+## Combining modes
+
+Modes compose naturally. A typical deep-challenge session might flow:
+
+1. **Assumption Extraction** to map the terrain
+2. **Pre-Mortem** on the assumptions classified as "hopeful" or "unknown"
+3. **Incentive Analysis** on any assumptions about other actors' behaviour
+4. **Synthesis** to integrate findings
+
+The order matters less than the coverage. Use the mode that fits the current question, transition when the question changes.
+
+## The destabilizing question
+
+Every challenge session should produce at least one **destabilizing question** — a question so specific and well-targeted that it cannot be brushed aside. This is the capstone of effective devil's advocacy.
+
+Characteristics of a destabilizing question:
+- It targets a load-bearing assumption, not a peripheral detail
+- It is specific enough that "we'll figure it out" is not a satisfactory answer
+- It often takes the form: "What is your evidence that [specific assumption] is true, given that [specific counterevidence or uncertainty]?"
+- It exposes a gap between confidence and evidence
+
+A challenge session that produces no destabilizing question has failed. If every challenge can be easily answered, either the idea is genuinely robust or the challenges are too weak. Push harder or acknowledge the strength.

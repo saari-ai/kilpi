@@ -1,0 +1,263 @@
+---
+title: Technique Catalog
+description: 15 validation techniques with structured entries — fidelity, best for, setup effort, evidence strength, and usage guidance
+---
+
+Each technique entry includes: fidelity level, assumption types it tests best, setup effort, evidence strength, description, when to use, and when NOT to use. Techniques are ordered by fidelity level (lowest first).
+
+For selection guidance, see [Techniques](/docs/product-validation/techniques).
+
+---
+
+## 1. Smoke Test / Fake Door
+
+| Attribute | Value |
+|-----------|-------|
+| Fidelity | Level 1 |
+| Best for | Desirability |
+| Setup effort | Very low (hours) |
+| Evidence strength | Low-Medium |
+
+A button, link, or menu item for a feature that does not yet exist. When users click, they see a message explaining the feature is coming and are invited to register interest. Measures demand via click-through rate.
+
+**When to use:** Testing whether users want a specific feature before building it. Works best embedded in an existing product or website where real users encounter it naturally.
+
+**When NOT to use:** When you need to understand *why* users want something (qualitative signal is too weak). When the feature is obvious (no one clicks "make me richer" tests). When used on paying customers who may feel deceived.
+
+---
+
+## 2. Landing Page Test
+
+| Attribute | Value |
+|-----------|-------|
+| Fidelity | Level 1 |
+| Best for | Desirability |
+| Setup effort | Low (1-2 days) |
+| Evidence strength | Medium |
+
+A standalone page describing the product/feature value proposition with a clear call to action (sign up, join waitlist, get notified). Drive traffic via ads or organic channels. Measure visitor-to-signup conversion rate.
+
+**When to use:** Testing demand for a new product or major feature. Especially useful when you need quantitative conversion data from a specific audience segment.
+
+**When NOT to use:** When the value proposition requires demonstration (complex products). When you cannot drive sufficient traffic (< 300 visitors). When the target audience does not respond to digital ads.
+
+---
+
+## 3. Painted Door
+
+| Attribute | Value |
+|-----------|-------|
+| Fidelity | Level 1 |
+| Best for | Desirability |
+| Setup effort | Very low (hours) |
+| Evidence strength | Low-Medium |
+
+Similar to a fake door but placed in organic discovery contexts — a blog post describing the solution, a social media post gauging interest, a forum thread describing the concept. Measures engagement (comments, shares, DMs, sign-ups).
+
+**When to use:** When you want to test demand in a community or audience you already have access to. Good for B2B where target users gather in specific forums or Slack channels.
+
+**When NOT to use:** When you need precise conversion metrics (engagement is noisy). When the community norms discourage promotional content.
+
+---
+
+## 4. Explainer Video
+
+| Attribute | Value |
+|-----------|-------|
+| Fidelity | Level 1 |
+| Best for | Desirability |
+| Setup effort | Low-Medium (2-3 days) |
+| Evidence strength | Medium |
+
+A short video (60-120 seconds) demonstrating the product concept — what it does, how it works, what the user experience looks like. Paired with a call to action (sign up, pre-order). Measures view-to-action conversion rate.
+
+**When to use:** When the value proposition is hard to explain in text alone. When the product experience is visual or interactive. Dropbox famously validated demand with an explainer video.
+
+**When NOT to use:** When the audience does not consume video content. When the cost of production exceeds the experiment budget.
+
+---
+
+## 5. Customer Interview (Solution-Focused)
+
+| Attribute | Value |
+|-----------|-------|
+| Fidelity | Level 2 |
+| Best for | Desirability, Usability |
+| Setup effort | Low (1-2 days to prepare script) |
+| Evidence strength | Medium |
+
+Structured interviews with target users focused on the proposed solution (not the problem — that was Discovery). Present the solution concept and probe reactions: Would they use it? What concerns do they have? How does it compare to their current approach?
+
+**When to use:** When you need qualitative depth — understanding *why* users want (or do not want) the solution. When quantitative tests pass but you need to understand the nuance.
+
+**When NOT to use:** As the sole validation method (interviews are biased toward politeness — people say "yes" too easily). Without a structured script (unstructured conversations produce unusable data).
+
+---
+
+## 6. Wizard of Oz
+
+| Attribute | Value |
+|-----------|-------|
+| Fidelity | Level 2 |
+| Best for | Feasibility, Usability |
+| Setup effort | Medium (1-2 weeks) |
+| Evidence strength | Medium-High |
+
+Users interact with what appears to be a working product, but a human behind the scenes performs the work manually. Tests whether the value proposition works when delivered, without building the technology.
+
+**When to use:** When the core assumption is about feasibility (can the technology deliver the expected value?) or usability (can users interact with the output?). When building the real technology is expensive and you want to validate the concept first.
+
+**When NOT to use:** When the hypothesis is about demand (a Wizard of Oz tests experience, not demand). When you cannot sustain the manual effort for the experiment duration. When scaling the test beyond 10-15 users is needed.
+
+---
+
+## 7. Paper Prototype
+
+| Attribute | Value |
+|-----------|-------|
+| Fidelity | Level 3 |
+| Best for | Usability, Feasibility |
+| Setup effort | Low (hours to 1 day) |
+| Evidence strength | Medium |
+
+Hand-drawn or printed screens representing the product interface. A facilitator plays the role of the computer, swapping screens as the user "interacts." Tests information architecture, flow, and basic usability.
+
+**When to use:** Very early usability testing when no digital prototype exists. When you want to test multiple layout or flow options quickly. When budget is extremely limited.
+
+**When NOT to use:** When the product experience depends on interactivity, animation, or speed. When users cannot abstract from paper to digital (common with non-technical audiences).
+
+---
+
+## 8. Clickable Prototype
+
+| Attribute | Value |
+|-----------|-------|
+| Fidelity | Level 3 |
+| Best for | Usability, Desirability |
+| Setup effort | Medium (3-7 days) |
+| Evidence strength | Medium-High |
+
+A digital prototype built in a design tool (Figma, Framer) with clickable interactions. Users navigate realistic screens and complete tasks. Tests usability, flow, and emotional response to the design.
+
+**When to use:** When paper prototypes are insufficient (the experience depends on visual design, micro-interactions, or realistic content). When testing with users who need a near-real experience to provide honest feedback.
+
+**When NOT to use:** When a paper prototype would suffice (over-investing in fidelity). When the core assumption is about demand or willingness to pay (prototypes test experience, not commitment).
+
+---
+
+## 9. Prototype Usability Test
+
+| Attribute | Value |
+|-----------|-------|
+| Fidelity | Level 3 |
+| Best for | Usability |
+| Setup effort | Medium (1-2 weeks including prototype) |
+| Evidence strength | High |
+
+A structured usability test using a clickable prototype. Users complete specific tasks while an observer records completion rates, error rates, time on task, and confusion points. Follows a formal test script with defined success criteria.
+
+**When to use:** When usability is a critical assumption. When you need quantitative usability metrics (task completion rate, error rate) in addition to qualitative observations. When the interaction model is novel and untested.
+
+**When NOT to use:** When you only need to test demand (use a landing page instead). When 5 users are not available (minimum for pattern detection).
+
+---
+
+## 10. A/B Test
+
+| Attribute | Value |
+|-----------|-------|
+| Fidelity | Level 3 |
+| Best for | Viability, Desirability |
+| Setup effort | Medium (1-2 weeks) |
+| Evidence strength | High |
+
+Two or more variants shown to randomly assigned user groups. Measures which variant performs better on a defined metric (conversion, click-through, engagement). Requires sufficient traffic for statistical significance.
+
+**When to use:** When comparing two specific approaches (pricing tiers, value proposition framings, feature configurations). When you have enough traffic (200+ per variant minimum).
+
+**When NOT to use:** When traffic is too low for statistical significance. When the variants are not clearly different. When you are testing whether the concept works at all (A/B tests compare options, they do not validate concepts).
+
+---
+
+## 11. Pre-order / Letter of Intent
+
+| Attribute | Value |
+|-----------|-------|
+| Fidelity | Level 3 |
+| Best for | Viability |
+| Setup effort | Low-Medium (2-5 days) |
+| Evidence strength | High |
+
+Ask users to commit financially — a refundable pre-order, a letter of intent, or a deposit. Measures willingness to pay with real commitment (not just stated intent). The strongest viability signal short of actual sales.
+
+**When to use:** When the critical assumption is willingness to pay at a specific price point. When you have a warm audience from prior desirability testing. When the product can be described clearly enough for a purchase decision.
+
+**When NOT to use:** When the product concept is too abstract for a purchase decision. When your audience or market norms make pre-orders unusual. When you cannot fulfill the commitment (ethical obligation to deliver or refund).
+
+---
+
+## 12. Crowdfunding Test
+
+| Attribute | Value |
+|-----------|-------|
+| Fidelity | Level 3 |
+| Best for | Viability, Desirability |
+| Setup effort | High (2-4 weeks) |
+| Evidence strength | High |
+
+Launch a crowdfunding campaign (Kickstarter, Indiegogo) with a funding goal. Measures both demand (number of backers) and willingness to pay (average pledge). Provides public social proof and market validation.
+
+**When to use:** When the product is physical or has a strong visual/emotional appeal. When you want to test demand and viability simultaneously. When the crowdfunding platform's audience overlaps with your target segment.
+
+**When NOT to use:** For B2B products (crowdfunding audiences skew consumer). When you cannot deliver on the campaign promise. When the product requires extensive explanation (crowdfunding rewards simple concepts).
+
+---
+
+## 13. Concierge
+
+| Attribute | Value |
+|-----------|-------|
+| Fidelity | Level 4 |
+| Best for | Feasibility, Usability, Viability |
+| Setup effort | High (2-4 weeks) |
+| Evidence strength | High |
+
+Manually deliver the full value proposition to a small group of real users. Unlike Wizard of Oz (where users think they are using technology), in a Concierge test users know a human is providing the service. Tests whether the value proposition resonates when fully delivered.
+
+**When to use:** When you need to test all four assumption types simultaneously. When the product is a service or has a strong service component. When you need deep qualitative evidence about the full user experience.
+
+**When NOT to use:** When you only need to test demand (too expensive for a demand test). When the product is purely self-serve software with no service component. When you cannot sustain the manual effort for 5-10 customers over 2-4 weeks.
+
+---
+
+## 14. Pocket Test (Willingness to Pay)
+
+| Attribute | Value |
+|-----------|-------|
+| Fidelity | Level 2-3 |
+| Best for | Viability |
+| Setup effort | Low (1-3 days) |
+| Evidence strength | Medium-High |
+
+After demonstrating the value proposition (via demo, Wizard of Oz, or prototype), ask users to commit to a specific price. Techniques include: Van Westendorp pricing study (at what price is this too cheap / too expensive?), direct "would you pay $X" with credit card entry, or pricing page A/B test.
+
+**When to use:** When viability is a critical assumption and you need pricing data. After desirability has been validated (users must want it before you test price). When you need to compare multiple price points.
+
+**When NOT to use:** Before validating desirability (users who do not want the product cannot provide useful pricing data). As a survey-only exercise (stated willingness to pay is unreliable — pair with a commitment mechanism).
+
+---
+
+## 15. Competitor Comparison Test
+
+| Attribute | Value |
+|-----------|-------|
+| Fidelity | Level 2-3 |
+| Best for | Desirability, Usability |
+| Setup effort | Medium (1-2 weeks) |
+| Evidence strength | Medium |
+
+Present users with your solution concept alongside existing alternatives (competitors or current workarounds). Users evaluate, compare, and state preferences. Measures differentiation and switching intent.
+
+**When to use:** When the market has existing solutions and your hypothesis is about differentiation. When you need to understand whether your approach is meaningfully better than alternatives.
+
+**When NOT to use:** When no comparable solutions exist (greenfield markets). When the comparison is unfair (comparing a concept to a polished product). When users are not familiar enough with alternatives to make an informed comparison.

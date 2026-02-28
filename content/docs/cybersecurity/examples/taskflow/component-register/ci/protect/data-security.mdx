@@ -1,0 +1,57 @@
+---
+title: "PR.DS: Data Security"
+description: Build Pipeline example for data-security
+---
+
+For methodology guidance, see [PR.DS: Data Security](/docs/cybersecurity/functions/protect/data-security).
+
+---
+
+### PR.DS-01: Data at rest
+
+| Data store | Encryption method | Key management | Key rotation |
+|---|---|---|---|
+| GitHub Secrets | AES-256 (GitHub-managed, libsodium sealed box) | GitHub-managed | Automatic (GitHub managed). Manual rotation of secret values quarterly. |
+| AWS ECR (Docker images) | AES-256 (SSE-S3 or KMS) | AWS KMS managed | Annually (AWS managed) |
+| GitHub Actions cache | Encrypted at rest (GitHub-managed) | GitHub-managed | Cache expires after 7 days |
+| Workflow run logs | Encrypted at rest (GitHub-managed) | GitHub-managed | Logs retained 90 days |
+
+**Controls:** <span style={{whiteSpace: 'nowrap'}}>SC-CI-3.1</span> (minimal secret scope -- secrets scoped to environment/repository, not org-wide), <span style={{whiteSpace: 'nowrap'}}>SC-CI-4.1</span> (image signing with cosign verifies integrity of stored artifacts)
+
+---
+
+### PR.DS-02: Data in transit
+
+| Communication path | Protocol | Minimum version | Additional controls |
+|---|---|---|---|
+| Developer to GitHub | HTTPS / SSH | TLS 1.2 / SSH protocol 2 | GitHub enforces HTTPS/SSH. No plaintext git protocols allowed. |
+| GitHub Actions to GitHub API | HTTPS | TLS 1.2 | GITHUB_TOKEN scoped per-job with minimal permissions (<span style={{whiteSpace: 'nowrap'}}>SC-CI-2.2</span>) |
+| GitHub Actions to AWS (OIDC) | HTTPS | TLS 1.2 | OIDC token exchange via STS endpoint. No static credentials in transit. (<span style={{whiteSpace: 'nowrap'}}>SC-CI-3.3</span>) |
+| GitHub Actions to ECR | HTTPS | TLS 1.2 | AWS SDK enforces HTTPS. IAM authentication via OIDC-derived credentials. |
+| GitHub Actions to Docker Hub | HTTPS | TLS 1.2 | Docker CLI enforces HTTPS for registry operations. |
+
+**Controls:** <span style={{whiteSpace: 'nowrap'}}>SC-CI-3.2</span> (secret scanning in logs prevents secrets in transit via log output)
+
+---
+
+### PR.DS-10: Data in use
+
+| Control | What it covers | Implementation |
+|---|---|---|
+| Secret masking in logs | Secrets never appear in workflow log output | GitHub automatically masks any value stored as a secret. Additional log scrubbing regex catches base64-encoded or partial secret values. (<span style={{whiteSpace: 'nowrap'}}>SC-CI-3.2</span>) |
+| No secrets in build artifacts | Secrets never baked into Docker images or packages | Multi-stage Docker builds discard build-time secrets. CI step verifies no secret patterns in final image layers. |
+| Ephemeral runner environment | Secrets not persisted after job completion | GitHub-hosted runners are disposable VMs. Environment is destroyed after each job. No cross-job secret persistence. |
+| OIDC token scoping | Deployment credentials valid only for specific job context | OIDC subject claim includes repo, branch, and environment. Token cannot be reused outside the originating workflow run. (<span style={{whiteSpace: 'nowrap'}}>SC-CI-3.3</span>) |
+
+---
+
+### PR.DS-11: Backups
+
+| Data source | Backup frequency | Storage location | Encryption | Restore test cadence |
+|---|---|---|---|---|
+| Source code (GitHub repo) | Continuous (Git distributed) | GitHub (primary) + developer local clones | GitHub-managed encryption at rest | N/A (inherent in Git distributed model) |
+| GitHub Secrets | No backup (re-provision from source of truth) | Secrets manager / password vault (source of truth) | AES-256 | Annually (verify re-provisioning procedure) |
+| ECR images | Versioned (immutable tags + image lifecycle policy) | AWS ECR (same region) + cross-region replication for critical images | AES-256 (KMS) | Semi-annually |
+| Workflow definitions | Continuous (Git versioned) | GitHub repository | GitHub-managed encryption at rest | N/A (inherent in Git history) |
+
+---

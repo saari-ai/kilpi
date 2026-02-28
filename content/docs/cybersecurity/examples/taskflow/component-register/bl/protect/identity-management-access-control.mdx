@@ -1,0 +1,74 @@
+---
+title: "PR.AA: Identity Management, Authentication, and Access Control"
+description: Billing Portal example for identity management, authentication, and access control
+---
+
+For methodology guidance, see [PR.AA: Identity Management, Authentication, and Access Control](/docs/cybersecurity/functions/protect/identity-management-access-control).
+
+---
+
+### PR.AA-01: Identity and credential management
+
+| Identity type | Credential type | Provisioning | Rotation schedule | Revocation trigger |
+|---|---|---|---|---|
+| Billing admin | Password (bcrypt cost 12) + MFA (TOTP) | Manually provisioned by existing admin | User-initiated. Forced after compromise. | Account deletion or admin lockout. |
+| API service (Stripe) | Secret API key (separate from Taskflow keys) | Generated in Stripe dashboard, stored in secrets manager | Quarterly | Key compromise detected. |
+| Database (billing app user) | PostgreSQL password | Provisioned via infrastructure-as-code | Quarterly | Infrastructure rotation cycle. |
+| Customer (billing portal) | Session token (via Taskflow auth) | Delegated to Taskflow core authentication | Managed by Taskflow auth service | Session expiry or account deletion. |
+
+**Controls:** <span style={{whiteSpace: 'nowrap'}}>SC-BL-2.1</span> (admin login rate limiting), <span style={{whiteSpace: 'nowrap'}}>SC-BL-2.2</span> (admin MFA)
+
+---
+
+### PR.AA-02: Identity proofing
+
+| Identity type | Proofing method | Binding |
+|---|---|---|
+| Billing admin | Email verification link sent during provisioning. Link expires after 24 hours. | Email address verified before admin access is granted. |
+| Customer | Identity proofed by Taskflow core authentication. Billing Portal trusts Taskflow session. | Bound to Taskflow user account. |
+
+**Controls:** <span style={{whiteSpace: 'nowrap'}}>SC-BL-2.2</span> (admin MFA required for admin-level access)
+
+---
+
+### PR.AA-03: Authentication methods
+
+| Actor | Auth method | MFA required | Password / credential policy | Reauthentication |
+|---|---|---|---|---|
+| Billing admin | Email + password, session cookie | Yes (TOTP) | Min 12 chars, no known-breached passwords (HaveIBeenPwned check) | Session expires after 2h inactivity, 8h absolute |
+| Customer | Delegated to Taskflow auth (session cookie) | Per Taskflow policy | Per Taskflow policy | Per Taskflow session policy |
+| API to Stripe | Server-side API key | N/A | Key stored in secrets manager, rotated quarterly | Per-request authentication via key |
+| Stripe webhooks | HMAC signature (Stripe-Signature header) | N/A | Signing secret stored in secrets manager | Per-request signature validation |
+
+**Controls:** <span style={{whiteSpace: 'nowrap'}}>SC-BL-2.1</span> (rate limiting), <span style={{whiteSpace: 'nowrap'}}>SC-BL-2.3</span> (admin session management)
+
+---
+
+### PR.AA-04: Identity assertions
+
+| Assertion type | Standard | Protection | Verification |
+|---|---|---|---|
+| Admin session cookie | HTTP cookie (HttpOnly, Secure, SameSite=Strict) | Not readable by client JavaScript. Transmitted only over HTTPS. | Server-side session lookup on every request. |
+| Customer session cookie | HTTP cookie (via Taskflow auth) | Managed by Taskflow core authentication. | Validated against Taskflow session store. |
+| Stripe webhook signature | HMAC-SHA256 | Signing secret stored in secrets manager | Signature verified on every webhook request before processing. |
+
+---
+
+### PR.AA-05: Access permissions and least privilege
+
+| Role / principal | Access scope | Model | Review cadence |
+|---|---|---|---|
+| Customer | Own invoices, subscription, and payment methods only. Cannot access other customers' data. | Application-level tenant isolation (customer ID in all queries) | Continuous (enforced by code) |
+| Billing admin | All customer billing data within their workspace. Invoice management, refund processing, subscription changes. | Role-based access control (RBAC) | Quarterly |
+| Application DB user | SELECT, INSERT, UPDATE, DELETE only on billing tables. No DDL. No system tables. | PostgreSQL role with explicit grants | Quarterly (infrastructure review) |
+| Stripe API key | Scoped to billing operations only (charges, invoices, subscriptions). No account-level access. | Stripe restricted API key | Quarterly |
+
+**Controls:** <span style={{whiteSpace: 'nowrap'}}>SC-BL-4.1</span> (least-privilege DB user), <span style={{whiteSpace: 'nowrap'}}>SC-BL-4.2</span> (tenant isolation for invoice access), <span style={{whiteSpace: 'nowrap'}}>SC-BL-4.3</span> (admin RBAC)
+
+---
+
+### PR.AA-06: Physical access
+
+The Billing Portal runs entirely on AWS managed infrastructure. There is no physical hardware managed by the organization. Physical access controls are delegated to AWS under the shared responsibility model. AWS maintains SOC 2 and ISO 27001 certifications covering physical security of data centers.
+
+---

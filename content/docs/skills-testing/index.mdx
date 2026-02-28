@@ -1,0 +1,155 @@
+---
+title: Skills Testing
+description: Testing Fiksu skills — ensuring agent workflows behave correctly across sessions, models, and updates.
+---
+
+Skills Testing is a cross-cutting concern for all Fiksu methodologies. Every skill that drives a workflow — Product Discovery, Cybersecurity, Product Validation — needs a way to verify that it activates correctly, calls the right tools, manages state properly, and produces quality output.
+
+## The problem
+
+Skills are instructions that shape agent behaviour. They are non-deterministic by nature. The same skill, given the same input, may produce different tool call sequences, different outputs, and different interaction patterns across runs, models, and context lengths.
+
+This makes traditional unit testing insufficient. A skill test must answer two questions:
+
+1. **Deterministic**: Did the agent take the right actions? (correct skill activated, correct MCP tools called, correct arguments passed, no docs loaded into main context)
+2. **Qualitative**: Is the output good? (are hypotheses falsifiable, is evidence weighted conservatively, does the research plan match the hypotheses)
+
+## Architecture
+
+Skills Testing follows the same thin orchestrator pattern used by Fiksu skills themselves.
+
+```
+skill-test (orchestrator skill)
+  ├── Reads: test case definitions from the target skill's tests/ directory
+  ├── Runs: claude -p per test case (isolated process — natural sandbox)
+  ├── Checks: deterministic assertions via stream parsing
+  ├── Judges: qualitative assertions via sub-agent (LLM-as-judge)
+  └── Reports: results to user + orch
+```
+
+### Isolation
+
+Each test case runs in its own `claude -p` process. This gives natural isolation — the skill under test cannot interfere with the test runner, and the test runner's context is not polluted by methodology docs or sub-agent output.
+
+```bash
+claude -p "$PROMPT" \
+  --output-format stream-json \
+  --max-turns $MAX_TURNS \
+  --permission-mode bypassPermissions
+```
+
+The JSONL stream output is parsed for tool call events, skill activations, and text responses.
+
+### Sub-agents as judges
+
+For qualitative assertions, the test runner spawns sub-agents that act as LLM judges. Each judge receives the test case's expected quality criteria and the actual output, and returns a pass/fail with reasoning.
+
+## Test case structure
+
+Test cases live alongside the skill they test:
+
+```
+.claude/skills/product-discovery/
+  ├── SKILL.md
+  └── tests/
+      ├── activation-cold-start.yaml
+      ├── activation-with-context.yaml
+      ├── resume-existing-discovery.yaml
+      ├── problem-framing-output-quality.yaml
+      └── evidence-evaluation-weights.yaml
+```
+
+### Test case format
+
+```yaml
+name: Resume existing discovery from cold start
+description: >
+  When activated with no prior conversation context, the skill should
+  present existing discoveries from orch and let the user pick one.
+
+setup:
+  orch:
+    - create_work_scope:
+        namespace: pd.discovery
+        name: Test Discovery
+        keyPrefix: TD
+    - create_work_scope:
+        namespace: pd.hypothesis
+        name: Users struggle with onboarding
+        parentId: $TD  # references the discovery created above
+
+prompt: "I want to continue a product discovery session"
+
+max_turns: 5
+
+expect:
+  # Deterministic — parsed from JSONL stream
+  skill_activated: product-discovery
+  tool_calls:
+    - list_work_scopes_by_namespace:
+        namespace: pd.discovery
+  tool_calls_absent:
+    - Read  # should not load methodology docs into main context
+
+  # Qualitative — evaluated by LLM judge
+  quality:
+    - "Presents the existing 'Test Discovery' to the user with its status"
+    - "Does not ask the user to describe their problem from scratch"
+    - "Offers to resume the existing discovery"
+
+teardown:
+  orch:
+    - delete_work_scope: $TD
+```
+
+### Test case fields
+
+| Field | Purpose |
+|-------|---------|
+| `name` | Human-readable test name |
+| `description` | What the test verifies and why |
+| `setup` | State to create before running (orch work scopes, files, etc.) |
+| `prompt` | The user message sent to `claude -p` |
+| `max_turns` | Cap on agent turns to prevent runaway execution |
+| `expect.skill_activated` | Which skill should be activated |
+| `expect.tool_calls` | MCP tools that must be called, with argument assertions |
+| `expect.tool_calls_absent` | Tools that must NOT be called |
+| `expect.quality` | Natural language assertions evaluated by LLM judge |
+| `teardown` | State to clean up after the test |
+
+## Open problems
+
+### Data seeding
+
+The hardest part of skill testing is setting up known state. A test that verifies "resume an existing discovery" needs a discovery to exist in orch before the test runs, and needs it cleaned up after.
+
+Current thinking:
+- **Orch seeding**: the `setup` block creates work scopes via MCP before the test prompt is sent. The `teardown` block deletes them.
+- **File seeding**: for skills that read local files, the setup block can create temporary files.
+- **Conversation context seeding**: for tests that require prior conversation (Situation A/B activation), the prompt may need to include synthetic conversation history.
+
+Seeding is not yet implemented. The test case format above represents the target design.
+
+### Model variance
+
+Skills behave differently across models (Haiku, Sonnet, Opus). A test suite should run against all target models and track which pass on which. A skill that only works on Opus is less valuable than one that works on Sonnet.
+
+### Flakiness
+
+Non-deterministic agents produce non-deterministic test results. Anthropic recommends using Pass@k (at least one success in k attempts) and Pass^k (all k attempts succeed) to distinguish capability from reliability. A skill that passes 4/5 times has a capability but not reliability.
+
+### Context window pressure
+
+Long-running tests with many turns consume context. The `max_turns` cap prevents runaway execution, but some skill workflows genuinely need many turns. Tests should be designed to exercise the minimum number of turns needed to verify the assertion.
+
+## Relationship to skills
+
+Skills Testing is not methodology-specific. It applies to every Fiksu skill:
+
+| Skill | Example test cases |
+|-------|--------------------|
+| Product Discovery | Activation flow, hypothesis quality, evidence weighting, orch state management |
+| Cybersecurity | Correct template selection, NIST CSF mapping, component vs. org scope |
+| Product Validation | Handoff from Discovery, experiment design quality |
+
+Each skill owns its own test cases. The testing skill provides the runner and the evaluation infrastructure.

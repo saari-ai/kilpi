@@ -1,0 +1,102 @@
+---
+title: Composability
+description: How the Devil's Advocate framework combines with domain skills to change agent behaviour
+---
+
+The Devil's Advocate framework is designed to be composed with domain skills. It modifies **how** domain knowledge is applied without changing **what** the domain contains. Devil's advocacy is not a standalone skill — it is a modifier that reshapes the agent's engagement posture when active alongside a domain.
+
+## The composability model
+
+A domain skill gives an agent expertise. The Devil's Advocate framework gives it adversarial rigour.
+
+| Configuration | Agent behaviour |
+|---------------|----------------|
+| Domain skill alone | Produce the answer. "Here is the security architecture for your system." |
+| Devil's Advocate alone | Adversarial thinking without subject matter. Limited to surface-level challenges. |
+| Domain skill + Devil's Advocate | Challenge the answer with domain depth. "Your security architecture assumes the internal network is trusted. What evidence supports that assumption given that 60% of breaches involve lateral movement from compromised internal hosts?" |
+
+When devil's advocacy is active alongside a domain skill, the agent's default shifts. Instead of optimizing for **answer quality** (the best possible output), it optimizes for **decision quality** (the best possible evaluation of the output). The answer may still be excellent — but it will have been tested before being affirmed.
+
+## The default shift
+
+Without devil's advocacy, an agent with domain expertise will:
+1. Receive a question or decision
+2. Apply its domain knowledge
+3. Produce the best answer it can
+
+With devil's advocacy active, the agent will:
+1. Receive a question or decision
+2. [Analyze the context](/docs/devils-advocate/context) — stakes, reversibility, uncertainty
+3. Apply its domain knowledge to identify the answer **and** the answer's vulnerabilities
+4. [Select a mode](/docs/devils-advocate/modes) appropriate to the context
+5. Challenge at the appropriate [intensity](/docs/devils-advocate/calibration)
+6. Synthesize — present the strengthened position
+
+The critical change is step 3. The agent uses its domain expertise *twice* — once to build and once to break. Domain knowledge is what makes the challenge specific rather than generic.
+
+## Domain combinations
+
+### Devil's Advocate + Cybersecurity
+
+The most natural pairing. Security thinking is inherently adversarial.
+
+**Without DA:** The agent applies the security methodology — identifies assets, maps threats using STRIDE, produces a threat register with controls. The output is thorough.
+
+**With DA:** The agent does the same work, then turns on itself. "This threat model covers the standard attack surfaces. But it assumes the CI/CD pipeline is trusted. What happens if an attacker compromises the build system? That's not in your threat register because it's infrastructure, not application — but it's your highest-leverage single point of failure."
+
+**What DA adds to security:** Security methodologies are comprehensive by design, but they can become mechanical. DA forces the question: *are we actually catching the threats that matter, or just the threats the checklist mentions?* It pushes past compliance-level security toward genuine adversarial thinking about what an actual attacker would target.
+
+### Devil's Advocate + Product Discovery
+
+Discovery is about finding problems worth solving. Devil's advocacy challenges whether you've actually found one.
+
+**Without DA:** The agent helps map the opportunity space, conduct interviews, score opportunities. The output is a prioritised list of problems to solve.
+
+**With DA:** The agent challenges the interpretation of evidence. "You've identified 'slow onboarding' as the top problem. But your interview data shows that 4 of 6 users who mentioned onboarding were power users complaining about features being hidden — that's a discoverability problem, not an onboarding problem. If you solve for onboarding, you'll make things easier for new users and harder for your best users."
+
+**What DA adds to discovery:** Discovery suffers from pattern-matching bias — people see the pattern they expect. DA challenges whether the pattern in the data is the actual pattern or a projection. It forces sharper distinction between signal and noise, between what users say and what they mean.
+
+### Devil's Advocate + Product Validation
+
+Validation tests whether solutions work. Devil's advocacy tests whether the tests themselves are valid.
+
+**Without DA:** The agent helps design experiments, define success criteria, and interpret results. The output is a validated or invalidated hypothesis.
+
+**With DA:** The agent challenges the experiment design. "Your success criterion is 15% conversion on the landing page. But your test traffic is coming from your existing mailing list — people who already know and trust your brand. A 15% conversion from warm traffic tells you nothing about whether cold traffic will convert. You're validating familiarity, not the value proposition."
+
+**What DA adds to validation:** Validation's biggest failure mode is testing the wrong thing and getting a confident answer to the wrong question. DA challenges the experimental design itself — the sample, the criteria, the measurement, the interpretation — not just the outcome.
+
+### Devil's Advocate + Mentorship
+
+These two modifier disciplines overlap and complement.
+
+**Overlap:** Mentorship's [Collaborative Exploration](/docs/mentorship/modes#collaborative-exploration) mode already involves challenging ideas and pushing back. Devil's advocacy formalises this with specific techniques and intensity calibration.
+
+**Differentiation:** Mentorship's goal is **development** — growing the person's capability. Devil's advocacy's goal is **decision quality** — strengthening the idea. A mentor using guided discovery asks questions to help the person learn. A devil's advocate asks questions to stress-test the idea.
+
+**Combined:** When both are active, the agent can choose which goal to prioritise per interaction turn. For a junior person presenting their first architecture proposal:
+- **Mentorship alone** would coach them through improvements
+- **Devil's Advocate alone** would challenge the architecture
+- **Both active** — the agent challenges the architecture *at a calibration that develops the person*. It uses [Steel Man Then Break](/docs/devils-advocate/modes#steel-man-then-break) to show it understands their reasoning before challenging it. It paces the challenge so each objection becomes a learning opportunity. It ends with synthesis that teaches, not just evaluates.
+
+The combination produces what experienced mentors do naturally: challenge that develops rather than deflates.
+
+## Composability rules
+
+### Domain knowledge makes challenges specific
+
+A devil's advocate without domain knowledge produces generic challenges: "What if it fails?" A devil's advocate with domain knowledge produces specific challenges: "What if it fails *because your event-driven architecture creates a thundering herd when the circuit breaker resets and all backed-up messages replay simultaneously*?"
+
+Always use domain knowledge to make challenges concrete. The value of the DA framework is not in asking "have you thought about X?" — it's in identifying the specific X that matters.
+
+### Challenge the methodology, not just the output
+
+When combined with a domain skill, DA should occasionally challenge whether the methodology was applied correctly — not just whether the output looks right. "You've run STRIDE on the user-facing API, but the admin endpoints aren't in the threat model. The methodology requires comprehensive asset coverage. Why were those excluded?"
+
+### Maintain domain accuracy
+
+Challenges must be factually correct within the domain. A devil's advocate who raises objections based on misunderstood domain concepts loses all credibility. If you're not certain about a domain claim, frame the challenge as a question rather than an assertion: "Am I right that eventual consistency means you could serve stale data for up to 30 seconds?" not "You'll serve stale data for 30 seconds."
+
+### The challenge serves the domain goal
+
+The purpose of devil's advocacy in a domain context is to produce better domain outcomes — more secure systems, more validated products, more robust architectures. If the challenge isn't making the domain output better, recalibrate. The framework exists to serve the work, not to demonstrate rigour.

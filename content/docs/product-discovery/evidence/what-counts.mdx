@@ -1,0 +1,90 @@
+---
+title: What Counts as Evidence
+description: Evidence taxonomy, weight scale, and linking evidence to hypotheses
+---
+
+Not everything gathered during research is evidence. A customer saying "that sounds cool" is not evidence of a problem. A customer describing the last time they failed at a task, the workaround they built, and how much time it cost them — that is evidence.
+
+## Evidence taxonomy
+
+Evidence items fall into five categories. Each category has different strengths and typical weight ranges.
+
+### Direct quotes
+
+Verbatim statements from customers captured during interviews or support interactions. These carry the customer's own words and framing.
+
+| Strength | Limitation | Typical weight |
+|----------|------------|----------------|
+| Captures the customer's perspective authentically | Self-reported — may not reflect actual behaviour | 1-3 |
+
+**Example:** "Every time we get a new enterprise lead, I spend two days scrambling to figure out what security stuff we need. I usually just Google it and pick whatever checklist comes up first." (EV-FN-7)
+
+### Behavioural observations
+
+What you directly observed someone doing, either in person or via session recordings.
+
+| Strength | Limitation | Typical weight |
+|----------|------------|----------------|
+| Shows actual behaviour, not reported behaviour | Limited sample size, observer may influence behaviour | 2-4 |
+
+**Example:** Participant opened 4 browser tabs, visited 3 different security checklist sites, and spent 22 minutes comparing them before selecting one with no stated rationale for the choice. (EV-FN-12)
+
+### Quantitative data
+
+Numbers from analytics, surveys, market data, or other measured sources.
+
+| Strength | Limitation | Typical weight |
+|----------|------------|----------------|
+| Objective, scalable, precise | Lacks context — tells you what, not why | 2-5 |
+
+**Example:** 47% of new users who reach the security setup screen abandon it within 60 seconds. Of those who continue, 68% select the default configuration without modification. (EV-FN-15)
+
+### Market signals
+
+Data about the broader market — competitor activity, industry trends, regulatory changes, funding patterns.
+
+| Strength | Limitation | Typical weight |
+|----------|------------|----------------|
+| Contextualises the opportunity | Indirect — market trends do not prove your specific users have the problem | 1-3 |
+
+**Example:** Three compliance-automation startups raised Series A rounds in the past 12 months, all targeting SMB. Combined funding exceeds $40M. (EV-FN-20)
+
+### Expert opinion
+
+Insights from domain experts, industry analysts, or experienced practitioners.
+
+| Strength | Limitation | Typical weight |
+|----------|------------|----------------|
+| Deep domain knowledge, pattern recognition | Subject to individual biases and incentives | 1-3 |
+
+**Example:** Security consultant with 50+ SMB clients: "Most small teams implement 2-3 controls that are easy to find online but miss the controls that actually matter for their specific architecture." (EV-FN-22)
+
+## Weight scale
+
+Every evidence item is assigned a weight from 1-5. See [Conventions](/docs/product-discovery/conventions#evidence-weight-scale) for the full scale definition. When assigning weights, apply these guidelines:
+
+| Weight | Assign when | Do not assign when |
+|--------|-------------|-------------------|
+| 1 | Single data point, no corroboration | You have multiple confirming sources (upgrade to 2+) |
+| 2 | Multiple data points suggesting a trend | The pattern has been confirmed quantitatively (upgrade to 3+) |
+| 3 | Consistent signal across a reasonable sample | The finding is based on a single method only (consider whether 2 is more honest) |
+| 4 | Clear pattern confirmed across multiple methods (triangulation) | The quantitative data has methodological issues |
+| 5 | Large-sample quantitative data with statistical rigour | You are estimating or extrapolating |
+
+Be conservative. Most discovery evidence lands at weight 2-3. Upgrading to weight 4 requires triangulation. Weight 5 is rare in discovery — it typically requires a dedicated quantitative study.
+
+## Linking evidence to hypotheses
+
+Every evidence item in the [Evidence Register](/docs/product-discovery/templates/evidence-register) must link to at least one hypothesis (PH- reference). The link also indicates direction:
+
+| Direction | Meaning | Example |
+|-----------|---------|---------|
+| Supports | This evidence is consistent with the hypothesis being true | EV-FN-7 supports PH-FN-1 |
+| Refutes | This evidence contradicts the hypothesis | EV-FN-15 refutes PH-FN-3 |
+| Neutral | This evidence relates to the hypothesis but neither supports nor refutes it | EV-FN-20 is neutral on PH-FN-2 |
+
+An evidence item can support one hypothesis while refuting another. Link it to all relevant hypotheses with the appropriate direction for each.
+
+When you encounter evidence that does not fit any current hypothesis, either:
+1. Write a new hypothesis (PH-) that this evidence relates to, or
+2. Document it as an unlinked observation — it may become relevant during [Synthesis](/docs/product-discovery/synthesis)

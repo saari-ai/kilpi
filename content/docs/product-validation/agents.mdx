@@ -1,0 +1,23 @@
+---
+title: Agents
+description: AI agent skills that apply the Product Validation methodology.
+---
+
+## Skills
+
+The Product Validation skill set comes with a skill for applying the methodology, referencing sections of these docs as its source of truth.
+
+You don't have to use our skill — you can build your own or simply point your agent towards the docs as reference. However, our skill has been tuned to get the best outcomes when applying the methodology.
+
+| Skill | When activated | Reads from |
+|-------|---------------|------------|
+| <span style={{whiteSpace: 'nowrap'}}>product-validation</span> | Running a validation cycle for a proposed solution — from assumption decomposition through experiment design, execution, and decision | All 5 phases (HY, DE, EX, EV, DC), [Templates](/docs/product-validation/templates), [Technique Catalog](/docs/product-validation/techniques/catalog), [FocusNote](/docs/product-validation/examples/greenfield) example |
+
+The skill is available at [saari-ai/fiksu-skills](https://github.com/saari-ai/fiksu-skills). Claude users can activate it via the [Saari Claude Marketplace](https://github.com/saari-ai/claude-marketplace).
+
+## Workflow
+
+> [!TODO]
+> Design the end-to-end workflow for the `product-validation` skill — how it takes a Discovery Brief as input, decomposes assumptions, guides experiment design, supports evidence collection, and produces a Decision Record. The current model is outlined in the phases but the agent-specific interaction flow needs to be defined.
+>
+> Consider that Product Validation operates between Product Discovery (upstream) and engineering build (downstream). The skill should be composable — an agent using Product Discovery could hand off a Discovery Brief to Product Validation without human intervention, and Product Validation could hand off a Decision Record to a build planning agent. The skill should also work standalone for teams that manage Discovery and Build outside the Saari ecosystem.

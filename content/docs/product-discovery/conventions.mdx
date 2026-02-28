@@ -1,0 +1,106 @@
+---
+title: Conventions
+description: ID schemes, evidence scales, hypothesis lifecycle, and naming conventions used across the Product Discovery methodology
+---
+
+## ID schemes
+
+We use prefixed ID schemes to uniquely identify discovery artifacts across the documentation. The `{discovery}` segment in each scheme is a short code for the discovery being run (e.g., FN for FocusNote, TM for TeamMetrics). Discovery codes are defined when the discovery starts.
+
+### Hypothesis IDs (PH-)
+
+Problem hypotheses are the starting point. Every hypothesis gets a unique ID.
+
+| Format | Example | Meaning |
+|--------|---------|---------|
+| `PH-{discovery}-{n}` | PH-FN-1 | First hypothesis for the FocusNote discovery |
+
+### Evidence IDs (EV-)
+
+Evidence items are individual pieces of data gathered during customer research. Every evidence item links back to one or more hypotheses.
+
+| Format | Example | Meaning |
+|--------|---------|---------|
+| `EV-{discovery}-{n}` | EV-FN-1 | First evidence item for the FocusNote discovery |
+
+### Insight IDs (IN-)
+
+Insights are patterns extracted from multiple evidence items during synthesis. Each insight references the evidence items that support it.
+
+| Format | Example | Meaning |
+|--------|---------|---------|
+| `IN-{discovery}-{n}` | IN-FN-1 | First insight for the FocusNote discovery |
+
+### Opportunity Score IDs (OP-)
+
+Opportunity scores summarise the attractiveness of an opportunity. Each score references the insights and evidence that inform it.
+
+| Format | Example | Meaning |
+|--------|---------|---------|
+| `OP-{discovery}-{n}` | OP-FN-1 | First opportunity score for the FocusNote discovery |
+
+## Discovery codes
+
+Discovery codes are short (2-4 character) uppercase identifiers assigned when a discovery begins. They appear in every artifact ID for that discovery.
+
+**Rules:**
+
+- 2-4 uppercase letters
+- Derived from the discovery name (e.g., FocusNote → FN, TeamMetrics → TM, SmartBudget → SB)
+- Must be unique within the organisation's active discoveries
+- Defined in the Problem Hypothesis Log when the discovery is created
+
+**Examples:**
+
+| Discovery name | Code | Usage |
+|----------------|------|-------|
+| FocusNote | FN | PH-FN-1, EV-FN-3 |
+| TeamMetrics | TM | PH-TM-1, EV-TM-2 |
+| SmartBudget | SB | PH-SB-1, IN-SB-1 |
+
+## Evidence weight scale
+
+Every evidence item is assigned a weight from 1-5 indicating its strength.
+
+| Weight | Label | Definition | Example |
+|--------|-------|------------|---------|
+| 1 | Anecdotal | A single data point or offhand comment. No pattern. | One person mentions frustration in passing |
+| 2 | Directional | Multiple data points suggesting a trend, but not yet reliable. | 3 of 5 interviewees mention the same problem unprompted |
+| 3 | Moderate | Consistent signal across a reasonable sample. Enough to form hypotheses around. | 7 of 10 interviewees describe the same workflow breakdown |
+| 4 | Strong | Clear, repeated pattern with supporting quantitative data. High confidence. | Interview pattern confirmed by analytics showing 40% drop-off at the same step |
+| 5 | Statistically significant | Large-sample quantitative data with statistical rigour. Highest confidence. | Survey of 500 users with p < 0.05 significance on the core finding |
+
+When assigning weights, be conservative. Most interview evidence lands at weight 2-3. Weight 4-5 requires either large samples or triangulation across multiple methods.
+
+## Hypothesis lifecycle
+
+Every hypothesis moves through a defined lifecycle. The current state is tracked in the [Problem Hypothesis Log](/docs/product-discovery/templates/problem-hypothesis-log).
+
+| State | Meaning | Transitions to |
+|-------|---------|----------------|
+| Draft | Written but not yet actively being tested | Active |
+| Active | Currently being tested — evidence is being gathered | Supported, Refuted |
+| Supported | Evidence supports the hypothesis at sufficient weight | (terminal, feeds into Insight) |
+| Refuted | Evidence contradicts the hypothesis at sufficient weight | Retired, or back to Draft if reframed |
+| Retired | No longer relevant — either refuted, superseded, or out of scope | (terminal) |
+
+**Transition rules:**
+
+- A hypothesis moves from Draft to Active when research begins that specifically targets it.
+- A hypothesis moves to Supported when it has at least 3 evidence items with an average weight of 3 or higher, and no unresolved contradictory evidence at weight 3+.
+- A hypothesis moves to Refuted when contradictory evidence at weight 3+ outweighs supporting evidence, OR a single piece of evidence at weight 5 directly contradicts it.
+- A Refuted hypothesis can return to Draft if it is reframed to account for the refuting evidence. The reframed version gets a new PH- ID.
+- A hypothesis moves to Retired when the team decides it is no longer worth pursuing, regardless of evidence state.
+
+## Traceability rules
+
+Every artifact must trace back to its predecessors:
+
+| Artifact | Must reference |
+|----------|---------------|
+| Evidence (EV-) | At least one Hypothesis (PH-) |
+| Insight (IN-) | At least two Evidence items (EV-) |
+| Opportunity Score (OP-) | At least one Insight (IN-) |
+| Discovery Brief | All Supported hypotheses, key Evidence, all Insights, Opportunity Scores |
+
+Orphaned artifacts — evidence not linked to a hypothesis, or insights not grounded in evidence — indicate a gap. Either link them or document why they stand alone.

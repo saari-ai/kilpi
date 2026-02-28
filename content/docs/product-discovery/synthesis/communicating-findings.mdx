@@ -1,0 +1,94 @@
+---
+title: Communicating Findings
+description: Structuring and presenting the Discovery Brief for different audiences
+---
+
+The Discovery Brief is the master output artifact of Product Discovery. It is the single document that communicates what you found, what it means, and what the organisation should do about it. Everything in the brief traces back to evidence — it is not a pitch deck, it is a research report with a recommendation.
+
+## Discovery Brief structure
+
+The Discovery Brief follows a fixed structure. Each section is required. The template is available at [Discovery Brief Template](/docs/product-discovery/templates/discovery-brief).
+
+### 1. Executive Summary
+
+A 3-5 sentence summary of the entire discovery. State the problem, the key finding, and the recommendation. A reader who reads only this section should know what to do.
+
+**Format:** "We investigated [problem area] for [segment]. We found [key finding]. Based on [evidence strength], we recommend [proceed / pivot / kill]."
+
+### 2. Problem Statement
+
+The validated problem statement from [Problem Framing](/docs/product-discovery/problem-framing/problem-statements). If the problem statement evolved during discovery (it often does), present the final version and note what changed.
+
+### 3. Evidence Summary
+
+A summary of the evidence gathered, organised by hypothesis:
+
+| Hypothesis | Status | Supporting EV- | Refuting EV- | Avg weight |
+|-----------|--------|-----------------|--------------|------------|
+| PH-FN-1 | Supported | EV-FN-7, EV-FN-9, EV-FN-14 | None | 3.3 |
+| PH-FN-2 | Supported | EV-FN-8, EV-FN-12, EV-FN-16 | EV-FN-22 | 3.0 |
+| PH-FN-3 | Refuted | EV-FN-11 | EV-FN-15, EV-FN-19 | 2.8 |
+
+Include the total evidence count, the method breakdown (X interviews, Y observations, Z data analyses), and any bias assessment notes.
+
+### 4. Key Insights
+
+List each insight (IN-) with its statement, supporting evidence, and confidence level. Order by importance to the recommendation.
+
+**Example:**
+
+> **IN-FN-1** (High confidence): Solo founders default to generic security checklists because they cannot assess their own risk profile, which means a solution that provides contextual risk assessment would replace the most common workaround. — Based on EV-FN-7, EV-FN-8, EV-FN-11, EV-FN-12.
+
+### 5. Opportunity Score
+
+The opportunity scorecard (OP-) from [Opportunity Assessment](/docs/product-discovery/opportunity-assessment):
+
+| Dimension | Score | Rationale |
+|-----------|-------|-----------|
+| Market size | *n*/5 | *Brief rationale with evidence reference* |
+| Competitive intensity | *n*/5 | *Brief rationale with evidence reference* |
+| Feasibility | *n*/5 | *Brief rationale with evidence reference* |
+| Evidence strength | *n*/5 | *Based on evidence register metrics* |
+| **Overall** | ***n*/5** | |
+
+### 6. Recommendation
+
+One of three outcomes:
+
+| Recommendation | When to use | What comes next |
+|---------------|------------|-----------------|
+| **Proceed to validation** | Strong opportunity (avg 3.5+), clear problem, sufficient evidence | Hand off to [Product Validation](/docs/product-validation) with this brief as input |
+| **Pivot** | Evidence points to a different/better opportunity than originally targeted | Reframe the problem, return to [Problem Framing](/docs/product-discovery/problem-framing) |
+| **Kill** | Opportunity is too small, competition too strong, or feasibility too low | Archive the discovery. Document findings for future reference. |
+
+State the recommendation clearly. Then explain what additional evidence would change it. This intellectual honesty is critical — it tells the reader what you are confident about and what remains uncertain.
+
+### 7. Appendix
+
+- Full evidence register (or link to it)
+- Full hypothesis log (or link to it)
+- Interview participant summary (roles and segments, not names)
+- Market sizing methodology and assumptions
+- Competitive landscape detail
+
+## Audience adaptation
+
+The same Discovery Brief serves different audiences. Do not create separate documents — adapt the presentation:
+
+| Audience | What they care about | How to present |
+|----------|---------------------|----------------|
+| Executive/founder | Should we invest? How much? What is the risk? | Lead with Executive Summary and Recommendation. Use Opportunity Score for the business case. Keep evidence high-level. |
+| Product team | What should we build? For whom? What are the constraints? | Lead with Insights and Problem Statement. Deep-dive on customer research findings. Use the evidence chain. |
+| Stakeholders | Is this grounded in reality? Have we been rigorous? | Lead with Evidence Summary and methodology. Show the bias assessment. Walk through the traceability chain. |
+
+The brief itself stays the same. What changes is where you start, how deep you go into each section, and how much time you spend on evidence methodology vs implications.
+
+## Common pitfalls
+
+| Pitfall | Symptom | Fix |
+|---------|---------|-----|
+| Advocacy, not analysis | The brief reads like a sales pitch for the opportunity | Check every claim for evidence references. Remove unsupported enthusiasm. |
+| Data dump | Every interview quote is included. The brief is 30 pages. | Synthesise. The brief is a summary, not a transcription. Use the appendix for raw data. |
+| Missing recommendation | The brief presents findings but does not say what to do | Always end with a clear proceed/pivot/kill recommendation. |
+| Ignoring contradictory evidence | Refuting evidence is absent or buried | Give contradictory evidence its own section. Explain how you resolved the contradiction. |
+| Overconfidence | Recommendation is definitive despite weak evidence | Match confidence language to evidence strength. "We are confident..." requires weight 4+ evidence. "We believe..." is appropriate for weight 2-3. |

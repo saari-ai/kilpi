@@ -1,0 +1,60 @@
+---
+title: Techniques
+description: How to choose the right validation technique by fidelity level and assumption type
+---
+
+The [Technique Catalog](/docs/product-validation/techniques/catalog) provides 15 validation methods. This page explains how to select the right technique for a given hypothesis.
+
+## Selection framework
+
+Technique selection is driven by two factors:
+
+1. **Assumption type** — What kind of assumption is the hypothesis testing? (Desirability, Viability, Feasibility, Usability)
+2. **Minimum viable fidelity** — What is the lowest-fidelity technique that can produce credible evidence for this hypothesis?
+
+Always start with the lowest fidelity that fits. Escalate only when lower-fidelity results are inconclusive or when the assumption type demands user interaction.
+
+## Selection matrix
+
+| Assumption type | Level 1: Smoke test | Level 2: Wizard of Oz | Level 3: Prototype | Level 4: Concierge | Level 5: MVP |
+|----------------|--------------------|-----------------------|-------------------|-------------------|----|
+| **Desirability** | Landing page, Fake door, Painted door, Explainer video | Customer interview (solution) | Clickable prototype | Concierge | MVP |
+| **Viability** | Pre-order, Crowdfunding | Pocket test | A/B test (pricing) | Concierge | MVP |
+| **Feasibility** | — | Wizard of Oz | Paper prototype, Clickable prototype | Concierge | MVP |
+| **Usability** | — | Wizard of Oz | Prototype usability test, Paper prototype | Concierge | MVP |
+
+Cells marked "—" indicate that the fidelity level is generally too low to produce meaningful evidence for that assumption type.
+
+## Decision flow
+
+Use this flow to select a technique:
+
+1. **Identify the assumption type** from the hypothesis card (D, V, F, U).
+2. **Start at the lowest fidelity column** in the matrix above.
+3. **Check if a technique in that cell fits the hypothesis.** Can the technique produce evidence that directly addresses the hypothesis's "measurable outcome"?
+4. **If yes, select it.** Define success criteria in the [Design](/docs/product-validation/phases/design) phase.
+5. **If no, move one column right** (next fidelity level) and repeat.
+
+## Combining techniques
+
+Some hypotheses benefit from multiple techniques at different fidelity levels:
+
+- **Sequential escalation:** Run a Level 1 smoke test first. If it passes, escalate to Level 2-3 for deeper validation. This avoids spending on high-fidelity tests for ideas that fail basic demand testing.
+- **Parallel triangulation:** Run a quantitative test (landing page) and a qualitative test (solution interview) simultaneously. Converging evidence increases confidence beyond what either test achieves alone.
+- **Type coverage:** A desirability test (landing page) + viability test (pocket test) + usability test (prototype) covers three assumption types for the same solution. This is a common pattern for a full validation cycle.
+
+## Technique fit assessment
+
+Before committing to a technique, verify fit:
+
+| Check | Question |
+|-------|----------|
+| Evidence type match | Does the technique produce the kind of evidence the hypothesis needs? (quantitative vs qualitative) |
+| Sample size feasibility | Can you reach the required sample size with available resources and time? |
+| Audience access | Can you reach the target user segment through this technique? |
+| Budget alignment | Does the technique fit within the experiment's cost budget? |
+| Ethical considerations | Does the technique require deception that could damage trust? (e.g., fake door tests on existing customers) |
+
+If any check fails, select a different technique — do not force a poor fit.
+
+For the full catalog with detailed descriptions, see [Technique Catalog](/docs/product-validation/techniques/catalog).

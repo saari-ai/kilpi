@@ -1,0 +1,6 @@
+{
+  "title": "Devil's Advocate",
+  "description": "Devil's Advocate Framework",
+  "root": true,
+  "pages": ["index", "context", "modes", "calibration", "composability"]
+}

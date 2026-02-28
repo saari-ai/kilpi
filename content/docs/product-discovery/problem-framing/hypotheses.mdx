@@ -1,0 +1,83 @@
+---
+title: Hypotheses
+description: Writing, managing, and evolving falsifiable hypotheses throughout discovery
+---
+
+Hypotheses are the core unit of work in Product Discovery. Every research activity, every evidence item, and every insight traces back to a hypothesis. A hypothesis that cannot be proven wrong is not a hypothesis — it is an assumption.
+
+## Format
+
+Every hypothesis follows this structure:
+
+> **We believe [statement]. We'll know this is true when [supporting evidence]. We'll know this is false when [refuting evidence].**
+
+All three components are mandatory:
+
+| Component | Purpose | Common failure |
+|-----------|---------|----------------|
+| Statement | What you believe to be true | Too vague: "users want this" instead of "users of [segment] experience [problem] in [context]" |
+| Supporting evidence | What would confirm the belief | Too easy to satisfy: "someone agrees" instead of "5+ interviewees independently describe the same behaviour" |
+| Refuting evidence | What would disprove the belief | Missing entirely, or set to an impossible bar: "no one disagrees" |
+
+## Hypothesis types
+
+Not all hypotheses test the same thing. Categorising them helps ensure coverage across the problem space.
+
+### Problem hypotheses
+
+Test whether the problem actually exists as described.
+
+> **We believe [solo SaaS founders abandon security setup halfway through] (PH-FN-1). We'll know this is true when [founders describe starting and stopping security tasks during interviews, and analytics show > 50% drop-off in security setup flows]. We'll know this is false when [founders report completing security setup in one session and analytics show > 70% completion rates].**
+
+### User hypotheses
+
+Test assumptions about the user segment — who they are, what they value, how they behave.
+
+> **We believe [the primary users affected are technical founders with 1-3 years of experience, not non-technical founders] (PH-FN-2). We'll know this is true when [the problem appears consistently in interviews with technical founders but not with non-technical founders]. We'll know this is false when [non-technical founders describe the same problem with equal or greater intensity].**
+
+### Context hypotheses
+
+Test when and where the problem occurs — the triggers, environment, and conditions.
+
+> **We believe [the problem is most acute when founders are preparing for their first enterprise customer] (PH-FN-3). We'll know this is true when [founders link security urgency to enterprise sales conversations]. We'll know this is false when [the security problem appears equally across all business stages].**
+
+## Falsifiability
+
+A hypothesis must be falsifiable. This is the most common failure point. Test your hypothesis with these questions:
+
+1. **Can I describe specific evidence that would prove this wrong?** If not, rewrite.
+2. **Is the refuting evidence bar achievable?** If refutation requires proving a negative ("no one in the world disagrees"), the bar is too high.
+3. **Are the supporting and refuting evidence bars at the same difficulty level?** If it takes 1 interview to confirm but 100 to refute, the hypothesis is biased.
+4. **Could someone who disagrees with me design a study that might refute it?** If the hypothesis is structured so that any result confirms it, it is not falsifiable.
+
+### Examples of non-falsifiable hypotheses (do not use)
+
+| Statement | Why it fails |
+|-----------|-------------|
+| "Users would prefer a better experience" | Any improvement satisfies this. No evidence could refute it. |
+| "Some users have this problem" | With a large enough sample, you will always find some. It sets no threshold. |
+| "The market is growing" | Unfocused — what market? Growing how? What would refutation look like? |
+
+## Managing the hypothesis backlog
+
+Hypotheses are tracked in the [Problem Hypothesis Log](/docs/product-discovery/templates/problem-hypothesis-log). As discovery progresses, the backlog evolves:
+
+**Adding hypotheses:** New hypotheses emerge during Customer Research. When an interviewee describes a problem you did not anticipate, write a new hypothesis (new PH- ID) and add it to the backlog.
+
+**Splitting hypotheses:** If a hypothesis is too broad to test cleanly (evidence partially supports it and partially refutes it), split it into narrower hypotheses. The original moves to Retired; the new ones get fresh IDs.
+
+**Merging hypotheses:** If two hypotheses are effectively testing the same thing, merge them. Keep the stronger formulation, Retire the other, and consolidate evidence references.
+
+## Lifecycle states
+
+Every hypothesis has a lifecycle state. See [Conventions](/docs/product-discovery/conventions) for the full lifecycle definition and transition rules.
+
+| State | What it means for research |
+|-------|---------------------------|
+| Draft | Not yet being actively tested. Queued for future research. |
+| Active | Currently the target of research activities. Evidence is being gathered. |
+| Supported | Enough evidence supports it. Ready to feed into [Synthesis](/docs/product-discovery/synthesis). |
+| Refuted | Evidence contradicts it. Document why and move on. |
+| Retired | No longer relevant. Superseded, merged, or out of scope. |
+
+Aim to move hypotheses out of Draft quickly. A backlog full of Draft hypotheses means you are generating ideas faster than you are testing them. Prioritise the hypotheses most likely to change your direction and test those first.

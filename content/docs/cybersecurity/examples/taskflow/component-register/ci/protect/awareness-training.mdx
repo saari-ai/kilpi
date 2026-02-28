@@ -1,0 +1,31 @@
+---
+title: "PR.AT: Awareness and Training"
+description: Build Pipeline example for awareness-training
+---
+
+For methodology guidance, see [PR.AT: Awareness and Training](/docs/cybersecurity/functions/protect/awareness-training).
+
+---
+
+### PR.AT-01: General awareness
+
+| Topic | Audience | Delivery | Cadence |
+|---|---|---|---|
+| Supply chain attack patterns (dependency confusion, typosquatting, compromised Actions) | All developers | Team session + case study review (e.g., event-stream, ua-parser-js, codecov) | Annually, refreshed when major supply chain incident occurs |
+| Secure pipeline practices (never echo secrets, use OIDC over static keys, pin Actions to SHA) | All developers | Onboarding walkthrough + CI configuration checklist | Onboarding + continuous via PR reviews |
+| Secret handling in CI (never hardcode, never log, use environment-scoped secrets) | All developers | Onboarding briefing + CI enforcement (secret scanning) | Onboarding + continuous via CI |
+| Branch protection and code review requirements (why they exist, how to follow them) | All developers | Onboarding walkthrough + written policy | Onboarding + annually |
+| Incident escalation for pipeline compromise (who to contact, how to rotate credentials) | All team members | Onboarding briefing + pipeline incident runbook | Onboarding + refreshed after each incident |
+
+---
+
+### PR.AT-02: Specialized role training
+
+| Role | Training topics | Delivery | Cadence |
+|---|---|---|---|
+| Infrastructure owner | SLSA framework, GitHub Actions security hardening, OIDC configuration, Action pinning strategies | Self-study + external training (OpenSSF courses) | Annually |
+| Security lead | Supply chain threat landscape, SBOM generation, provenance verification, Sigstore ecosystem | External training / conference, self-study | Annually |
+| On-call engineer | Pipeline incident response, credential rotation procedures, emergency deployment bypass | Team exercise + tabletop simulation | Quarterly |
+| All developers | Workflow file security review (identifying risky patterns: `pull_request_target`, `workflow_dispatch` inputs, artifact trust) | Team knowledge sharing session | Semi-annually |
+
+---

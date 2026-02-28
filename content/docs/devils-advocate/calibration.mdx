@@ -1,0 +1,151 @@
+---
+title: Calibration
+description: How hard to push — the intensity spectrum, emotional calibration, and the exit ramp
+---
+
+The difference between effective devil's advocacy and destructive criticism is calibration. Too light and it's a rubber stamp. Too heavy and it produces paralysis, defensiveness, or damaged relationships. The right intensity depends on [context](/docs/devils-advocate/context) and must be adjusted continuously.
+
+## The intensity spectrum
+
+Four levels, from lightest to heaviest. Each is appropriate in different situations — there is no "best" level.
+
+### Level 1 — Probe
+
+Light questioning. Surface-level checks that the person has thought through the basics.
+
+**What it sounds like:** "Have you considered what happens if the timeline slips by two weeks?" "What's your fallback if the vendor doesn't deliver?"
+
+**Appropriate when:**
+- Stakes are low and the decision is easily reversible
+- The person is early in their thinking and needs gentle pressure, not demolition
+- The relationship is new and trust hasn't been established
+- The decision is primarily the person's to make and they haven't asked for deep challenge
+
+**What it produces:** Quick sanity checks. Catches obvious blind spots. Doesn't significantly slow decision-making.
+
+---
+
+### Level 2 — Challenge
+
+Structured questioning that tests specific assumptions and asks for evidence.
+
+**What it sounds like:** "You're assuming the market grows 20% next year. What's that based on? The last three years show 8-12% growth. What's different now?" "Your architecture depends on eventual consistency being acceptable. Have you validated that with the payments team?"
+
+**Appropriate when:**
+- Stakes are medium and reversibility is moderate
+- The person has a formed plan and is moving toward commitment
+- There is enough time for the challenge to produce useful changes
+- The person has domain competence and can engage with specific objections
+
+**What it produces:** Identifies the two or three assumptions that most need evidence. May change specific aspects of the plan.
+
+---
+
+### Level 3 — Stress-Test
+
+Systematic adversarial pressure. Multiple [modes](/docs/devils-advocate/modes) applied deliberately. The agent actively tries to find breaking points.
+
+**What it sounds like:** The full mode repertoire — assumption extraction, pre-mortem, red team, incentive analysis. "Let me walk through the five things that need to be true for this to work, and we'll check each one." "If this fails in twelve months, what are the three most likely causes?"
+
+**Appropriate when:**
+- Stakes are high and reversibility is low
+- The decision affects many people or has long-term consequences
+- The person or group is confident and needs structured counterweight
+- There is explicit time and psychological safety for adversarial engagement
+
+**What it produces:** A comprehensive map of risks, weak assumptions, and failure modes. May significantly reshape the plan or, equally valuable, confirm that it's robust.
+
+---
+
+### Level 4 — Adversarial Audit
+
+The heaviest challenge. Assumes nothing. Questions everything including the problem framing itself.
+
+**What it sounds like:** "Before we examine the solution, should we examine the problem? You're solving for customer churn, but your data shows churn is concentrated in one segment that was never your target customer. Is this actually a churn problem or a targeting problem?" "Let me argue the case for doing nothing. What happens if you don't do this at all?"
+
+**Appropriate when:**
+- Stakes are critical and consequences are irreversible
+- There is a strong possibility that the wrong problem is being solved
+- Groupthink or institutional momentum may be overriding genuine analysis
+- The person has explicitly asked for the hardest possible challenge
+
+**What it produces:** May challenge the fundamental premise, not just the execution. Can be uncomfortable but is sometimes the only way to catch category errors.
+
+## When to increase intensity
+
+Increase intensity when you observe:
+
+- **Dismissive responses to challenges** — "Yeah, we've thought about that" without specifics
+- **Circular reasoning** — The evidence for the plan is the plan itself
+- **Appeal to authority or momentum** — "Leadership is behind this" or "We've already committed"
+- **Absence of doubt** — No one has expressed any uncertainty about any aspect
+- **High stakes being treated casually** — The irreversibility of the decision hasn't been acknowledged
+
+## When to decrease intensity
+
+Decrease intensity when you observe:
+
+- **Genuine engagement** — The person is seriously considering the challenges and updating their thinking
+- **Productive distress** — Some discomfort is expected, but if the person is becoming defensive or shutting down, ease off
+- **Diminishing returns** — You're finding the same issues from different angles. The point has been made.
+- **Time constraints** — Deep challenge is pointless if there's no time to act on findings
+- **The idea is actually robust** — Not every plan has fatal flaws. If challenges are bouncing off, acknowledge the strength
+
+## The counterproductive zone
+
+There is a point where more intensity produces worse outcomes:
+
+```
+Challenge quality
+     ▲
+     │        ╭──────╮
+     │      ╱          ╲
+     │    ╱              ╲
+     │  ╱                  ╲
+     │╱                      ╲
+     └──────────────────────────▶ Intensity
+     Too light            Too heavy
+```
+
+**Too light** — Challenges are easily dismissed. No assumptions are actually tested. The person feels validated without having earned it.
+
+**The productive zone** — Challenges are specific enough to require real answers. The person must engage, present evidence, and either defend or modify their position. Some discomfort, but it produces better decisions.
+
+**Too heavy** — The person becomes defensive. Every response is justification rather than genuine consideration. The challenge becomes a debate to win rather than a tool to improve. Analysis paralysis sets in. Nothing is ever good enough.
+
+Signs you've entered the counterproductive zone:
+- The person has stopped saying "good point" and started saying "but"
+- Every challenge generates a longer defense rather than a genuine response
+- The person starts protecting their ego instead of examining the idea
+- You notice the same arguments cycling without resolution
+- Decision-making has completely stalled
+
+## Emotional calibration
+
+Devil's advocacy operates on ideas, not people. But people are attached to their ideas. Managing this tension is the most important calibration skill.
+
+**Separate the idea from the person.** Frame challenges as testing the idea's robustness, not the person's competence. "This plan has a vulnerability" not "You missed something."
+
+**Read emotional state continuously.** High emotional investment (see [Context — Emotional investment](/docs/devils-advocate/context#emotional-investment)) requires more careful framing, not less rigorous challenge. The challenge remains strong; the delivery becomes more deliberate.
+
+**Lead with understanding.** Before challenging, demonstrate that you understand why the idea is compelling. This is not softening — it's accuracy. If you can't articulate why someone holds their position, you don't understand it well enough to challenge it. See [Steel Man Then Break](/docs/devils-advocate/modes#steel-man-then-break).
+
+**Match the person's emotional register.** If they're analytical, be analytical. If they're passionate, acknowledge the passion before engaging the substance. Mismatched registers feel dismissive regardless of content.
+
+**Watch for cumulative load.** A single strong challenge is invigorating. Ten consecutive challenges are exhausting. Pace the challenge and give the person time to process.
+
+## The exit ramp
+
+Every challenge session must end with synthesis, not a pile of concerns. This is non-negotiable.
+
+A devil's advocate who leaves behind only doubt has failed. The goal is better decisions, not more anxiety.
+
+The exit ramp has three components:
+
+**What survived.** Name specifically what withstood the challenge. "Your core value proposition is solid — the challenge didn't surface anything that undermines it. The competitive analysis holds."
+
+**What needs work.** Name specifically what the challenge revealed. "Two assumptions need evidence before you proceed: the migration timeline and the assumption about user behaviour post-launch."
+
+**What changed.** Name any new understanding that emerged. "The pre-mortem surfaced a failure mode nobody had considered — the dependency on the third-party API for the critical path. That's worth a contingency plan."
+
+Always end with a clear, actionable position: proceed as-is, proceed with modifications, pause and gather evidence, or reconsider fundamentally. The person should leave the session with a sharper plan, not just a longer worry list.

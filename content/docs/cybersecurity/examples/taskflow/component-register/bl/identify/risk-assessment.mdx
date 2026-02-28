@@ -1,0 +1,130 @@
+---
+title: "ID.RA: Risk Assessment"
+description: Billing Portal example for risk assessment
+---
+
+For methodology guidance, see [ID.RA: Risk Assessment](/docs/cybersecurity/functions/identify/risk-assessment).
+
+---
+
+### ID.RA-01: Vulnerability identification
+
+| Asset | Vulnerability | Source | Validated | Severity | Status |
+|---|---|---|---|---|---|
+| <span style={{whiteSpace: 'nowrap'}}>SA-BL-2</span>, <span style={{whiteSpace: 'nowrap'}}>SA-BL-4</span> | <span id="ST-BL-1" style={{whiteSpace: 'nowrap'}}>ST-BL-1</span> Payment fraud via manipulated billing API requests | Threat modelling (STRIDE) | Yes | Critical | Controls implemented (<span style={{whiteSpace: 'nowrap'}}>SC-BL-1.3</span>, <span style={{whiteSpace: 'nowrap'}}>SC-BL-3.2</span>) |
+| <span style={{whiteSpace: 'nowrap'}}>SA-BL-2</span>, <span style={{whiteSpace: 'nowrap'}}>SA-BL-6</span> | <span id="ST-BL-2" style={{whiteSpace: 'nowrap'}}>ST-BL-2</span> Unauthorized invoice access via IDOR | Threat modelling (STRIDE) | Yes | High | Controls implemented (<span style={{whiteSpace: 'nowrap'}}>SC-BL-4.2</span>) |
+| <span style={{whiteSpace: 'nowrap'}}>SA-BL-2</span>, <span style={{whiteSpace: 'nowrap'}}>SA-BL-3</span> | <span id="ST-BL-3" style={{whiteSpace: 'nowrap'}}>ST-BL-3</span> Billing data tampering via SQL injection | Threat modelling (STRIDE) | Yes | Critical | Controls implemented (<span style={{whiteSpace: 'nowrap'}}>SC-BL-1.1</span>) |
+| <span style={{whiteSpace: 'nowrap'}}>SA-BL-2</span>, <span style={{whiteSpace: 'nowrap'}}>SA-BL-7</span> | <span id="ST-BL-4" style={{whiteSpace: 'nowrap'}}>ST-BL-4</span> Stripe API key exposure via logs or source code | Threat modelling (STRIDE) | Yes | Critical | Controls implemented (<span style={{whiteSpace: 'nowrap'}}>SC-BL-5.1</span>, <span style={{whiteSpace: 'nowrap'}}>SC-BL-5.2</span>) |
+| <span style={{whiteSpace: 'nowrap'}}>SA-BL-1</span>, <span style={{whiteSpace: 'nowrap'}}>SA-BL-2</span>, <span style={{whiteSpace: 'nowrap'}}>SA-BL-8</span> | <span id="ST-BL-5" style={{whiteSpace: 'nowrap'}}>ST-BL-5</span> Privilege escalation in billing admin panel | Threat modelling (STRIDE) | Yes | High | Controls implemented (<span style={{whiteSpace: 'nowrap'}}>SC-BL-4.3</span>) |
+| <span style={{whiteSpace: 'nowrap'}}>SA-BL-1</span>, <span style={{whiteSpace: 'nowrap'}}>SA-BL-6</span> | <span id="ST-BL-6" style={{whiteSpace: 'nowrap'}}>ST-BL-6</span> XSS in billing dashboard via invoice fields | Threat modelling (STRIDE) | Yes | High | Controls implemented (<span style={{whiteSpace: 'nowrap'}}>SC-BL-1.2</span>) |
+| <span style={{whiteSpace: 'nowrap'}}>SA-BL-2</span>, <span style={{whiteSpace: 'nowrap'}}>SA-BL-3</span> | <span id="ST-BL-7" style={{whiteSpace: 'nowrap'}}>ST-BL-7</span> SQL injection in billing queries | Threat modelling (STRIDE) | Yes | Critical | Controls implemented (<span style={{whiteSpace: 'nowrap'}}>SC-BL-1.1</span>) |
+| <span style={{whiteSpace: 'nowrap'}}>SA-BL-1</span>, <span style={{whiteSpace: 'nowrap'}}>SA-BL-2</span>, <span style={{whiteSpace: 'nowrap'}}>SA-BL-8</span> | <span id="ST-BL-8" style={{whiteSpace: 'nowrap'}}>ST-BL-8</span> Session hijacking of admin sessions | Threat modelling (STRIDE) | Yes | High | Controls implemented (<span style={{whiteSpace: 'nowrap'}}>SC-BL-2.3</span>) |
+| <span style={{whiteSpace: 'nowrap'}}>SA-BL-2</span>, <span style={{whiteSpace: 'nowrap'}}>SA-BL-6</span> | <span id="ST-BL-9" style={{whiteSpace: 'nowrap'}}>ST-BL-9</span> Invoice manipulation via unsigned API requests | Threat modelling (STRIDE) | Yes | High | Controls implemented (<span style={{whiteSpace: 'nowrap'}}>SC-BL-3.3</span>) |
+| <span style={{whiteSpace: 'nowrap'}}>SA-BL-2</span>, <span style={{whiteSpace: 'nowrap'}}>SA-BL-4</span> | <span id="ST-BL-10" style={{whiteSpace: 'nowrap'}}>ST-BL-10</span> Stripe webhook spoofing | Threat modelling (STRIDE) | Yes | High | Controls implemented (<span style={{whiteSpace: 'nowrap'}}>SC-BL-3.1</span>) |
+| <span style={{whiteSpace: 'nowrap'}}>SA-BL-1</span>, <span style={{whiteSpace: 'nowrap'}}>SA-BL-2</span>, <span style={{whiteSpace: 'nowrap'}}>SA-BL-8</span> | <span id="ST-BL-11" style={{whiteSpace: 'nowrap'}}>ST-BL-11</span> Credential stuffing on admin login | Threat modelling (STRIDE) | Yes | High | Controls implemented (<span style={{whiteSpace: 'nowrap'}}>SC-BL-2.1</span>, <span style={{whiteSpace: 'nowrap'}}>SC-BL-2.2</span>) |
+| <span style={{whiteSpace: 'nowrap'}}>SA-BL-1</span>, <span style={{whiteSpace: 'nowrap'}}>SA-BL-2</span> | <span id="ST-BL-12" style={{whiteSpace: 'nowrap'}}>ST-BL-12</span> Exploitation via known CVE in npm dependency | Threat modelling + Dependabot | Yes | High | Controls implemented (<span style={{whiteSpace: 'nowrap'}}>SC-BL-7.1</span>) |
+
+---
+
+### ID.RA-02: Threat intelligence
+
+| Intelligence source | Type | Frequency | What it covers |
+|---|---|---|---|
+| MITRE ATT&CK | Threat taxonomy | Referenced during threat modelling | Attack technique classification for all 12 threats (T1190, T1059, T1110, etc.) |
+| Dependabot / GitHub Advisory Database | Vulnerability advisories | Continuous (automated) | Known CVEs in npm dependencies |
+| OWASP Top 10 | Vulnerability taxonomy | Referenced during threat modelling | Web application vulnerability patterns (injection, XSS, IDOR, etc.) |
+| Stripe security advisories | Vendor advisory | As published | Stripe integration security updates and webhook changes |
+| PCI DSS guidance | Compliance standard | Referenced during design and review | Payment data handling requirements |
+
+---
+
+### ID.RA-03: Threat identification
+
+| Threat | STRIDE category | Affected asset | Trust boundary involved |
+|---|---|---|---|
+| <span style={{whiteSpace: 'nowrap'}}>ST-BL-1</span> Payment fraud via manipulated billing API requests | Tampering | Billing API, Stripe integration | Browser to API |
+| <span style={{whiteSpace: 'nowrap'}}>ST-BL-2</span> Unauthorized invoice access via IDOR | Information Disclosure | Billing API, invoice records | Browser to API |
+| <span style={{whiteSpace: 'nowrap'}}>ST-BL-3</span> Billing data tampering via SQL injection | Tampering | Billing API, billing database | API to PostgreSQL |
+| <span style={{whiteSpace: 'nowrap'}}>ST-BL-4</span> Stripe API key exposure via logs or source code | Information Disclosure | Billing API, Stripe API keys | API to Stripe / internal logs |
+| <span style={{whiteSpace: 'nowrap'}}>ST-BL-5</span> Privilege escalation in billing admin panel | Elevation of Privilege | Billing SPA, Billing API, admin credentials | Browser to API |
+| <span style={{whiteSpace: 'nowrap'}}>ST-BL-6</span> XSS in billing dashboard via invoice fields | Tampering | Billing SPA, invoice records | Browser to API |
+| <span style={{whiteSpace: 'nowrap'}}>ST-BL-7</span> SQL injection in billing queries | Tampering | Billing API, billing database | API to PostgreSQL |
+| <span style={{whiteSpace: 'nowrap'}}>ST-BL-8</span> Session hijacking of admin sessions | Spoofing | Billing SPA, Billing API, admin credentials | Browser to API |
+| <span style={{whiteSpace: 'nowrap'}}>ST-BL-9</span> Invoice manipulation via unsigned API requests | Tampering | Billing API, invoice records | Browser to API |
+| <span style={{whiteSpace: 'nowrap'}}>ST-BL-10</span> Stripe webhook spoofing | Spoofing | Billing API, Stripe integration | Stripe to API |
+| <span style={{whiteSpace: 'nowrap'}}>ST-BL-11</span> Credential stuffing on admin login | Spoofing | Billing SPA, Billing API, admin credentials | Browser to API |
+| <span style={{whiteSpace: 'nowrap'}}>ST-BL-12</span> Exploitation via known CVE in npm dependency | Varies | Billing SPA, Billing API | Supply chain |
+
+---
+
+### ID.RA-04: Impact and likelihood scoring
+
+| | Impact: Critical | Impact: High | Impact: Medium | Impact: Low |
+|---|---|---|---|---|
+| **Likelihood: High** | <span style={{whiteSpace: 'nowrap'}}>ST-BL-1</span>, <span style={{whiteSpace: 'nowrap'}}>ST-BL-3</span>, <span style={{whiteSpace: 'nowrap'}}>ST-BL-7</span> | <span style={{whiteSpace: 'nowrap'}}>ST-BL-11</span> | | |
+| **Likelihood: Medium** | <span style={{whiteSpace: 'nowrap'}}>ST-BL-4</span> | <span style={{whiteSpace: 'nowrap'}}>ST-BL-2</span>, <span style={{whiteSpace: 'nowrap'}}>ST-BL-5</span>, <span style={{whiteSpace: 'nowrap'}}>ST-BL-6</span>, <span style={{whiteSpace: 'nowrap'}}>ST-BL-8</span>, <span style={{whiteSpace: 'nowrap'}}>ST-BL-9</span>, <span style={{whiteSpace: 'nowrap'}}>ST-BL-10</span>, <span style={{whiteSpace: 'nowrap'}}>ST-BL-12</span> | | |
+| **Likelihood: Low** | | | | |
+
+---
+
+### ID.RA-05: Risk prioritization
+
+| Severity | Required response |
+|---|---|
+| Critical (4 threats) | Must be addressed before shipping. No exceptions. |
+| High (8 threats) | Must be addressed, may ship with documented mitigation plan |
+
+---
+
+### ID.RA-06: Risk response
+
+All 12 threats have been addressed with the "mitigate" response. Controls are documented in the [Protect](/docs/cybersecurity/examples/taskflow/component-register/bl/protect) function pages. No threats have been accepted without mitigation. Stripe handles PCI scope for card storage, but the Billing Portal still mitigates its integration risks.
+
+| Threat | Severity | Response | Control / rationale | Owner | Status |
+|---|---|---|---|---|---|
+| <span style={{whiteSpace: 'nowrap'}}>ST-BL-1</span>, <span style={{whiteSpace: 'nowrap'}}>ST-BL-3</span>, <span style={{whiteSpace: 'nowrap'}}>ST-BL-6</span>, <span style={{whiteSpace: 'nowrap'}}>ST-BL-7</span>, <span style={{whiteSpace: 'nowrap'}}>ST-BL-9</span> | Critical/High | Mitigate | Input handling controls (<span style={{whiteSpace: 'nowrap'}}>SC-BL-1.1</span> to <span style={{whiteSpace: 'nowrap'}}>SC-BL-1.3</span>) | All developers | Implemented |
+| <span style={{whiteSpace: 'nowrap'}}>ST-BL-8</span>, <span style={{whiteSpace: 'nowrap'}}>ST-BL-11</span> | High | Mitigate | Authentication controls (<span style={{whiteSpace: 'nowrap'}}>SC-BL-2.1</span> to <span style={{whiteSpace: 'nowrap'}}>SC-BL-2.3</span>) | Backend team | Implemented |
+| <span style={{whiteSpace: 'nowrap'}}>ST-BL-1</span>, <span style={{whiteSpace: 'nowrap'}}>ST-BL-9</span>, <span style={{whiteSpace: 'nowrap'}}>ST-BL-10</span> | Critical/High | Mitigate | Payment security controls (<span style={{whiteSpace: 'nowrap'}}>SC-BL-3.1</span> to <span style={{whiteSpace: 'nowrap'}}>SC-BL-3.3</span>) | Backend team | Implemented |
+| <span style={{whiteSpace: 'nowrap'}}>ST-BL-2</span>, <span style={{whiteSpace: 'nowrap'}}>ST-BL-5</span> | High | Mitigate | Data access controls (<span style={{whiteSpace: 'nowrap'}}>SC-BL-4.1</span> to <span style={{whiteSpace: 'nowrap'}}>SC-BL-4.3</span>) | Backend team | Implemented |
+| <span style={{whiteSpace: 'nowrap'}}>ST-BL-4</span> | Critical | Mitigate | Secret management controls (<span style={{whiteSpace: 'nowrap'}}>SC-BL-5.1</span>, <span style={{whiteSpace: 'nowrap'}}>SC-BL-5.2</span>) | Backend team | Implemented |
+| <span style={{whiteSpace: 'nowrap'}}>ST-BL-5</span>, <span style={{whiteSpace: 'nowrap'}}>ST-BL-8</span> | High | Mitigate | Audit controls (<span style={{whiteSpace: 'nowrap'}}>SC-BL-6.1</span>, <span style={{whiteSpace: 'nowrap'}}>SC-BL-6.2</span>) | Backend team | Implemented |
+| <span style={{whiteSpace: 'nowrap'}}>ST-BL-12</span> | High | Mitigate | Dependency management control (<span style={{whiteSpace: 'nowrap'}}>SC-BL-7.1</span>) | Dependency maintainer | Implemented |
+
+---
+
+### ID.RA-07: Change and exception management
+
+| Change / exception | Requested by | Risk if approved | Risk if not approved | Decision | Approved by |
+|---|---|---|---|---|---|
+| Defer admin MFA to Q2 launch | Product lead | Single-factor admin sessions (high risk) | Billing portal launch delayed by 3 weeks | Approved with shorter admin session TTL (2 hours) and IP allowlisting | Security lead |
+| Accept invoice field length validation gaps | Backend team | Edge cases in invoice rendering could be exploited for XSS | Sprint delayed by 1 week | Approved with 2-week fix deadline | Security lead |
+
+---
+
+### ID.RA-08: Vulnerability disclosure
+
+| Disclosure channel | Responsible party | SLA for acknowledgement | SLA for resolution |
+|---|---|---|---|
+| security@taskflow.app email | Security lead | 48 hours | Critical: 7 days. High: 30 days. |
+| GitHub Security Advisories (for open source components) | Dependency maintainer | 48 hours | Per dependency management policy |
+
+---
+
+### ID.RA-09: Hardware and software integrity
+
+| Product | Verification method | Verified by | Date | Result |
+|---|---|---|---|---|
+| npm dependencies | package-lock.json integrity check, `npm audit` on every build | CI pipeline | Every build | Automated pass/fail |
+| Docker base images | Pinned to digest, scanned with Trivy | CI pipeline | Every build | Automated pass/fail |
+| Stripe SDK | Verified via npm package integrity and Stripe changelog review | Backend team | On upgrade | Manual review |
+
+---
+
+### ID.RA-10: Critical supplier assessment
+
+| Supplier | Service | Assessment method | Security posture | Compliance | Decision |
+|---|---|---|---|---|---|
+| Stripe | Payment processing | SOC 2 report review, PCI DSS Level 1 attestation | Strong | PCI DSS Level 1, SOC 2 Type II | Approved |
+| AWS | Infrastructure | SOC 2 report review, ISO 27001 certification | Strong | SOC 2, ISO 27001, FedRAMP | Approved |
+
+---

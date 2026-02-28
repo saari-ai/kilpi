@@ -1,0 +1,107 @@
+---
+title: Overview
+description: Product Discovery — an agent-first methodology for finding problems worth solving
+---
+
+import { Search } from 'lucide-react';
+
+The Product Discovery methodology is a standalone methodology for finding problems worth solving before committing to solutions. It provides the structure, conventions, and operational guidance needed to run a traceable, evidence-driven discovery process.
+
+The structure and documentation are designed to be directly consumable by AI agents, so they can apply the methodology autonomously. At the same time, it's written to be easy for humans to follow along &mdash; whether to understand what an agent is doing, or to apply the methodology themselves.
+
+It defines a systematic, repeatable approach for moving from vague problem spaces to validated opportunity assessments backed by real evidence.
+
+<Accordions type="single">
+  <Accordion value="evidence-driven" title={<span className="flex items-center gap-2"><Search className="text-blue-500" size={18} /> Evidence-Driven, Not Opinion-Driven</span>}>
+    Every hypothesis requires supporting or refuting evidence before it advances. No problem statement survives on intuition alone. Evidence is weighted on a 1-5 scale from anecdotal to statistically significant, and every decision traces back to the evidence that informed it.
+  </Accordion>
+  <Accordion value="traceable" title={<span className="flex items-center gap-2"><Search className="text-blue-500" size={18} /> End-to-End Traceability Chain</span>}>
+    Nothing exists in isolation. Every artifact traces through a chain: Hypothesis → Evidence → Insight → Opportunity Score → Discovery Brief. Every artifact references back to its predecessors, creating full accountability from initial hunch to final recommendation.
+  </Accordion>
+  <Accordion value="artifacts" title={<span className="flex items-center gap-2"><Search className="text-blue-500" size={18} /> Concrete, Named Artifacts with an ID Scheme</span>}>
+    The methodology produces traceable deliverables with strict naming conventions (PH-*, EV-*, IN-*, OP-*). A framework tells you "talk to customers." A methodology tells you to produce an Evidence Register with columns for ID, source type, summary, weight, and linked hypotheses — and gives you the template.
+  </Accordion>
+  <Accordion value="adaptive" title={<span className="flex items-center gap-2"><Search className="text-blue-500" size={18} /> Medium Prescriptive, Medium Adaptive</span>}>
+    The five phases provide clear structure, but they are not strictly linear. Evidence gathered during Customer Research often reshapes Problem Framing. Synthesis happens continuously, not just at the end. The methodology prescribes what artifacts to produce, but adapts to how your discovery unfolds.
+  </Accordion>
+  <Accordion value="boundary" title={<span className="flex items-center gap-2"><Search className="text-blue-500" size={18} /> Clear Boundary: Problems, Not Solutions</span>}>
+    Product Discovery finds and validates problems. It does NOT design or test solutions. The output is a Discovery Brief that describes a validated problem and opportunity. Solution testing belongs to <a href="/docs/product-validation">Product Validation</a>. This boundary keeps discovery honest — you cannot fall in love with a solution before proving the problem exists.
+  </Accordion>
+</Accordions>
+
+Ready to apply the methodology? See [Getting Started](/docs/product-discovery/getting-started) for execution order and phase guidance.
+
+## Phases
+
+The methodology is organised into five phases. Each phase builds on the previous one, though iteration between phases is expected and encouraged.
+
+```
+Problem Framing
+  → Customer Research
+    → Evidence
+      → Opportunity Assessment
+        → Synthesis
+```
+
+| Phase | Purpose | Key artifacts |
+|-------|---------|---------------|
+| [Problem Framing](/docs/product-discovery/problem-framing) | Define problem statements and generate falsifiable hypotheses | Problem statements, hypothesis backlog (PH-*) |
+| [Customer Research](/docs/product-discovery/customer-research) | Gather evidence through interviews, observation, and data analysis | Interview transcripts, observation notes, evidence items (EV-*) |
+| [Evidence](/docs/product-discovery/evidence) | Evaluate evidence quality, weight, and sufficiency | Weighted evidence register, bias assessments |
+| [Opportunity Assessment](/docs/product-discovery/opportunity-assessment) | Size the market, map competition, assess feasibility | Market sizing, competitive landscape, opportunity scores (OP-*) |
+| [Synthesis](/docs/product-discovery/synthesis) | Extract patterns, form insights, produce the Discovery Brief | Insights (IN-*), Discovery Brief |
+
+## Traceability
+
+Every discovery artifact traces through a chain across phases:
+
+```
+Hypothesis (PH-)
+  → Evidence (EV-)
+    → Insight (IN-)
+      → Opportunity Score (OP-)
+        → Discovery Brief
+```
+
+ID schemes keep artifacts traceable. See [Conventions](/docs/product-discovery/conventions) for the full scheme.
+
+| Prefix | Artifact | Example |
+|--------|----------|---------|
+| PH- | Problem Hypothesis | PH-FN-1 |
+| EV- | Evidence item | EV-FN-1 |
+| IN- | Insight | IN-FN-1 |
+| OP- | Opportunity Score | OP-FN-1 |
+
+The `{discovery}` segment is a short code for the discovery being run (e.g., FN for FocusNote). Discovery codes are defined when the discovery starts. See [Conventions](/docs/product-discovery/conventions) for naming rules.
+
+## Templates
+
+The [Templates](/docs/product-discovery/templates) provide the fill-in structures for applying the methodology. Copy the template when starting a discovery — do not edit the templates directly.
+
+| Template | Purpose |
+|----------|---------|
+| [Discovery Brief](/docs/product-discovery/templates/discovery-brief) | Master output artifact — the deliverable that summarises the entire discovery |
+| [Problem Hypothesis Log](/docs/product-discovery/templates/problem-hypothesis-log) | Track hypotheses through their lifecycle |
+| [Interview Guide](/docs/product-discovery/templates/interview-guide) | Plan and structure customer research interviews |
+| [Evidence Register](/docs/product-discovery/templates/evidence-register) | Collect and weight all evidence items |
+| [Opportunity Scorecard](/docs/product-discovery/templates/opportunity-scorecard) | Score opportunities against consistent criteria |
+
+## Techniques
+
+[Techniques](/docs/product-discovery/techniques) catalogs the discovery methods available at each phase, including when to use each one, what evidence type it produces, and sample size guidance.
+
+## Boundary
+
+Product Discovery finds problems worth solving. It does NOT design solutions, test prototypes, or validate product concepts. The output of a successful discovery is a Discovery Brief that recommends one of three actions:
+
+1. **Proceed to validation** — the problem is real, significant, and worth solving. Hand off to [Product Validation](/docs/product-validation).
+2. **Pivot** — the evidence points to a different problem than originally hypothesised. Reframe and continue discovery.
+3. **Kill** — the problem is not significant enough, the market is too small, or feasibility is too low. Document findings and move on.
+
+## Conventions
+
+[Conventions](/docs/product-discovery/conventions) covers ID schemes, evidence weight scales, hypothesis lifecycle states, and naming rules.
+
+## Agents
+
+[Agents](/docs/product-discovery/agents) documents the Claude Code skills that apply the methodology.

@@ -1,0 +1,74 @@
+---
+title: Problem Hypothesis Log
+description: Template for tracking hypotheses through their lifecycle during discovery
+---
+
+The Problem Hypothesis Log tracks every hypothesis from creation through resolution. It is the central registry for what you believe, what you are testing, and what you have learned. Start this log during [Problem Framing](/docs/product-discovery/problem-framing) and update it throughout the discovery.
+
+See [Hypotheses](/docs/product-discovery/problem-framing/hypotheses) for how to write hypotheses and [Conventions](/docs/product-discovery/conventions) for lifecycle state definitions and transition rules.
+
+## Template
+
+---
+
+### Problem Hypothesis Log: [Discovery Name] ([Discovery Code])
+
+**Discovery code:** [XX]
+**Created:** [Date]
+**Last updated:** [Date]
+
+---
+
+#### Hypothesis register
+
+| ID | Hypothesis | Type | Status | Supporting EV- | Refuting EV- | Avg weight | Confidence | Notes |
+|----|-----------|------|--------|----------------|--------------|------------|------------|-------|
+| PH-XX-1 | *We believe [statement]. We'll know this is true when [evidence]. We'll know this is false when [evidence].* | Problem / User / Context | Draft / Active / Supported / Refuted / Retired | | | | | |
+| PH-XX-2 | | | | | | | | |
+| PH-XX-3 | | | | | | | | |
+| | | | | | | | | |
+
+---
+
+#### Column definitions
+
+| Column | Description |
+|--------|-------------|
+| ID | Unique identifier per [Conventions](/docs/product-discovery/conventions). Format: `PH-{discovery}-{n}`. |
+| Hypothesis | Full hypothesis statement including belief, supporting evidence criteria, and refuting evidence criteria. |
+| Type | Problem (the problem exists as described), User (the target user is as described), or Context (the triggering context is as described). See [Hypotheses](/docs/product-discovery/problem-framing/hypotheses#hypothesis-types). |
+| Status | Current lifecycle state. See [Conventions](/docs/product-discovery/conventions#hypothesis-lifecycle). |
+| Supporting EV- | List of evidence item IDs that support this hypothesis. |
+| Refuting EV- | List of evidence item IDs that refute this hypothesis. |
+| Avg weight | Average evidence weight of supporting items. Used for sufficiency checks. |
+| Confidence | High / Medium / Low — overall confidence in the current status, accounting for evidence weight and bias. |
+| Notes | Status change history, links to related hypotheses (merged/split), or other context. |
+
+---
+
+#### Status change log
+
+Record every status transition for auditability.
+
+| Date | Hypothesis | From | To | Reason |
+|------|-----------|------|----|--------|
+| *YYYY-MM-DD* | PH-XX-1 | Draft | Active | *Research batch 1 targeting this hypothesis* |
+| *YYYY-MM-DD* | PH-XX-1 | Active | Supported | *3 supporting items at avg weight 3.3, no contradictions* |
+| | | | | |
+
+---
+
+#### Summary statistics
+
+Update at each synthesis checkpoint.
+
+| Metric | Count |
+|--------|-------|
+| Total hypotheses | |
+| Draft | |
+| Active | |
+| Supported | |
+| Refuted | |
+| Retired | |
+
+---

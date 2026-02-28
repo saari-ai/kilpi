@@ -1,0 +1,100 @@
+---
+title: Decision — FocusNote
+description: Decision Record VD-FN-1 — Pivot (value capture) based on validated desirability but failed viability at $10/month
+---
+
+## Decision header
+
+```
+VD-ID:          VD-FN-1
+Solution:       FocusNote
+Solution code:  FN
+Date:           2026-02-22
+Validation plan: VP-FN-1
+Previous VD:    N/A (first validation cycle)
+```
+
+## Evidence summary
+
+| VE-ID | Hypothesis tested | Method | Result | Confidence | Key evidence |
+|-------|------------------|--------|--------|-----------|-------------|
+| VE-FN-1 | VH-FN-1 (Desirability) | Landing page test | Pass | High | VV-FN-5: 9.4% conversion (523 visitors). VV-FN-6: Top signup reason aligns with Discovery Brief. |
+| VE-FN-2 | VH-FN-2 (Feasibility/Usability) | Wizard of Oz | Pass | Medium | VV-FN-9: 9/10 rated useful. VV-FN-10: 8/10 used for study. VV-FN-12: Attention detection feasible for 70% of users. |
+| VE-FN-3 | VH-FN-3 (Viability) | Pocket test | Fail (leaning) | High | VV-FN-18: 8.2% pre-purchase (below 15% threshold). VV-FN-19: Price is the barrier, not interest. |
+
+## Assumption outcomes
+
+| VA-ID | Assumption | Type | Risk level | Final status | Evidence |
+|-------|-----------|------|-----------|-------------|----------|
+| VA-FN-1 | Students with ADHD want an AI-powered note-taking tool | D | High | Validated | VE-FN-1 (9.4% conversion) |
+| VA-FN-2 | Value proposition is compelling enough to drive signups | D | High | Validated | VE-FN-1 (9.4% conversion, VV-FN-6 survey data) |
+| VA-FN-3 | AI can detect attention patterns from typing cadence | F | Critical | Validated (proxy) | VE-FN-2 (VV-FN-12: worked for 70% of students) |
+| VA-FN-4 | Students will trust AI-generated summaries | U | High | Validated | VE-FN-2 (VV-FN-9: 9/10 useful, VV-FN-10: 8/10 used for study) |
+| VA-FN-5 | Students will pay $10/month | V | Critical | Invalidated | VE-FN-3 (VV-FN-18: 8.2% conversion. VV-FN-19: price is barrier) |
+| VA-FN-6 | Student acquisition via university channels is sustainable | V | Medium | Untested | Not tested in this cycle |
+
+## Overall confidence
+
+```
+Overall confidence level: Medium
+Critical assumptions resolved: 2 of 2
+  - VA-FN-3 (Feasibility): Validated via proxy (Medium confidence)
+  - VA-FN-5 (Viability): Invalidated (High confidence)
+Conflicting evidence: None — all evidence is directionally consistent
+```
+
+## Decision
+
+```
+Decision:    Pivot (Value Capture)
+```
+
+### Pivot details
+
+```
+Pivot type:    Value capture
+
+What stays (validated learnings):
+  - VA-FN-1: Students with ADHD want an AI-powered note-taking tool (High confidence)
+  - VA-FN-2: The value proposition drives signups (High confidence)
+  - VA-FN-4: Students trust and use AI-generated summaries (Medium confidence)
+  - VA-FN-3: Attention detection from typing patterns is feasible for ~70% of users (Medium confidence)
+
+What changes:
+  - Revenue model shifts from $10/month subscription to freemium:
+    - Free tier: basic AI summaries for up to 3 lectures/week
+    - Pro tier: unlimited lectures, advanced features (export, collaboration), at $4-5/month
+  - This addresses the core failure: students want the product but $10/month exceeds
+    their budget. Qualitative evidence (VV-FN-19) suggests $3-5/month is the acceptable range.
+    Freemium also addresses the "I want to try it first" objection (VV-FN-17).
+
+New assumptions to test:
+  - VA-FN-7: Students will convert from free to Pro at $4.99/month at ≥ 5% conversion
+  - VA-FN-8: Free tier usage is sufficient to demonstrate value and drive upgrades
+  - VA-FN-9: Unit economics are sustainable with freemium (CAC < LTV at projected conversion rates)
+
+Next validation cycle:
+  Create a new Validation Plan (VP-FN-2) with solution code FN, referencing VD-FN-1.
+  Focus experiments on the new viability assumptions (VA-FN-7, VA-FN-8, VA-FN-9).
+  Desirability and usability assumptions carry forward as validated — do not re-test.
+```
+
+## Rationale
+
+The evidence strongly supports that FocusNote solves a real problem that students care about. Desirability is validated with High confidence (9.4% landing page conversion, strong qualitative alignment with Discovery evidence). Usability is validated with Medium confidence (9/10 found summaries useful, 8/10 used them for study). Feasibility is validated via proxy with Medium confidence (attention detection worked for 70% of users).
+
+The critical failure is viability at the $10/month price point. However, the qualitative evidence from VE-FN-3 is unambiguous: students are not rejecting the product, they are rejecting the price. Four out of seven reply emails cited cost as the barrier. One specifically suggested $3-5/month. Two wanted a free trial. Zero said the product was not interesting.
+
+This is a textbook value capture pivot — the product is right, the revenue model is wrong. A freemium model addresses both the price barrier and the "try before you buy" objection. The pivot preserves all validated learnings while attacking the specific assumption that failed.
+
+Kill was considered but rejected because: (1) the desirability and usability evidence is strong, (2) the failure is clearly in pricing, not product-market fit, and (3) a concrete alternative pricing model exists with supportive qualitative evidence.
+
+## Next actions
+
+| Action | Owner | Deadline | Notes |
+|--------|-------|----------|-------|
+| Create Validation Plan VP-FN-2 for freemium model | Product lead | 2026-02-28 | Focus on VA-FN-7, VA-FN-8, VA-FN-9 |
+| Design pricing page A/B test ($3.99 vs $4.99 vs $5.99) | Product lead | 2026-03-05 | Test with new landing page signups |
+| Design freemium conversion experiment | Product lead | 2026-03-05 | Simulate free tier limits and measure upgrade intent |
+| Refund all VE-FN-3 pre-orders ($40 total) | Finance | 2026-02-25 | Ethical obligation — product direction changed |
+| Archive VP-FN-1 and link to VP-FN-2 | Product lead | 2026-02-28 | Maintain traceability |

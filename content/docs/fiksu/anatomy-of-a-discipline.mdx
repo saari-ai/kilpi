@@ -1,0 +1,61 @@
+---
+title: Anatomy of a Discipline
+description: Every discipline is a blend of prescriptive, adaptive, and reference elements. The mix determines how you structure the docs and skills.
+---
+
+Every discipline is a blend. The question is not "is this a methodology or a framework?" but "what's the mix?"
+
+## The problem with the binary
+
+An earlier version of this page drew a clean line: methodologies (prescriptive, artifact-heavy) vs frameworks (adaptive, principle-driven). That binary holds at the extremes — Cybersecurity is clearly prescriptive, Mentorship is clearly adaptive. But most real disciplines don't sit at an extreme. Software architecture has prescriptive parts (ADRs, patterns, layer conventions) and adaptive parts (which pattern fits this context? when to break the rule?). Product development has process (discovery, validation, experimentation) and judgment (pivot vs persevere, signal vs noise).
+
+Forcing every discipline into one of two bins produces awkward classification debates and, worse, the wrong internal structure. A discipline labelled "methodology" gets templated end-to-end, even the parts that require judgment. A discipline labelled "framework" gets loose guidelines, even the parts that need rigid checklists.
+
+## Three element types
+
+Instead of two categories, think of three element types that blend in different proportions.
+
+### Prescriptive elements
+
+Steps, templates, checklists, artifacts. The structure is explicit: do this, produce that, in this order. Validated through **completeness** — did you cover everything?
+
+Structure these as templates with exhaustive coverage. An agent working with prescriptive elements should systematically traverse every item and produce traceable artifacts.
+
+### Adaptive elements
+
+Decision frameworks, interaction modes, judgment guidelines, principles. The structure is loose: here are the considerations, here is how to decide. Validated through **appropriateness** — did you respond well to the situation?
+
+Structure these as principles and decision models. An agent working with adaptive elements should read context, select a mode, and adapt continuously.
+
+### Reference elements
+
+Bodies of knowledge, standards, domain expertise, informative mappings. Not instructions — material to consult. Validated through **accuracy** — is the information correct and current?
+
+Structure these as reference documentation and lookup tables. An agent working with reference elements should retrieve and apply relevant knowledge on demand.
+
+## Every discipline is a blend
+
+The mix varies. Here is how the current disciplines break down:
+
+| Discipline | Prescriptive | Adaptive | Reference |
+|---|---|---|---|
+| **[Cybersecurity](/docs/cybersecurity)** | Heavy — templates, ID schemes, traceability chains, 106 subcategory checklists | Light — risk appetite judgment, proportionality decisions | Medium — NIST CSF 2.0, ISO 27001, CIS Benchmarks, MITRE ATT&CK |
+| **[Mentorship](/docs/mentorship)** | None | Heavy — interaction modes, assessment signals, continuous adaptation loop | Light — Dreyfus skill model as conceptual foundation |
+| **Software Architecture** | Medium — ADRs, pattern catalogues, layer conventions, interface contracts | Medium — pattern selection, trade-off analysis, context-dependent decisions | Medium — established patterns, platform capabilities, constraint catalogues |
+| **[Product Discovery](/docs/product-discovery)** | Medium — hypothesis lifecycle, evidence registers, interview protocols, opportunity scorecards | Medium — signal interpretation, research prioritisation, pattern recognition | Light — JTBD theory, market sizing models |
+| **[Product Validation](/docs/product-validation)** | High — experiment cards, assumption registers, decision records, fidelity ladder, success criteria | Medium — pivot/persevere/kill decisions, confidence judgment, signal vs noise | Light — experiment design heuristics, sample size guidance |
+| **[Devil's Advocate](/docs/devils-advocate)** | Light — six-step challenge process provides structure, but no templates or ID schemes | Heavy — mode selection, intensity calibration, context reading, knowing when to disengage | Light — cognitive biases as conceptual foundation, pre-mortem and red team as established techniques |
+
+No discipline is purely one type. Even Cybersecurity — the most prescriptive discipline — requires adaptive judgment on risk appetite and proportionality. Even Mentorship — the most adaptive — draws on reference material (the Dreyfus model) to ground its decisions.
+
+## Why this matters for agent skills
+
+The element type determines how you structure the documentation and the agent skill. Get this wrong and the skill produces bad results.
+
+| Element type | Doc structure | Agent behaviour | Failure mode if misapplied |
+|---|---|---|---|
+| Prescriptive | Templates, checklists, ID schemes | Systematic traversal, exhaustive coverage | Templating an adaptive element produces rigid, checkbox interactions |
+| Adaptive | Principles, decision models, modes | Context reading, mode selection, continuous adaptation | Making a prescriptive element into loose guidelines produces inconsistent, gap-riddled coverage |
+| Reference | Lookup tables, standard mappings, knowledge bases | On-demand retrieval, accurate citation | Treating reference as prescriptive forces rote recitation; treating it as adaptive loses precision |
+
+When building a new discipline, start by identifying the mix. Map each part of the discipline to an element type. Then structure the docs accordingly — templates for the prescriptive parts, decision frameworks for the adaptive parts, reference pages for the knowledge base. The discipline holds together as a coherent whole, but each part gets the structure it actually needs.

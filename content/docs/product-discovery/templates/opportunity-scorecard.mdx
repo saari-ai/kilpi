@@ -1,0 +1,103 @@
+---
+title: Opportunity Scorecard
+description: Template for scoring opportunities against consistent criteria
+---
+
+The Opportunity Scorecard provides a structured evaluation of each opportunity identified during discovery. It translates qualitative insights and evidence into a comparable score across four dimensions.
+
+See [Opportunity Assessment](/docs/product-discovery/opportunity-assessment) for guidance on each dimension and scoring criteria.
+
+## Template
+
+---
+
+### Opportunity Scorecard: [Discovery Name] ([Discovery Code])
+
+**Discovery code:** [XX]
+**Created:** [Date]
+**Last updated:** [Date]
+
+---
+
+#### Opportunity scores
+
+| ID | Opportunity name | Market size | Competitive intensity | Feasibility | Evidence strength | Overall | Linked insights | Recommendation |
+|----|-----------------|-------------|----------------------|-------------|------------------|---------|-----------------|----------------|
+| OP-XX-1 | *Short name for the opportunity* | *1-5* | *1-5* | *1-5* | *1-5* | *avg* | *IN-XX-1, IN-XX-2* | *Proceed / Pivot / Kill* |
+| OP-XX-2 | | | | | | | | |
+| | | | | | | | | |
+
+---
+
+#### Column definitions
+
+| Column | Description |
+|--------|-------------|
+| ID | Unique identifier. Format: `OP-{discovery}-{n}`. |
+| Opportunity name | Short, descriptive name for the opportunity. |
+| Market size | 1 (niche) to 5 (massive). Based on [Market Sizing](/docs/product-discovery/opportunity-assessment/market-sizing). |
+| Competitive intensity | 1 (red ocean) to 5 (blue ocean). Based on [Competitive Landscape](/docs/product-discovery/opportunity-assessment/competitive-landscape). |
+| Feasibility | 1 (moonshot) to 5 (straightforward). Average of technical, business, and distribution feasibility. Based on [Feasibility](/docs/product-discovery/opportunity-assessment/feasibility). |
+| Evidence strength | 1 (weak) to 5 (strong). Average weight of supporting evidence for the core hypotheses behind this opportunity. |
+| Overall | Average of the four dimension scores. |
+| Linked insights | IN- IDs that inform this opportunity score. |
+| Recommendation | Proceed to [Product Validation](/docs/product-validation), Pivot, or Kill. |
+
+---
+
+#### Scoring detail: OP-XX-1
+
+*Expand this section for each opportunity scored. Provides the rationale behind each dimension score.*
+
+**Market size: [n]/5**
+
+| Metric | Estimate | Evidence | Confidence |
+|--------|----------|----------|------------|
+| TAM | *$n* | *EV-XX-n* | *High / Medium / Low* |
+| SAM | *$n* | *EV-XX-n* | |
+| SOM | *$n* | *EV-XX-n* | |
+
+*Rationale: [Why this score]*
+
+**Competitive intensity: [n]/5**
+
+| Competitor | Type | Threat level |
+|-----------|------|-------------|
+| *Name* | *Direct / Indirect / JTBD* | *High / Medium / Low* |
+| | | |
+
+*Rationale: [Why this score]*
+
+**Feasibility: [n]/5**
+
+| Dimension | Score | Key factor |
+|-----------|-------|-----------|
+| Technical | *1-5* | *Primary constraint or enabler* |
+| Business | *1-5* | *Primary constraint or enabler* |
+| Distribution | *1-5* | *Primary constraint or enabler* |
+
+*Rationale: [Why this score]*
+
+**Evidence strength: [n]/5**
+
+| Metric | Value |
+|--------|-------|
+| Total evidence items | *n* |
+| Average weight (supporting) | *n.n* |
+| Triangulated findings | *n* |
+| Bias risks mitigated | *Yes / Partial / No* |
+
+*Rationale: [Why this score]*
+
+---
+
+#### Score interpretation
+
+| Average score | Interpretation | Recommended action |
+|---------------|---------------|-------------------|
+| 4.0 - 5.0 | Strong opportunity | Proceed to [Product Validation](/docs/product-validation) |
+| 3.0 - 3.9 | Moderate opportunity | Proceed with caution, or investigate weak dimensions |
+| 2.0 - 2.9 | Weak opportunity | Pivot to a different problem or segment |
+| 1.0 - 1.9 | Non-viable | Kill. Document findings for future reference. |
+
+---

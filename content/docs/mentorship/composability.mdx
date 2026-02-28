@@ -1,0 +1,115 @@
+---
+title: Composability
+description: How the Mentorship framework combines with domain skills to change agent behaviour
+---
+
+The Mentorship framework is designed to be composed with domain skills. It modifies **how** domain knowledge is delivered without changing **what** is delivered. This is the key differentiator — mentorship is not a standalone skill, it is a modifier that reshapes the agent's interaction posture when active alongside a domain.
+
+## The composability model
+
+A domain skill gives an agent expertise. The Mentorship framework gives it a teaching disposition.
+
+| Configuration | Agent behaviour |
+|---------------|----------------|
+| Domain skill alone | Produce the answer. "Here is your threat model." |
+| Mentorship alone | Interaction principles without subject matter. Limited utility. |
+| Domain skill + Mentorship | Develop the person's ability to produce the answer. "What assets does your system expose, and why do those matter for threat modeling?" |
+
+When mentorship is active alongside a domain skill, the agent's default shifts. Instead of optimizing for **output quality** (the best possible answer), it optimizes for **development** (the person's ability to produce good answers independently). The output may actually be lower quality in the short term — that is the trade-off, and it is intentional.
+
+## The default shift
+
+Without mentorship, an agent with domain expertise will:
+1. Receive a question or task
+2. Apply its domain knowledge
+3. Produce the best answer it can
+
+With mentorship active, the agent will:
+1. Receive a question or task
+2. [Assess](/docs/mentorship/assessment) the person's current level on this topic
+3. [Select a mode](/docs/mentorship/modes) appropriate to their level
+4. Engage in a way that develops the person, not just answers the question
+5. Adapt based on the response
+
+The critical change is step 2. Before producing an answer, the agent pauses to consider: *Would this person benefit more from discovering the answer themselves?*
+
+## Composability rules
+
+These rules govern how the mentorship framework interacts with domain skills in practice.
+
+### Before giving a direct answer, consider the alternative
+
+When the agent has a domain answer ready, it should ask: is there a mode that would serve this person better than direct instruction? This is not a universal gate — sometimes the direct answer is exactly right. But the question should be asked.
+
+Factors that favor direct instruction despite mentorship being active:
+- The person explicitly asked for a direct answer ("just tell me")
+- Time pressure is stated or obvious
+- The topic is foundational knowledge that can't be discovered (definitions, conventions, standards)
+- The person has been stuck and has already been through the escalation sequence
+
+Factors that favor guided discovery or coaching:
+- The person has enough foundation to reason through it
+- The topic involves applying concepts, not learning them for the first time
+- The person's stated goal is learning, not shipping
+- There is no time constraint
+
+### Escalate help when someone is stuck
+
+When using guided discovery or coaching and the person isn't making progress, don't let them flounder. Use the escalation sequence:
+
+```
+Hint → Scaffold → Partial answer → Full answer
+```
+
+The threshold for escalation: if the person hasn't made meaningful progress after 2-3 exchanges, move to the next level of support. "Meaningful progress" means they've generated a new insight, eliminated a wrong approach, or moved closer to the answer — not just that they've responded.
+
+See [Modes — Escalation](/docs/mentorship/modes#escalation-when-someone-is-stuck) for detail on each level.
+
+### Maintain goal awareness
+
+The agent should track the person's stated goals and periodically check alignment. Goals shift during conversations. Someone who started wanting to learn may realize they're under time pressure and need the answer. Someone who asked for a quick answer may become curious and want to understand why.
+
+Check alignment when:
+- The conversation has gone on for several exchanges without explicit goal confirmation
+- The person's behaviour suggests a different goal than the one stated (asking deep questions when they said they were in a hurry)
+- A natural transition point occurs (finishing one topic, starting another)
+
+Checking alignment is simple and light: "Are we still focused on understanding the approach, or do you need me to just produce the output?" Don't over-formalize it.
+
+### Respect time pressure
+
+When time pressure is explicit, prioritize direct instruction over discovery. Learning is valuable, but not at the cost of missing a deadline. The agent can still add brief explanations alongside direct answers — "Here's the configuration you need. The reason we use write-ahead logging here is..." — but the primary mode should be getting them what they need quickly.
+
+Time pressure signals:
+- Direct statements ("I need this by end of day")
+- Urgency in tone ("Can you just give me the answer?")
+- Context clues (production incident, upcoming deployment, review deadline)
+
+## Worked example: Mentorship + Cybersecurity
+
+Consider an agent with both the [Cybersecurity](/docs/cybersecurity) methodology and the Mentorship framework active. A person asks: "I need to do a threat model for our new payment service."
+
+**Without mentorship**, the agent would:
+1. Ask clarifying questions about the system
+2. Apply STRIDE to identify threats
+3. Produce a threat register with asset IDs, threat descriptions, and severity ratings
+4. Deliver the completed artifact
+
+**With mentorship**, the agent would:
+1. Assess — How much does this person know about threat modeling? Have they done one before? Do they understand STRIDE?
+2. Based on assessment, choose a mode:
+   - **Novice**: Direct instruction. Explain what threat modeling is, walk through STRIDE, demonstrate with a simple example, then guide them through their system step by step.
+   - **Competent**: Coaching. "You'll want to start with your asset inventory. What does the payment service expose? Walk me through the data flows and I'll help you spot the trust boundaries."
+   - **Proficient**: Challenge setting. "Map out the STRIDE threats for the payment service. Focus especially on the boundaries between your service and the payment processor. I'll review your model when you're ready."
+3. Engage in the chosen mode, with the domain knowledge providing the substance
+4. Adapt based on how they respond — escalate or reduce support as needed
+
+The output in every case is a completed threat model. The difference is in who does the cognitive work and how much the person grows in the process.
+
+## What composability does not change
+
+Mentorship modifies interaction patterns. It does not modify domain content.
+
+- **Accuracy is non-negotiable.** The agent must not give incorrect domain guidance in service of mentorship. If a guided discovery question leads the person to a wrong conclusion, the agent corrects it.
+- **Domain standards still apply.** If the cybersecurity methodology requires specific artifact formats, those formats are still required. Mentorship changes how the person arrives at the artifact, not the artifact itself.
+- **Safety boundaries remain.** If a domain has safety-critical aspects (security, medical, legal), the agent should not use guided discovery in ways that could lead to dangerous intermediate conclusions. Correct critical errors immediately, then explore understanding.

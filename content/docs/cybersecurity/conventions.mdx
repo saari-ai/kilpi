@@ -1,0 +1,126 @@
+---
+title: Conventions
+description: ID schemes, naming conventions, and traceability rules used across the security documentation
+---
+
+## ID schemes
+
+We use prefixed ID schemes to uniquely identify security artifacts across the documentation. The `{component}` segment in each scheme is a short code for whatever entity is being assessed (e.g., TF for [Taskflow](/docs/cybersecurity/examples/taskflow), SR for Streams). Component codes are formally defined in the [Component Register](/docs/cybersecurity/templates/component-register).
+
+### Control IDs (SC-)
+
+Controls are safeguards implemented to achieve security outcomes. Every control gets a unique ID.
+
+| Format | Example | Meaning |
+|--------|---------|---------|
+| `SC-{component}-{number}` | SC-TF-1 | First control for [Taskflow](/docs/cybersecurity/examples/taskflow) |
+| `SC-{component}-{number}.{sub}` | SC-TF-1.1 | Sub-control under SC-TF-1 |
+
+### Threat IDs (ST-)
+
+Threats are identified risks that controls mitigate.
+
+| Format | Example | Meaning |
+|--------|---------|---------|
+| `ST-{component}-{number}` | ST-TF-1 | First threat identified for [Taskflow](/docs/cybersecurity/examples/taskflow) |
+| `ST-{component}-{number}.{sub}` | ST-TF-1.1 | Sub-threat under ST-TF-1 |
+
+### Asset IDs (SA-)
+
+Assets are things of value that need protection — data, services, infrastructure.
+
+| Format | Example | Meaning |
+|--------|---------|---------|
+| `SA-{component}-{number}` | SA-TF-1 | First asset identified for [Taskflow](/docs/cybersecurity/examples/taskflow) |
+
+### Monitoring Rule IDs (SM-)
+
+Monitoring rules define how you detect when a control fails or is bypassed (used in [Detect](/docs/cybersecurity/functions/detect)).
+
+| Format | Example | Meaning |
+|--------|---------|---------|
+| `SM-{component}-{number}` | SM-TF-1 | First monitoring rule for [Taskflow](/docs/cybersecurity/examples/taskflow) |
+
+### Response Playbook IDs (SP-)
+
+Response playbooks define the actions taken when a monitoring rule fires (used in [Respond](/docs/cybersecurity/functions/respond)).
+
+| Format | Example | Meaning |
+|--------|---------|---------|
+| `SP-{component}-{number}` | SP-TF-1 | First response playbook for [Taskflow](/docs/cybersecurity/examples/taskflow) |
+
+### Recovery Plan IDs (SR-)
+
+Recovery plans define how to restore services after an incident (used in [Recover](/docs/cybersecurity/functions/recover)).
+
+| Format | Example | Meaning |
+|--------|---------|---------|
+| `SR-{component}-{number}` | SR-TF-1 | First recovery plan for [Taskflow](/docs/cybersecurity/examples/taskflow) |
+
+## NIST category codes
+
+Each NIST CSF 2.0 category has a two-letter code. These codes appear in subcategory IDs throughout the methodology (e.g., PR.AA-01 is subcategory 01 of the Access Control category under Protect).
+
+| Code | Category | Function |
+|------|----------|----------|
+| OC | Organizational Context | Govern |
+| RM | Risk Management Strategy | Govern |
+| RR | Roles, Responsibilities, and Authorities | Govern |
+| PO | Policy | Govern |
+| OV | Oversight | Govern |
+| SC | Supply Chain Risk Management | Govern |
+| AM | Asset Management | Identify |
+| RA | Risk Assessment | Identify |
+| IM | Improvement | Identify |
+| AA | Identity Management, Authentication, and Access Control | Protect |
+| AT | Awareness and Training | Protect |
+| DS | Data Security | Protect |
+| PS | Platform Security | Protect |
+| IR | Technology Infrastructure Resilience | Protect |
+| CM | Continuous Monitoring | Detect |
+| AE | Adverse Event Analysis | Detect |
+| MA | Incident Management | Respond |
+| AN | Incident Analysis | Respond |
+| CO | Incident Response Reporting / Recovery Communication | Respond, Recover |
+| MI | Incident Mitigation | Respond |
+| RP | Recovery Plan Execution | Recover |
+
+## Subcategory traceability
+
+Every control, threat, and asset should trace back to at least one NIST CSF subcategory. This is how we ensure coverage and avoid gaps.
+
+### In threat model tables
+
+Threat model tables include a **Subcategory** column mapping each threat to the NIST subcategory it relates to:
+
+| ID | Threat | STRIDE | Subcategory |
+|----|--------|--------|-------------|
+| <span style={{whiteSpace: 'nowrap'}}>ST-TF-1</span> | Unauthorized API access | Spoofing | ID.RA-01 |
+
+### In control inventory tables
+
+Control inventory tables include a **Subcategory** column mapping each control to the subcategory it satisfies:
+
+| ID | Control | Threat | Subcategory |
+|----|---------|--------|-------------|
+| <span style={{whiteSpace: 'nowrap'}}>SC-TF-1</span> | JWT authentication | ST-TF-1 | PR.AA-01 |
+
+### Coverage check
+
+To verify completeness, list the subcategories relevant to your component (from the Identify phase) and confirm each has at least one control mapped to it. Gaps indicate either:
+
+1. A missing control (add one in [Protect](/docs/cybersecurity/functions/protect))
+2. A subcategory that genuinely doesn't apply (document the exclusion in your component template)
+
+## Severity levels
+
+We use a four-level severity scale consistently across all functions:
+
+| Level | Label | Meaning |
+|-------|-------|---------|
+| 4 | Critical | Existential risk to the component or organization |
+| 3 | High | Significant impact requiring prompt action |
+| 2 | Medium | Moderate impact, addressed in normal planning cycles |
+| 1 | Low | Minimal impact, monitored but not urgently acted on |
+
+Severity drives priority in both risk assessment (Identify) and incident response (Respond).

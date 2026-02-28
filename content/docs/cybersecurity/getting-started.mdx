@@ -1,0 +1,56 @@
+---
+title: Getting Started
+description: Execution order and scope guidance for applying the Cybersecurity methodology
+---
+
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+Execute the methodology in this order:
+
+<Steps>
+<Step>
+### Govern
+
+Establish risk strategy, roles, policies, and oversight for the organisation.
+
+See [Govern](/docs/cybersecurity/functions/govern).
+</Step>
+
+<Step>
+### Component Register
+
+Register the components you will assess.
+
+See [Component Register](/docs/cybersecurity/templates/component-register).
+</Step>
+
+<Step>
+### For each component, repeat
+
+Work through every registered component and complete the following three functions for each one:
+
+- **[Identify](/docs/cybersecurity/functions/identify)** — inventory assets, model threats (STRIDE), and score risks.
+- **[Protect](/docs/cybersecurity/functions/protect)** — select and implement controls for each scored threat.
+- **[Detect](/docs/cybersecurity/functions/detect)** — define monitoring rules and alert thresholds for each control.
+</Step>
+
+<Step>
+### Respond
+
+Build incident response playbooks and escalation paths.
+
+See [Respond](/docs/cybersecurity/functions/respond).
+</Step>
+
+<Step>
+### Recover
+
+Define recovery plans and feedback loops.
+
+See [Recover](/docs/cybersecurity/functions/recover).
+</Step>
+</Steps>
+
+Steps 1, 2, 4, and 5 are **org-level** — do them once and all components inherit them. Step 3 is **per-component** — repeat it for each registered component. See [Scope](/docs/cybersecurity/scope) for detail.
+
+For single-product startups where the organisation *is* the product team, run the org-level and component-level work simultaneously — there's no need to complete Govern in isolation before starting Identify.

@@ -1,0 +1,67 @@
+---
+title: Evidence Sufficiency
+description: How much evidence is enough to make a call on a hypothesis
+---
+
+Sufficiency answers the question: do we have enough evidence to move this hypothesis to Supported or Refuted, or do we need more research?
+
+There is no universal threshold that works for all discoveries. But there are minimum standards that prevent premature decisions and guidelines that prevent over-researching.
+
+## Minimum evidence thresholds
+
+These are the minimum requirements before a hypothesis can move to Supported or Refuted. Meeting the minimum does not automatically change the state — it means you have enough to make a judgment call.
+
+### For moving to Supported
+
+| Criterion | Threshold |
+|-----------|-----------|
+| Total evidence items | At least 3 items linked to this hypothesis |
+| Average weight | Average weight of supporting evidence is 3.0 or higher |
+| Source diversity | Evidence from at least 2 different source types (e.g., interviews + analytics) |
+| Contradictory evidence | No unresolved contradictory evidence at weight 3 or higher |
+
+If contradictory evidence exists at weight 3+, the hypothesis cannot move to Supported until the contradiction is resolved — either by gathering more evidence, refining the hypothesis, or splitting it.
+
+### For moving to Refuted
+
+| Criterion | Threshold |
+|-----------|-----------|
+| Direct refutation | A single evidence item at weight 5 directly contradicts the hypothesis, OR |
+| Accumulated refutation | Contradictory evidence at weight 3+ outweighs supporting evidence in both count and average weight |
+| Investigation | You have actively attempted to find supporting evidence and failed |
+
+A hypothesis should not be refuted purely because you found no evidence. Absence of evidence is not evidence of absence. However, if you have specifically designed research to test a hypothesis and the expected signal does not appear after adequate sampling, that is meaningful.
+
+## Diminishing returns
+
+Every additional piece of evidence has diminishing marginal value. The first 5 interviews produce more insight than interviews 15-20. Recognise the signs of diminishing returns:
+
+| Signal | What it means | Action |
+|--------|--------------|--------|
+| New interviews repeat what you have already heard | You have reached saturation for this segment | Stop interviewing this segment for this hypothesis |
+| Additional data confirms existing patterns without adding nuance | Quantitative confirmation is solid | Move to assessment |
+| Evidence weight is not increasing with new items | New items are anecdotal (weight 1-2), not additive | Switch methods — try observation or data analysis instead |
+| You are interviewing to feel confident, not to learn | Confirmation-seeking behaviour | Check for [bias](/docs/product-discovery/evidence/bias), make the call |
+
+## Sufficiency by hypothesis type
+
+Different hypothesis types require different evidence thresholds because the cost of being wrong differs.
+
+| Hypothesis type | Minimum evidence | Rationale |
+|----------------|-----------------|-----------|
+| Problem hypothesis | 3 items, avg weight 3+ | Core to the discovery — being wrong here invalidates everything downstream |
+| User hypothesis | 3 items, avg weight 2.5+ | Important for targeting but can be refined later |
+| Context hypothesis | 2 items, avg weight 2.5+ | Contextual — useful for positioning but lower risk if partially wrong |
+
+These are minimums. For high-stakes discoveries (significant investment required, irreversible decisions), increase the thresholds.
+
+## When to stop researching
+
+Use this decision framework:
+
+1. **Have all active hypotheses reached a terminal state (Supported, Refuted, or Retired)?** If yes, research is complete.
+2. **Do you have enough Supported hypotheses to form meaningful insights?** If yes, proceed to [Synthesis](/docs/product-discovery/synthesis) — you can always return for more evidence.
+3. **Are you past the point of diminishing returns on all active hypotheses?** If yes, make the best call you can with what you have.
+4. **Is the cost of additional research greater than the value of additional certainty?** If the decision would be the same at 80% confidence as at 95% confidence, stop.
+
+The goal is not perfect evidence. The goal is enough evidence to make a defensible recommendation in the [Discovery Brief](/docs/product-discovery/templates/discovery-brief). Document your confidence level and what additional evidence would change the recommendation.

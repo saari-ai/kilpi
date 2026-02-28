@@ -1,0 +1,109 @@
+---
+title: Evaluate
+description: Phase EV — assess evidence against pre-defined criteria, assign confidence levels, determine evidence sufficiency
+---
+
+## Purpose
+
+The Evaluate phase takes the evidence collected in [Execute](/docs/product-validation/phases/execute) and assesses it against the success criteria defined in [Design](/docs/product-validation/phases/design). It determines whether each experiment passed, failed, or was inconclusive, and assigns a confidence level to the overall hypothesis.
+
+**Input:** Evidence log (VV-) and experiment cards (VE-) with pre-defined success criteria.
+
+**Output:** Evaluated experiment results with confidence levels and an evidence sufficiency assessment.
+
+## Evaluation process
+
+For each experiment, work through these steps in order:
+
+### 1. Compile evidence
+
+Gather all VV- entries linked to the experiment. Verify completeness:
+
+- Has the minimum sample size been reached?
+- Are there gaps in the data collection period?
+- Are there VV- entries flagged with anomalies that need to be accounted for?
+
+If the sample size was not met, the experiment result is **Inconclusive** regardless of the numbers. Do not extrapolate from insufficient data.
+
+### 2. Assess against success criteria
+
+Compare the compiled evidence against the pass/fail/inconclusive thresholds defined in the experiment card.
+
+| Threshold | Outcome | Meaning |
+|-----------|---------|---------|
+| Meets or exceeds pass threshold | **Pass** | The hypothesis is supported by this experiment |
+| Falls below failure threshold | **Fail** | The hypothesis is not supported by this experiment |
+| Falls between thresholds | **Inconclusive** | Cannot determine — need additional evidence |
+| Sample size not met | **Inconclusive** | Insufficient data to evaluate |
+
+### 3. Check for confounding factors
+
+Before accepting a pass or fail, assess whether external factors may have influenced the result:
+
+| Factor | Risk | Mitigation |
+|--------|------|-----------|
+| Selection bias in participants | Results reflect a non-representative sample | Compare participant demographics to target segment |
+| External events during experiment | A news story, competitor launch, or seasonal effect skewed behavior | Check VV- notes for anomalies; consider re-running |
+| Technical issues | Broken tracking, slow page loads, email delivery failures | Review VV- notes for logged issues; discount affected data |
+| Hawthorne effect | Participants behaved differently because they knew they were being observed | Relevant for Wizard of Oz and usability tests; discount enthusiasm |
+
+If confounding factors are significant, downgrade confidence or mark as Inconclusive.
+
+### 4. Assign confidence level
+
+Based on the experiment result and the assessment of confounding factors, assign a confidence level from the [confidence scale](/docs/product-validation/conventions#confidence-levels):
+
+| Level | When to assign |
+|-------|---------------|
+| None | No evidence collected (experiment not yet run) |
+| Low | Experiment completed but result is inconclusive, confounded, or based on very small sample |
+| Medium | Clear pass or fail from a well-executed experiment with adequate sample size |
+| High | Clear pass or fail from a well-designed experiment with strong sample size and no confounding factors |
+| Validated | Multiple experiments converge on the same conclusion with High confidence each |
+
+### 5. Synthesize across experiments
+
+When multiple experiments test the same hypothesis (or related hypotheses testing the same assumption), synthesize the results:
+
+- **Converging evidence** (multiple experiments agree): Increase confidence. If two Medium-confidence experiments agree, the synthesized confidence is High.
+- **Conflicting evidence** (experiments disagree): Do not average. Investigate why. Common causes: different user segments, different fidelity levels revealing different behaviors, confounding factors in one experiment.
+- **Mixed signals** (some pass, some inconclusive): The hypothesis is partially supported. Note which conditions it holds under and which remain uncertain.
+
+## Signal vs noise
+
+Not all data is signal. Small sample experiments, qualitative-heavy methods, and early-stage tests produce noisy data. Use these rules to separate signal from noise:
+
+### Quantitative experiments
+
+- **Conversion rate experiments** (landing page, fake door): Require 300+ visitors for meaningful conversion rate comparisons. Below that, random variation dominates.
+- **A/B tests**: Use standard statistical significance (p < 0.05) as the bar. If you cannot calculate significance, report the raw numbers and assign Low confidence.
+- **Payment/pre-order experiments**: Expressed intent is weaker signal than actual payment. A "yes I would pay" in a survey is not the same as a credit card entry.
+
+### Qualitative experiments
+
+- **Pattern threshold**: In qualitative research (interviews, usability tests), a pattern exists when 3+ participants independently exhibit the same behavior or express the same sentiment.
+- **Outlier handling**: A single passionate user is an anecdote, not a pattern. Do not build strategy on one person's enthusiasm.
+- **Negative signal strength**: One user saying "I would never use this" is worth more than five saying "yeah, that's cool" — negative signals in qualitative research are typically more reliable than positive ones.
+
+## Evidence sufficiency
+
+After evaluating all experiments in the current cycle, determine whether you have enough evidence to proceed to [Decide](/docs/product-validation/phases/decide):
+
+| Condition | Sufficient? | Action |
+|-----------|------------|--------|
+| All critical assumptions have at least Medium confidence | Yes | Proceed to Decide |
+| Some critical assumptions are still Inconclusive | No | Return to [Design](/docs/product-validation/phases/design) for additional experiments |
+| Critical assumptions have conflicting evidence | No | Design targeted experiments to resolve the conflict |
+| All experiments are Inconclusive | No | Reassess experiment design — methods may be inappropriate |
+| High-risk assumption fails with High confidence | Yes | Proceed to Decide — likely a Pivot or Kill |
+
+## Output
+
+The Evaluate phase produces **evaluated experiment results** — each experiment card updated with:
+
+- Result: Pass / Fail / Inconclusive
+- Confidence level: None through Validated
+- Confounding factors (if any)
+- Evidence sufficiency assessment: Ready for decision or needs more experiments
+
+If evidence is sufficient, proceed to [Decide](/docs/product-validation/phases/decide). If insufficient, return to [Design](/docs/product-validation/phases/design) with a clear statement of what additional evidence is needed and why.

@@ -1,0 +1,104 @@
+---
+title: Feasibility
+description: Assessing whether the opportunity can realistically be pursued across technical, business, and distribution dimensions
+---
+
+Feasibility assessment determines whether you can actually capture the opportunity — not just whether it exists. A real problem in a large market with no competitors is still not an opportunity if you cannot build a solution, fund the business, or reach the customers.
+
+## Three dimensions of feasibility
+
+### Technical feasibility
+
+Can a solution be built with available technology and resources?
+
+| Factor | Question | Red flag |
+|--------|----------|----------|
+| Core technology | Does the required technology exist? | Solution requires a breakthrough that no one has achieved |
+| Team capability | Does the team have (or can it acquire) the skills to build this? | Requires deep domain expertise the team lacks and cannot hire for |
+| Data requirements | Does the solution need data you do not have and cannot acquire? | Requires proprietary data owned by a competitor or locked behind regulation |
+| Timeline | Can a viable first version be built within a reasonable timeframe? | Minimum viable solution requires 18+ months of development |
+| Infrastructure | Are the infrastructure requirements feasible at your scale? | Requires infrastructure investment disproportionate to early revenue |
+
+Score technical feasibility:
+
+| Score | Label | Conditions |
+|-------|-------|------------|
+| 5 | Straightforward | Known technology, team has skills, can ship MVP in weeks |
+| 4 | Achievable | Some technical challenges, but path is clear. MVP in 1-3 months. |
+| 3 | Challenging | Significant technical work required. Some unknowns. MVP in 3-6 months. |
+| 2 | Difficult | Major technical unknowns. May require research phase before building. |
+| 1 | Moonshot | Requires technology that does not exist or fundamental breakthrough |
+
+### Business feasibility
+
+Can this be a viable business?
+
+| Factor | Question | Red flag |
+|--------|----------|----------|
+| Revenue model | Is there a clear way to charge for this? | Users expect the solution to be free (and viable free alternatives exist) |
+| Unit economics | Can you serve a customer at a cost lower than the revenue they generate? | High per-customer cost (human support, infrastructure) with low willingness to pay |
+| Funding | Can you fund development to first revenue? | Requires significant investment with no revenue until product is mature |
+| Regulatory | Are there regulatory barriers to entering this market? | Requires licences, certifications, or compliance the team cannot achieve |
+| Defensibility | Can you build durable advantages over time? | Easily replicated by any competitor with more resources |
+
+Score business feasibility:
+
+| Score | Label | Conditions |
+|-------|-------|------------|
+| 5 | Clear path | Proven revenue model, good unit economics, fundable |
+| 4 | Viable | Revenue model identified, unit economics plausible, funding achievable |
+| 3 | Uncertain | Revenue model untested, unit economics depend on assumptions |
+| 2 | Risky | Revenue model unclear, unit economics challenging, funding difficult |
+| 1 | Non-viable | No clear revenue model, or unit economics fundamentally broken |
+
+### Distribution feasibility
+
+Can you reach and acquire customers?
+
+| Factor | Question | Red flag |
+|--------|----------|----------|
+| Channel access | Can you reach the target segment through available channels? | Target segment is unreachable through standard channels |
+| Customer acquisition cost | Can you acquire customers at a cost that supports unit economics? | CAC exceeds lifetime value under any reasonable model |
+| Sales cycle | How long does it take to convert a lead to a customer? | Sales cycle > 12 months for a startup without runway to support it |
+| Trust requirements | Does the customer need to trust you before buying? | Solution requires deep institutional trust (e.g., healthcare, finance) you have not yet earned |
+| Existing audience | Do you have access to the target segment already? | No existing relationships, no community presence, no brand recognition |
+
+Score distribution feasibility:
+
+| Score | Label | Conditions |
+|-------|-------|------------|
+| 5 | Easy access | Existing audience, low CAC, self-serve acquisition |
+| 4 | Accessible | Clear channel strategy, reasonable CAC, short sales cycle |
+| 3 | Moderate | Channels identified but untested, CAC estimated but not proven |
+| 2 | Difficult | Channels unclear, high CAC, long sales cycle |
+| 1 | Blocked | No viable distribution path identified |
+
+## Overall feasibility score
+
+The feasibility score for the [Opportunity Scorecard](/docs/product-discovery/templates/opportunity-scorecard) is the average of the three dimension scores:
+
+```
+Feasibility = (Technical + Business + Distribution) / 3
+```
+
+Record the breakdown alongside the average so that readers of the Discovery Brief can see which dimension is the constraint.
+
+## Go/no-go signals
+
+Use these to make quick feasibility assessments before investing in a full evaluation:
+
+**Go signals:**
+
+- The team has built something similar before
+- Target customers are already using inferior workarounds (validates willingness to act)
+- A clear pricing model exists in the competitive landscape
+- You have an unfair advantage in reaching the target segment
+
+**No-go signals:**
+
+- Any single dimension scores 1 with no realistic path to improvement
+- Technical and distribution both score 2 or below
+- The solution requires the customer to change a deeply ingrained behaviour with no forcing function
+- Regulatory barriers require years of compliance work before you can operate
+
+A single dimension at 1 does not automatically kill the opportunity, but it should trigger serious scrutiny. Can the constraint be removed? At what cost? If not, the opportunity is likely not viable regardless of how strong the other dimensions are.

@@ -1,0 +1,63 @@
+---
+title: "DE.CM: Continuous Monitoring"
+description: Build Pipeline example for continuous-monitoring
+---
+
+For methodology guidance, see [DE.CM: Continuous Monitoring](/docs/cybersecurity/functions/detect/continuous-monitoring).
+
+---
+
+### DE.CM-01: Network monitoring
+
+| What to monitor | Method | Alert threshold |
+|---|---|---|
+| Workflow runs triggered from forks or unexpected branches | GitHub audit log, workflow run metadata (source repo, branch, actor) | **Critical**: Workflow triggered from a fork attempting to access secrets. **High**: Workflow triggered from an unexpected branch with deployment permissions. |
+| ECR image push from unauthorized principals | CloudTrail events for `PutImage`, grouped by caller identity (IAM role, OIDC subject) | **Critical**: Image pushed by a principal not matching the expected OIDC subject claim (repo + branch). **High**: Image pushed outside of a CI workflow run. |
+| OIDC token requests from unexpected repositories or branches | CloudTrail events for `AssumeRoleWithWebIdentity`, filtered by OIDC subject claim | **Critical**: OIDC token request from a repository or branch not in the trust policy allow-list. |
+| GitHub API calls with elevated permissions from GITHUB_TOKEN | GitHub audit log, token permission analysis | **High**: GITHUB_TOKEN used with permissions beyond those declared in the workflow `permissions:` block. |
+
+---
+
+### DE.CM-03: Personnel activity monitoring
+
+| What to monitor | Method | Alert threshold |
+|---|---|---|
+| Branch protection rule changes | GitHub audit log events for `protected_branch.update`, `protected_branch.destroy` | **Critical**: Branch protection disabled or weakened on main branch. **High**: Admin override enabled. (<span style={{whiteSpace: 'nowrap'}}>SC-CI-6.1</span>) |
+| GitHub Secrets changes (create, update, delete) | GitHub audit log events for secret management actions | **High**: Production secret created or modified outside of scheduled rotation window. **Medium**: Secret deleted without corresponding rotation record. |
+| Repository visibility changes | GitHub audit log events for `repo.access` | **Critical**: Private repository changed to public. |
+| CODEOWNERS file modifications | Git diff on PR, CODEOWNERS change detection | **High**: CODEOWNERS file modified to remove infrastructure owner from workflow file ownership. |
+| Direct pushes to main (bypassing PR) | GitHub audit log, branch protection bypass events | **Critical**: Direct push to main branch detected (indicates branch protection bypass). (<span style={{whiteSpace: 'nowrap'}}>SC-CI-6.1</span>) |
+
+---
+
+### DE.CM-06: External service provider monitoring
+
+| What to monitor | Method | Alert threshold |
+|---|---|---|
+| Dependency scanning results (npm, Docker base images) | Dependabot alerts, `npm audit`, Trivy scan results in CI | **Critical**: Critical or high CVE in a production dependency or base image. **High**: PR merged despite failing dependency scan (CI bypass). **Medium**: Scanning job not run in 7+ days. |
+| Third-party Action SHA drift (upstream changes to pinned Action) | Automated check comparing pinned SHA against upstream default branch | **High**: Pinned Action SHA is more than 90 days behind upstream. **Medium**: Upstream Action has published security advisory. |
+| GitHub platform status and incident reports | GitHub Status API, RSS feed | **Medium**: GitHub Actions degraded performance or outage reported. |
+
+---
+
+### DE.CM-09: Application and runtime monitoring
+
+| What to monitor | Method | Alert threshold |
+|---|---|---|
+| Workflow run anomalies (unexpected duration, resource usage) | GitHub Actions workflow run metrics (duration, exit code, step count) | **High**: Workflow run duration exceeds 3x the 30-day rolling average. **Medium**: New workflow step added that was not in the reviewed workflow file. |
+| Secret access patterns during workflow runs | GitHub audit log (secret access events), workflow step correlation | **Critical**: Secret accessed by a workflow step that should not need it. **High**: Secret accessed during a PR workflow (secrets should only be available on main branch deploys). |
+| Image signing and provenance verification failures | Deployment pipeline logs (cosign verify output) | **Critical**: Deployment attempted with unsigned image or missing provenance attestation. (<span style={{whiteSpace: 'nowrap'}}>SC-CI-6.2</span>) |
+| Cache poisoning indicators (unexpected cache key matches) | GitHub Actions cache logs, cache key analysis | **High**: Cache restored from a key that was not created by a trusted workflow run. **Medium**: Cache size significantly larger than expected (potential payload injection). |
+| Build artifact integrity (lockfile changes without corresponding PR) | CI step comparing `package-lock.json` hash against committed version | **Critical**: Lockfile differs between checkout and build (potential tampering). (<span style={{whiteSpace: 'nowrap'}}>SC-CI-4.3</span>) |
+
+---
+
+## Alerting tiers
+
+Every alert trigger above maps to one of three tiers. The tier determines the response time.
+
+| Tier | Response time | Examples |
+|---|---|---|
+| **Critical** (immediate page) | On-call paged within 5 minutes. Response within 15 minutes. | Fork accessing secrets. Unauthorized ECR push. Branch protection disabled. Repo made public. Unsigned deployment. Lockfile tampering. Direct push to main. Unauthorized OIDC request. |
+| **High** (same-day investigation) | Alert to security channel. Investigation within 4 hours. | Unexpected branch deployment. Elevated GITHUB_TOKEN usage. Secret modified outside rotation. CODEOWNERS weakened. Action SHA drift > 90 days. Workflow duration anomaly. Cache key mismatch. CI scan bypassed. |
+| **Medium** (weekly review) | Included in weekly security review. Triaged within 7 days. | Secret deleted without record. GitHub Actions degraded. Action upstream advisory. New workflow step. Cache size anomaly. Scanning not running. |

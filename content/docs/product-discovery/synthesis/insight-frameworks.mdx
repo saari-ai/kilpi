@@ -1,0 +1,95 @@
+---
+title: Insight Frameworks
+description: Structured frameworks for extracting actionable insights from evidence patterns
+---
+
+An insight is an actionable understanding that connects evidence to opportunity. It goes beyond describing what you observed (that is a pattern) to explaining why it matters and what it implies for a solution.
+
+Every insight gets a formal ID (`IN-{discovery}-{n}`) and must reference at least two evidence items. Insights are recorded in the [Discovery Brief](/docs/product-discovery/templates/discovery-brief).
+
+## Jobs to Be Done (JTBD)
+
+JTBD is the primary insight framework for Product Discovery. It reframes problems from the user's perspective: what "job" are they hiring a solution to do?
+
+### Core concept
+
+People do not buy products — they hire them to make progress in a specific circumstance. Understanding the job reveals the real competition (anything else that could do the job) and the real value proposition (progress the user wants to make).
+
+### Job statement format
+
+> **When I [situation/trigger], I want to [motivation/action], so I can [desired outcome].**
+
+| Component | What it captures | Example |
+|-----------|-----------------|---------|
+| When I... | The trigger or circumstance | When I get my first enterprise sales inquiry |
+| I want to... | The action or progress sought | I want to quickly demonstrate my product meets security requirements |
+| So I can... | The ultimate outcome | So I can close the deal without losing weeks to compliance preparation |
+
+### Building JTBD insights from evidence
+
+1. **Identify the trigger.** What event or circumstance causes the user to seek progress? Look for temporal evidence: "When X happens, I need to..." or "The last time I had to..."
+
+2. **Identify the desired outcome.** What does success look like from the user's perspective? This is often different from what you assumed. Listen for emotional and social outcomes, not just functional ones.
+
+3. **Identify the current "hire."** What is the user currently doing to get the job done? This reveals the real competition and the baseline experience.
+
+4. **Identify the struggling moment.** Where does the current approach fall short? This is where the opportunity lives.
+
+**Example insight:**
+
+> **IN-FN-1:** When solo founders receive their first enterprise security questionnaire (trigger), they want to quickly determine which security controls apply to their specific architecture (action), so they can respond confidently without spending weeks on research (outcome). Currently, they hire generic security checklists and blog posts (current solution), which fail because they are not contextualised to the founder's stack (struggling moment). — Based on EV-FN-7, EV-FN-8, EV-FN-11, EV-FN-12.
+
+## Outcome statements
+
+Outcome statements formalise what the user is trying to achieve. They are more specific than job statements and are useful for prioritising which aspects of a job to focus on.
+
+### Format
+
+> **[Direction] + [metric] + [object of control] + [context]**
+
+| Component | Options | Example |
+|-----------|---------|---------|
+| Direction | Minimise, Maximise, Increase, Reduce | Minimise |
+| Metric | Time, effort, likelihood, cost | the time |
+| Object of control | What the user is acting on | it takes to determine which security controls apply |
+| Context | The circumstance | when responding to an enterprise security questionnaire |
+
+**Full example:** "Minimise the time it takes to determine which security controls apply when responding to an enterprise security questionnaire."
+
+Outcome statements are useful because they are measurable. You can test whether a solution actually minimises the time, which feeds directly into [Product Validation](/docs/product-validation).
+
+## Combining frameworks
+
+No single framework captures everything. Use JTBD to understand the overall job and context. Use outcome statements to specify what success looks like. The combination produces insights that are both contextual and measurable.
+
+| Framework | Captures | Best for |
+|-----------|---------|----------|
+| JTBD | The full context: trigger, action, outcome, current hire, struggling moment | Understanding why the problem exists and what the user is really trying to achieve |
+| Outcome statements | Specific, measurable desired outcomes | Prioritising which outcomes matter most and defining success criteria for a solution |
+
+## Insight quality checklist
+
+Before recording an insight (IN-), verify it meets these criteria:
+
+| Criterion | Test |
+|-----------|------|
+| Grounded in evidence | References at least 2 evidence items (EV-) from different sources |
+| Goes beyond description | Explains why, not just what. Includes interpretation, not just observation. |
+| Actionable | Someone could design a solution direction from this insight alone |
+| Falsifiable | There exists evidence that could prove this insight wrong |
+| Non-obvious | It tells you something you did not know before the research |
+
+An insight that fails any of these criteria is either a pattern (not yet interpretive enough), an assumption (not grounded in evidence), or common knowledge (does not add value).
+
+## Recording insights
+
+Each insight is recorded with:
+
+| Field | Description |
+|-------|-------------|
+| ID | `IN-{discovery}-{n}` |
+| Statement | The insight in JTBD or outcome statement format |
+| Supporting evidence | List of EV- items that ground this insight |
+| Pattern source | Which evidence pattern this insight was derived from |
+| Confidence | High / Medium / Low — based on evidence strength and bias assessment |
+| Implications | What this insight suggests about the opportunity |

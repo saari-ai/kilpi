@@ -1,0 +1,85 @@
+---
+title: Market Sizing
+description: Evidence-based approaches to sizing the market opportunity
+---
+
+Market sizing estimates how large the opportunity is in terms of potential customers and revenue. In discovery, market sizing serves a specific purpose: is this opportunity large enough to justify investment? It is not a financial forecast — it is a sanity check.
+
+## Approaches
+
+There are two standard approaches. Use both and compare results. Large discrepancies indicate one or both estimates are wrong.
+
+### Top-down
+
+Start with a known total market and narrow it to your addressable segment.
+
+```
+Total Addressable Market (TAM)
+  → Serviceable Addressable Market (SAM)
+    → Serviceable Obtainable Market (SOM)
+```
+
+| Level | Definition | Example |
+|-------|------------|---------|
+| TAM | Total market for the category | All companies that need cybersecurity compliance ($50B globally) |
+| SAM | The portion you could theoretically serve given your product constraints | SMB SaaS companies in English-speaking markets ($2B) |
+| SOM | The portion you can realistically capture in 3-5 years given your resources | Solo-to-10-person SaaS teams who self-serve ($200M) |
+
+**When to use top-down:** When industry reports, analyst data, or public filings provide credible total market numbers. Good for establishing an upper bound.
+
+**Weakness:** Every narrowing step involves assumptions. TAM → SAM might assume "20% of the market is SMB" without evidence. Stack enough assumptions and the final number is fiction.
+
+### Bottom-up
+
+Start with your evidence about individual customers and scale up.
+
+```
+Number of target customers × Revenue per customer = Market size
+```
+
+| Component | How to estimate | Evidence source |
+|-----------|----------------|-----------------|
+| Number of target customers | Count from databases, industry reports, census data | Public data, market research |
+| Percentage with the problem | From your discovery evidence | Interview and survey data |
+| Willingness to pay | From switching interview data and competitive pricing | Customer research, competitive analysis |
+| Revenue per customer | Price × frequency | Pricing research, competitive benchmarks |
+
+**When to use bottom-up:** When you have good evidence about your target segment from Customer Research. Bottom-up estimates are grounded in your actual evidence rather than analyst projections.
+
+**Weakness:** Harder to execute. Requires concrete data about customer counts and willingness to pay, which may not be available early in discovery.
+
+## Evidence-based sizing
+
+Ground your estimates in the evidence you actually have. For each assumption in the market sizing, note:
+
+| Assumption | Based on | Evidence ID | Confidence |
+|------------|----------|-------------|------------|
+| *e.g., 2M SaaS companies globally* | *Industry report from [source]* | *EV-FN-20* | *High — reputable source, recent data* |
+| *e.g., 30% are solo/small team* | *Extrapolated from survey of 200* | *EV-FN-21* | *Medium — reasonable sample but self-selected* |
+| *e.g., 60% lack security processes* | *Interview finding (7/12 interviewees)* | *EV-FN-7, EV-FN-9, EV-FN-11* | *Medium — consistent pattern but small sample* |
+| *e.g., $200/year willingness to pay* | *Competitive pricing analysis* | *EV-FN-25* | *Medium — inferred from proxies, not measured directly* |
+
+When an assumption has low confidence, run the sizing twice — once with an optimistic estimate and once with a conservative one. If the opportunity is attractive even under conservative assumptions, that is a strong signal.
+
+## Common pitfalls
+
+| Pitfall | What happens | How to avoid |
+|---------|-------------|-------------|
+| TAM worship | Citing a massive TAM number as if it is the opportunity. "It's a $50B market!" | Always drill to SAM and SOM. Your actual opportunity is SOM. |
+| Assumption stacking | Each step uses the most optimistic estimate, compounding errors | Use conservative estimates by default. Show the range. |
+| Ignoring competition | Sizing the market as if no one else is in it | Factor in competitive share. See [Competitive Landscape](/docs/product-discovery/opportunity-assessment/competitive-landscape). |
+| Static market | Assuming today's market size is tomorrow's market size | Note market growth trends, but do not rely on projections more than 3 years out. |
+| Confusing users with payers | "50M people have this problem" does not mean 50M will pay to solve it | Bottom-up sizing should include willingness-to-pay evidence. |
+
+## Minimum viable threshold
+
+Before starting market sizing, define your minimum viable threshold — the smallest market that justifies the investment. This depends on your context:
+
+| Context | Typical SOM threshold |
+|---------|----------------------|
+| Venture-backed startup | $100M+ (to support venture-scale returns) |
+| Bootstrapped SaaS | $5M-$50M (to support a profitable business) |
+| Feature within existing product | Lower — justified by retention or expansion revenue |
+| Internal tool | N/A — measured by cost savings, not market size |
+
+If the SOM is below your threshold even under optimistic assumptions, this is an early kill signal. Document the finding and move on.

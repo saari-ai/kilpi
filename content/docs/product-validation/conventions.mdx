@@ -1,0 +1,119 @@
+---
+title: Conventions
+description: ID schemes, confidence levels, risk levels, and traceability rules used across the validation documentation
+---
+
+## ID schemes
+
+We use prefixed ID schemes to uniquely identify validation artifacts across the documentation. The `{solution}` segment in each scheme is a short code for the solution being validated (e.g., FN for FocusNote, PT for PriceTrack). Solution codes are defined in the [Validation Plan](/docs/product-validation/templates/validation-plan) when a validation cycle begins.
+
+### Solution codes
+
+Solution codes are 2-3 uppercase letters derived from the solution name. They must be unique within an organisation's active validation portfolio.
+
+| Rule | Example |
+|------|---------|
+| Use initials of the solution name | FocusNote → FN |
+| For single-word names, use first two letters | Beacon → BE |
+| For common prefixes, add a distinguishing letter | FocusNote → FN, FocusBoard → FB |
+| Document the code in the Validation Plan header | — |
+
+### Assumption IDs (VA-)
+
+Assumptions are beliefs about the solution that must be true for it to succeed. They are decomposed from the Discovery Brief during the [Hypothesize](/docs/product-validation/phases/hypothesize) phase.
+
+| Format | Example | Meaning |
+|--------|---------|---------|
+| `VA-{solution}-{number}` | VA-FN-1 | First assumption for FocusNote |
+
+### Hypothesis IDs (VH-)
+
+Hypotheses are testable predictions derived from assumptions. Each hypothesis links to one or more assumptions.
+
+| Format | Example | Meaning |
+|--------|---------|---------|
+| `VH-{solution}-{number}` | VH-FN-1 | First hypothesis for FocusNote |
+
+### Experiment IDs (VE-)
+
+Experiments are the tests designed to validate or invalidate hypotheses.
+
+| Format | Example | Meaning |
+|--------|---------|---------|
+| `VE-{solution}-{number}` | VE-FN-1 | First experiment for FocusNote |
+
+### Evidence IDs (VV-)
+
+Evidence items are individual observations or data points collected during experiment execution.
+
+| Format | Example | Meaning |
+|--------|---------|---------|
+| `VV-{solution}-{number}` | VV-FN-1 | First evidence item for FocusNote |
+
+### Decision IDs (VD-)
+
+Decisions are the culminating artifacts — the verdict on whether to persevere, pivot, or kill.
+
+| Format | Example | Meaning |
+|--------|---------|---------|
+| `VD-{solution}-{number}` | VD-FN-1 | First decision record for FocusNote |
+
+Multiple decision records for the same solution indicate iteration — a pivot produces a new VD- record referencing the previous one.
+
+## Traceability chain
+
+Every artifact must reference its predecessor in the chain:
+
+```
+VA-{solution}-{n}  (Assumption)
+  → VH-{solution}-{n}  (Hypothesis — references VA- IDs)
+    → VE-{solution}-{n}  (Experiment — references VH- ID)
+      → VV-{solution}-{n}  (Evidence — references VE- ID)
+        → VD-{solution}-{n}  (Decision — references VV- and VE- IDs)
+```
+
+Broken chains indicate gaps in reasoning. If an experiment cannot trace back to an assumption, it is testing something outside the validation scope. If a decision cannot reference evidence, it is a gut call, not a validated decision.
+
+## Confidence levels
+
+We use a five-level confidence scale to assess how strongly evidence supports or refutes a hypothesis:
+
+| Level | Label | Meaning |
+|-------|-------|---------|
+| 0 | None | No evidence collected yet |
+| 1 | Low | Some evidence but insufficient sample size, conflicting signals, or weak methodology |
+| 2 | Medium | Reasonable evidence from a sound experiment; sufficient to make a provisional decision |
+| 3 | High | Strong evidence from well-designed experiments with adequate sample sizes |
+| 4 | Validated | Overwhelming evidence from multiple experiments; near-certain conclusion |
+
+**Medium** is the minimum confidence required to exit validation with a decision. Lower confidence requires additional experiments. Higher confidence is preferred but not always worth the cost.
+
+## Assumption risk levels
+
+We use a four-level risk scale to prioritize which assumptions to test first:
+
+| Level | Label | Meaning |
+|-------|-------|---------|
+| 4 | Critical | If this assumption is wrong, the entire solution fails. Test first. |
+| 3 | High | Significant impact on solution success. Test early. |
+| 2 | Medium | Moderate impact. Test after critical and high assumptions are resolved. |
+| 1 | Low | Minimal impact. May not need explicit testing — monitor during build. |
+
+Risk level is determined by the intersection of **impact** (how badly the solution fails if the assumption is wrong) and **uncertainty** (how confident we are that the assumption is true based on existing evidence).
+
+| | Low Uncertainty | Medium Uncertainty | High Uncertainty |
+|---|---|---|---|
+| **High Impact** | Medium | High | Critical |
+| **Medium Impact** | Low | Medium | High |
+| **Low Impact** | Low | Low | Medium |
+
+## Assumption types
+
+Every assumption is categorized into one of four types. This drives technique selection in the [Design](/docs/product-validation/phases/design) phase.
+
+| Type | Code | Tests whether... |
+|------|------|-----------------|
+| Desirability | D | Users want the solution — they have the problem, they'd use this approach |
+| Viability | V | The solution can sustain a business — willingness to pay, unit economics, market size |
+| Feasibility | F | The solution can be built — technical capability, regulatory constraints, resource requirements |
+| Usability | U | Users can use the solution — learnability, efficiency, error tolerance |

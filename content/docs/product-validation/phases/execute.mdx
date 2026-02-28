@@ -1,0 +1,98 @@
+---
+title: Execute
+description: Phase EX — run experiments with integrity, collect and log evidence systematically
+---
+
+## Purpose
+
+The Execute phase runs the experiments designed in the [Design](/docs/product-validation/phases/design) phase, collects data, and logs evidence entries. The key discipline in this phase is execution integrity — following the protocol exactly as designed, not improvising mid-experiment.
+
+**Input:** Experiment cards (VE-) with defined methods, success criteria, and sample sizes.
+
+**Output:** Evidence log entries (VV-) with observations, data, and timestamps.
+
+## Execution integrity
+
+Execution integrity means running the experiment as designed. The most common validation failures happen in this phase, not because experiments are poorly designed, but because teams deviate from the plan when early results look uncomfortable.
+
+### Rules of execution
+
+1. **Do not change success criteria mid-experiment.** If the criteria feel wrong once you see early data, that is confirmation bias. Log the concern, finish the experiment, and adjust criteria in a subsequent experiment if warranted.
+2. **Do not change the sample size mid-experiment.** If early results are negative, do not shrink the sample to declare "inconclusive." If early results are positive, do not stop early to lock in the win.
+3. **Do not change the method mid-experiment.** If a landing page test becomes a prototype test halfway through, the data is meaningless.
+4. **Log everything, including surprises.** Unexpected observations are some of the most valuable evidence. Log them as VV- entries even if they fall outside the success criteria.
+5. **Separate observation from interpretation.** VV- entries record what happened. Interpretation happens in [Evaluate](/docs/product-validation/phases/evaluate).
+
+### Acceptable mid-experiment adjustments
+
+Some changes are legitimate and do not compromise integrity:
+
+| Adjustment | Acceptable | Why |
+|-----------|-----------|-----|
+| Fix broken tracking/tooling | Yes | Ensures data quality — not changing the experiment |
+| Extend duration (sample size not met) | With caution | Acceptable if the original duration was too short, but set a hard stop |
+| Pause for external disruption | Yes | Holiday, outage, etc. — pause and resume, don't restart |
+| Change success criteria | No | Fundamental violation of execution integrity |
+| Change target audience | No | Different audience = different experiment |
+
+## Data collection methods
+
+Data collection depends on the experiment type. The method is specified in the experiment card.
+
+### Quantitative data
+
+| Source | What it captures | Tools |
+|--------|-----------------|-------|
+| Web analytics | Page visits, conversion rates, bounce rates, time on page | Analytics platform, UTM tracking |
+| Survey responses | Likert scales, NPS, multiple choice | Survey tools, embedded forms |
+| Transaction data | Pre-orders, sign-ups, payment commitments | Payment platform, CRM |
+| Usage metrics | Task completion rate, time to complete, error rate | Product analytics, session recording |
+
+### Qualitative data
+
+| Source | What it captures | Method |
+|--------|-----------------|--------|
+| User interviews | Reactions, reasoning, preferences, concerns | Structured interview script with open-ended questions |
+| Observation notes | Behavior during usability tests, body language, confusion points | Observer notes during sessions |
+| Open-ended survey responses | Unprompted feedback, feature requests, objections | Text fields in surveys |
+| Support/feedback channels | Unsolicited reactions, complaints, praise | Email, chat logs, social mentions |
+
+## Evidence logging
+
+Every observation gets logged as a VV- evidence item. Evidence entries are the raw material for the [Evaluate](/docs/product-validation/phases/evaluate) phase.
+
+### Evidence entry structure
+
+| Field | Description | Example |
+|-------|-------------|---------|
+| VV-ID | Unique evidence identifier | VV-FN-1 |
+| Linked experiment | VE-ID this evidence belongs to | VE-FN-1 |
+| Timestamp | When the observation was made | 2026-02-15 |
+| Source | Where the data came from | Google Analytics, user interview #3 |
+| Type | Quantitative or qualitative | Quantitative |
+| Observation | What was observed (fact, not interpretation) | 312 of 4,200 visitors clicked "Join Waitlist" (7.4%) |
+| Notes | Additional context, surprises, anomalies | Traffic spike on Day 3 from Hacker News — may skew demographics |
+
+### Logging discipline
+
+- **Log daily** during active experiments. Do not batch at the end.
+- **One observation per VV- entry.** Do not combine multiple data points into a single entry.
+- **Quantitative entries include raw numbers**, not just percentages. "7.4% conversion" is incomplete. "312 of 4,200 visitors (7.4%)" is complete.
+- **Qualitative entries include direct quotes** where possible, not paraphrases. "P3 said: 'I wouldn't trust AI to summarize my lecture notes'" is stronger than "User expressed distrust."
+
+## Common execution failures
+
+| Failure | What happens | How to prevent |
+|---------|-------------|----------------|
+| Moving the goalposts | Team changes success criteria after seeing early results | Lock criteria in experiment card; any change invalidates the experiment |
+| Confirmation bias | Team notices positive signals and ignores negative ones | Require logging ALL observations, positive and negative |
+| Premature stopping | Experiment stops early because results "look good enough" | Enforce minimum sample size before evaluation |
+| Leading questions | Interview questions steer users toward desired answers | Use neutral, open-ended questions; have someone outside the team review the script |
+| Selection bias | Experiment recruits only friendly users | Define recruitment criteria in Design phase; use channels that reach representative users |
+| Survivor bias | Only measuring users who completed the flow, ignoring dropoffs | Track the full funnel, including abandonment points |
+
+## Output
+
+The Execute phase produces an **Evidence Log** — a set of VV- entries linked to their parent experiment (VE-). The log contains raw observations without interpretation.
+
+This log feeds directly into the [Evaluate](/docs/product-validation/phases/evaluate) phase, where evidence is assessed against the pre-defined success criteria.

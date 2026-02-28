@@ -1,4 +1,4 @@
-# Kilpi Methodology -- Critical Review from a Non-NIST Founder's Perspective
+# Cybersecurity Methodology -- Critical Review from a Non-NIST Founder's Perspective
 
 **Reviewer context:** I am a startup founder and first-time security lead. I have never read the NIST Cybersecurity Framework. I know security matters, I know we need to "do something," but I have never worked through a formal security methodology. I am reading this documentation for the first time, top to bottom, as presented.
 
@@ -6,7 +6,7 @@
 
 ## Overview (index.mdx)
 
-The overview page is the front door and it carries a lot of weight. It opens well: "Kilpi is a standalone security methodology built on NIST CSF 2.0" -- I immediately know what this is. The sentence about agents being able to apply it autonomously is interesting and differentiating, but it raises a question it does not answer: what does "apply the methodology" actually produce? A document? A set of configuration changes? Tickets? I do not yet know what the output of this process is.
+The overview page is the front door and it carries a lot of weight. It opens well: "Cybersecurity is a standalone security methodology built on NIST CSF 2.0" -- I immediately know what this is. The sentence about agents being able to apply it autonomously is interesting and differentiating, but it raises a question it does not answer: what does "apply the methodology" actually produce? A document? A set of configuration changes? Tickets? I do not yet know what the output of this process is.
 
 The accordion sections list strong claims (defined procedures, concrete artifacts, traceability chain, worked example). This is good -- it tells me this is not just a checklist. But the accordion for "Defined Procedures" mentions "threat modeling (STRIDE)" and "risk scoring (likelihood x impact)" without any explanation. At this point in my reading, I do not know what STRIDE is. The word appears here, in the techniques table, and nowhere on this page is it explained. I would have to click through to the Risk Assessment function page to learn it. For an overview page, this is a problem -- it name-drops jargon that a NIST-naive reader cannot parse.
 
@@ -42,14 +42,14 @@ From a founder's perspective, this page does not tell me:
 - How long it takes. Minutes? Hours?
 
 ### Blockers
-- None. The page is optional -- you can use Kilpi without agents.
+- None. The page is optional -- you can use Cybersecurity without agents.
 
 ### Gaps
 - **No description of the agent workflow.** I cannot tell what the agent does versus what I need to provide. The "Reads from" column tells me what the agent references but not what it produces.
 - **No example of agent output.** If the Taskflow example is what the agent produces, say so explicitly. "Running kilpi_component on a product like Taskflow would produce output similar to the Taskflow example" would close this loop.
 
 ### Polish
-- "appyling" is a typo on line 8 ("for appyling the Kilpi methodology").
+- "appyling" is a typo on line 8 ("for appyling the Cybersecurity methodology").
 
 ---
 

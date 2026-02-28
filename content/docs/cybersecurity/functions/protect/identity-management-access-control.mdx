@@ -1,0 +1,108 @@
+---
+title: "PR.AA: Identity Management, Authentication, and Access Control"
+description: Limit access to authorized users, services, and hardware, managed commensurate with assessed risk.
+---
+
+## Subcategories
+
+| ID | Outcome |
+|----|---------|
+| <span style={{whiteSpace: 'nowrap'}}>[PR.AA-01](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/pr/pr-aa/pr-aa-01/)</span> | Identities and credentials for authorized users, services, and hardware are managed by the organization |
+| <span style={{whiteSpace: 'nowrap'}}>[PR.AA-02](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/pr/pr-aa/pr-aa-02/)</span> | Identities are proofed and bound to credentials based on the context of interactions |
+| <span style={{whiteSpace: 'nowrap'}}>[PR.AA-03](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/pr/pr-aa/pr-aa-03/)</span> | Users, services, and hardware are authenticated |
+| <span style={{whiteSpace: 'nowrap'}}>[PR.AA-04](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/pr/pr-aa/pr-aa-04/)</span> | Identity assertions are protected, conveyed, and verified |
+| <span style={{whiteSpace: 'nowrap'}}>[PR.AA-05](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/pr/pr-aa/pr-aa-05/)</span> | Access permissions, entitlements, and authorizations are defined in a policy, managed, enforced, and reviewed, and incorporate the principles of least privilege and separation of duties |
+| <span style={{whiteSpace: 'nowrap'}}>[PR.AA-06](https://csf.tools/reference/nist-cybersecurity-framework/v2-0/pr/pr-aa/pr-aa-06/)</span> | Physical access to assets is managed, monitored, and enforced commensurate with risk |
+
+## Our methodology
+
+Identity management and access control is where most of the Protect function's practical weight falls for software products. Every scored threat related to authentication, authorization, session management, or credential handling maps here.
+
+---
+
+### PR.AA-01: Identity and credential management
+
+Document every identity type in the system — end users, service accounts, external integrations — and how their credentials are managed through the full lifecycle.
+
+| Identity type | Credential type | Provisioning | Rotation schedule | Revocation trigger |
+|---|---|---|---|---|
+| *e.g. End user* | *Password + MFA* | *Self-registration with email verification* | *On compromise or annual* | *Account deletion, compromise* |
+| *e.g. Service account* | *Short-lived token* | *CI/CD pipeline generates per-deployment* | *Every deployment* | *Service decommission* |
+| *e.g. External integration* | *API key* | *Generated in admin console* | *90 days* | *Partner offboarding, compromise* |
+| | | | | |
+
+---
+
+### PR.AA-02: Identity proofing
+
+Define how each identity type is verified before credentials are issued. Each person gets their own credential — no shared accounts.
+
+| Identity type | Proofing method | Binding |
+|---|---|---|
+| *e.g. Employee* | *HR-verified email, manager approval* | *Individual account, no sharing* |
+| *e.g. Customer* | *Email verification + phone OTP* | *One account per email address* |
+| *e.g. External partner* | *Contract + named contact* | *Named API key per integration* |
+| | | |
+
+---
+
+### PR.AA-03: Authentication methods
+
+Define how each actor proves their identity on every interaction. Include MFA requirements, password policy, and reauthentication triggers.
+
+| Actor | Auth method | MFA required | Password / credential policy | Reauthentication |
+|---|---|---|---|---|
+| *e.g. End user (web)* | *OAuth/OIDC* | *Yes — login + sensitive ops* | *Min 12 chars, breach DB check, no recent reuse* | *Idle 30m, absolute 24h* |
+| *e.g. Service-to-service* | *Mutual TLS* | *N/A* | *Certificate auto-rotated* | *Per-request* |
+| *e.g. Admin* | *SSO + hardware key* | *Always* | *As end user + hardware token* | *Idle 15m* |
+| | | | | |
+
+---
+
+### PR.AA-04: Identity assertions
+
+Protect the tokens and assertions that carry authentication state between systems. Use standards-based formats and verify signatures on every hop.
+
+| Assertion type | Standard | Protection | Verification |
+|---|---|---|---|
+| *e.g. SSO token* | *SAML 2.0* | *Signed + encrypted* | *Signature checked by SP* |
+| *e.g. API auth* | *JWT (OAuth 2.0)* | *Signed (RS256), short-lived* | *Signature + expiry checked per request* |
+| *e.g. Session cookie* | *HttpOnly, Secure, SameSite* | *Server-side session store* | *Session lookup on each request* |
+| | | | |
+
+---
+
+### PR.AA-05: Access permissions and least privilege
+
+Define the authorization model and enforce least privilege. Review access when roles change and when people leave.
+
+| Role / principal | Access scope | Model | Review cadence |
+|---|---|---|---|
+| *e.g. End user* | *Own data only* | *RBAC* | *On role change* |
+| *e.g. Admin* | *All tenant data, user management* | *RBAC* | *Quarterly* |
+| *e.g. CI/CD pipeline* | *Deploy to staging + production* | *Policy-based* | *On pipeline change* |
+| *e.g. Database service* | *Read/write to own schema only* | *Credential-scoped* | *On schema change* |
+| | | | |
+
+---
+
+### PR.AA-06: Physical access
+
+For cloud-hosted products, physical access responsibility sits with the cloud provider (documented in [Organizational Context](/docs/cybersecurity/functions/govern/organizational-context) under layers of responsibility). For any physical infrastructure you manage directly, document the controls.
+
+| Location / asset | Access control | Monitoring | Review cadence |
+|---|---|---|---|
+| *e.g. Office* | *Keycard entry, visitor log* | *CCTV, access log* | *Quarterly* |
+| *e.g. Cloud data centre* | *Provider-managed (AWS, GCP, etc.)* | *Provider SOC reports* | *Annual (via SOC 2 review)* |
+| | | | |
+
+---
+
+## Informative references
+
+| Standard | Controls | Subcategories mapped |
+|----------|----------|---------------------|
+| ISO 27001 | A.5.15, A.5.16, A.5.17, A.5.18 | <span style={{whiteSpace: 'nowrap'}}>PR.AA-01</span>, <span style={{whiteSpace: 'nowrap'}}>PR.AA-02</span>, <span style={{whiteSpace: 'nowrap'}}>PR.AA-05</span> |
+| ISO 27001 | A.8.2, A.8.3, A.8.5 | <span style={{whiteSpace: 'nowrap'}}>PR.AA-03</span>, <span style={{whiteSpace: 'nowrap'}}>PR.AA-04</span> |
+| ISO 27001 | A.7.1, A.7.2, A.7.3 | <span style={{whiteSpace: 'nowrap'}}>PR.AA-06</span> |
+| NIST SP 800-63B | Digital Identity Guidelines | <span style={{whiteSpace: 'nowrap'}}>PR.AA-01</span>, <span style={{whiteSpace: 'nowrap'}}>PR.AA-02</span>, <span style={{whiteSpace: 'nowrap'}}>PR.AA-03</span> |

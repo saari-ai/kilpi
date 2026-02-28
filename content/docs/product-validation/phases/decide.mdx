@@ -1,0 +1,103 @@
+---
+title: Decide
+description: Phase DC — make pivot, persevere, or kill decisions backed by evidence
+---
+
+## Purpose
+
+The Decide phase takes evaluated experiment results from [Evaluate](/docs/product-validation/phases/evaluate) and produces a formal decision: Persevere, Pivot, or Kill. The decision is documented in a Decision Record (VD-) with full evidence references, rationale, and next actions.
+
+**Input:** Evaluated experiment results with confidence levels.
+
+**Output:** VD- Decision Record.
+
+## Decision framework
+
+Every validation cycle ends with one of three decisions:
+
+| Decision | Meaning | When |
+|----------|---------|------|
+| **Persevere** | Proceed to build the solution as validated | Critical assumptions pass with ≥ Medium confidence; evidence supports the solution |
+| **Pivot** | Change direction while preserving validated learnings | Some assumptions validated, others failed; a viable alternative direction exists |
+| **Kill** | Abandon this solution direction entirely | Critical assumptions fail; no viable pivot direction exists |
+
+### Decision is NOT a vote
+
+The decision is determined by evidence, not consensus. The decision framework is mechanical:
+
+1. List all critical and high-risk assumptions with their experiment results and confidence levels.
+2. If all critical assumptions pass → **Persevere** is the default.
+3. If any critical assumption fails → **Pivot** or **Kill**.
+4. Choose Pivot over Kill if a viable pivot direction exists (see pivot types below).
+5. Choose Kill if no pivot direction preserves the validated learnings.
+
+### Decision criteria matrix
+
+| Critical assumptions | High assumptions | Non-critical | Decision |
+|---------------------|-----------------|-------------|----------|
+| All pass | All pass | — | Persevere |
+| All pass | Some fail | — | Persevere with adjustments (address failed High assumptions in build) |
+| Some pass, some fail | — | — | Pivot (preserve passing, redirect failing) |
+| All fail | — | — | Kill |
+| Inconclusive | — | — | Do not decide — return to Design for more experiments |
+
+## Pivot types
+
+A pivot changes direction while preserving validated learnings. Not all pivots are the same. Identify the type to guide the next validation cycle.
+
+| Pivot type | What changes | What stays | Example |
+|-----------|-------------|-----------|---------|
+| **Zoom-in** | A single feature becomes the whole product | Core value proposition | "The AI summary feature is the product, not the full note-taking app" |
+| **Zoom-out** | The product becomes a feature of a larger product | Core technology | "The attention tracking becomes part of an existing study platform" |
+| **Customer segment** | Target a different user segment | Core solution mechanism | "Target professionals in meetings instead of students in lectures" |
+| **Value capture** | Change the revenue model | Core product and users | "Switch from subscription to freemium with premium features" |
+| **Channel** | Change how you reach users | Core product and pricing | "Sell through universities instead of direct-to-student" |
+| **Technology** | Change the underlying technology | User problem and value proposition | "Use rule-based detection instead of AI for attention patterns" |
+
+### Choosing a pivot type
+
+The pivot type is determined by which assumptions passed and which failed:
+
+- **Desirability passes, viability fails** → Value capture pivot or customer segment pivot
+- **Desirability passes, feasibility fails** → Technology pivot or zoom-in pivot
+- **Desirability fails for one segment, passes for another** → Customer segment pivot
+- **Core feature validates but the product doesn't** → Zoom-in pivot
+- **Product validates but the channel doesn't** → Channel pivot
+
+## Decision record structure
+
+Every decision is documented in a formal VD- record:
+
+| Field | Description |
+|-------|-------------|
+| VD-ID | Unique decision identifier (e.g., VD-FN-1) |
+| Solution | Name and code of the solution being decided on |
+| Date | Date the decision was made |
+| Evidence summary | Table of experiments (VE-IDs) with results, confidence levels, and key evidence (VV-IDs) |
+| Overall confidence | Synthesized confidence level across all experiments |
+| Decision | Persevere / Pivot (type) / Kill |
+| Rationale | Why this decision, based on the evidence |
+| Next actions | Specific steps based on the decision |
+
+### Next actions by decision type
+
+| Decision | Next actions |
+|----------|-------------|
+| **Persevere** | Define build specifications referencing validated assumptions. Handoff Decision Record to engineering. Identify remaining Medium-risk assumptions to monitor during build. |
+| **Pivot** | State the pivot type. Define the new assumptions created by the pivot. Initiate a new validation cycle (new VA-, VH-, VE- artifacts with the same solution code). Reference VD- from the previous cycle. |
+| **Kill** | Archive the Validation Plan and all artifacts. Document key learnings. Return to [Product Discovery](/docs/product-discovery) with the evidence — it narrows the solution space for the next attempt. |
+
+## Escalation
+
+When the team disagrees with the evidence-based decision:
+
+1. **Re-examine the evidence.** Is there a confounding factor that was missed? Is the sample size too small? Are the success criteria reasonable?
+2. **If the evidence is sound, follow the evidence.** Personal conviction does not override data. The methodology exists specifically to prevent emotion-driven decisions.
+3. **If new information exists that wasn't captured in experiments**, design a targeted experiment to test it. Do not override the decision based on untested intuition.
+4. **Document the disagreement** in the Decision Record's rationale section. If the team overrides the evidence, record the override with its justification. This creates accountability.
+
+## Output
+
+The Decide phase produces a **VD- Decision Record** — the culminating artifact of the validation cycle. If the decision is Persevere, this record becomes the primary input to the build process. If the decision is Pivot, it becomes the input to a new validation cycle. If the decision is Kill, it becomes the archival record.
+
+See the [Decision Record template](/docs/product-validation/templates/decision-record) for the fill-in format.

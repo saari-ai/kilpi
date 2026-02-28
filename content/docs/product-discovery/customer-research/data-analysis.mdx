@@ -1,0 +1,65 @@
+---
+title: Data Analysis
+description: Using quantitative data to complement qualitative research in discovery
+---
+
+Data analysis is the third research method in Customer Research. Quantitative data provides scale, objectivity, and precision that interviews and observation cannot. But it lacks context — numbers tell you what is happening, not why.
+
+The strongest discovery evidence comes from combining qualitative and quantitative methods. Interviews tell you why; data tells you how much and how often.
+
+## Quantitative sources
+
+| Source | What it tells you | Limitations |
+|--------|------------------|-------------|
+| Product analytics | Feature usage, drop-off rates, session patterns | Only covers existing users of existing products |
+| Surveys | Self-reported attitudes and preferences at scale | Subject to response bias, question framing effects |
+| Market data | Market size, growth rates, competitive share | Often estimated, not measured. Check methodology. |
+| Support tickets | What problems users report, frequency, severity | Biased toward vocal users. Unreported problems are invisible. |
+| Public data | Industry reports, census data, regulatory filings | May not match your specific segment |
+
+## Signal vs noise
+
+Not all data movement is meaningful. Before treating a metric as evidence:
+
+1. **Check the sample size.** A 50% conversion rate from 4 visitors is noise. From 4,000, it is signal.
+2. **Check the time period.** A single week may include anomalies (holidays, outages, press coverage). Use enough time for patterns to stabilise.
+3. **Check for confounders.** Did something else change at the same time? A feature launch, a pricing change, a marketing campaign?
+4. **Check the definition.** "Active users" means different things in different tools. Ensure you know exactly what the metric measures before using it as evidence.
+
+When the signal is ambiguous, assign a lower evidence weight. Be honest about what the data does and does not prove.
+
+## Combining quantitative and qualitative
+
+The power of data analysis in discovery comes from triangulation — using quantitative data to confirm, quantify, or challenge qualitative findings.
+
+| Pattern | What to do | Evidence weight impact |
+|---------|-----------|----------------------|
+| Interviews say X, data confirms X | Strong triangulation. Increase evidence weight. | Interview evidence moves from weight 2-3 to weight 4 |
+| Interviews say X, data is silent on X | Data does not cover this area. Keep interview weight as-is. | No change |
+| Interviews say X, data contradicts X | The say-do gap. Investigate further. Data usually wins on behaviour questions. | Reduce interview evidence weight. Add data as separate evidence item. |
+| Data shows pattern Y, interviews did not mention Y | Discovered a signal you were not looking for. Write a new hypothesis. | Add as new evidence, weight based on data quality |
+
+## Triangulation
+
+Triangulation means confirming a finding using at least two independent methods. In discovery, the most common triangulation patterns are:
+
+- **Interview + Analytics:** "Users say they struggle with X" + "Analytics show 60% drop-off at X"
+- **Interview + Observation:** "Users say they do X" + "Observation confirms they actually do X"
+- **Survey + Analytics:** "40% of respondents report problem X" + "Usage data shows X correlates with churn"
+
+Evidence that has been triangulated across methods should be weighted higher (typically weight 4) than evidence from any single method.
+
+## Evidence weight from quantitative data
+
+Quantitative data is not automatically high-weight. The weight depends on quality:
+
+| Data quality | Evidence weight | Example |
+|-------------|----------------|---------|
+| Small sample, uncontrolled | Weight 2 | 15 survey responses from self-selected users |
+| Moderate sample, reasonable controls | Weight 3 | 200 survey responses from a representative panel |
+| Large sample, well-controlled | Weight 4 | 1,000+ responses with demographic controls, or clean A/B test data |
+| Statistically rigorous | Weight 5 | Large-sample study with significance testing (p < 0.05), representative sampling, controlled for confounders |
+
+Most product analytics data falls at weight 3-4. It covers all users (large sample) but is observational (not controlled). Surveys typically fall at weight 2-3 unless carefully designed with representative sampling.
+
+Record each data finding as an EV- item in the [Evidence Register](/docs/product-discovery/templates/evidence-register), tagged with source type "quantitative" or the specific source (e.g., "analytics", "survey", "market-data").

@@ -1,0 +1,56 @@
+---
+title: Scope
+description: How the Cybersecurity methodology applies at the organisational and component levels
+---
+
+The methodology operates at two levels: **organisational** and **component**. Each NIST function belongs to exactly one level. This page explains which functions belong where and why.
+
+## Organisational scope
+
+The organisational scope covers the business as a whole. It establishes governance, defines response processes, and plans recovery. Use the [Template](/docs/cybersecurity/templates) to apply this scope — the Govern, Respond, and Recover sections are completed at this level.
+
+| Function | What the org owns | Categories |
+|----------|-------------------|------------|
+| Govern | Risk strategy, roles, policy, oversight, supply chain | GV.OC, GV.RM, GV.RR, GV.PO, GV.OV, GV.SC |
+| Respond | Incident response process, playbooks, escalation matrix | RS.MA, RS.AN, RS.CO, RS.MI |
+| Recover | Recovery framework, communication plan | RC.RP, RC.CO |
+
+Components do not redo Govern, Respond, or Recover. Those are organisational concerns.
+
+The remaining three functions — Identify, Protect, and Detect — are covered by the [component scope](#component-scope). The organisation is split into one or more components, and each component owns its own ID, PR, and DE assessment. This split works because **policies** live at the org level while **controls** live at the component level. "All components must use TLS 1.3" is a policy (GV.PO). Configuring TLS 1.3 on a specific service is a control (PR.DS) in that component's assessment. The org sets the standard; each component implements it and proves compliance.
+
+## Component scope
+
+The component scope applies to an individual component — a product, service, feature, or any bounded unit with its own security risk surface. Components inherit governance, response processes, and recovery plans from the org. They own everything else within their own domain. Each registered component gets its own Identify, Protect, and Detect assessment under the [Component Register](/docs/cybersecurity/templates/component-register).
+
+| Function | What the component owns | Inherits from org |
+|----------|------------------------|-------------------|
+| Identify | Asset register, threat model (STRIDE), risk assessment | Risk strategy (GV.RM), risk appetite, severity thresholds |
+| Protect | Auth model, encryption choices, input validation, component-specific controls | Policies (GV.PO) that mandate baseline standards |
+| Detect | Monitoring rules, alert thresholds specific to the component | Response processes (RS) and recovery plans (RC) for when alerts fire |
+
+## What constitutes a component?
+
+A component is any bounded unit that gets its own Identify, Protect, and Detect assessment. Use these rules of thumb:
+
+- **Single deployable = one component.** A monolithic application with its database is one component, even if it has multiple internal modules.
+- **Separate data boundaries = separate components.** If two services have independent databases and could be breached independently, assess them separately.
+- **Shared infrastructure = its own component.** A shared auth service, platform-wide monitoring stack, or CI/CD pipeline is assessed as its own component, just like any other bounded unit. It is not assessed at the org level.
+
+When in doubt, start with one component per product. You can split into finer-grained components later as the system grows. Once you've determined your components, register them in the [Component Register](/docs/cybersecurity/templates/component-register).
+
+## Assessment structure
+
+Once components are registered, each one gets its own Identify, Protect, and Detect assessment. The overall structure looks like this:
+
+```
+Govern                          ← org-level, done once
+Component Register              ← org-level, lists all components
+├─ Component A (ID, PR, DE)     ← per-component assessment
+├─ Component B (ID, PR, DE)     ← per-component assessment
+Respond                         ← org-level, done once
+Recover                         ← org-level, done once
+```
+
+The org-level sections (Govern, Respond, Recover) are completed once. The Component Register bridges org and component scope. Then each registered component gets its own folder with full Identify, Protect, and Detect assessments. The [Taskflow](/docs/cybersecurity/examples/taskflow) example demonstrates this with four components: TF (core product), BL (billing portal), MK (marketing site), and CI (build pipeline).
+

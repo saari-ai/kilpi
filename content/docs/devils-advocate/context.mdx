@@ -1,0 +1,107 @@
+---
+title: Decision Context
+description: How to read the decision landscape — stakes, reversibility, uncertainty, and emotional investment
+---
+
+Before challenging anything, understand the terrain. The same idea might warrant a light probe in one context and a full adversarial assault in another. Context analysis determines the [intensity](/docs/devils-advocate/calibration) and [mode](/docs/devils-advocate/modes) of challenge.
+
+## The four dimensions
+
+Every decision context can be read along four dimensions. Together they determine how much adversarial pressure is appropriate.
+
+### Stakes
+
+What happens if this decision is wrong?
+
+| Level | Characteristics | Examples |
+|-------|----------------|----------|
+| **Low** | Easy to recover from. Cost of being wrong is time and minor effort. | Choosing a UI framework, naming conventions, sprint scope |
+| **Medium** | Meaningful cost but survivable. Recovery takes real effort and resources. | Product strategy for a quarter, hiring a key role, architectural patterns |
+| **High** | Serious damage to people, business, or reputation. Recovery is difficult and expensive. | Security architecture, pricing model changes, entering new markets |
+| **Critical** | Existential or irreversible. Failure threatens survival or causes permanent harm. | Fundraising strategy, regulatory compliance, safety-critical systems |
+
+Higher stakes demand more rigorous challenge. Low-stakes decisions don't need a pre-mortem — they need a quick sanity check and a bias toward action.
+
+### Reversibility
+
+How easily can you undo this decision?
+
+- **Easily reversible** — You can change course with minimal cost. Feature flags, A/B tests, soft launches. Challenge lightly. Favor experimentation over analysis.
+- **Reversible with effort** — You can change course but it's expensive. Database schema changes, API contracts, team restructuring. Challenge moderately. Ensure the key assumptions have evidence.
+- **Partially reversible** — Some consequences can be undone, others cannot. Public product launches, major hires, vendor contracts. Challenge firmly. Identify the irreversible components and stress-test those specifically.
+- **Irreversible** — Once done, it's done. Acquisitions, public commitments, bridge-burning exits. Challenge hard. Every load-bearing assumption needs evidence, not just conviction.
+
+Reversibility is the strongest signal for calibration. Irreversible decisions with high stakes are where devil's advocacy earns its keep.
+
+### Uncertainty
+
+How much is unknown?
+
+- **Low uncertainty** — The domain is well-understood, data is available, precedent exists. Challenge focuses on whether the known data has been interpreted correctly.
+- **Moderate uncertainty** — Some unknowns exist but the shape of the problem is familiar. Challenge focuses on whether assumptions fill the gaps correctly.
+- **High uncertainty** — Novel territory. Few precedents, limited data, unclear cause-and-effect. Challenge focuses on whether the plan is robust to surprises and whether the person has confused confidence with knowledge.
+
+High uncertainty requires extra attention to the difference between what is known and what is assumed. People are worst at this distinction when they are most uncertain — they paper over gaps with plausible-sounding assumptions and forget they did it.
+
+### Emotional investment
+
+How attached is the person to this idea?
+
+This is the most sensitive dimension and the one most often ignored. High emotional investment creates specific failure modes:
+
+- **Confirmation bias** — Seeking evidence that supports the idea while dismissing evidence that contradicts it
+- **Sunk cost reasoning** — "We've already invested too much to change course"
+- **Identity fusion** — The idea becomes part of their identity. Challenging the idea feels like challenging them.
+- **Optimism bias** — Overweighting best-case scenarios because the person wants the idea to work
+
+Signs of high emotional investment:
+- The person originated the idea and has been championing it
+- They respond to questions with justification rather than curiosity
+- They frame challenges as attacks ("You don't believe in this?")
+- They have already made public commitments based on the idea
+- Their language is advocacy-heavy ("This is going to be huge")
+
+High emotional investment doesn't mean the idea is wrong. It means the usual self-correction mechanisms are compromised. The devil's advocate role becomes more important — and must be exercised with more care. See [Calibration — Emotional calibration](/docs/devils-advocate/calibration#emotional-calibration).
+
+## Direct and indirect signals
+
+### Direct signals
+
+Sometimes the context is stated explicitly:
+
+- "This is a critical decision for the company"
+- "We can always roll it back if it doesn't work"
+- "I've been working on this for six months"
+- "We don't really know if this will work"
+
+Take direct signals at face value but verify against indirect evidence. People sometimes understate stakes to avoid scrutiny or overstate them to create urgency.
+
+### Indirect signals
+
+Most context must be inferred:
+
+| Signal | What it suggests |
+|--------|-----------------|
+| Decision has been made quickly without consultation | May be low-stakes, or may be avoiding scrutiny |
+| Multiple stakeholders are involved | Likely medium-to-high stakes |
+| The person asks "what do you think?" before presenting evidence | May be seeking confirmation, not genuine challenge |
+| The person presents extensive evidence unprompted | Either high-confidence or trying to preempt objections |
+| Timeline is compressed ("we need to decide today") | May be genuine urgency or manufactured pressure to avoid deliberation |
+| The person hedges frequently ("I think maybe we should...") | Lower emotional investment, open to challenge |
+| The person speaks with absolute certainty | Either high expertise or high emotional investment — distinguish by checking if they engage with counterarguments |
+
+## Decision type taxonomy
+
+Different decision types create different challenge surfaces:
+
+| Type | Primary challenge surface |
+|------|--------------------------|
+| **Strategic** (where to play, how to win) | Assumptions about the market, competition, and timing |
+| **Architectural** (system structure, boundaries) | Assumptions about scale, change vectors, and coupling |
+| **Operational** (process, workflow, allocation) | Assumptions about capacity, bottlenecks, and incentives |
+| **People** (hiring, team structure, roles) | Assumptions about skills, motivation, and culture fit |
+| **Investment** (spend, build vs buy, resource allocation) | Assumptions about ROI, opportunity cost, and alternatives |
+
+Each type has characteristic blind spots. Strategic decisions often underweight execution difficulty. Architectural decisions often overweight current requirements and underweight future change. People decisions often confuse "like us" with "good fit." Investment decisions often anchor on sunk costs.
+
+Knowing the decision type helps select the right [adversarial mode](/docs/devils-advocate/modes).

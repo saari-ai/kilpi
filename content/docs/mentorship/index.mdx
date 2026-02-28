@@ -1,0 +1,51 @@
+---
+title: Overview
+description: Mentorship — a decision framework for how AI agents interact when teaching, coaching, and developing people
+---
+
+The Mentorship framework governs how an AI agent **interacts** when combined with a domain skill. It is not a methodology that prescribes artifacts and checklists. It is a decision framework that shapes interaction patterns — how an agent decides between explaining, questioning, coaching, challenging, and collaborating in any given moment.
+
+Without this framework, agents handle "teach me X" and "do X for me" inconsistently. Some default to lecturing. Others jump straight to answers. Most lack a principled way to decide when to explain, when to ask questions, and when to step back. The Mentorship framework fixes this by giving agents a structured but adaptive model for developing people.
+
+## Composable by design
+
+The Mentorship framework is designed to combine with domain skills. On its own, it provides interaction patterns but no subject matter. Combined with a domain skill, it changes the agent's default posture:
+
+- **Domain skill alone** — the agent produces answers. "Here is the threat model for your system."
+- **Domain skill + Mentorship** — the agent develops the person's ability to produce answers. "What assets does your system expose to the internet, and why do those matter for threat modeling?"
+
+The domain skill provides the **what**. Mentorship provides the **how**. See [Composability](/docs/mentorship/composability) for the full model.
+
+## The core loop
+
+The framework operates through a continuous loop, not a linear sequence:
+
+```
+Assess → Select Mode → Engage → Adapt
+  ↑                                 |
+  └─────────────────────────────────┘
+```
+
+**[Assess](/docs/mentorship/assessment)** — Understand where the person is. What is their current skill level? What are they trying to achieve? What signals are they giving about what they need?
+
+**[Select Mode](/docs/mentorship/modes)** — Choose how to engage. Direct instruction? Guided discovery? Coaching? The right mode depends on the person's level, the complexity of the topic, and the constraints of the moment.
+
+**Engage** — Interact in the selected mode. Deliver the explanation, ask the question, set the challenge, or think alongside them.
+
+**Adapt** — Observe the response. Are they keeping up? Are they bored? Frustrated? Energized? Adjust the mode, the pacing, the depth. Return to Assess.
+
+This loop runs continuously. It is not something the agent announces or makes visible. It is the internal decision process that governs every interaction turn.
+
+## What this framework contains
+
+| Page | Purpose |
+|------|---------|
+| [Assessment](/docs/mentorship/assessment) | How to understand where someone is — the Dreyfus skill model and practical assessment signals |
+| [Modes](/docs/mentorship/modes) | The five interaction modes and when to use each one |
+| [Composability](/docs/mentorship/composability) | How mentorship combines with domain skills to change agent behaviour |
+
+---
+
+> [!WARNING] **The biggest risk**
+>
+> Making the framework too rigid and producing mentorship that feels like a compliance exercise. The biggest opportunity: giving agents a principled framework for something they currently do inconsistently. The mentorship framework must govern *interaction patterns* — not produce checklists.

@@ -1,0 +1,61 @@
+---
+title: "ID.IM: Improvement"
+description: Build Pipeline example for improvement
+---
+
+For methodology guidance, see [ID.IM: Improvement](/docs/cybersecurity/functions/identify/improvement).
+
+---
+
+### ID.IM-01: Improvements from evaluations
+
+| Evaluation type | Scope | Frequency | Findings feed into |
+|---|---|---|---|
+| Quarterly pipeline security review | All 10 threats, all controls, SLSA level assessment | Quarterly | Threat severity re-scoring, control inventory updates, SLSA maturity progression |
+| SLSA maturity assessment | Build provenance, source integrity, build platform hardening | Quarterly | SLSA level progression plan, control gap identification |
+| Annual supply chain posture review | End-to-end: developer workstation through production deployment | Annually | Policy updates, Action allow-list changes, credential rotation schedule changes |
+| Dependency audit | All direct and transitive npm dependencies, Docker base images, GitHub Actions | Monthly | Dependency management policy updates, scanning frequency changes |
+
+---
+
+### ID.IM-02: Improvements from tests and exercises
+
+| Test type | Target | Last conducted | Findings | Status |
+|---|---|---|---|---|
+| Tabletop exercise: compromised Action | Action security controls, incident response | Q3 2025 | Need automated alert when pinned Action SHA changes upstream | Implemented |
+| Tabletop exercise: secret exfiltration | Secret management controls, log scrubbing | Q4 2025 | Log scrubbing regex missed base64-encoded secrets | Remediated (added base64 pattern detection) |
+| Supply chain attack simulation | Dependency confusion, private registry scoping | Q4 2025 | Private registry scoping was not enforced for all package managers | Remediated (added .npmrc with registry scoping) |
+| Branch protection bypass test | Admin override controls, audit logging | Q3 2025 | Admin override was not generating alerts | Implemented (CloudTrail alert for protection rule changes) |
+
+---
+
+### ID.IM-03: Improvements from operations
+
+| Source function | What it produces | How it feeds back |
+|---|---|---|
+| Detect (workflow monitoring alerts) | False positive / true positive data on workflow anomalies | Tuning alert thresholds, refining correlation rules for pipeline events |
+| Respond (incident post-mortems) | Root cause analysis, supply chain timeline gaps | New threats added to register, controls strengthened, Action allow-list updated |
+| Recover (after-action reports) | Lessons learned, credential rotation effectiveness | Re-scored threat likelihoods, tighter OIDC scoping, updated runbooks |
+| Day-to-day operations (workflow changes) | Patterns in pipeline configuration changes | Updated workflow templates, new linting rules for workflow files |
+
+---
+
+### ID.IM-04: Plan maintenance
+
+| Plan | Owner | Last reviewed | Next review | Status |
+|---|---|---|---|---|
+| Pipeline incident response procedures | Infrastructure owner | Q4 2025 | Q1 2026 | Current |
+| Credential rotation runbook | Infrastructure owner | Q4 2025 | Q1 2026 | Current |
+| SLSA maturity roadmap | Infrastructure owner | Q4 2025 | Q2 2026 | Current |
+| Action allow-list and review policy | Infrastructure owner | Q3 2025 | Q1 2026 | Due for review |
+| Dependency management policy (CI scope) | Infrastructure owner | Q4 2025 | Q2 2026 | Current |
+
+SLSA maturity progression:
+
+| SLSA level | Status | Key requirements | Target date |
+|---|---|---|---|
+| SLSA Build L1 | Achieved | Build process exists and produces provenance | Achieved Q2 2025 |
+| SLSA Build L2 | Achieved | Build service is hosted (GitHub Actions), provenance is authenticated | Achieved Q3 2025 |
+| SLSA Build L3 | In progress | Hardened build platform, isolated builds, non-falsifiable provenance | Target Q2 2026 |
+
+---

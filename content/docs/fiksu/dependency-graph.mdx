@@ -1,0 +1,28 @@
+---
+title: Dependency Graph
+description: Exploring how capabilities can depend on and build upon each other.
+---
+
+Capabilities should be composable — built on top of each other rather than standing in isolation. A dependency graph lets us express that one capability requires or extends another.
+
+## The idea
+
+Some capabilities are specialisations of broader ones. For example:
+
+- **Father** depends on **Parent** — fatherhood-specific practices layered on top of general parenting knowledge.
+- A future **React Security** capability might depend on both **Cybersecurity** and **Software Architecture**.
+
+If a capability declares a dependency, the agent should load the dependency's knowledge before (or alongside) the capability itself. This means we avoid duplicating foundational content across specialised capabilities, and updates to a base capability automatically flow through to everything that builds on it.
+
+## Open questions
+
+- **Declaration format** — How should a capability declare its dependencies? A `dependencies` field in `meta.json`? A frontmatter key in the definition?
+- **Resolution** — When an agent loads a capability with dependencies, how does it resolve and merge them? Depth-first? Breadth-first? Does order matter?
+- **Conflict handling** — What happens when two dependencies give contradictory guidance? Which one wins?
+- **Circular dependencies** — How do we detect and prevent them?
+- **Partial loading** — Can an agent load only the parts of a dependency that are relevant, or is it all-or-nothing?
+- **Visualisation** — Can we generate a visual dependency graph from the metadata to help authors understand the capability topology?
+
+## Next steps
+
+Explore these questions and prototype a dependency declaration mechanism. Start with the Father/Parent relationship as the first test case.

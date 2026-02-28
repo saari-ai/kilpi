@@ -1,0 +1,36 @@
+---
+title: Templates
+description: Fill-in templates for applying the Product Validation methodology
+---
+
+The Product Validation methodology uses three templates that cover the full validation lifecycle. Copy these structures when starting a validation cycle — do not edit the templates directly.
+
+The templates are designed for sequential use: the Validation Plan is created first, Experiment Cards are created during the Design phase, and the Decision Record is created last.
+
+| Template | When created | Purpose | Key IDs |
+|----------|-------------|---------|---------|
+| [Validation Plan](/docs/product-validation/templates/validation-plan) | Start of validation (HY phase) | Solution-level container — assumption register, hypothesis register, overall status | VA-*, VH-* |
+| [Experiment Card](/docs/product-validation/templates/experiment) | Design phase (DE) | Per-experiment documentation — method, criteria, evidence log, result | VE-*, VV-* |
+| [Decision Record](/docs/product-validation/templates/decision-record) | Decide phase (DC) | Culminating artifact — evidence summary, decision, next actions | VD-* |
+
+## How templates relate
+
+```
+Validation Plan (one per solution)
+├── Assumption Register (VA-*)
+├── Hypothesis Register (VH-*)
+├── Experiment Card 1 (VE-*) ──→ Evidence entries (VV-*)
+├── Experiment Card 2 (VE-*) ──→ Evidence entries (VV-*)
+├── Experiment Card 3 (VE-*) ──→ Evidence entries (VV-*)
+└── Decision Record (VD-*) ──→ References VE-* and VV-*
+```
+
+The Validation Plan is the container. It holds the assumption register and hypothesis register, and links to experiment cards and the decision record. Experiment Cards are nested within the plan. The Decision Record is the culminating artifact that references evidence from across all experiments.
+
+## When to use each template
+
+- **Starting a new validation cycle?** Create a [Validation Plan](/docs/product-validation/templates/validation-plan). Populate the assumption register and hypothesis register during the [Hypothesize](/docs/product-validation/phases/hypothesize) phase.
+- **Designing an experiment?** Create an [Experiment Card](/docs/product-validation/templates/experiment) for each experiment during the [Design](/docs/product-validation/phases/design) phase. Link it to the Validation Plan.
+- **Ready to make a decision?** Create a [Decision Record](/docs/product-validation/templates/decision-record) during the [Decide](/docs/product-validation/phases/decide) phase. Reference all experiments and evidence.
+
+For a completed example of all three templates, see the [FocusNote example](/docs/product-validation/examples/greenfield).

@@ -1,0 +1,82 @@
+---
+title: Observation
+description: Gathering evidence from what people actually do, not what they say they do
+---
+
+Observation research captures actual behaviour. People are unreliable narrators of their own actions — they forget steps, rationalise decisions after the fact, and describe idealised versions of their workflows. Observation closes the gap between reported and actual behaviour.
+
+## The say-do gap
+
+The most important principle in observation research: **what people say they do and what they actually do are often different.** This is not dishonesty. It is human nature. People:
+
+- Forget routine steps that have become automatic
+- Post-rationalise decisions that were made on instinct
+- Describe their ideal workflow, not their actual one
+- Omit workarounds they consider embarrassing
+- Overestimate how often they do something
+
+When interview evidence (what they say) and observation evidence (what they do) conflict, observation evidence carries more weight.
+
+## Contextual inquiry
+
+Contextual inquiry is the primary observation method for discovery. You observe someone performing their actual work in their actual environment while asking questions to understand what you are seeing.
+
+### Protocol
+
+1. **Set up.** Explain that you want to watch them work normally. You will ask questions along the way. They should narrate what they are doing and why when it feels natural.
+
+2. **Observe the full workflow.** Do not interrupt to ask about specific steps until the participant reaches a natural pause. Note:
+   - The sequence of actions they take
+   - Tools and artifacts they use
+   - Workarounds and shortcuts
+   - Points where they hesitate, backtrack, or switch tools
+   - Emotional cues (sighing, muttering, visible frustration)
+
+3. **Ask about what you see.** At natural breaks:
+   - "I noticed you [did X]. What was happening there?"
+   - "You switched from [tool A] to [tool B]. Why?"
+   - "You paused at [step]. What were you thinking about?"
+
+4. **Do not correct or suggest.** If they are doing something inefficiently, do not help. You are here to understand current behaviour, not to improve it.
+
+5. **Debrief.** After the observation, ask: "Was that typical? Is there anything you would normally do differently?"
+
+### What to capture
+
+| Observation type | Example | Evidence weight |
+|-----------------|---------|-----------------|
+| Workflow sequence | User opens 3 tools in sequence to complete one task | Weight 2-3 per observation, increases with repetition across participants |
+| Workaround | User copies data from app into spreadsheet for analysis the app does not support | Weight 3 — workarounds indicate unmet needs |
+| Error/confusion | User clicks wrong button, backtracks, tries different path | Weight 2-3 depending on frequency |
+| Time spent | 40% of observed time spent on task that user described as "quick" | Weight 3-4 — quantified time data is strong |
+| Emotional response | Visible frustration when system requires re-entry of data | Weight 2 — subjective, but directional |
+
+## Behavioural data
+
+When direct observation is not feasible, behavioural data from digital products serves as a proxy. This includes:
+
+- **Session recordings** — tools like FullStory, Hotjar that record user sessions
+- **Clickstream data** — sequence of pages/actions a user takes
+- **Feature usage patterns** — what features are used, in what order, how often
+
+Behavioural data has the advantage of scale (you can observe hundreds of users) but lacks the context that direct observation provides (you see what they did but not why).
+
+Use behavioural data to:
+- Identify where users get stuck (drop-off points, rage clicks, repeated actions)
+- Quantify the frequency of problems observed in contextual inquiry
+- Discover workflows you did not anticipate
+
+## Recording observations as evidence
+
+Each observation becomes an EV- item in the [Evidence Register](/docs/product-discovery/templates/evidence-register).
+
+**Source type:** "observation" for direct observation, "behavioural-data" for digital observation.
+
+**Summary format:** Describe what was observed in neutral, factual language. Separate what happened from your interpretation of why.
+
+- Good: "Participant opened a spreadsheet alongside the app and manually copied 12 data points from the app into the spreadsheet before beginning their analysis."
+- Bad: "Participant clearly finds the app insufficient for analysis." (This is interpretation, not observation.)
+
+You can add interpretation in a separate notes field, but the evidence summary itself should be factual. Interpretation belongs in [Synthesis](/docs/product-discovery/synthesis).
+
+**Linking to hypotheses:** Every observation should link to at least one PH- hypothesis. If you observe something unexpected that does not relate to any current hypothesis, create a new hypothesis to account for it and link the evidence there.

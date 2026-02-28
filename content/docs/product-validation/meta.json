@@ -1,0 +1,17 @@
+{
+  "title": "Product Validation",
+  "description": "Validation Skills",
+  "root": true,
+  "pages": [
+    "index",
+    "getting-started",
+    "conventions",
+    "scope",
+    "phases",
+    "techniques",
+    "templates",
+    "examples",
+    "agents",
+    "changelog"
+  ]
+}

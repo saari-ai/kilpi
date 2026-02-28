@@ -1,0 +1,71 @@
+---
+title: Getting Started
+description: Execution order and phase guidance for applying the Product Discovery methodology
+---
+
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+Execute the methodology in this order:
+
+<Steps>
+<Step>
+### Problem Framing
+
+Define the problem space, write problem statements, and generate falsifiable hypotheses. Each hypothesis must include what you believe, what evidence would support it, and what evidence would refute it.
+
+Start with at least 3 hypotheses. Each must be falsifiable and scoped to a specific user segment and context. Overly broad hypotheses ("users want a better experience") are not actionable — narrow them until they can be tested.
+
+See [Problem Framing](/docs/product-discovery/problem-framing).
+</Step>
+
+<Step>
+### Customer Research
+
+Gather evidence through direct engagement with customers and analysis of existing data. Choose research methods based on what you need to learn — use interviews for understanding motivations, observation for understanding behaviour, and data analysis for understanding patterns at scale.
+
+Plan your research before executing it. Define your target segments, screening criteria, and the specific evidence you need to collect. A minimum of 5 interviews per segment is the starting point; you may need more depending on signal clarity.
+
+See [Customer Research](/docs/product-discovery/customer-research).
+</Step>
+
+<Step>
+### Evidence
+
+Evaluate the evidence you have collected. Weight each piece on a 1-5 scale (Anecdotal to Statistically Significant). Link every evidence item to the hypotheses it supports or refutes. Check for sufficiency — do you have enough evidence to make a call on each hypothesis?
+
+Actively check for bias. Confirmation bias is the most common failure mode in discovery. Use the bias countermeasures defined in the [Bias](/docs/product-discovery/evidence/bias) page.
+
+See [Evidence](/docs/product-discovery/evidence).
+</Step>
+
+<Step>
+### Opportunity Assessment
+
+Size the opportunity using evidence-based estimates, not aspirational projections. Map the competitive landscape — who else is solving this problem, and how? Assess feasibility across technical, business, and distribution dimensions.
+
+The opportunity assessment turns qualitative evidence into a structured evaluation. Each opportunity gets a score (OP-) that summarises its attractiveness.
+
+See [Opportunity Assessment](/docs/product-discovery/opportunity-assessment).
+</Step>
+
+<Step>
+### Synthesis
+
+Identify patterns across all evidence. Form insights (IN-) that connect multiple evidence items into actionable understanding. Produce the Discovery Brief — the master output artifact that summarises the problem, evidence, insights, opportunity score, and recommendation.
+
+The Discovery Brief recommends one of three outcomes: proceed to [Product Validation](/docs/product-validation), pivot to a reframed problem, or kill the discovery.
+
+See [Synthesis](/docs/product-discovery/synthesis).
+</Step>
+</Steps>
+
+## Iteration is expected
+
+The five phases are presented in sequence, but discovery is not strictly linear. Common iteration patterns:
+
+- **Customer Research reshapes Problem Framing.** Early interviews often reveal that your initial problem statement was too broad, too narrow, or pointed at the wrong segment. Go back and reframe.
+- **Evidence gaps trigger more Customer Research.** When evaluating evidence sufficiency, you may find that certain hypotheses lack enough data. Run additional interviews or analysis before proceeding.
+- **Synthesis happens continuously.** Do not wait until the end to synthesise. After every batch of interviews, look for emerging patterns. Early synthesis sharpens your remaining research.
+- **Opportunity Assessment may kill a path early.** If a quick market sizing reveals the opportunity is too small, pivot before investing more in customer research.
+
+The phases give you structure. The iteration keeps you honest. If you never loop back, you are probably not listening to your evidence.

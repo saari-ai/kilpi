@@ -1,0 +1,23 @@
+---
+title: Agents
+description: AI agent skills that apply the Cybersecurity methodology.
+---
+
+## Skills
+
+The Cybersecurity skill set comes with a skill for applying the methodology, referencing sections of these docs as its source of truth.
+
+You don't have to use our skill — you can build your own or simply point your agent towards the docs as reference. However, our skill has been tuned to get the best outcomes when applying the methodology.
+
+| Skill | When activated | Reads from |
+|-------|---------------|------------|
+| <span style={{whiteSpace: 'nowrap'}}>cybersecurity</span> | Applying the Cybersecurity methodology to an organisation and its components | All 6 functions (GV, ID, PR, DE, RS, RC), [Template](/docs/cybersecurity/templates), [Taskflow](/docs/cybersecurity/examples/taskflow) example |
+
+The skill is available at [saari-ai/fiksu-skills](https://github.com/saari-ai/fiksu-skills). Claude users can activate it via the [Saari Claude Marketplace](https://github.com/saari-ai/claude-marketplace).
+
+## Workflow
+
+> [!TODO]
+> Design the end-to-end workflow for the `cybersecurity` skill — how it gathers context, what it asks the human for vs. infers, how it walks through the template, and what the output looks like. The current inputs/execution/output model is too rigid and should be rethought as an interactive workflow.
+>
+> Consider that Cybersecurity, Product Discovery, Product Validation, and Software Architecture each provide standalone value. An agent using any methodology outside the Saari ecosystem could still offload security capability to Cybersecurity — the skill should work as a composable tool, not just within a Saari-orchestrated workflow.

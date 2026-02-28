@@ -1,12 +1,30 @@
 ---
 title: Welcome to fiksu
-description: The skill library for clever agents.
+description: Agent skills backed by robust methodology.
 ---
 
-fiksu is a curated library of skills that help AI agents build, secure, and ship software. Each skill set gives agents the structured knowledge they need to operate effectively across security, architecture, and product disciplines.
+fiksu is a documentation site — methodologies, frameworks, and domain knowledge structured for both humans and AI agents. Skills are the code that brings this knowledge to life. See [Anatomy of a Discipline](/docs/fiksu/anatomy-of-a-discipline) for how disciplines are structured, and [Anatomy of a Skill](/docs/fiksu/anatomy-of-a-skill) for how skills use them.
+
+## Agent agnostic
+
+fiksu is a general capabilities library. The methodologies and frameworks here are not tied to any specific AI agent or tool. They can be mapped to different sub-agents and platforms — Claude, Cursor, Windsurf, or any agent that can consume structured knowledge. The disciplines provide the _what_; the target agent determines the _how_.
+
+A packaging layer will compile fiksu capabilities into agent-specific formats — Claude skills, Cursor rules, or whatever a given platform requires. You author once in fiksu's universal format; the packager outputs the right shape for each target.
+
+## Capability levels
+
+Capabilities in fiksu exist at two levels, similar to the extension model in Orch:
+
+- **Extension-level capabilities** — packaged by vendors or the community, these are curated skill sets that ship as part of a tool or platform. They provide domain expertise out of the box.
+- **User-level capabilities** — created and customised by individual users or teams. These let you add your own methodologies, adapt existing ones, or layer domain knowledge specific to your context.
+
+Extension-level capabilities give you a strong starting point. User-level capabilities let you make it yours.
 
 ## Skill Sets
 
-- **[Kilpi](/docs/kilpi)** — Security Skills for securing AI generated applications and systems.
-- **[Runko](/docs/runko)** — Architecture Skills for structuring AI generated applications and systems.
-- **[Varma](/docs/varma)** — Product Skills for finding and validating products and features.
+- **[Cybersecurity](/docs/cybersecurity)** — Security Skills for securing AI generated applications and systems.
+- **[Software Architecture](/docs/software-architecture)** — Architecture Skills for structuring AI generated applications and systems.
+- **[Product Discovery](/docs/product-discovery)** — Discovery Skills for finding problems worth solving.
+- **[Product Validation](/docs/product-validation)** — Validation Skills for testing and proving solutions before building.
+- **[Mentorship](/docs/mentorship)** — Mentorship Skills for developing people and teams.
+- **[Devil's Advocate](/docs/devils-advocate)** — Adversarial Thinking Skills for challenging ideas and strengthening decisions.

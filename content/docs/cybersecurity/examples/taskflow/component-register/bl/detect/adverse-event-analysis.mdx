@@ -1,0 +1,78 @@
+---
+title: "DE.AE: Adverse Event Analysis"
+description: Billing Portal example for adverse event analysis
+---
+
+For methodology guidance, see [DE.AE: Adverse Event Analysis](/docs/cybersecurity/functions/detect/adverse-event-analysis).
+
+---
+
+### DE.AE-02: Event analysis
+
+| Alert source | Analysis method | Triage outcome |
+|---|---|---|
+| Payment validation failure spikes | Correlate with specific IPs and endpoints. A single IP hitting the payment endpoint with manipulated amounts is a stronger signal than distributed validation failures. | Automated fraud attempt (block IP, flag transactions) vs legitimate input errors (no action) |
+| Admin authentication failure spikes | Distinguish credential stuffing (many admin accounts from one IP) from brute force (one admin account from many IPs). Both are attacks but indicate different threat actors. | Credential stuffing: block IP range. Brute force: lock admin account + notify security lead. |
+| Webhook signature failures | Correlate with source IPs. Invalid signatures from non-Stripe IPs are likely spoofing attempts. Valid signatures with abnormal volume could indicate replay attacks. Cross-reference Stripe status page. | Spoofing attempt (block IP, investigate) vs Stripe platform issue (monitor) |
+| Invoice access anomalies (IDOR attempts) | Correlate requesting customer ID with invoice owner ID. Single occurrences may be URL manipulation; repeated attempts from one customer indicate deliberate exploitation. | Accidental access (log, no action) vs deliberate IDOR exploitation (block customer, escalate) |
+| Payment amount discrepancies | Compare Billing API request amount with Stripe charge confirmation. Discrepancy indicates either API manipulation or integration defect. | Fraud attempt (freeze transaction, investigate) vs integration bug (fix, reconcile) |
+
+---
+
+### DE.AE-03: Cross-source correlation
+
+| Source A | Source B | Correlation method | Combined signal |
+|---|---|---|---|
+| Payment API validation failures | Stripe charge attempts | Customer ID + time window | Correlating rejected API requests with subsequent Stripe charges reveals bypassed validation |
+| Admin login failures | Admin action audit log | Same admin account, within 10-minute window | Successful admin action shortly after login failure spike = potential account compromise |
+| Stripe webhook signature failures | Billing operation changes | Invoice ID + time window | Webhook failure followed by billing state change = potential spoofed webhook that bypassed validation |
+| Secret pattern in logs | Secrets manager access log | Key identity match + time window | Determines if leaked Stripe key was accessed by unauthorized party during exposure window |
+| Invoice modification event | Invoice finalization event | Same invoice ID, modification after finalization | Confirmed integrity violation -- invoice changed after being marked as final |
+
+---
+
+### DE.AE-04: Impact and scope estimation
+
+| Event | Affected systems | Affected data | Estimated severity |
+|---|---|---|---|
+| Stripe API key leaked in logs | Billing API, Stripe integration | All payment operations, customer payment methods | Critical -- immediate key rotation required, audit all charges during exposure window |
+| DDL executed by billing app user | Billing database | All billing tables, invoice records, subscription data | Critical -- indicates SQL injection or privilege escalation |
+| Payment amount discrepancy confirmed | Billing API, Stripe | Affected customer's payment, potentially broader if systematic | Critical -- financial fraud, requires transaction freeze and reconciliation |
+| Admin account compromise (brute force success) | Billing admin panel | All customer billing data, refund capability | Critical -- attacker can issue refunds, modify invoices, access all billing data |
+| IDOR confirmed (cross-tenant invoice access) | Billing API | Affected invoices and customer billing details | High -- single or multiple customer data exposure |
+| Webhook spoofing confirmed | Billing API, Stripe integration | Payment state, invoice state | High -- attacker can manipulate billing state (mark unpaid as paid, trigger false events) |
+
+---
+
+### DE.AE-06: Alert routing and notification
+
+| Alert severity | Route to | Method | SLA |
+|---|---|---|---|
+| Critical | On-call engineer (pager) + security lead + engineering Slack channel | PagerDuty page + Slack alert | Paged within 5 minutes. Response within 15 minutes. |
+| High | Security lead + engineering Slack channel | Slack alert + email | Alert within 30 minutes. Investigation started within 4 hours. |
+| Medium | Weekly security review queue | Slack alert (low priority) + dashboard ticket | Included in next weekly review. Triaged within 7 days. |
+
+---
+
+### DE.AE-07: Threat intelligence integration
+
+| Intelligence type | Source | Integration point | Update cadence |
+|---|---|---|---|
+| Known CVE data | GitHub Advisory Database, NVD | Dependabot scans, `npm audit` | Continuous (automated) |
+| MITRE ATT&CK techniques | MITRE ATT&CK knowledge base | Threat model classification (T-codes in threat register) | Referenced during quarterly threat review |
+| Stripe webhook IP ranges | Stripe documentation | Webhook source IP validation | Quarterly update check |
+| Payment fraud patterns | Industry reports, PCI DSS guidance | Payment anomaly detection rules | Semi-annually |
+
+---
+
+### DE.AE-08: Incident declaration
+
+| Criterion | Threshold | Example |
+|---|---|---|
+| Confirmed unauthorized payment data access | Any confirmed access | Stripe key used for unauthorized charges, cross-tenant invoice access confirmed |
+| Credential compromise confirmed | Any leaked secret used by unauthorized party | Stripe API key used outside billing application, admin credentials used from unexpected location |
+| Active exploitation in progress | Attack is ongoing and controls are not containing it | Payment fraud bypassing validation, brute force bypassing rate limiter, SQL injection succeeding |
+| Control failure confirmed | A control expected to prevent an attack type is not functioning | Webhook signature verification disabled, tenant isolation bypassed, admin MFA not enforced |
+| Critical CVE actively exploited in the wild | Exploit code published + vulnerable code path reachable in billing portal | npm dependency with published exploit affecting a function the billing portal uses |
+
+---

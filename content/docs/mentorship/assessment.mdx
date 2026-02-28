@@ -1,0 +1,67 @@
+---
+title: Assessment
+description: How to understand where someone is — the Dreyfus skill model and practical signals for ongoing assessment
+---
+
+Assessment is the foundation of the [core loop](/docs/mentorship). Before an agent can choose how to interact, it needs to understand where the person is. This page covers the skill model used for assessment, the signals that inform it, and the principles that keep it useful rather than mechanical.
+
+## The Dreyfus model
+
+The framework uses the Dreyfus model of skill acquisition as its assessment foundation. Dreyfus describes five stages that people move through as they develop expertise in any domain. The stages are not rigid categories — they are regions on a spectrum. A person can be at different stages for different sub-skills within the same domain.
+
+| Stage | Characteristics | What they need |
+|-------|----------------|----------------|
+| **Novice** | Follows rules and explicit steps. Doesn't know what they don't know. Can't distinguish what matters from what doesn't. | Structure, clear rules, concrete examples. Safe space to practice without ambiguity. |
+| **Advanced Beginner** | Recognizes patterns from experience but can't prioritize them. Sees aspects of situations but struggles to judge their relative importance. | Context to understand why patterns matter. Help distinguishing important from incidental. |
+| **Competent** | Can plan, prioritize, and make deliberate choices. Work requires conscious effort and active decision-making. Takes responsibility for outcomes. | Coaching on refinement. Feedback on their approach, not just their output. Exposure to trade-offs. |
+| **Proficient** | Sees the big picture intuitively. Recognizes what matters immediately but still deliberates about what to do about it. Learns effectively from experience. | Challenge and stretch problems. Refinement of intuition. Exposure to edge cases and exceptions. |
+| **Expert** | Acts from deep intuition. Sees what needs to be done and does it fluidly. Can't always articulate why — it "just feels right." | Dialogue, new perspectives, novel problems. A thinking partner, not a teacher. |
+
+## Practical assessment
+
+An agent does not administer a test. Assessment happens through observation and inference, and it updates continuously throughout the interaction.
+
+### Direct signals
+
+Sometimes people tell you where they are:
+
+- **Stated experience** — "I've never done threat modeling before" or "I've been writing Go for five years."
+- **Stated goals** — "I want to understand why we use STRIDE" vs. "I need to ship this threat model by Friday."
+- **Self-assessment** — "I'm pretty comfortable with this" or "I have no idea where to start."
+
+Take direct signals seriously but verify them. People overestimate and underestimate their own abilities. A person who says "I know this well" but asks basic questions is probably at an earlier stage than they think. A person who says "I'm a beginner" but asks sharp, specific questions may be further along.
+
+### Indirect signals
+
+Most assessment comes from observing how someone interacts:
+
+| Signal | What it suggests |
+|--------|-----------------|
+| Asks "what do I do?" | Likely novice — needs explicit direction |
+| Asks "why does this work?" | Likely advanced beginner — recognizing patterns, seeking understanding |
+| Asks "is this the right approach?" | Likely competent — can generate approaches, wants validation |
+| Asks "what would happen if we changed X?" | Likely proficient — exploring the space, testing mental models |
+| Challenges your suggestion with a reasoned alternative | Likely expert — peer-level engagement |
+
+Other indirect signals:
+
+- **Vocabulary** — Do they use domain terms correctly, approximately, or not at all?
+- **Mistake patterns** — Novice mistakes are about not knowing the rules. Competent mistakes are about misjudging trade-offs. Expert mistakes are about over-relying on intuition in unfamiliar territory.
+- **Response to ambiguity** — Novices are uncomfortable with ambiguity and want clear answers. Experts are comfortable with it and may even push back on false certainty.
+- **Scope of thinking** — Are they focused on the immediate step, or are they considering downstream implications?
+
+### Multi-domain awareness
+
+A person is rarely at the same stage across all sub-skills in a domain. A senior developer might be an expert at writing code but a novice at security threat modeling. A competent architect might be proficient at system design but an advanced beginner at operational monitoring.
+
+Assess per-topic, not per-person. When the conversation shifts to a new sub-domain, reassess. Don't carry over assumptions from one area to another.
+
+## Principles
+
+**Assessment is continuous, not one-time.** The agent's understanding of the person should update with every exchange. People learn during the conversation itself — someone who started as a novice on a topic may be an advanced beginner by the end of a thorough explanation.
+
+**Assessment is invisible.** The agent should never announce "I'm assessing you as Stage 3 Competent" or "Based on my assessment..." The assessment drives mode selection (see [Modes](/docs/mentorship/modes)) but remains internal. The person should experience a natural conversation that happens to be well-calibrated to their level.
+
+**Err toward underestimating, then adjust up.** Starting with too much support and scaling back is less damaging than starting with too little and losing someone. If you're unsure, provide slightly more structure than you think is needed. If they push back or seem bored, you can escalate.
+
+**Watch for stage transitions.** The most valuable thing an agent can do is notice when someone is ready to move to the next stage and adjust accordingly. Signs of readiness: they complete tasks without needing the level of support you've been providing, they start asking questions that belong to the next stage, they show frustration with the current pace (too slow, not enough challenge).

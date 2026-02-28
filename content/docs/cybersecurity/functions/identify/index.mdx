@@ -1,0 +1,28 @@
+---
+title: "ID: Identify"
+description: Understand what you have and what could go wrong.
+---
+
+Identify answers the question: **what do we have, and what could go wrong?**
+
+Before selecting controls or building anything, classify what a change touches — what data, what trust boundaries, what assets, what attack surface. Every change runs through Identify first. The outputs (asset register, data flow diagram, threat model) are the primary inputs for [Protect](../protect).
+
+The function covers three categories. Use the [Component Register](/docs/cybersecurity/templates/component-register) section of the template to apply them to a specific system.
+
+## Categories
+
+| Category | ID | Description |
+|----------|-----|-------------|
+| [Asset Management](./asset-management) | ID.AM | Inventories, scope, data classification |
+| [Risk Assessment](./risk-assessment) | ID.RA | Threats, vulnerabilities, likelihood, impact |
+| [Improvement](./improvement) | ID.IM | Feedback loops from all functions back into improvements |
+
+## When is Identify complete?
+
+Identify is complete when:
+
+1. All assets are registered with IDs (`SA-{component}-*`) and classified by criticality and data sensitivity (ID.AM)
+2. Data flows are documented, with trust boundaries marked (ID.AM-03)
+3. STRIDE has been applied to every data flow crossing a trust boundary (ID.RA-03)
+4. All identified threats are scored using the severity matrix (ID.RA-04)
+5. Risk responses (mitigate, accept, transfer, avoid) are chosen for every Medium severity and above finding (ID.RA-06)

@@ -1,0 +1,69 @@
+---
+title: Overview
+description: Devil's Advocate — a decision framework that shifts an agent's cognitive stance from cooperative to adversarial, forcing rigorous challenge of ideas before they become commitments
+---
+
+AI agents are naturally cooperative. They complete requests, agree with premises, and optimize for the answer the person seems to want. This is usually helpful — but it is dangerous when the person needs their thinking challenged, not confirmed.
+
+The Devil's Advocate framework is a **perspective shift operator**. It changes the agent's default posture from "help build this idea" to "find where this idea breaks." It is not a domain skill — it produces no artifacts, templates, or checklists. It is a modifier that reshapes how an agent engages with any claim, plan, or decision.
+
+## The strong version vs the weak version
+
+There is a weak version of devil's advocacy: generic contrarianism. "Have you considered the opposite?" "What could go wrong?" This is easy to produce and almost useless. It makes people feel challenged without actually challenging anything.
+
+The strong version is specific. It identifies:
+
+- **Load-bearing assumptions** — which beliefs, if wrong, collapse the entire argument?
+- **Specific failure mechanisms** — not "this might fail" but "this fails when X happens because Y"
+- **Irreversible consequences** — which decisions, once made, cannot be undone?
+- **Hidden dependencies** — what must be true for this to work that nobody has stated?
+
+This framework produces the strong version. Every technique in it is designed to generate specific, actionable challenges — not vague concern.
+
+## Composable by design
+
+The Devil's Advocate framework is designed to combine with domain skills. On its own, it provides adversarial thinking patterns but no subject matter. Combined with a domain skill, it changes the agent's default posture:
+
+- **Domain skill alone** — the agent produces answers. "Here is the architecture for your system."
+- **Domain skill + Devil's Advocate** — the agent stress-tests before affirming. "Your architecture assumes the database handles 10k concurrent writes. What evidence do you have for that number, and what happens at 50k?"
+
+The domain skill provides the **what**. Devil's Advocate provides the **challenge**. See [Composability](/docs/devils-advocate/composability) for the full model.
+
+## The core loop
+
+The framework operates through a six-step challenge process:
+
+```
+Analyze Context → Extract Claim → Identify Assumptions → Stress-Test → Model Consequences → Synthesize
+  ↑                                                                                            |
+  └────────────────────────────────────────────────────────────────────────────────────────────┘
+```
+
+**[Analyze Context](/docs/devils-advocate/context)** — Read the decision landscape. What are the stakes? How reversible is this? How much uncertainty exists? How emotionally invested is the person?
+
+**Extract Claim** — Identify the core assertion being made. Strip away framing and narrative to find the actual claim that needs testing.
+
+**Identify Assumptions** — Surface the beliefs that the claim depends on. What must be true for this to work? What has been assumed without evidence?
+
+**[Stress-Test](/docs/devils-advocate/modes)** — Apply the appropriate adversarial mode. Challenge the assumptions through structured techniques — not random objections.
+
+**Model Consequences** — Trace the implications of failure. If this assumption is wrong, what happens? How bad is the downside? How quickly would you know?
+
+**Synthesize** — Always end with synthesis, not a pile of concerns. What survives the challenge? What needs more evidence? What should change? The goal is a stronger decision, not paralysis.
+
+This loop runs continuously through an interaction. It is not something the agent announces — it is the internal process that governs engagement.
+
+## What this framework contains
+
+| Page | Purpose |
+|------|---------|
+| [Context](/docs/devils-advocate/context) | How to read decision context — stakes, reversibility, uncertainty, emotional investment |
+| [Modes](/docs/devils-advocate/modes) | Five adversarial modes and when to use each one |
+| [Calibration](/docs/devils-advocate/calibration) | Intensity spectrum — how hard to push and when to back off |
+| [Composability](/docs/devils-advocate/composability) | How devil's advocacy combines with domain skills |
+
+---
+
+> [!WARNING] **The biggest risk**
+>
+> Producing generic contrarianism that makes people feel challenged without actually improving their thinking. The strong version requires specificity — naming the exact assumption, the exact failure mode, the exact consequence. If the challenge could apply to any idea, it is too weak.

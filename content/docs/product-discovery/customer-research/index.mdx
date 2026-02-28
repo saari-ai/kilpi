@@ -1,0 +1,62 @@
+---
+title: Customer Research
+description: Planning and executing research to gather evidence for or against problem hypotheses
+---
+
+Customer Research is the second phase of Product Discovery. It is where hypotheses meet reality. The goal is to gather evidence — not to confirm what you already believe, but to find out whether your hypotheses are true, false, or pointed in the wrong direction entirely.
+
+## Research planning
+
+Before talking to anyone or pulling any data, plan your research:
+
+1. **List the active hypotheses** you need to test (from [Problem Framing](/docs/product-discovery/problem-framing)).
+2. **Choose methods** based on what each hypothesis needs. Different hypotheses require different evidence types.
+3. **Define your target segments** with specific screening criteria.
+4. **Set evidence goals** — what would you need to see to move each hypothesis to Supported or Refuted?
+5. **Document the plan** in an [Interview Guide](/docs/product-discovery/templates/interview-guide) for qualitative research, or a research brief for quantitative methods.
+
+## Choosing methods
+
+| Method | Best for | Evidence type | See |
+|--------|----------|---------------|-----|
+| [Interviews](/docs/product-discovery/customer-research/interviews) | Understanding motivations, context, stories | Direct quotes, described behaviours | Interviews page |
+| [Observation](/docs/product-discovery/customer-research/observation) | Understanding actual behaviour (vs. reported) | Behavioural data, workflow documentation | Observation page |
+| [Data Analysis](/docs/product-discovery/customer-research/data-analysis) | Understanding patterns at scale, quantifying signals | Quantitative metrics, statistical patterns | Data Analysis page |
+
+Use multiple methods when possible. Triangulation — confirming a finding across different methods — increases evidence weight. A pattern that appears in both interviews and analytics data (weight 4) is stronger than the same pattern in interviews alone (weight 2-3).
+
+## Sample size guidance
+
+There is no universal rule for sample sizes in discovery research. Use these starting points:
+
+| Method | Minimum | Typical | When to stop |
+|--------|---------|---------|-------------|
+| Exploratory interviews | 5 per segment | 8-12 per segment | When new interviews stop revealing new themes (saturation) |
+| Problem interviews | 5 per segment | 10-15 per segment | When hypothesis can be moved to Supported or Refuted |
+| Contextual observation | 3 per workflow | 5-8 per workflow | When behaviour patterns stabilise |
+| Surveys | 50 responses | 100-500 responses | When confidence intervals are acceptable for the decision |
+| Analytics analysis | N/A (use all available data) | N/A | When the signal is clear or clearly absent |
+
+Saturation — the point where additional research stops producing new information — is the practical stopping signal for qualitative methods. If interviews 8, 9, and 10 tell you the same things as interviews 5, 6, and 7, you have likely reached saturation for that segment.
+
+## Research ethics
+
+Discovery research involves real people sharing real experiences. Follow these principles:
+
+- **Informed consent.** Participants must know what the research is for, how their data will be used, and that they can stop at any time.
+- **No deception.** Do not misrepresent who you are or why you are asking. You can withhold your specific hypotheses (to avoid bias), but do not lie about the purpose.
+- **Confidentiality.** Evidence items (EV-) should not contain personally identifiable information. Use roles and segment labels, not names.
+- **No pressure.** Participants should never feel obligated to answer or to agree with you. If they are not experiencing the problem, that is evidence too.
+- **Compensation.** If the research takes significant time (> 15 minutes), compensate participants appropriately.
+
+## Recording evidence
+
+Every piece of evidence gathered during Customer Research is recorded as an evidence item (EV-) in the [Evidence Register](/docs/product-discovery/templates/evidence-register). At the point of recording:
+
+1. Assign an EV- ID
+2. Tag the source type (interview, observation, analytics, etc.)
+3. Write a clear summary (what was observed or said, in neutral language)
+4. Assign an initial weight (1-5, per the [evidence weight scale](/docs/product-discovery/conventions#evidence-weight-scale))
+5. Link to the hypothesis or hypotheses it relates to (PH- references)
+
+Do not wait until all research is complete to record evidence. Record evidence items as you go. This enables continuous [Synthesis](/docs/product-discovery/synthesis) and helps you identify saturation.

@@ -1,0 +1,69 @@
+---
+title: Problem Statements
+description: How to write structured, scoped problem statements that drive effective discovery
+---
+
+A problem statement describes who is struggling, what they are struggling with, in what context, and what impact it has. It is a narrative artifact — it does not get a formal ID. Instead, it serves as the foundation from which [hypotheses](/docs/product-discovery/problem-framing/hypotheses) are derived.
+
+## Format
+
+Use this structure:
+
+> **Users of [segment] struggle with [problem] when [context], which causes [impact].**
+
+Every component is required:
+
+| Component | Purpose | Example |
+|-----------|---------|---------|
+| Segment | Who has this problem | Solo founders running SaaS products |
+| Problem | What they struggle with | Tracking which security controls apply to their stack |
+| Context | When/where it happens | Setting up security for the first time without a dedicated security team |
+| Impact | Why it matters | They skip security entirely or implement controls that do not match their actual risk profile |
+
+## Examples
+
+### Good problem statements
+
+> **Users of [solo SaaS founders] struggle with [prioritising which security controls to implement first] when [they have limited time and no security background], which causes [either analysis paralysis or random control selection that misses critical risks].**
+
+This is good because: the segment is specific, the problem is concrete, the context explains when it happens, and the impact describes a real consequence.
+
+> **Users of [mid-market engineering teams] struggle with [knowing whether customer interview insights are reliable] when [the PM has talked to fewer than 10 customers], which causes [product decisions based on anecdotal evidence that does not represent the broader customer base].**
+
+This is good because: it names a specific team type, describes an information quality problem, and connects it to a decision-making consequence.
+
+### Bad problem statements
+
+> **Users struggle with onboarding.**
+
+This fails on every dimension: no segment, vague problem, no context, no impact.
+
+> **Enterprise customers need a better dashboard.**
+
+This is a solution masquerading as a problem statement. What problem does the current dashboard create? For whom? When?
+
+> **Everyone finds it hard to manage their finances.**
+
+Too broad. "Everyone" is not a segment. "Hard to manage finances" is not specific enough to test.
+
+## Scope control
+
+Problem statements can fail by being too broad or too narrow. Use these tests:
+
+| Issue | Symptom | Fix |
+|-------|---------|-----|
+| Too broad | You could write 20+ hypotheses from it. The segment includes very different user types. | Split into multiple problem statements, each targeting a specific segment. |
+| Too narrow | You can only write 1 hypothesis. The answer seems obvious. | Step back one level of abstraction. Is there a broader problem this is a symptom of? |
+| Just right | You can write 3-7 hypotheses. The segment is specific but not singular. The problem is concrete but has multiple possible explanations. | Proceed to hypothesis generation. |
+
+## From problem statements to hypotheses
+
+A single problem statement typically generates multiple hypotheses. Each hypothesis proposes a specific explanation for why the problem exists and what evidence would confirm or refute it.
+
+For example, the problem statement about solo founders and security controls might generate:
+
+- **PH-FN-1:** We believe solo founders skip security because they do not know where to start. We'll know this is true when founders describe security as overwhelming during interviews.
+- **PH-FN-2:** We believe solo founders implement the wrong controls because they copy checklists from companies with different risk profiles. We'll know this is true when founders reference generic security guides rather than their own threat model.
+- **PH-FN-3:** We believe solo founders would invest time in security if they could see which risks actually apply to their specific stack. We'll know this is true when founders express interest in risk-based prioritisation during interviews.
+
+Each hypothesis is testable, specific, and linked to the original problem statement. See [Hypotheses](/docs/product-discovery/problem-framing/hypotheses) for the full format and lifecycle.

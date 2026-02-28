@@ -1,0 +1,129 @@
+---
+title: Anatomy of a Skill
+description: fiksu is the knowledge. Skills are the code that brings it to life. Understanding the line between them is the key design decision.
+---
+
+fiksu is a documentation site. It contains methodologies, frameworks, and domain knowledge — structured so that both humans and agents can read it. But fiksu does not *do* anything. It is a reference guide.
+
+A **skill** is a small piece of code that tells an agent *how to use* the documentation. It adds workflow, activation logic, and optionally state on top of the raw knowledge. Without skills, an agent would need to read every page and figure out the execution order itself. Skills make that efficient.
+
+## Two layers, one system
+
+```
+┌─────────────────────────────────────────┐
+│            Skills Library               │
+│  (workflow, activation, state)          │
+│                                         │
+│  ┌───────────┐ ┌───────────┐ ┌───────┐ │
+│  │cybersec.  │ │discovery  │ │mentor │ │
+│  │skill      │ │skill      │ │skill  │ │
+│  └─────┬─────┘ └─────┬─────┘ └───┬───┘ │
+└────────┼──────────────┼───────────┼─────┘
+         │ reads from   │           │
+┌────────▼──────────────▼───────────▼─────┐
+│              fiksu docs                 │
+│  (methodology, frameworks, knowledge)   │
+│                                         │
+│  Cybersecurity · Product Discovery      │
+│  Product Validation · Mentorship · ...  │
+└─────────────────────────────────────────┘
+```
+
+The docs are the **single source of truth** for methodology content. Skills never duplicate that content — they reference it and orchestrate around it.
+
+## What a skill contains
+
+A skill is a single file (typically `SKILL.md`) with three responsibilities:
+
+### 1. Activation logic
+
+When should this skill fire? Skills can be activated in two ways:
+
+- **Manually** — the user explicitly invokes the skill (e.g., `/cybersecurity`, "apply the security methodology to this product")
+- **Automatically** — the agent recognises a trigger and activates the skill itself (e.g., the user mentions "security assessment" and the agent activates the cybersecurity skill without being asked)
+
+The skill's metadata defines trigger phrases and descriptions that tell the agent when the skill is relevant. Good trigger definitions mean the agent activates the right skill at the right time without the user having to remember skill names.
+
+### 2. Workflow orchestration
+
+The skill defines the execution sequence — what to do first, what depends on what, and in what order to walk through the documentation. This is the core value of a skill: it turns a large reference into a guided process.
+
+For example, the cybersecurity skill says: read Govern first, then register components, then for each component do Identify, Protect, Detect, then do Respond, then Recover. Without this, the agent would need to infer the execution order from the docs alone — possible, but slower and less reliable.
+
+### 3. Doc references
+
+The skill lists the specific documentation pages it reads from. It does not embed their content. This keeps the skill lightweight (~200 lines) and ensures the docs remain the single source of truth.
+
+```
+## Reference docs
+
+Key pages:
+- Overview: /docs/cybersecurity
+- Conventions: /docs/cybersecurity/conventions
+- Template: /docs/cybersecurity/templates
+- Example: /docs/cybersecurity/examples/taskflow
+```
+
+## What goes where
+
+The hardest design decision is the line between what belongs in the skill file and what belongs in the docs. Get it wrong and you either bloat the skill with content that should be in the docs, or leave the skill so thin that it adds no value.
+
+| Concern | Belongs in docs | Belongs in skill |
+|---------|----------------|-----------------|
+| Methodology content | Templates, ID schemes, traceability chains, technique catalogs, worked examples | Never — reference the page, don't copy it |
+| Execution order | Implied by page structure (Getting Started, phase ordering) | Explicit — the skill defines the sequence the agent follows |
+| Decision logic | Principles and frameworks ("here's how to decide") | Contextual shortcuts ("if the user has a single product, skip component registration") |
+| Trigger conditions | N/A | When this skill should activate — phrases, contexts, user intents |
+| Domain knowledge | Full explanations, reference tables, informative mappings | Never — domain knowledge lives in docs |
+| State and memory | N/A (docs are static reference) | Session state, user context, accumulated learnings (see [Stateful skills](#stateful-skills)) |
+
+**Rule of thumb:** if it's true regardless of who is using it, it belongs in the docs. If it's about *how an agent should behave* when applying the docs, it belongs in the skill.
+
+## The discipline blend shapes the skill
+
+The [discipline blend](/docs/fiksu/anatomy-of-a-discipline) — the mix of prescriptive, adaptive, and reference elements — directly determines how the skill behaves.
+
+| Element type | Skill behaviour |
+|---|---|
+| Prescriptive | Systematic traversal. The skill walks through templates and checklists in order, ensuring exhaustive coverage. Most of the workflow lives in the docs; the skill just enforces the sequence. |
+| Adaptive | Context reading. The skill reads the situation and selects the appropriate mode or approach. More decision logic lives in the skill itself because the "right answer" depends on context the docs can't anticipate. |
+| Reference | On-demand retrieval. The skill fetches relevant knowledge when needed rather than traversing everything sequentially. The skill knows *when* to look something up; the docs provide *what* to find. |
+
+A heavily prescriptive discipline like Cybersecurity produces a skill that is mostly orchestration — the docs define the work, the skill defines the order. A heavily adaptive discipline like Mentorship produces a skill where more logic lives in the skill itself — the docs provide principles, but the skill must read context and adapt.
+
+## Stateful skills
+
+The simplest skills are stateless — they activate, reference the docs, guide a workflow, and finish. But some disciplines benefit from state that persists across sessions.
+
+Consider mentorship. A mentorship skill that tracks which domains it has coached on, what the user's current skill levels are, and what they struggled with last time is more effective than one that starts fresh every session. That state does not belong in the methodology docs — it is user-specific and session-specific.
+
+Skills can manage state through MCP servers that read and write to structured storage. A mentorship skill could maintain a learner profile. A cybersecurity skill could track which components have been assessed and which are due for review. A discovery skill could maintain a running evidence register across sessions.
+
+The state layer sits alongside the docs, not inside them:
+
+```
+┌──────────────┐
+│    Skill     │──reads──▶ fiksu docs (static knowledge)
+│              │──reads/writes──▶ Skill state (user-specific)
+└──────────────┘
+```
+
+State gives skills memory. The docs provide knowledge that is true for everyone. State captures what is true for *this user, this project, this moment*.
+
+## Composability
+
+Skills are composable. An agent working on a product can activate the discovery skill, then hand off to the validation skill, then activate the cybersecurity skill to assess the resulting system. Each skill operates independently against its own section of the docs, but the outputs of one feed the inputs of the next.
+
+This composability means skills don't need to know about each other. The discovery skill produces a Discovery Brief. The validation skill consumes a Discovery Brief. The interface is the artifact, not a skill-to-skill API.
+
+## Building a skill
+
+To build a skill for a fiksu discipline:
+
+1. **Identify the triggers.** What phrases, contexts, or user intents should activate this skill?
+2. **Define the workflow.** What is the execution order? What does the agent do first, second, third?
+3. **List the doc references.** Which pages does the agent need to read? Be specific — don't point at the entire discipline.
+4. **Decide on state.** Does this skill benefit from persistence across sessions? If so, what needs to be stored?
+5. **Match the blend.** Prescriptive disciplines need sequential orchestration. Adaptive disciplines need context-reading logic. Reference-heavy disciplines need retrieval strategies.
+
+Keep it under 300 lines. If the skill file is getting long, content is leaking in that should be in the docs.

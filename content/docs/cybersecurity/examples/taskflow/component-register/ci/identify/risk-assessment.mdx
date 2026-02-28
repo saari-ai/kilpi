@@ -1,0 +1,128 @@
+---
+title: "ID.RA: Risk Assessment"
+description: Build Pipeline example for risk-assessment
+---
+
+For methodology guidance, see [ID.RA: Risk Assessment](/docs/cybersecurity/functions/identify/risk-assessment).
+
+---
+
+### ID.RA-01: Vulnerability identification
+
+| Asset | Vulnerability | Source | Validated | Severity | Status |
+|---|---|---|---|---|---|
+| <span style={{whiteSpace: 'nowrap'}}>SA-CI-5</span>, <span style={{whiteSpace: 'nowrap'}}>SA-CI-8</span> | <span id="ST-CI-1" style={{whiteSpace: 'nowrap'}}>ST-CI-1</span> Malicious PR bypassing code review | Threat modelling (STRIDE) | Yes | Critical | Controls implemented (<span style={{whiteSpace: 'nowrap'}}>SC-CI-1.1</span>, <span style={{whiteSpace: 'nowrap'}}>SC-CI-1.3</span>) |
+| <span style={{whiteSpace: 'nowrap'}}>SA-CI-2</span>, <span style={{whiteSpace: 'nowrap'}}>SA-CI-6</span> | <span id="ST-CI-2" style={{whiteSpace: 'nowrap'}}>ST-CI-2</span> Secret exfiltration from workflow logs | Threat modelling (STRIDE) | Yes | Critical | Controls implemented (<span style={{whiteSpace: 'nowrap'}}>SC-CI-3.1</span>, <span style={{whiteSpace: 'nowrap'}}>SC-CI-3.2</span>) |
+| <span style={{whiteSpace: 'nowrap'}}>SA-CI-7</span>, <span style={{whiteSpace: 'nowrap'}}>SA-CI-5</span> | <span id="ST-CI-3" style={{whiteSpace: 'nowrap'}}>ST-CI-3</span> Dependency confusion attack | Threat modelling (STRIDE) | Yes | High | Controls implemented (<span style={{whiteSpace: 'nowrap'}}>SC-CI-5.1</span>, <span style={{whiteSpace: 'nowrap'}}>SC-CI-5.2</span>) |
+| <span style={{whiteSpace: 'nowrap'}}>SA-CI-1</span>, <span style={{whiteSpace: 'nowrap'}}>SA-CI-4</span> | <span id="ST-CI-4" style={{whiteSpace: 'nowrap'}}>ST-CI-4</span> Compromised third-party GitHub Action | Threat modelling (STRIDE) | Yes | Critical | Controls implemented (<span style={{whiteSpace: 'nowrap'}}>SC-CI-2.1</span>, <span style={{whiteSpace: 'nowrap'}}>SC-CI-2.2</span>) |
+| <span style={{whiteSpace: 'nowrap'}}>SA-CI-3</span>, <span style={{whiteSpace: 'nowrap'}}>SA-CI-7</span> | <span id="ST-CI-5" style={{whiteSpace: 'nowrap'}}>ST-CI-5</span> Artifact tampering in container registry | Threat modelling (STRIDE) | Yes | Critical | Controls implemented (<span style={{whiteSpace: 'nowrap'}}>SC-CI-4.1</span>, <span style={{whiteSpace: 'nowrap'}}>SC-CI-4.2</span>) |
+| <span style={{whiteSpace: 'nowrap'}}>SA-CI-4</span>, <span style={{whiteSpace: 'nowrap'}}>SA-CI-1</span> | <span id="ST-CI-6" style={{whiteSpace: 'nowrap'}}>ST-CI-6</span> Runner compromise via malicious workflow | Threat modelling (STRIDE) | Yes | High | Controls implemented (<span style={{whiteSpace: 'nowrap'}}>SC-CI-2.2</span>, <span style={{whiteSpace: 'nowrap'}}>SC-CI-6.1</span>) |
+| <span style={{whiteSpace: 'nowrap'}}>SA-CI-8</span>, <span style={{whiteSpace: 'nowrap'}}>SA-CI-5</span> | <span id="ST-CI-7" style={{whiteSpace: 'nowrap'}}>ST-CI-7</span> Branch protection bypass via admin override | Threat modelling (STRIDE) | Yes | High | Controls implemented (<span style={{whiteSpace: 'nowrap'}}>SC-CI-1.3</span>, <span style={{whiteSpace: 'nowrap'}}>SC-CI-6.1</span>) |
+| <span style={{whiteSpace: 'nowrap'}}>SA-CI-2</span>, <span style={{whiteSpace: 'nowrap'}}>SA-CI-6</span> | <span id="ST-CI-8" style={{whiteSpace: 'nowrap'}}>ST-CI-8</span> Stolen deployment credentials | Threat modelling (STRIDE) | Yes | Critical | Controls implemented (<span style={{whiteSpace: 'nowrap'}}>SC-CI-3.1</span>, <span style={{whiteSpace: 'nowrap'}}>SC-CI-3.3</span>) |
+| <span style={{whiteSpace: 'nowrap'}}>SA-CI-7</span>, <span style={{whiteSpace: 'nowrap'}}>SA-CI-4</span> | <span id="ST-CI-9" style={{whiteSpace: 'nowrap'}}>ST-CI-9</span> Build artifact poisoning via cache manipulation | Threat modelling (STRIDE) | Yes | High | Controls implemented (<span style={{whiteSpace: 'nowrap'}}>SC-CI-4.3</span>, <span style={{whiteSpace: 'nowrap'}}>SC-CI-4.2</span>) |
+| <span style={{whiteSpace: 'nowrap'}}>SA-CI-5</span>, <span style={{whiteSpace: 'nowrap'}}>SA-CI-8</span> | <span id="ST-CI-10" style={{whiteSpace: 'nowrap'}}>ST-CI-10</span> Unsigned commits introducing backdoor | Threat modelling (STRIDE) | Yes | High | Controls implemented (<span style={{whiteSpace: 'nowrap'}}>SC-CI-1.2</span>, <span style={{whiteSpace: 'nowrap'}}>SC-CI-1.1</span>) |
+
+---
+
+### ID.RA-02: Threat intelligence
+
+| Intelligence source | Type | Frequency | What it covers |
+|---|---|---|---|
+| MITRE ATT&CK (CI/CD techniques) | Threat taxonomy | Referenced during threat modelling | Supply chain attack patterns (T1195), code injection via CI (T1059), credential access (T1552) |
+| OpenSSF Scorecard | Supply chain risk scoring | Monthly (automated) | Dependency health, branch protection, CI/CD configuration risks |
+| GitHub Advisory Database | Vulnerability advisories | Continuous (automated) | Known CVEs in Actions, npm dependencies, container base images |
+| SLSA framework | Supply chain integrity levels | Referenced during control design | Build provenance, source integrity, build integrity requirements |
+| CISA supply chain advisories | Government advisory | As published | Software supply chain compromise notifications (SolarWinds-class events) |
+
+---
+
+### ID.RA-03: Threat identification
+
+| Threat | STRIDE category | Affected asset | Trust boundary involved |
+|---|---|---|---|
+| <span style={{whiteSpace: 'nowrap'}}>ST-CI-1</span> Malicious PR bypassing code review | Tampering | Source code, branch protection | Developer to repository |
+| <span style={{whiteSpace: 'nowrap'}}>ST-CI-2</span> Secret exfiltration from workflow logs | Information Disclosure | Production secrets, deployment credentials | Workflow runtime to log output |
+| <span style={{whiteSpace: 'nowrap'}}>ST-CI-3</span> Dependency confusion attack | Tampering | Build artifacts, source code | Public registry to build environment |
+| <span style={{whiteSpace: 'nowrap'}}>ST-CI-4</span> Compromised third-party GitHub Action | Tampering | Workflows, runners | Third-party action to workflow runtime |
+| <span style={{whiteSpace: 'nowrap'}}>ST-CI-5</span> Artifact tampering in container registry | Tampering | Container registry, build artifacts | Build output to deployment |
+| <span style={{whiteSpace: 'nowrap'}}>ST-CI-6</span> Runner compromise via malicious workflow | Elevation of Privilege | Runners, workflows | Workflow code to runner environment |
+| <span style={{whiteSpace: 'nowrap'}}>ST-CI-7</span> Branch protection bypass via admin override | Elevation of Privilege | Branch protection, source code | Admin to repository settings |
+| <span style={{whiteSpace: 'nowrap'}}>ST-CI-8</span> Stolen deployment credentials | Information Disclosure | Production secrets, deployment credentials | Secret store to external attacker |
+| <span style={{whiteSpace: 'nowrap'}}>ST-CI-9</span> Build artifact poisoning via cache manipulation | Tampering | Build artifacts, runners | Cache storage to build environment |
+| <span style={{whiteSpace: 'nowrap'}}>ST-CI-10</span> Unsigned commits introducing backdoor | Tampering | Source code, branch protection | Developer workstation to repository |
+
+---
+
+### ID.RA-04: Impact and likelihood scoring
+
+| | Impact: Critical | Impact: High | Impact: Medium | Impact: Low |
+|---|---|---|---|---|
+| **Likelihood: High** | <span style={{whiteSpace: 'nowrap'}}>ST-CI-4</span> | <span style={{whiteSpace: 'nowrap'}}>ST-CI-3</span>, <span style={{whiteSpace: 'nowrap'}}>ST-CI-9</span> | | |
+| **Likelihood: Medium** | <span style={{whiteSpace: 'nowrap'}}>ST-CI-1</span>, <span style={{whiteSpace: 'nowrap'}}>ST-CI-2</span>, <span style={{whiteSpace: 'nowrap'}}>ST-CI-5</span> | <span style={{whiteSpace: 'nowrap'}}>ST-CI-6</span>, <span style={{whiteSpace: 'nowrap'}}>ST-CI-7</span>, <span style={{whiteSpace: 'nowrap'}}>ST-CI-10</span> | | |
+| **Likelihood: Low** | <span style={{whiteSpace: 'nowrap'}}>ST-CI-8</span> | | | |
+
+---
+
+### ID.RA-05: Risk prioritization
+
+| Severity | Required response |
+|---|---|
+| Critical (5 threats) | Must be addressed before pipeline goes live. No exceptions. |
+| High (5 threats) | Must be addressed, may operate with documented mitigation plan. |
+
+---
+
+### ID.RA-06: Risk response
+
+All 10 threats have been addressed with the "mitigate" response. Controls are documented in the [Protect](/docs/cybersecurity/examples/taskflow/component-register/ci/protect) function pages. No threats have been accepted without mitigation.
+
+| Threat | Severity | Response | Control / rationale | Owner | Status |
+|---|---|---|---|---|---|
+| <span style={{whiteSpace: 'nowrap'}}>ST-CI-1</span>, <span style={{whiteSpace: 'nowrap'}}>ST-CI-7</span>, <span style={{whiteSpace: 'nowrap'}}>ST-CI-10</span> | Critical/High | Mitigate | Branch protection controls (<span style={{whiteSpace: 'nowrap'}}>SC-CI-1.1</span>, <span style={{whiteSpace: 'nowrap'}}>SC-CI-1.2</span>, <span style={{whiteSpace: 'nowrap'}}>SC-CI-1.3</span>) | Infrastructure owner | Implemented |
+| <span style={{whiteSpace: 'nowrap'}}>ST-CI-4</span>, <span style={{whiteSpace: 'nowrap'}}>ST-CI-6</span> | Critical/High | Mitigate | Action security controls (<span style={{whiteSpace: 'nowrap'}}>SC-CI-2.1</span>, <span style={{whiteSpace: 'nowrap'}}>SC-CI-2.2</span>) | Infrastructure owner | Implemented |
+| <span style={{whiteSpace: 'nowrap'}}>ST-CI-2</span>, <span style={{whiteSpace: 'nowrap'}}>ST-CI-8</span> | Critical | Mitigate | Secret management controls (<span style={{whiteSpace: 'nowrap'}}>SC-CI-3.1</span>, <span style={{whiteSpace: 'nowrap'}}>SC-CI-3.2</span>, <span style={{whiteSpace: 'nowrap'}}>SC-CI-3.3</span>) | Infrastructure owner | Implemented |
+| <span style={{whiteSpace: 'nowrap'}}>ST-CI-5</span>, <span style={{whiteSpace: 'nowrap'}}>ST-CI-9</span> | Critical/High | Mitigate | Artifact integrity controls (<span style={{whiteSpace: 'nowrap'}}>SC-CI-4.1</span>, <span style={{whiteSpace: 'nowrap'}}>SC-CI-4.2</span>, <span style={{whiteSpace: 'nowrap'}}>SC-CI-4.3</span>) | Infrastructure owner | Implemented |
+| <span style={{whiteSpace: 'nowrap'}}>ST-CI-3</span> | High | Mitigate | Supply chain controls (<span style={{whiteSpace: 'nowrap'}}>SC-CI-5.1</span>, <span style={{whiteSpace: 'nowrap'}}>SC-CI-5.2</span>) | Infrastructure owner | Implemented |
+
+---
+
+### ID.RA-07: Change and exception management
+
+| Change / exception | Requested by | Risk if approved | Risk if not approved | Decision | Approved by |
+|---|---|---|---|---|---|
+| Allow unsigned commits from CI bot | Infrastructure owner | CI bot commits could be spoofed (medium risk) | Automated version bumps blocked | Approved with bot account restricted to non-production branches only | Security lead |
+| Temporarily disable OIDC for legacy deployment | Backend team | Static credentials in GitHub Secrets (higher exposure window) | Legacy service cannot deploy | Approved with 30-day migration deadline and additional audit logging | Security lead |
+
+---
+
+### ID.RA-08: Vulnerability disclosure
+
+| Disclosure channel | Responsible party | SLA for acknowledgement | SLA for resolution |
+|---|---|---|---|
+| security@taskflow.app email | Security lead | 48 hours | Critical: 7 days. High: 30 days. |
+| GitHub Security Advisories (for Actions or dependencies) | Infrastructure owner | 48 hours | Per dependency management policy |
+| GitHub private vulnerability reporting | Infrastructure owner | 48 hours | Critical: 7 days. High: 30 days. |
+
+---
+
+### ID.RA-09: Hardware and software integrity
+
+| Product | Verification method | Verified by | Date | Result |
+|---|---|---|---|---|
+| Third-party GitHub Actions | Pinned to commit SHA, not mutable tag | Infrastructure owner | Every workflow change | Manual review |
+| npm dependencies | package-lock.json integrity check, `npm audit` on every build | CI pipeline | Every build | Automated pass/fail |
+| Docker base images | Pinned to digest, scanned with Trivy | CI pipeline | Every build | Automated pass/fail |
+| GitHub-hosted runners | GitHub-managed, ephemeral (fresh VM per job) | GitHub | Every run | GitHub responsibility |
+
+---
+
+### ID.RA-10: Critical supplier assessment
+
+| Supplier | Service | Assessment method | Security posture | Compliance | Decision |
+|---|---|---|---|---|---|
+| GitHub | Source control, CI/CD, secret storage | SOC 2 report review, security practices review | Strong | SOC 2 Type II, ISO 27001 | Approved |
+| AWS (ECR) | Container registry | SOC 2 report review, shared responsibility model | Strong | SOC 2, ISO 27001, FedRAMP | Approved |
+| AWS (IAM / STS) | OIDC deployment authentication | SOC 2 report review | Strong | SOC 2, ISO 27001 | Approved |
+| Third-party Action authors | Reusable CI steps | Per-action code review, pinned to SHA, OpenSSF Scorecard | Varies | N/A (open source) | Approved per action after review |
+
+---

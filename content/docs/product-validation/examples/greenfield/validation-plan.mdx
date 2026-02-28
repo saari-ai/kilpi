@@ -1,0 +1,58 @@
+---
+title: Validation Plan — FocusNote
+description: Filled-in validation plan for FocusNote with assumption register, hypothesis register, and overall status
+---
+
+## Header
+
+```
+Solution:        FocusNote
+Code:            FN
+Discovery Brief: DB-FN-1
+Date started:    2026-01-15
+Status:          Complete
+Decision:        VD-FN-1
+```
+
+## Assumption register
+
+| VA-ID | Assumption | Type | Risk level | Discovery ref | Linked hypotheses | Status |
+|-------|-----------|------|------------|--------------|-------------------|--------|
+| VA-FN-1 | Students with ADHD want an AI-powered note-taking tool (not just a better traditional tool) | D | High | DB-FN-1: 60% would consider AI solution | VH-FN-1 | Validated |
+| VA-FN-2 | The value proposition (AI summaries during attention drops) is compelling enough to drive signups | D | High | DB-FN-1: 85% want better tools, 72% lose info during lapses | VH-FN-1 | Validated |
+| VA-FN-3 | AI can detect attention patterns from typing cadence and interaction behavior | F | Critical | No prior evidence — pure technical hypothesis | VH-FN-2 | Validated (via proxy) |
+| VA-FN-4 | Students will trust and act on AI-generated summaries of lecture content | U | High | DB-FN-1: Students expressed interest but no evidence of trust | VH-FN-2 | Validated |
+| VA-FN-5 | Students will pay $10/month for this service | V | Critical | DB-FN-1: No pricing evidence from Discovery | VH-FN-3 | Invalidated |
+| VA-FN-6 | Student acquisition cost is sustainable via university channels | V | Medium | DB-FN-1: Students found via university disability services | — | Untested |
+
+### Risk prioritization rationale
+
+- **VA-FN-3 (Feasibility — Critical):** If AI cannot detect attention patterns, the core product mechanism does not work. Highest impact, highest uncertainty. Tested via Wizard of Oz proxy.
+- **VA-FN-5 (Viability — Critical):** If students will not pay, the business model fails. High impact, high uncertainty (no pricing data from Discovery).
+- **VA-FN-1, VA-FN-2 (Desirability — High):** Discovery showed demand signals, but Discovery tested the problem, not the solution. Need solution-specific demand data.
+- **VA-FN-4 (Usability — High):** Trust in AI-generated content is uncertain — students may not rely on summaries for exam preparation.
+- **VA-FN-6 (Viability — Medium):** Distribution channel assumption. Medium impact (alternatives exist), medium uncertainty.
+
+## Hypothesis register
+
+| VH-ID | Hypothesis | Linked assumptions | Experiment | Confidence | Status |
+|-------|-----------|-------------------|-----------|-----------|--------|
+| VH-FN-1 | If we present a landing page describing AI-powered note summaries that adapt to attention patterns, then at least 8% of visitors will sign up for the waitlist, because Discovery showed 85% of ADHD students want better note-taking tools and 60% would consider AI. | VA-FN-1, VA-FN-2 | VE-FN-1 | High | Supported |
+| VH-FN-2 | If we provide human-generated summaries (simulating AI) during lectures to students, then at least 7 out of 10 will rate the summaries as "useful" or "very useful" and will use them for study, because Discovery showed students spend 40+ minutes post-lecture filling note gaps. | VA-FN-3, VA-FN-4 | VE-FN-2 | Medium | Supported |
+| VH-FN-3 | If we offer FocusNote at $10/month to students who expressed interest via the landing page, then at least 15% will commit to a pre-purchase, because Discovery showed high willingness to seek solutions (85% tried 3+ tools). | VA-FN-5 | VE-FN-3 | High | Refuted |
+
+## Overall validation status
+
+```
+Overall status:      Complete
+Assumptions total:   6
+  - Validated:       3 (VA-FN-1, VA-FN-2, VA-FN-4)
+  - Invalidated:     1 (VA-FN-5)
+  - Untested:        1 (VA-FN-6)
+  - Testing:         0
+  - Validated (proxy): 1 (VA-FN-3)
+Critical assumptions resolved: 2 of 2 (VA-FN-3: validated, VA-FN-5: invalidated)
+Overall confidence:  Medium
+Decision:            Pivot (value capture)
+Decision record:     VD-FN-1
+```

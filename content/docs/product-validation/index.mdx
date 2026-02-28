@@ -1,0 +1,118 @@
+---
+title: Overview
+description: Product Validation — an agent-first methodology for testing whether proposed solutions actually solve proven problems
+---
+
+import { FlaskConical } from 'lucide-react';
+
+The Product Validation methodology is a standalone validation methodology that can be adopted by any product team, startup, or solopreneur. It provides the structure, conventions, and operational guidance needed to run a traceable, evidence-driven validation process before committing to full-scale build.
+
+The structure and documentation are designed to be directly consumable by AI agents, so they can apply the methodology autonomously. At the same time, it's written to be easy for humans to follow along &mdash; whether to understand what an agent is doing, or to apply the methodology themselves.
+
+It defines a systematic, repeatable approach with defined phases, artifacts, and decision frameworks for testing solution assumptions before investing in engineering.
+
+<Accordions type="single">
+  <Accordion value="phases" title={<span className="flex items-center gap-2"><FlaskConical className="text-blue-500" size={18} /> Five Defined Phases</span>}>
+    The methodology prescribes a five-phase lifecycle: Hypothesize, Design, Execute, Evaluate, Decide. Each phase has concrete inputs, outputs, and procedures — not just suggestions. Assumptions are decomposed, experiments are designed with pre-defined success criteria, evidence is collected systematically, and decisions are made against explicit frameworks.
+  </Accordion>
+  <Accordion value="artifacts" title={<span className="flex items-center gap-2"><FlaskConical className="text-blue-500" size={18} /> Concrete, Named Artifacts with an ID Scheme</span>}>
+    It produces traceable deliverables with strict naming conventions (VA-*, VH-*, VE-*, VV-*, VD-*). A framework tells you "test your assumptions." A methodology tells you to produce an Assumption Register with columns for ID, assumption, type, risk level, and linked hypotheses — and gives you the template.
+  </Accordion>
+  <Accordion value="traceability" title={<span className="flex items-center gap-2"><FlaskConical className="text-blue-500" size={18} /> End-to-End Traceability Chain</span>}>
+    Nothing exists in isolation. Every artifact traces through a chain: Assumption → Hypothesis → Experiment → Evidence → Decision. Every artifact references back to its predecessors, creating full accountability from initial assumption to final go/no-go decision.
+  </Accordion>
+  <Accordion value="evidence" title={<span className="flex items-center gap-2"><FlaskConical className="text-blue-500" size={18} /> Evidence-Driven Decision Making</span>}>
+    Decisions are never gut calls. Every pivot, persevere, or kill decision is backed by collected evidence with assigned confidence levels. Success criteria are defined before experiments run, eliminating post-hoc rationalization. The methodology enforces intellectual honesty.
+  </Accordion>
+  <Accordion value="repeatable" title={<span className="flex items-center gap-2"><FlaskConical className="text-blue-500" size={18} /> Scoped, Repeatable Application</span>}>
+    A single validation plan template defines the full validation cycle for a solution. The methodology can be applied consistently to any solution — whether a new product, a feature, a pricing model, or a channel strategy. Each solution gets its own plan with its own assumption register, experiments, and decision records.
+  </Accordion>
+  <Accordion value="example" title={<span className="flex items-center gap-2"><FlaskConical className="text-blue-500" size={18} /> Worked Example Demonstrating Application</span>}>
+    The FocusNote example shows the methodology applied end-to-end to a realistic product — assumptions decomposed from a Discovery Brief, three experiments executed across different fidelity levels, mixed results leading to a Pivot decision. This demonstrates that the methodology produces concrete, defensible outcomes.
+  </Accordion>
+  <Accordion value="foundation" title={<span className="flex items-center gap-2"><FlaskConical className="text-blue-500" size={18} /> Built on Discovery Output</span>}>
+    The methodology doesn't operate in a vacuum. It takes the Discovery Brief from [Product Discovery](/docs/product-discovery) as its input — a proven problem or opportunity with validated user needs. Validation tests the **solution**, not the problem. This clean separation prevents scope creep and ensures each discipline does its job.
+  </Accordion>
+</Accordions>
+
+Ready to apply the methodology? See [Getting Started](/docs/product-validation/getting-started) for execution order and entry/exit conditions.
+
+## Foundation
+
+Product Validation takes the output of [Product Discovery](/docs/product-discovery) — a Discovery Brief containing proven problems, validated user needs, and opportunity scores — and tests whether a proposed solution actually addresses those problems before committing to full-scale engineering.
+
+The methodology organizes work into five phases that form a linear pipeline:
+
+```
+Hypothesize (HY)
+  → Design (DE)
+    → Execute (EX)
+      → Evaluate (EV)
+        → Decide (DC)
+```
+
+Discovery establishes the **problem**. Validation tests the **solution**. Build implements the **validated solution**. These are three distinct disciplines with clean handoffs.
+
+## Boundary
+
+Product Validation tests solutions. It does NOT discover problems. If validation evidence suggests the underlying problem was wrong, the methodology loops back to [Product Discovery](/docs/product-discovery) rather than attempting to redefine the problem within a validation cycle. This boundary is enforced through the traceability chain — every assumption must trace back to a Discovery Brief reference.
+
+## Traceability
+
+Every validation artifact traces through a chain across phases:
+
+```
+Assumption (VA-)
+  → Hypothesis (VH-)
+    → Experiment (VE-)
+      → Evidence (VV-)
+        → Decision (VD-)
+```
+
+ID schemes keep artifacts traceable. See [Conventions](/docs/product-validation/conventions) for the full scheme.
+
+| Prefix | Artifact | Example |
+|--------|----------|---------|
+| VA- | Assumption | VA-FN-1 |
+| VH- | Hypothesis | VH-FN-1 |
+| VE- | Experiment | VE-FN-1 |
+| VV- | Evidence | VV-FN-1 |
+| VD- | Decision | VD-FN-1 |
+
+## Phases
+
+The methodology pages live under [Phases](/docs/product-validation/phases). Each phase page contains inputs, outputs, procedures, and worked guidance.
+
+| Phase | Code | Purpose |
+|-------|------|---------|
+| [Hypothesize](/docs/product-validation/phases/hypothesize) | HY | Decompose assumptions from the Discovery Brief, prioritize by risk, form testable hypotheses |
+| [Design](/docs/product-validation/phases/design) | DE | Design experiments with appropriate fidelity, define success criteria before execution |
+| [Execute](/docs/product-validation/phases/execute) | EX | Run experiments with integrity, collect and log evidence |
+| [Evaluate](/docs/product-validation/phases/evaluate) | EV | Assess evidence against pre-defined criteria, assign confidence levels |
+| [Decide](/docs/product-validation/phases/decide) | DC | Make pivot, persevere, or kill decisions backed by evidence |
+
+## Techniques
+
+The [Technique Catalog](/docs/product-validation/techniques/catalog) provides 15 validation methods organized by fidelity level and assumption type. See [Techniques](/docs/product-validation/techniques) for selection guidance.
+
+## Templates
+
+The [Templates](/docs/product-validation/templates) provide the fill-in structure for applying the methodology. Three templates cover the full lifecycle:
+
+| Template | Purpose |
+|----------|---------|
+| [Validation Plan](/docs/product-validation/templates/validation-plan) | Solution-level container: assumption register, hypothesis register, overall status |
+| [Experiment Card](/docs/product-validation/templates/experiment) | Per-experiment: method, success criteria, evidence log, result |
+| [Decision Record](/docs/product-validation/templates/decision-record) | Culminating artifact: evidence summary, confidence, decision, next actions |
+
+## Examples
+
+[FocusNote](/docs/product-validation/examples/greenfield) is a worked example showing what a completed validation cycle looks like for a fictional product, covering all 5 phases with filled-in artifacts and full traceability.
+
+## Conventions
+
+[Conventions](/docs/product-validation/conventions) covers ID schemes, confidence levels, risk levels, and traceability rules.
+
+## Agents
+
+[Agents](/docs/product-validation/agents) documents the Claude Code skills that maintain and apply the methodology.

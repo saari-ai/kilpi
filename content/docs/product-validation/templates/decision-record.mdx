@@ -1,0 +1,115 @@
+---
+title: Decision Record
+description: Culminating artifact template — evidence summary, confidence, decision, rationale, and next actions
+---
+
+The Decision Record is the culminating artifact of a validation cycle. It documents the evidence-backed decision to Persevere, Pivot, or Kill. Created during the [Decide](/docs/product-validation/phases/decide) phase.
+
+## Decision header
+
+```
+VD-ID:          [VD-{solution}-{n}]
+Solution:       [Solution name]
+Solution code:  [{solution code}]
+Date:           [YYYY-MM-DD]
+Validation plan: [Reference to the Validation Plan]
+Previous VD:    [VD-{solution}-{n-1} if this is a pivot iteration, otherwise N/A]
+```
+
+## Evidence summary
+
+Reference all experiments and their results. This is the evidentiary basis for the decision.
+
+| VE-ID | Hypothesis tested | Method | Result | Confidence | Key evidence (VV-IDs) |
+|-------|------------------|--------|--------|-----------|----------------------|
+| `VE-{sol}-1` | `VH-{sol}-1` | [Method] | Pass/Fail/Inconclusive | None-Validated | `VV-{sol}-1`, `VV-{sol}-2` |
+| `VE-{sol}-2` | `VH-{sol}-2` | [Method] | Pass/Fail/Inconclusive | None-Validated | `VV-{sol}-3`, `VV-{sol}-4` |
+
+## Assumption outcomes
+
+Summarize the status of each assumption after all experiments:
+
+| VA-ID | Assumption | Type | Risk level | Final status | Evidence |
+|-------|-----------|------|-----------|-------------|----------|
+| `VA-{sol}-1` | [Assumption text] | D/V/F/U | Critical/High/Medium/Low | Validated/Invalidated/Inconclusive | [VE-IDs that tested it] |
+| `VA-{sol}-2` | | | | | |
+
+## Overall confidence
+
+```
+Overall confidence level: [None | Low | Medium | High | Validated]
+Critical assumptions resolved: [n of n]
+Conflicting evidence:          [None | Description]
+```
+
+## Decision
+
+```
+Decision:    [Persevere | Pivot ({type}) | Kill]
+```
+
+### If Persevere
+
+```
+Validated assumptions to carry into build:
+  - [VA-{sol}-{n}: assumption text]
+  - [VA-{sol}-{n}: assumption text]
+
+Remaining risks to monitor during build:
+  - [VA-{sol}-{n}: assumption text — Medium confidence, monitor via {method}]
+
+Build handoff notes:
+  [Key specifications, constraints, and validated parameters for the engineering team]
+```
+
+### If Pivot
+
+```
+Pivot type:    [Zoom-in | Zoom-out | Customer segment | Value capture | Channel | Technology]
+
+What stays (validated learnings):
+  - [VA-{sol}-{n}: assumption text — validated with High confidence]
+
+What changes:
+  - [Description of what the pivot changes]
+
+New assumptions to test:
+  - [New assumption 1 — will become VA-{sol}-{n+1} in next cycle]
+  - [New assumption 2]
+
+Next validation cycle:
+  [Create a new Validation Plan with the solution code, referencing this VD- record]
+```
+
+### If Kill
+
+```
+Key learnings:
+  - [Learning 1 — what the evidence showed]
+  - [Learning 2 — what was surprising]
+
+What NOT to repeat:
+  - [Dead end 1]
+  - [Dead end 2]
+
+Return to Discovery:
+  [What the Discovery team should investigate next, informed by validation evidence]
+```
+
+## Rationale
+
+[2-5 sentences explaining why this decision follows from the evidence. Reference specific experiment results and confidence levels. If the team disagrees with the evidence-based decision, document the disagreement and its resolution here.]
+
+## Next actions
+
+| Action | Owner | Deadline | Notes |
+|--------|-------|----------|-------|
+| [Specific action item] | [Person/team] | [YYYY-MM-DD] | [Context] |
+| [Specific action item] | | | |
+
+## Usage notes
+
+- Create the Decision Record only when the [Evaluate](/docs/product-validation/phases/evaluate) phase confirms evidence sufficiency (all critical assumptions have ≥ Medium confidence).
+- The Decision Record becomes the primary handoff artifact. For Persevere, it goes to engineering. For Pivot, it feeds the next validation cycle. For Kill, it goes to the learning archive.
+- If the decision is Pivot, create a new Validation Plan for the next cycle. The new plan references this VD- record in its header.
+- Multiple VD- records for the same solution code indicate iteration — each references the previous one, creating an audit trail of how the team arrived at the final decision.
